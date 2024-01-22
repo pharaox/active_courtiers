@@ -1,0 +1,740 @@
+﻿accou_marriage_ai_accept_modifier_value = {
+	value = 0
+
+	# Hooks (no possible, skipped)
+
+	# Perks
+	if = {
+		limit = {
+			scope:actor = {
+				has_perk = promising_prospects_perk
+			}
+			scope:secondary_actor = {
+				is_close_or_extended_family_of = scope:actor
+			}
+		}
+		add = promising_prospects_other_value
+	}
+	if = {
+		limit = {
+			scope:secondary_actor.dynasty ?= {
+				has_dynasty_perk = glory_legacy_1
+			}
+		}
+		add = glory_legacy_1_marriage_acceptance
+	}
+	if = {
+		limit = {
+			scope:secondary_actor.dynasty ?= {
+				has_dynasty_perk = fp3_khvarenah_legacy_3
+			}
+		}
+		add = khvarenah_legacy_marriage_acceptance
+	}
+
+	# Who is getting married
+	if = {
+		limit = { scope:recipient = scope:secondary_recipient }
+		add = -15
+	}
+
+	# Player heir (not possible, skipped)
+
+	# Alliances (not possible, skipped)
+
+	# Clan contract: Marriage Favor
+	if = {
+		limit = {
+			OR = {
+				scope:recipient = {
+					is_vassal_of = scope:actor
+					vassal_contract_has_flag = vassal_contract_marriage_favor
+				}
+				scope:actor = {
+					is_vassal_of = scope:recipient
+					vassal_contract_has_flag = vassal_contract_marriage_favor
+				}
+			}
+		}
+		add = 100
+	}
+
+	# Tier differences (simplified)
+	if = {
+		limit = {
+			scope:secondary_recipient = {
+				OR = {
+					is_close_or_extended_family_of = scope:recipient
+					accou_is_same_dynasty_trigger = { CHARACTER = scope:recipient }
+				}
+			}
+		}
+		if = {
+			limit = {
+				scope:secondary_actor = {
+					is_close_or_extended_family_of = scope:actor
+				}
+			}
+			add = {
+				value = scope:actor.highest_held_title_tier
+				subtract = scope:recipient.highest_held_title_tier
+				multiply = 40 # Simplified
+			}
+		}
+		else = {
+			add = {
+				value = scope:secondary_actor.highest_held_title_tier
+				subtract = scope:recipient.highest_held_title_tier
+				multiply = 40
+			}
+		}
+	}
+
+	# Opinions
+	add = {
+		value = scope:opinion_of_secondary_actor
+		multiply = 0.25
+		if = {
+			limit = { scope:opinion_of_secondary_actor >= 0 }
+			floor = yes
+		}
+		else = {
+			ceiling = yes
+		}
+	}
+	add = {
+		value = scope:opinion_of_actor
+		multiply = 0.75
+		if = {
+			limit = { scope:opinion_of_actor >= 0 }
+			floor = yes
+		}
+		else = {
+			ceiling = yes
+		}
+	}
+
+	# Opinions continued (not likely, skipped)
+
+	# Lovers / soulmates
+	if = {
+		limit = {
+			scope:secondary_recipient = scope:recipient
+			scope:secondary_recipient = {
+				OR = {
+					has_relation_lover = scope:secondary_actor
+					has_relation_soulmate = scope:secondary_actor
+				}
+				trigger_if = {
+					limit = {
+						any_secret = {
+							secret_type = secret_lover
+							secret_target = scope:secondary_actor
+						}
+					}
+					any_secret = {
+						secret_type = secret_lover
+						secret_target = scope:secondary_actor
+						any_secret_knower = {
+							this = scope:actor
+						}
+					}
+				}
+			}
+		}
+		if = {
+			limit = {
+				scope:secondary_recipient = {
+					has_relation_soulmate = scope:secondary_actor
+				}
+			}
+			add = 100
+		}
+		else = {
+			add = 25
+		}
+	}
+
+	# Just widowed (not likely, skipped)
+
+	# Language
+	if = {
+		limit = {
+			scope:actor = {
+				knows_language_of_culture = scope:recipient.culture
+			}
+		}
+		add = 5
+	}
+
+	# Court language
+	if = {
+		limit = {
+			scope:actor = {
+				has_royal_court = yes
+			}
+			NOT = { scope:actor.top_liege = scope:recipient.top_liege }
+			scope:ruler_with_royal_court ?= {
+				has_same_court_language = scope:actor
+			}
+		}
+		if = {
+			limit = {
+				scope:actor = {
+					knows_court_language_of = this
+				}
+			}
+			add = 15
+		}
+		else = {
+			add = 5
+		}
+	}
+
+	# Dynasty prestige levels
+	if = {
+		limit = {
+			scope:secondary_actor = {
+				has_dynasty = no
+			}
+		}
+		add = {
+			value = -20
+			if = {
+				limit = {
+					scope:secondary_recipient = {
+						has_dynasty = yes
+					}
+				}
+				multiply = 6
+			}
+		}
+	}
+	else_if = {
+		limit = {
+			scope:secondary_recipient = {
+				dynasty = scope:recipient.dynasty
+			}
+		}
+		add = {
+			value = scope:secondary_actor.dynasty.dynasty_prestige_level
+			multiply = 5
+			subtract = 5
+		}
+	}
+
+	# Incorrect lineality (not likely, skipped)
+
+	# Faith (simplified)
+	if = {
+		limit = {
+			scope:recipient.faith = {
+				faith_hostility_level = {
+					target = scope:actor.faith
+					value >= faith_hostility_prevents_marriage_level
+				}
+			}
+		}
+		add = -1000
+	}
+	else_if = {
+		limit = {
+			scope:recipient.faith = {
+				faith_hostility_level = {
+					target = scope:actor.faith
+					value >= faith_hostile_level
+				}
+			}
+		}
+		add = -25
+	}
+	else_if = {
+		limit = {
+			scope:recipient.faith = {
+				faith_hostility_level = {
+					target = scope:actor.faith
+					value >= faith_astray_level
+				}
+			}
+		}
+		add = -10
+	}
+
+	# Poligamy (not possible, skipped)
+
+	# Same-sex marriage (not likely, skipped)
+
+	# Procreation
+	if = {
+		limit = {
+			scope:secondary_recipient = {
+				OR = {
+					is_close_or_extended_family_of = scope:recipient
+					accou_has_real_dynasty_trigger = yes
+				}
+			}
+		}
+
+		# Reluctant to marry old women
+		if = {
+			limit = {
+				scope:secondary_actor = {
+					age > 29
+					is_female = yes
+				}
+			}
+			add = {
+				value = scope:secondary_actor.age
+				subtract = 29
+				multiply = -5.0
+			}
+		}
+
+		# Unlikely to agree if the secondary recipient is fertile and the secondary actor isn't
+		if = {
+			limit = {
+				scope:secondary_actor = {
+					OR = {
+						fertility < 0.1
+						AND = {
+							is_female = yes
+							age >= marriage_female_fertility_cutoff_age_value
+						}
+					}
+				}
+				scope:secondary_recipient = {
+					fertility > 0.1
+					OR = {
+						is_female = no
+						age < 45
+					}
+				}
+			}
+			if = {
+				limit = {
+					scope:secondary_recipient = {
+						any_child = {
+							count >= 1
+						}
+					}
+				}
+				add = -100
+			}
+			else = {
+				add = -200
+			}
+		}
+	}
+
+	# Procreation continued (not possible, skipped)
+
+	# Importance
+	if = {
+		limit = {
+			scope:secondary_recipient = {
+				NOR = {
+					dynasty = scope:recipient.dynasty
+					is_close_or_extended_family_of = scope:recipient
+					is_councillor_of = scope:recipient
+					has_relation_lover = scope:recipient
+					has_relation_soulmate = scope:recipient
+					has_relation_friend = scope:recipient
+					has_relation_best_friend = scope:recipient
+					is_knight_of = scope:recipient
+					exists = inspiration
+				}
+			}
+		}
+		add = 10
+	}
+	if = {
+		limit = {
+			scope:secondary_recipient = {
+				OR = {
+					is_councillor_of = scope:recipient
+					has_relation_lover = scope:recipient
+					has_relation_soulmate = scope:recipient
+					has_relation_friend = scope:recipient
+					has_relation_best_friend = scope:recipient
+					is_knight_of = scope:recipient
+					AND = {
+						exists = inspiration
+						inspiration = {
+							exists = inspiration_sponsor
+							inspiration_sponsor = scope:recipient
+						}
+					}
+				}
+			}
+		}
+		add = -10
+	}
+
+	# Parent of children
+	if = {
+		limit = {
+			scope:secondary_recipient = {
+				NOT = { this = scope:recipient }
+				any_child = {
+					is_child_of = scope:recipient
+				}
+			}
+		}
+		add = -25
+	}
+
+	# Liege (simplified)
+	if = {
+		limit = {
+			scope:recipient = {
+				target_is_liege_or_above = scope:actor
+			}
+		}
+		add = 40
+	}
+
+	# Liege continued (not possible, skipped)
+
+	# Claimants (simplified)
+	if = {
+		limit = {
+			scope:secondary_recipient = {
+				is_claimant = yes
+				NOT = { is_close_or_extended_family_of = scope:recipient }
+			}
+		}
+		add = -50
+	}
+
+	# Dread
+	scope:recipient = {
+		if = {
+			limit = {
+				has_dread_level_towards = {
+					target = scope:actor
+					level = 1
+				}
+			}
+			if = {
+				limit = {
+					NOT = { this = scope:secondary_recipient }
+				}
+				if = {
+					limit = { target_is_liege_or_above = scope:actor }
+					add = intimidated_marriage_reason_value
+				}
+				else = {
+					add = intimidated_marriage_external_reason_value
+				}
+			}
+			else = {
+				add = intimidated_marriage_not_secondary_reason_value
+			}
+		}
+		else_if = {
+			limit = {
+				has_dread_level_towards = {
+					target = scope:actor
+					level = 2
+				}
+			}
+			if = {
+				limit = {
+					NOT = { this = scope:secondary_recipient }
+				}
+				if = {
+					limit = { target_is_liege_or_above = scope:actor }
+					add = cowed_marriage_reason_value
+				}
+				else = {
+					add = cowed_marriage_external_reason_value
+				}
+			}
+			else = {
+				add = cowed_marriage_not_secondary_reason_value
+			}
+		}
+	}
+
+	# Dread continued (not possible, skipped)
+
+	# Additional reluctance if recipient likes the close relative
+	if = {
+		limit = {
+			NOT = { scope:recipient = scope:secondary_recipient }
+			scope:recipient = {
+				OR = {
+					is_close_or_extended_family_of = scope:secondary_recipient
+					has_relation_lover = scope:secondary_recipient
+				}
+				opinion = {
+					target = scope:secondary_recipient
+					value > 10
+				}
+			}
+		}
+		add = {
+			value = scope:opinion_of_secondary_recipient
+			multiply = -0.15
+			if = {
+				limit = { scope:opinion_of_secondary_recipient <= 0 }
+				floor = yes
+			}
+			else = {
+				ceiling = yes
+			}
+		}
+	}
+
+	# Consaguinity (not possible, skipped)
+
+	# Age
+	if = {
+		limit = {
+			scope:secondary_recipient = {
+				age > 20
+				OR = {
+					dynasty = scope:recipient.dynasty
+					is_close_or_extended_family_of = scope:recipient
+				}
+			}
+		}
+		add = {
+			value = scope:secondary_recipient.age
+			subtract = 20
+		}
+	}
+
+	# Family considerations continued (not possible, skipped)
+
+	# Inspirations (fixed)
+	if = {
+		limit = {
+			exists = scope:secondary_recipient.inspiration
+			#has_completed_inspiration = no
+		}
+		add = -100
+	}
+
+	# Court grandeur
+	scope:actor = {
+		if = {
+			limit = { has_royal_court = yes }
+			if = {
+				limit = { court_grandeur_current_level > court_grandeur_minimum_expected_level }
+				add = ep1_court_grandeur_marriage_acceptance_value
+			}
+			else_if = {
+				limit = { court_grandeur_current_level < court_grandeur_minimum_expected_level }
+				add = ep1_court_grandeur_marriage_acceptance_value_penalty
+			}
+		}
+	}
+
+	# Cultural traditions
+	if = {
+		limit = {
+			scope:actor.culture = {
+				has_cultural_parameter = marriage_acceptance_bonus
+			}
+		}
+		add = 10
+	}
+	if = {
+		limit = {
+			scope:recipient.culture = {
+				has_cultural_parameter = dislikes_marrying_outside_of_culture
+				NOT = { this = scope:actor.culture }
+			}
+		}
+		add = -50
+	}
+
+	# Struggles
+	if = {
+		limit = {
+			scope:actor = {
+				any_character_struggle = {
+					involvement = involved
+					is_struggle_parameter_active_secondary_character_involvement_involved_trigger = {
+						PARAMETER = involved_form_alliances_with_each_other_easier
+						CHAR = scope:recipient
+					}
+				}
+			}
+		}
+		add = 25
+	}
+	if = {
+		limit = {
+			OR = {
+				AND = {
+					# The actor is involved and try to marry with someone outside of it
+					scope:actor = {
+						is_ai = yes
+						any_character_struggle = {
+							involvement = involved
+							is_secondary_character_involvement_neither_trigger = { CHAR = scope:recipient }
+						}
+					}
+					scope:recipient = {
+						is_ai = yes
+					}
+				}
+				AND = {
+					# The actor is not involved and try to marry with someone inside of it
+					scope:recipient = {
+						is_ai = yes
+						any_character_struggle = {
+							involvement = involved
+							is_secondary_character_involvement_neither_trigger = { CHAR = scope:actor }
+						}
+					}
+					scope:actor = {
+						is_ai = yes
+					}
+				}
+			}
+		}
+		multiply = {
+			value = 0
+			if = {
+				limit = {
+					OR = {
+						AND = {
+							scope:actor = {
+								any_character_struggle = {
+									involvement = involved
+									phase_has_catalyst = catalyst_forming_alliance_with_major_uninvolved_power
+								}
+							}
+							scope:recipient = {
+								realm_size <= medium_realm_size
+							}
+						}
+						AND = {
+							scope:recipient = {
+								any_character_struggle = {
+									involvement = involved
+									phase_has_catalyst = catalyst_forming_alliance_with_major_uninvolved_power
+								}
+							}
+							scope:actor = {
+								realm_size <= medium_realm_size
+							}
+						}
+					}
+				}
+				add = 0.2
+			}
+			if = {
+				limit = {
+					OR = {
+						AND = {
+							scope:actor = {
+								has_trait = fp3_struggle_detractor
+								any_character_struggle = {
+									involvement = involved
+									phase_has_catalyst = catalyst_forming_alliance_between_detractor_uninvolved_rulers
+								}
+							}
+							scope:recipient = {
+								fp3_character_uninvolved_in_struggle_trigger = yes
+							}
+						}
+						AND = {
+							scope:recipient = {
+								has_trait = fp3_struggle_detractor
+								any_character_struggle = {
+									involvement = involved
+									phase_has_catalyst = catalyst_forming_alliance_between_detractor_uninvolved_rulers
+								}
+							}
+							scope:actor = {
+								fp3_character_uninvolved_in_struggle_trigger = yes
+							}
+						}
+					}
+				}
+				add = 0.2
+			}
+		}
+	}
+	if = {
+		limit = {
+			OR = {
+				AND = {
+					scope:actor = {
+						is_ai = yes
+						any_character_struggle = {
+							involvement = involved
+							is_secondary_character_involvement_interloper_trigger = { CHAR = scope:recipient }
+						}
+					}
+					scope:recipient = {
+						is_ai = yes
+					}
+				}
+				AND = {
+					scope:recipient = {
+						is_ai = yes
+						any_character_struggle = {
+							involvement = involved
+							is_secondary_character_involvement_interloper_trigger = { CHAR = scope:actor }
+						}
+					}
+					scope:actor = {
+						is_ai = yes
+					}
+				}
+			}
+		}
+		multiply = 0.5
+	}
+
+	# Stuggles piety cost (not possible, skipped)
+
+	# Diarchies (not likely, skipped )
+
+	# Feud
+	if = {
+		limit = {
+			scope:recipient = {
+				existing_feud_against_target_trigger = { TARGET = scope:actor }
+			}
+		}
+		add = -25
+	}
+
+	# Grand Wedding
+	if = {
+		limit = {
+			scope:actor.dynasty ?= {
+				has_dynasty_perk = ep2_activities_legacy_2
+			}
+		}
+		add = ep2_activities_legacy_2_grand_weddings_acceptance_boost_value
+	}
+
+	# Grand Wedding continued (not possible, skipped)
+
+	# Player
+	if = {
+		limit = {
+			scope:recipient = {
+				is_ai = no
+			}
+			scope:secondary_recipient = {
+				NOR = {
+					is_close_or_extended_family_of = scope:recipient
+					accou_is_same_dynasty_trigger = { CHARACTER = scope:recipient }
+				}
+			}
+		}
+		add = -5000
+	}
+
+	# Player continued (not likely, skipped)
+
+	# Harold (not possible, skipped)
+}

@@ -1,0 +1,331 @@
+﻿namespace = accou_marriage
+
+scripted_trigger accou_marriage_0001_valid_liege_trigger = {
+	is_available = yes
+}
+
+scripted_trigger accou_marriage_0001_valid_courtier_trigger = {
+	# Valid marriage character
+	accou_is_valid_marriage_character_trigger = yes
+
+	# Not of major interest to root
+	NOT = { accou_is_of_major_interest_trigger = { CHARACTER = root } }
+
+	# Not a female in a male-dominated faith and vice versa
+	NOT = { is_wrong_gender_in_faith_trigger = { FAITH = faith } }
+}
+
+scripted_trigger accou_marriage_0001_valid_marriage_candidate_trigger = {
+	in_diplomatic_range = root
+	is_ruler = no
+
+	# Valid marriage character
+	accou_is_valid_marriage_character_trigger = yes
+
+	save_temporary_scope_as = candidate1
+
+	# Determine matchmaker
+	trigger_if = {
+		limit = { exists = matchmaker }
+		matchmaker = { save_temporary_scope_as = matchmaker1 }
+	}
+	trigger_else = {
+		save_temporary_scope_as = matchmaker1
+	}
+
+	trigger_if = {
+		limit = {
+			NOT = { this = scope:matchmaker1 }
+		}
+
+		scope:matchmaker1 = {
+			in_diplomatic_range = root
+
+			# Valid marriage recipient
+			accou_is_valid_marriage_recipient_trigger = { ACTOR = root }
+
+			# Marriage does not yield alliance between matchmaker and root
+			NOT = {
+				yields_alliance = {
+					candidate = scope:candidate1
+					target = root
+					target_candidate = $CHARACTER$
+				}
+			}
+		}
+
+		# Not of major interest to matchmaker
+		NOT = {
+			accou_is_of_major_interest_trigger = { CHARACTER = scope:matchmaker1 }
+		}
+	}
+
+	# Valid marriage target
+	accou_is_valid_marriage_target_trigger = {
+		CHARACTER = $CHARACTER$
+		ACTOR = root
+		RECIPIENT = scope:matchmaker1
+	}
+
+	# Either the initiated character is attracted to the spouse candidate
+	# or both characters are visibly fertile
+	OR = {
+		$CHARACTER$ = {
+			is_attracted_to_gender_of = scope:candidate1
+		}
+		AND = {
+			is_visibly_fertile = yes
+			$CHARACTER$ = {
+				is_visibly_fertile = yes
+			}
+		}
+	}
+}
+
+accou_marriage.0001 = {
+	type = character_event
+	title = accou_marriage.0001.t
+	desc = accou_marriage.0001.desc
+	#hidden = yes
+
+	theme = family
+	left_portrait = {
+		character = scope:courtier
+	}
+	right_portrait = {
+		character = scope:candidate
+	}
+	override_background = {
+		reference = throne_room
+	}
+
+	trigger = {
+		accou_marriage_0001_valid_liege_trigger = yes
+	}
+
+	immediate = {
+		# Determine courtier
+		random_courtier = {
+			limit = {
+				accou_marriage_0001_valid_courtier_trigger = yes
+			}
+			save_scope_as = courtier
+		}
+
+		# Get nearby characters
+		scope:courtier ?= {
+			if = {
+				limit = { allowed_to_marry_same_sex_trigger = yes }
+				accou_get_nearby_characters_effect = {
+					PREDICATE = always
+					CHARACTERS = characters
+				}
+			}
+			else = {
+				accou_get_nearby_characters_effect = {
+					PREDICATE = accou_is_opposite_sex_trigger
+					CHARACTERS = characters
+				}
+			}
+		}
+
+		root = { save_scope_as = actor }
+		scope:courtier ?= { save_scope_as = secondary_actor }
+
+		save_scope_value_as = { name = hook value = no }
+		save_scope_value_as = { name = grand_wedding_promise value = no }
+		scope:courtier ?= {
+			if = {
+				limit = { is_female = yes }
+				save_scope_value_as = { name = matrilineal value = yes }
+			}
+			else = {
+				save_scope_value_as = { name = matrilineal value = no }
+			}
+		}
+
+		# Get marriage canidates
+		every_in_list = {
+			list = characters
+			limit = {
+				accou_marriage_0001_valid_marriage_candidate_trigger = { CHARACTER = scope:courtier }
+			}
+
+			save_scope_as = secondary_recipient
+			if = {
+				limit = { exists = matchmaker }
+				matchmaker = { save_scope_as = recipient }
+			}
+			else = {
+				save_scope_as = recipient
+			}
+
+			if = {
+				limit = { scope:actor = scope:recipient }
+				add_to_temporary_list = accepting_candidates
+			}
+			else = {
+				#random = {
+				#	chance = 0
+				#	marriage_ai_accept_modifier = yes
+				#	modifier = {
+				#		factor = 100
+				#	}
+				#	add_to_temporary_list = accepting_candidates
+				#}
+
+				scope:recipient = {
+					save_opinion_value_as = { name = opinion_of_actor target = scope:actor }
+					save_opinion_value_as = { name = opinion_of_secondary_actor target = scope:secondary_actor }
+					save_opinion_value_as = { name = opinion_of_secondary_recipient target = scope:secondary_recipient }
+					accou_get_ruler_with_royal_court_effect = yes
+				}
+				save_scope_value_as = {
+					name = marriage_ai_accept_modifier_value
+					value = accou_marriage_ai_accept_modifier_value
+				}
+				if = {
+					limit = { scope:marriage_ai_accept_modifier_value > 0 }
+					add_to_temporary_list = accepting_candidates
+				}
+
+				#accou_debug_log_marriage_ai_accept_modifier_mismatches_effect = yes
+			}
+		}
+
+		# Determine candidate
+		random_in_list = {
+			list = accepting_candidates
+			save_scope_as = candidate
+		}
+
+		# Determine matchmaker
+		scope:candidate ?= {
+			if = {
+				limit = { exists = matchmaker }
+				matchmaker = { save_scope_as = matchmaker }
+			}
+			else = {
+				save_scope_as = matchmaker
+			}
+		}
+	}
+
+	option = {
+		name = accou_marriage.0001.a
+
+		if = {
+			limit = {
+				exists = scope:courtier
+				exists = scope:candidate
+				exists = scope:matchmaker
+
+				is_character_interaction_potentially_accepted = {
+					interaction = arrange_marriage_interaction
+					recipient = scope:matchmaker
+					secondary_actor = scope:courtier
+					secondary_recipient = scope:candidate
+				}
+			}
+			trigger_event = accou_marriage.0002
+		}
+		else = {
+			accou_debug_log_3_effect = {
+				MSG = accou_debug_msg_marriage_0001_a
+				NAME1 = courtier TYPE1 = flag:character
+				NAME2 = candidate TYPE2 = flag:character
+				NAME3 = matchmaker TYPE3 = flag:character
+			}
+			#debug_log_scopes = yes
+		}
+
+		ai_chance = {
+			base = 100
+		}
+	}
+}
+
+accou_marriage.0002 = {
+	type = character_event
+	title = accou_marriage.0002.t
+	desc = accou_marriage.0002.desc
+
+	theme = family
+	left_portrait = {
+		character = scope:courtier
+	}
+	right_portrait = {
+		character = scope:candidate
+	}
+	override_background = {
+		reference = throne_room
+	}
+
+	immediate = {
+	}
+
+	option = {
+		name = accou_marriage.0002.a
+
+		accou_debug_log_3_effect = {
+			MSG = accou_debug_msg_marriage_0002_a
+			NAME1 = courtier TYPE1 = flag:character
+			NAME2 = candidate TYPE2 = flag:character
+			NAME3 = matchmaker TYPE3 = flag:character
+		}
+		#debug_log_scopes = yes
+
+		run_interaction = {
+			interaction = arrange_marriage_interaction
+			actor = root
+			recipient = scope:matchmaker
+			secondary_actor = scope:courtier
+			secondary_recipient = scope:candidate
+			send_threshold = accept
+		}
+
+		ai_chance = {
+			base = 100
+		}
+	}
+
+	option = {
+		name = accou_marriage.0002.b
+
+		accou_debug_log_3_effect = {
+			MSG = accou_debug_msg_marriage_0002_b
+			NAME1 = courtier TYPE1 = flag:character
+			NAME2 = candidate TYPE2 = flag:character
+			NAME3 = matchmaker TYPE3 = flag:character
+		}
+		#debug_log_scopes = yes
+
+		ai_chance = {
+			base = 100
+		}
+	}
+
+	option = {
+		name = accou_marriage.0002.c
+
+		trigger = {
+			is_ai = no
+		}
+
+		accou_debug_log_3_effect = {
+			MSG = accou_debug_msg_marriage_0002_c
+			NAME1 = courtier TYPE1 = flag:character
+			NAME2 = candidate TYPE2 = flag:character
+			NAME3 = matchmaker TYPE3 = flag:character
+		}
+		#debug_log_scopes = yes
+
+		open_interaction_window = {
+			interaction = arrange_marriage_interaction
+			actor = root
+			recipient = scope:matchmaker
+			secondary_actor = scope:courtier
+			secondary_recipient = scope:candidate
+		}
+	}
+}

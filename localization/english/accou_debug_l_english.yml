@@ -1,0 +1,16 @@
+﻿l_english:
+ accou_debug_prefix: "[GetCurrentDate.GetStringShort]: [THIS.Char.GetFullNameNoTooltip] ([THIS.Char.GetID])"
+
+ accou_debug_msg_marriage_0001_a: "$accou_debug_prefix$: accou_marriage.0001 event option a, courtier: $accou_courtier$, candidate: $accou_candidate$, matchmaker: $accou_matchmaker$"
+ accou_debug_msg_marriage_0002_a: "$accou_debug_prefix$: accou_marriage.0002 event option a, courtier: $accou_courtier$, candidate: $accou_candidate$, matchmaker: $accou_matchmaker$"
+ accou_debug_msg_marriage_0002_b: "$accou_debug_prefix$: accou_marriage.0002 event option b, courtier: $accou_courtier$, candidate: $accou_candidate$, matchmaker: $accou_matchmaker$"
+ accou_debug_msg_marriage_0002_c: "$accou_debug_prefix$: accou_marriage.0002 event option c, courtier: $accou_courtier$, candidate: $accou_candidate$, matchmaker: $accou_matchmaker$"
+
+ accou_debug_msg_marriage_ai_accept_modifier_value_fp: "$accou_debug_prefix$: marriage_ai_accept_modifier_value false positive, courtier: $accou_courtier$, value:  $accou_marriage_ai_accept_modifier_value$"
+ accou_debug_msg_marriage_ai_accept_modifier_value_fn: "$accou_debug_prefix$: marriage_ai_accept_modifier_value false negative, courtier: $accou_courtier$, value:  $accou_marriage_ai_accept_modifier_value$"
+ accou_debug_msg_marriage_ai_accept_modifier_value_ok: "$accou_debug_prefix$: marriage_ai_accept_modifier_value ok"
+
+ accou_courtier: "[THIS.Var('courtier').Char.GetFullNameNoTooltip] ([THIS.Var('courtier').Char.GetID])"
+ accou_candidate: "[THIS.Var('candidate').Char.GetFullNameNoTooltip] ([THIS.Var('candidate').Char.GetID])"
+ accou_matchmaker: "[THIS.Var('matchmaker').Char.GetFullNameNoTooltip] ([THIS.Var('matchmaker').Char.GetID])"
+ accou_marriage_ai_accept_modifier_value: "[THIS.Var('marriage_ai_accept_modifier_value').GetValue]"

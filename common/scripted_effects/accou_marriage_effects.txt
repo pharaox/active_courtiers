@@ -1,0 +1,98 @@
+﻿accou_get_nearby_rulers_effect = {
+	top_liege ?= {
+		add_to_temporary_list = temp_rulers
+		every_vassal_or_below = {
+			add_to_temporary_list = temp_rulers
+		}
+	}
+	every_neighboring_and_across_water_top_liege_realm_owner = {
+		add_to_temporary_list = temp_rulers
+		every_vassal_or_below = {
+			add_to_temporary_list = temp_rulers
+		}
+	}
+
+	liege.capital_province ?= {
+		save_temporary_scope_as = capital_province
+		every_in_list = {
+			list = temp_rulers
+			limit = {
+				accou_is_landed_ruler_within_range_trigger = { LOCATION = scope:capital_province }
+			}
+			add_to_temporary_list = $RULERS$
+		}
+	}
+}
+
+accou_get_nearby_characters_effect = {
+	save_temporary_scope_as = character
+
+	# For every nearby ruler
+	accou_get_nearby_rulers_effect = { RULERS = rulers }
+	every_in_list = {
+		list = rulers
+
+		# Add the ruler itself
+		if = {
+			limit = { $PREDICATE$ = yes }
+			add_to_temporary_list = $CHARACTERS$
+		}
+
+		# Add every courtier or guest of this ruler
+		every_courtier_or_guest = {
+			limit = { $PREDICATE$ = yes }
+			add_to_temporary_list = $CHARACTERS$
+		}
+
+		# Add every pool character in the pool of this ruler's capital province
+		if = {
+			limit = { exists = capital_province }
+			save_temporary_scope_as = ruler
+			every_pool_character = {
+				province = scope:ruler.capital_province
+				limit = { $PREDICATE$ = yes }
+				add_to_temporary_list = $CHARACTERS$
+			}
+		}
+	}
+}
+
+accou_get_ruler_with_royal_court_effect = {
+	clear_saved_scope = ruler_with_royal_court
+	if = {
+		limit = { has_royal_court = yes }
+		save_temporary_scope_as = ruler_with_royal_court
+	}
+	else = {
+		liege ?= {
+			if = {
+				limit = { has_royal_court = yes }
+				save_temporary_scope_as = ruler_with_royal_court
+			}
+			else = {
+				liege ?= {
+					if = {
+						limit = { has_royal_court = yes }
+						save_temporary_scope_as = ruler_with_royal_court
+					}
+					else = {
+						liege ?= {
+							if = {
+								limit = { has_royal_court = yes }
+								save_temporary_scope_as = ruler_with_royal_court
+							}
+							else = {
+								liege ?= {
+									if = {
+										limit = { has_royal_court = yes }
+										save_temporary_scope_as = ruler_with_royal_court
+									}
+								}
+							}
+						}
+					}
+				}
+			}
+		}
+	}
+}

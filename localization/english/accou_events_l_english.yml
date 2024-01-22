@@ -1,0 +1,11 @@
+﻿l_english:
+ # accou_marriage.0001
+ accou_marriage.0001.t: "Courtier Requests to Marry (Preparation)"
+ accou_marriage.0001.desc: "My [ROOT.Char.Custom2('RelationToMe', SCOPE.sC('courtier'))] [courtier.GetUIName] is requesting to marry [candidate.GetUIName]."
+ accou_marriage.0001.a: "OK"
+ # accou_marriage.0002
+ accou_marriage.0002.t: "Courtier Requests to Marry"
+ accou_marriage.0002.desc: "My [ROOT.Char.Custom2('RelationToMe', SCOPE.sC('courtier'))] [courtier.GetUIName] is requesting to marry [candidate.GetUIName]."
+ accou_marriage.0002.a: "May [ROOT.Char.GetFaith.HighGodName] bless your union!"
+ accou_marriage.0002.b: "I am not willing to let you marry right now"
+ accou_marriage.0002.c: "Let me consider this..."

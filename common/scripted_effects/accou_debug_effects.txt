@@ -1,0 +1,94 @@
+﻿accou_debug_log_marriage_ai_accept_modifier_mismatches_effect = {
+	if = {
+		limit = {
+			is_in_list = accepting_candidates
+			scope:marriage_ai_accept_modifier_value <= -1
+		}
+		accou_debug_log_2_effect = {
+			MSG = accou_debug_msg_marriage_ai_accept_modifier_value_fn
+			NAME1 = courtier TYPE1 = flag:character
+			NAME2 = marriage_ai_accept_modifier_value TYPE2 = flag:value
+		}
+	}
+	else_if = {
+		limit = {
+			NOT = { is_in_list = accepting_candidates }
+			scope:marriage_ai_accept_modifier_value >= 1
+		}
+		accou_debug_log_2_effect = {
+			MSG = accou_debug_msg_marriage_ai_accept_modifier_value_fp
+			NAME1 = courtier TYPE1 = flag:character
+			NAME2 = marriage_ai_accept_modifier_value TYPE2 = flag:value
+		}
+	}
+	else = {
+		accou_debug_log_effect = { MSG = accou_debug_msg_marriage_ai_accept_modifier_value_ok }
+	}
+}
+
+accou_debug_log_effect = {
+	if = {
+		limit = { debug_only = yes }
+		debug_log = $MSG$
+	}
+}
+
+accou_debug_log_1_effect = {
+	if = {
+		limit = { debug_only = yes }
+
+		accou_debug_set_scope_variable_effect = { NAME = $NAME1$ TYPE = $TYPE1$ }
+		debug_log = $MSG$
+		accou_debug_remove_scope_variable_effect = { NAME = $NAME1$ TYPE = $TYPE1$ }
+	}
+}
+
+accou_debug_log_2_effect = {
+	if = {
+		limit = { debug_only = yes }
+
+		accou_debug_set_scope_variable_effect = { NAME = $NAME1$ TYPE = $TYPE1$ }
+		accou_debug_set_scope_variable_effect = { NAME = $NAME2$ TYPE = $TYPE2$ }
+		debug_log = $MSG$
+		accou_debug_remove_scope_variable_effect = { NAME = $NAME1$ TYPE = $TYPE1$ }
+		accou_debug_remove_scope_variable_effect = { NAME = $NAME2$ TYPE = $TYPE2$ }
+	}
+}
+
+accou_debug_log_3_effect = {
+	if = {
+		limit = { debug_only = yes }
+
+		accou_debug_set_scope_variable_effect = { NAME = $NAME1$ TYPE = $TYPE1$ }
+		accou_debug_set_scope_variable_effect = { NAME = $NAME2$ TYPE = $TYPE2$ }
+		accou_debug_set_scope_variable_effect = { NAME = $NAME3$ TYPE = $TYPE3$ }
+		debug_log = $MSG$
+		accou_debug_remove_scope_variable_effect = { NAME = $NAME1$ TYPE = $TYPE1$ }
+		accou_debug_remove_scope_variable_effect = { NAME = $NAME2$ TYPE = $TYPE2$ }
+		accou_debug_remove_scope_variable_effect = { NAME = $NAME3$ TYPE = $TYPE3$ }
+	}
+}
+
+accou_debug_set_scope_variable_effect = {
+	if = {
+		limit = {
+			NOT = { $TYPE$ = flag:variable }
+			exists = scope:$NAME$
+			trigger_if = {
+				limit = { $TYPE$ = flag:boolean }
+				scope:$NAME$ = yes
+			}
+		}
+		set_variable = { name = $NAME$ value = scope:$NAME$ }
+	}
+}
+
+accou_debug_remove_scope_variable_effect = {
+	if = {
+		limit = {
+			NOT = { $TYPE$ = flag:variable }
+			has_variable = $NAME$
+		}
+		remove_variable = $NAME$
+	}
+}
