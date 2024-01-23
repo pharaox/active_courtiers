@@ -9,6 +9,47 @@ random_yearly_playable_pulse = {
 
 accou_yearly_playable_pulse = {
 	trigger = {
+		always = no # TODO Game rule
+		basic_is_valid_for_yearly_events_trigger = yes
+	}
+
+	events = {
+		accou_marriage.0001 # Courtier Requests to Marry
+	}
+}
+
+# Called from code once every three years for "playable" (count+) characters.
+# Root is the character
+three_year_playable_pulse = {
+	on_actions = {
+		delay = { days = { 8 288 } }
+		accou_three_year_playable_pulse
+	}
+}
+
+accou_three_year_playable_pulse = {
+	trigger = {
+		always = yes # TODO Game rule
+		basic_is_valid_for_yearly_events_trigger = yes
+	}
+
+	events = {
+		accou_marriage.0001 # Courtier Requests to Marry
+	}
+}
+
+# Called from code once every five years for "playable" (count+) characters.
+# Root is the character
+five_year_playable_pulse = {
+	on_actions = {
+		delay = { days = { 8 288 } }
+		accou_five_year_playable_pulse
+	}
+}
+
+accou_five_year_playable_pulse = {
+	trigger = {
+		always = no # TODO Game rule
 		basic_is_valid_for_yearly_events_trigger = yes
 	}
 
