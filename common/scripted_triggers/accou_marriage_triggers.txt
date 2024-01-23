@@ -106,10 +106,10 @@ accou_could_marry_character_trigger = {
 			CHARACTER_1 = scope:character
 			CHARACTER_2 = $CHARACTER$
 		}
-		faith_hostility_level = {
-			target = $CHARACTER$.faith
-			value < faith_hostility_prevents_marriage_level
-		}
+		#faith_hostility_level = {
+		#	target = $CHARACTER$.faith
+		#	value < faith_hostility_prevents_marriage_level
+		#}
 	}
 
 	# Not already married or recently divorced
@@ -145,7 +145,7 @@ accou_is_landed_ruler_within_range_trigger = {
 	capital_province ?= {
 		squared_distance = {
 			target = $LOCATION$
-			value <= squared_distance_medium
+			value <= squared_distance_large # TODO Game rule
 		}
 	}
 }
@@ -177,5 +177,13 @@ accou_has_real_dynasty_trigger = {
 			}
 			dynasty_prestige_level > 1
 		}
+	}
+}
+
+accou_is_fertile_trigger = {
+	fertility > 0.1
+	OR = {
+		is_female = no
+		age < 45
 	}
 }

@@ -129,73 +129,115 @@ accou_marriage.0001 = {
 			}
 		}
 
-		root = { save_scope_as = actor }
-		scope:courtier ?= { save_scope_as = secondary_actor }
-
-		save_scope_value_as = { name = hook value = no }
-		save_scope_value_as = { name = grand_wedding_promise value = no }
-		scope:courtier ?= {
-			if = {
-				limit = { is_female = yes }
-				save_scope_value_as = { name = matrilineal value = yes }
+		# Get shortlisted marriage candidates
+		scope:courtier ?= { save_temporary_scope_as = suitor }
+		every_in_list = {
+			list = characters
+			scope:suitor = {
+				save_temporary_opinion_value_as = {
+					name = suitor_opinion
+					target = prev
+				}
 			}
-			else = {
-				save_scope_value_as = { name = matrilineal value = no }
+			save_temporary_scope_value_as = {
+				name = marriage_candidate_quality
+				value = accou_marriage_candidate_quality_value
+			}
+			if = {
+				limit = { scope:marriage_candidate_quality > 0 }
+				set_variable = {
+					name = accou_marriage_candidate_quality_value
+					value = scope:marriage_candidate_quality
+					days = 1
+				}
+				add_to_temporary_list = shortlisted_candidates
 			}
 		}
 
-		# Get marriage canidates
+		# Save actor and secondary actor scopes
+		root = { save_temporary_scope_as = actor }
+		scope:courtier ?= { save_temporary_scope_as = secondary_actor }
+
+		# Save option scopes used by marriage_ai_accept_modifier
+		save_temporary_scope_value_as = { name = hook value = no }
+		save_temporary_scope_value_as = { name = grand_wedding_promise value = no }
+		scope:courtier ?= {
+			if = {
+				limit = { is_female = yes }
+				save_temporary_scope_value_as = { name = matrilineal value = yes }
+			}
+			else = {
+				save_temporary_scope_value_as = { name = matrilineal value = no }
+			}
+		}
+
+		# Get accepting marriage canidates
 		every_in_list = {
-			list = characters
+			list = shortlisted_candidates
 			limit = {
 				accou_marriage_0001_valid_marriage_candidate_trigger = { CHARACTER = scope:courtier }
 			}
 
-			save_scope_as = secondary_recipient
+			# Save secondary recipient and recipient scopes
+			save_temporary_scope_as = secondary_recipient
 			if = {
 				limit = { exists = matchmaker }
-				matchmaker = { save_scope_as = recipient }
+				matchmaker = { save_temporary_scope_as = recipient }
 			}
 			else = {
-				save_scope_as = recipient
+				save_temporary_scope_as = recipient
 			}
 
+			# Determine if the candidate is accepting or not
 			if = {
 				limit = { scope:actor = scope:recipient }
 				add_to_temporary_list = accepting_candidates
 			}
 			else = {
-				#random = {
-				#	chance = 0
-				#	marriage_ai_accept_modifier = yes
-				#	modifier = {
-				#		factor = 100
-				#	}
-				#	add_to_temporary_list = accepting_candidates
-				#}
-
-				scope:recipient = {
-					save_opinion_value_as = { name = opinion_of_actor target = scope:actor }
-					save_opinion_value_as = { name = opinion_of_secondary_actor target = scope:secondary_actor }
-					save_opinion_value_as = { name = opinion_of_secondary_recipient target = scope:secondary_recipient }
-					accou_get_ruler_with_royal_court_effect = yes
-				}
-				save_scope_value_as = {
-					name = marriage_ai_accept_modifier_value
-					value = accou_marriage_ai_accept_modifier_value
-				}
 				if = {
-					limit = { scope:marriage_ai_accept_modifier_value > 0 }
-					add_to_temporary_list = accepting_candidates
-				}
+					limit = { always = no } # TODO Game rule
 
-				#accou_debug_log_marriage_ai_accept_modifier_mismatches_effect = yes
+					# Use vanilla marriage_ai_accept_modifier to check if the marriage will be accepted
+					random = {
+						chance = 0
+						marriage_ai_accept_modifier = yes
+						modifier = {
+							factor = 100
+						}
+						add_to_temporary_list = accepting_candidates
+					}
+				}
+				else = {
+					# Save additional scopes used by accou_quick_marriage_ai_accept_modifier_value
+					scope:recipient = {
+						save_temporary_opinion_value_as = { name = opinion_of_actor target = scope:actor }
+						save_temporary_opinion_value_as = { name = opinion_of_secondary_actor target = scope:secondary_actor }
+						save_temporary_opinion_value_as = { name = opinion_of_secondary_recipient target = scope:secondary_recipient }
+						accou_get_ruler_with_royal_court_effect = yes
+					}
+
+					# Use accou_quick_marriage_ai_accept_modifier_value to check if the marriage will be accepted
+					# This is not always accurate but faster (current match rate > 99.99%)
+					# It may also be less compatible with some conversion mods
+					save_temporary_scope_value_as = {
+						name = quick_marriage_ai_accept_modifier
+						value = accou_quick_marriage_ai_accept_modifier_value
+					}
+					if = {
+						limit = { scope:quick_marriage_ai_accept_modifier > 0 }
+						add_to_temporary_list = accepting_candidates
+					}
+
+					#accou_debug_log_quick_marriage_ai_accept_modifier_mismatches_effect = yes
+				}
 			}
 		}
 
-		# Determine candidate
-		random_in_list = {
+		# Determine best candidate
+		ordered_in_list = {
 			list = accepting_candidates
+			limit = { has_variable = accou_marriage_candidate_quality_value }
+			order_by = var:accou_marriage_candidate_quality_value
 			save_scope_as = candidate
 		}
 
@@ -207,6 +249,20 @@ accou_marriage.0001 = {
 			}
 			else = {
 				save_scope_as = matchmaker
+			}
+		}
+
+		# Save additional scopes for debugging
+		scope:candidate ?= {
+			scope:courtier ?= {
+				save_opinion_value_as = {
+					name = courtier_opinion_of_candidate
+					target = prev
+				}
+			}
+			save_scope_value_as = {
+				name = candidate_quality
+				value = var:accou_marriage_candidate_quality_value
 			}
 		}
 	}
@@ -236,7 +292,6 @@ accou_marriage.0001 = {
 				NAME2 = candidate TYPE2 = flag:character
 				NAME3 = matchmaker TYPE3 = flag:character
 			}
-			#debug_log_scopes = yes
 		}
 
 		ai_chance = {
@@ -267,13 +322,13 @@ accou_marriage.0002 = {
 	option = {
 		name = accou_marriage.0002.a
 
-		accou_debug_log_3_effect = {
+		accou_debug_log_4_effect = {
 			MSG = accou_debug_msg_marriage_0002_a
 			NAME1 = courtier TYPE1 = flag:character
 			NAME2 = candidate TYPE2 = flag:character
 			NAME3 = matchmaker TYPE3 = flag:character
+			NAME4 = candidate_quality TYPE4 = flag:value
 		}
-		#debug_log_scopes = yes
 
 		run_interaction = {
 			interaction = arrange_marriage_interaction
@@ -292,13 +347,13 @@ accou_marriage.0002 = {
 	option = {
 		name = accou_marriage.0002.b
 
-		accou_debug_log_3_effect = {
+		accou_debug_log_4_effect = {
 			MSG = accou_debug_msg_marriage_0002_b
 			NAME1 = courtier TYPE1 = flag:character
 			NAME2 = candidate TYPE2 = flag:character
 			NAME3 = matchmaker TYPE3 = flag:character
+			NAME4 = candidate_quality TYPE4 = flag:value
 		}
-		#debug_log_scopes = yes
 
 		ai_chance = {
 			base = 100
@@ -312,13 +367,13 @@ accou_marriage.0002 = {
 			is_ai = no
 		}
 
-		accou_debug_log_3_effect = {
+		accou_debug_log_4_effect = {
 			MSG = accou_debug_msg_marriage_0002_c
 			NAME1 = courtier TYPE1 = flag:character
 			NAME2 = candidate TYPE2 = flag:character
 			NAME3 = matchmaker TYPE3 = flag:character
+			NAME4 = candidate_quality TYPE4 = flag:value
 		}
-		#debug_log_scopes = yes
 
 		open_interaction_window = {
 			interaction = arrange_marriage_interaction

@@ -1,4 +1,283 @@
-﻿accou_marriage_ai_accept_modifier_value = {
+﻿accou_marriage_candidate_quality_value = {
+	value = 0
+
+	# Opinion (-100 to 100)
+	# Includes: attraction, relations, faith, culture, traits, etc.
+	add = scope:suitor_opinion
+
+	# Attraction (approx -25 to 25, lustful / chaste, already in opinion)
+	if = {
+		limit = {
+			scope:suitor = {
+				is_attracted_to_gender_of = prev
+			}
+		}
+		add = {
+			value = attraction
+			scope:suitor = {
+				if = {
+					limit = { has_trait = lustful }
+					multiply = 2
+				}
+				else_if = {
+					limit = { has_trait = chaste }
+					multiply = 0.5
+				}
+			}
+		}
+	}
+
+	# Fertility (-25 to 25)
+	if = {
+		limit = {
+			scope:suitor = {
+				accou_is_fertile_trigger = yes
+			}
+		}
+		add = {
+			if = {
+				limit = { accou_is_fertile_trigger = yes }
+				value = fertility # 0-1
+			}
+			else = {
+				value = 0
+			}
+			subtract = medium_fertility # 0.5
+			multiply = 50
+		}
+	}
+
+	# Health (-15 to 20)
+	add = {
+		value = health # 0-7
+		subtract = fine_health # 3
+		multiply = 5
+	}
+
+	# Age (approx -34 to 20)
+	add = {
+		value = 36
+		subtract = age # 16 - ~70
+	}
+
+	# Age difference (approx -50 to 0)
+	add = {
+		if = {
+			limit = { age < scope:suitor.age }
+			value = age
+			subtract = scope:suitor.age
+			multiply = 0.5
+		}
+		else = {
+			value = scope:suitor.age
+			subtract = age
+			multiply = 2
+		}
+	}
+
+	# Dynasty prestige difference (-50 to 50) (ambitious / content)
+	add = {
+		value = 0
+		if = {
+			limit = { exists = dynasty }
+			add = dynasty.dynasty_prestige_level # 0-10
+		}
+		if = {
+			limit = { exists = scope:suitor.dynasty }
+			subtract = scope:suitor.dynasty.dynasty_prestige_level
+		}
+		multiply = 5
+		scope:suitor = {
+			if = {
+				limit = { has_trait = ambitious }
+				multiply = 2
+			}
+			else_if = {
+				limit = { has_trait = content }
+				multiply = 0.5
+			}
+		}
+	}
+
+	save_temporary_scope_as = target_character
+
+	# Faith (-30 to 0, zealous / cynical, already in opinion)
+	if = {
+		limit = {
+			NOT = { faith = scope:suitor.faith }
+		}
+		add = {
+			value = scope:suitor.accou_faith_hostility_opinion_value
+			scope:suitor = {
+				if = {
+					limit = { has_trait = zealous }
+					multiply = 2
+				}
+				else_if = {
+					limit = { has_trait = cynical }
+					multiply = 0.5
+				}
+			}
+		}
+	}
+
+	# Culture & language (-15 to 0, gregarious / shy, already in opinion)
+	if = {
+		limit = {
+			NOT = { culture = scope:suitor.culture }
+		}
+		add = {
+			value = scope:suitor.accou_cultural_acceptance_opinion_value
+			scope:suitor = {
+				if = {
+					limit = { has_trait = gregarious }
+					multiply = 2
+				}
+				else_if = {
+					limit = { has_trait = shy }
+					multiply = 0.5
+				}
+			}
+		}
+	}
+
+	# Personality traits (-10 to 10 assuming a single relevant trait)
+	add = {
+		value = accou_spouse_personality_value
+		multiply = 10
+	}
+
+	# Genetic traits (-30 to 30 assuming a single genetic trait)
+	if = {
+		limit = {
+			accou_is_fertile_trigger = yes
+			scope:suitor = {
+				accou_is_fertile_trigger = yes
+			}
+		}
+		add = {
+			value = genetic_character_value
+			multiply = 10
+		}
+	}
+
+	# Skills (approx -80 to 80), and prowess (approx -8 to 8)
+	add = {
+		value = sum_of_all_skills_value
+		subtract = 40 # 5 * 8
+		multiply = 2
+	}
+	add = {
+		value = prowess
+		subtract = 8
+	}
+
+	round = yes
+}
+
+accou_faith_hostility_opinion_value = {
+	if = {
+		limit = {
+			faith = {
+				faith_hostility_level = {
+					target = scope:target_character.faith
+					value < faith_astray_level
+				}
+			}
+		}
+		value = 0
+	}
+	else_if = {
+		limit = {
+			faith = {
+				faith_hostility_level = {
+					target = scope:target_character.faith
+					value < faith_hostile_level
+				}
+			}
+		}
+		value = -10
+	}
+	else_if = {
+		limit = {
+			faith = {
+				faith_hostility_level = {
+					target = scope:target_character.faith
+					value < faith_evil_level
+				}
+			}
+		}
+		value = -20
+	}
+	else = {
+		value = -30
+	}
+}
+
+accou_cultural_acceptance_opinion_value = {
+	value = define:NCharacterOpinion|ZERO_CULTURE_ACCEPTANCE
+	if = {
+		limit = {
+			culture = {
+				cultural_acceptance = {
+					target = scope:target_character.culture
+					value = 100
+				}
+			}
+		}
+		multiply = 0
+	}
+	else_if = {
+		limit = {
+			culture = {
+				cultural_acceptance = {
+					target = scope:target_character.culture
+					value >= 75
+				}
+			}
+		}
+		multiply = 0.25
+	}
+	else_if = {
+		limit = {
+			culture = {
+				cultural_acceptance = {
+					target = scope:target_character.culture
+					value >= 50
+				}
+			}
+		}
+		multiply = 0.5
+	}
+	else_if = {
+		limit = {
+			culture = {
+				cultural_acceptance = {
+					target = scope:target_character.culture
+					value >= 25
+				}
+			}
+		}
+		multiply = 0.75
+	}
+	if = {
+		limit = { knows_language_of_culture = scope:target_character.culture }
+		multiply = define:NCharacterOpinion|CULTURE_ACCEPTANCE_MULT_KNOWS_LANGUAGE
+	}
+}
+
+accou_spouse_personality_value = {
+	if = {
+		limit = { has_trait = loyal }
+		add = 1
+	}
+	else_if = {
+		limit = { has_trait = disloyal }
+		add = -1
+	}
+}
+
+accou_quick_marriage_ai_accept_modifier_value = {
 	value = 0
 
 	# Hooks (no possible, skipped)
@@ -294,20 +573,10 @@
 		if = {
 			limit = {
 				scope:secondary_actor = {
-					OR = {
-						fertility < 0.1
-						AND = {
-							is_female = yes
-							age >= marriage_female_fertility_cutoff_age_value
-						}
-					}
+					accou_is_fertile_trigger = no
 				}
 				scope:secondary_recipient = {
-					fertility > 0.1
-					OR = {
-						is_female = no
-						age < 45
-					}
+					accou_is_fertile_trigger = yes
 				}
 			}
 			if = {
