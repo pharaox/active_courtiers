@@ -1,0 +1,7 @@
+﻿accou_commander_skill_value = {
+	value = martial
+	add = {
+		value = number_of_commander_traits
+		multiply = 3
+	}
+}

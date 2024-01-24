@@ -305,3 +305,53 @@ accou_can_be_better_court_position_trigger = {
 		}
 	}
 }
+
+accou_can_be_better_knight_trigger = {
+	save_temporary_scope_as = character
+	can_be_knight_trigger = { ARMY_OWNER = $LIEGE$ }
+	#prowess > decent_skill_rating
+	$LIEGE$ = {
+		highest_held_title_tier >= tier_county
+		OR = {
+			number_of_knights < max_number_of_knights
+			any_knight = {
+				prowess < scope:character.prowess
+			}
+		}
+		NOR = {
+			any_courtier = {
+				can_be_knight_trigger = { ARMY_OWNER = $LIEGE$ }
+				NOT = { is_knight_of = $LIEGE$ }
+				prowess >= scope:character.prowess
+			}
+			any_vassal = {
+				can_be_knight_trigger = { ARMY_OWNER = $LIEGE$ }
+				NOT = { is_knight_of = $LIEGE$ }
+				prowess >= scope:character.prowess
+			}
+		}
+	}
+}
+
+accou_can_be_better_commander_trigger = {
+	save_temporary_scope_as = character
+	can_be_commander_basic_trigger = { ARMY_OWNER = $LIEGE$ }
+	#martial >= decent_skill_rating
+	$LIEGE$ = {
+		highest_held_title_tier >= tier_county
+		any_courtier = {
+			count = all
+			add_to_temporary_list = commanders
+		}
+		any_vassal = {
+			count = all
+			add_to_temporary_list = commanders
+		}
+		any_in_list = {
+			list = commanders
+			can_be_commander_basic_trigger = { ARMY_OWNER = $LIEGE$ }
+			accou_commander_skill_value >= scope:character.accou_commander_skill_value
+			count < 3
+		}
+	}
+}
