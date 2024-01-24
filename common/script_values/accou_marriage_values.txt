@@ -502,7 +502,60 @@ accou_quick_marriage_ai_accept_modifier_value = {
 		}
 	}
 
-	# Incorrect lineality (not likely, skipped)
+	# Incorrect lineality (simplified)
+	if = {
+		limit = {
+			scope:recipient = {
+				is_ruler = yes
+			}
+			scope:secondary_actor = {
+				sex_opposite_of = scope:secondary_recipient
+			}
+			scope:secondary_recipient = {
+				accou_is_same_dynasty_trigger = { CHARACTER = scope:recipient }
+				trigger_if = {
+					limit = { is_female = yes }
+					scope:matrilineal = no
+				}
+				trigger_else = {
+					scope:matrilineal = yes
+				}
+			}
+		}
+
+		if = {
+			limit = {
+				scope:recipient = {
+					has_realm_law = equal_law
+				}
+			}
+			add = -10
+		}
+		else_if = {
+			limit = {
+				scope:recipient = {
+					trigger_if = {
+						limit = {
+							scope:secondary_recipient = {
+								is_female = yes
+							}
+						}
+						OR = {
+							has_realm_law = female_only_law
+							has_realm_law = female_preference_law
+						}
+					}
+					trigger_else = {
+						OR = {
+							has_realm_law = male_only_law
+							has_realm_law = male_preference_law
+						}
+					}
+				}
+			}
+			add = -20
+		}
+	}
 
 	# Faith (simplified)
 	if = {

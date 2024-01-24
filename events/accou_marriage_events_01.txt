@@ -283,6 +283,7 @@ accou_marriage.0001 = {
 					secondary_recipient = scope:candidate
 				}
 			}
+
 			trigger_event = accou_marriage.0002
 		}
 		else = {
@@ -317,6 +318,30 @@ accou_marriage.0002 = {
 	}
 
 	immediate = {
+		# Evaluate candidate
+		scope:candidate = {
+			if = {
+				limit = { NOT = { scope:matchmaker = root } }
+				accou_get_better_councillor_options_effect = { LIEGE = root OPTIONS = accou_better_councillor_options }
+				accou_get_better_court_position_options_effect = { LIEGE = root OPTIONS = accou_better_court_position_options }
+			}
+
+			every_in_list = {
+				variable = accou_better_councillor_options
+				add_to_list = better_councillor_options
+			}
+			every_in_list = {
+				variable = accou_better_court_position_options
+				add_to_list = better_court_position_options
+			}
+		}
+	}
+
+	after = {
+		scope:candidate = {
+			clear_variable_list = accou_better_councillor_options
+			clear_variable_list = accou_better_court_position_options
+		}
 	}
 
 	option = {
@@ -329,18 +354,42 @@ accou_marriage.0002 = {
 			NAME3 = matchmaker TYPE3 = flag:character
 			NAME4 = candidate_quality TYPE4 = flag:value
 		}
+		debug_log_scopes = yes
 
-		run_interaction = {
-			interaction = arrange_marriage_interaction
-			actor = root
-			recipient = scope:matchmaker
-			secondary_actor = scope:courtier
-			secondary_recipient = scope:candidate
-			send_threshold = accept
+		if = {
+			limit = {
+				scope:matchmaker = { is_ai = no }
+			}
+			run_interaction = {
+				interaction = arrange_marriage_interaction
+				actor = root
+				recipient = scope:matchmaker
+				secondary_actor = scope:courtier
+				secondary_recipient = scope:candidate
+				send_threshold = accept
+			}
+		}
+		else = {
+			trigger_event = accou_marriage.0003
 		}
 
 		ai_chance = {
-			base = 100
+			base = 1
+
+			modifier = {
+				list_size = {
+					name = better_councillor_options
+					value > 0
+				}
+				add = 50
+			}
+			modifier = {
+				list_size = {
+					name = better_court_position_options
+					value > 0
+				}
+				add = 50
+			}
 		}
 	}
 
@@ -354,9 +403,10 @@ accou_marriage.0002 = {
 			NAME3 = matchmaker TYPE3 = flag:character
 			NAME4 = candidate_quality TYPE4 = flag:value
 		}
+		debug_log_scopes = yes
 
 		ai_chance = {
-			base = 100
+			base = 1
 		}
 	}
 
@@ -374,6 +424,7 @@ accou_marriage.0002 = {
 			NAME3 = matchmaker TYPE3 = flag:character
 			NAME4 = candidate_quality TYPE4 = flag:value
 		}
+		debug_log_scopes = yes
 
 		open_interaction_window = {
 			interaction = arrange_marriage_interaction
@@ -382,5 +433,34 @@ accou_marriage.0002 = {
 			secondary_actor = scope:courtier
 			secondary_recipient = scope:candidate
 		}
+	}
+}
+
+accou_marriage.0003 = {
+	type = character_event
+	hidden = yes
+
+	immediate = {
+		# Actually marry courtier to candidate
+		scope:courtier = {
+			if = {
+				limit = { is_female = no }
+				marry = scope:candidate
+			}
+			else = {
+				marry_matrilineal = scope:candidate
+			}
+		}
+
+		# Save scopes used by marriage_interaction_on_accept_effect
+		root = { save_scope_as = actor }
+		scope:matchmaker = { save_scope_as = recipient }
+		scope:courtier = { save_scope_as = secondary_actor }
+		scope:candidate = { save_scope_as = secondary_recipient }
+		save_scope_value_as = { name = hook value = no }
+		save_scope_value_as = { name = grand_wedding_promise value = no }
+
+		# Execute marriage interaction effect
+		marriage_interaction_on_accept_effect = yes
 	}
 }

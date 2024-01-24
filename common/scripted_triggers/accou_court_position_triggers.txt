@@ -1,0 +1,197 @@
+﻿accou_can_be_court_physician_trigger = {
+	is_capable_adult = yes
+	exists = $LIEGE$
+}
+
+accou_can_be_cultural_emissary_trigger = {
+	is_capable_adult = yes
+	diplomacy >= 8
+	exists = $LIEGE$
+}
+
+accou_can_be_court_gardener_trigger = {
+	is_capable_adult = yes
+	exists = $LIEGE$
+}
+
+accou_can_be_lady_in_waiting_trigger = {
+	is_capable_adult = yes
+	is_female = yes
+	exists = $LIEGE$
+}
+
+accou_can_be_antiquarian_trigger = {
+	is_capable_adult = yes
+	NOT = { is_spouse_of = $LIEGE$ }
+}
+
+accou_can_be_travel_leader_trigger = {
+	is_capable_adult = yes
+	is_clergy = no
+	NOT = { has_variable = gone_adventuring }
+	NOT = { is_spouse_of = $LIEGE$ }
+}
+
+accou_can_be_wet_nurse_trigger = {
+	is_capable_adult = yes
+	NOT = { is_close_family_of = $LIEGE$ }
+	age <= 45
+	is_female = yes
+	has_no_particular_noble_roots_trigger = yes
+}
+
+accou_can_be_court_tutor_trigger = {
+	is_capable_adult = yes
+	NOT = { is_spouse_of = $LIEGE$ }
+}
+
+accou_can_be_food_taster_trigger = {
+	is_capable_adult = yes
+	NOT = { is_spouse_of = $LIEGE$ }
+	can_be_combatant_based_on_gender_trigger = { ARMY_OWNER = $LIEGE$ }
+	trigger_if = {
+		limit = {
+			$LIEGE$.faith = {
+				NOT = { has_doctrine = doctrine_clerical_function_recruitment }
+			}
+		}
+		is_clergy = no
+	}
+}
+
+accou_can_be_master_of_horse_trigger = {
+	is_capable_adult = yes
+	exists = $LIEGE$
+}
+
+accou_can_be_master_of_hunt_trigger = {
+	is_capable_adult = yes
+	NOR = {
+		has_trait = blind
+		has_trait = incapable
+		has_trait = infirm
+	}
+	can_be_combatant_based_on_gender_trigger = { ARMY_OWNER = $LIEGE$ }
+	trigger_if = {
+		limit = { is_clergy = yes }
+		faith = { has_doctrine_parameter = clergy_can_fight }
+	}
+}
+
+accou_can_be_royal_architect_trigger = {
+	is_capable_adult = yes
+	exists = $LIEGE$
+}
+
+accou_can_be_high_almoner_trigger = {
+	is_capable_adult = yes
+	exists = $LIEGE$
+}
+
+accou_can_be_seneschal_trigger = {
+	is_capable_adult = yes
+	NOT = { is_spouse_of = $LIEGE$ }
+}
+
+accou_can_be_cupbearer_trigger = {
+	is_capable_adult = yes
+	NOT = { is_spouse_of = $LIEGE$ }
+}
+
+accou_can_be_chief_eunuch_trigger = {
+	is_capable_adult = yes
+	has_trait = eunuch
+	exists = $LIEGE$
+}
+
+accou_can_be_court_jester_trigger = {
+	is_capable_adult = yes
+	exists = $LIEGE$
+	NOR = {
+		is_close_family_of = $LIEGE$
+		is_consort_of = $LIEGE$
+		is_ruler = yes
+		accou_has_real_dynasty_trigger = yes
+		is_clergy = yes
+		is_theocratic_lessee = yes
+	}
+}
+
+accou_can_be_court_poet_trigger = {
+	is_capable_adult = yes
+	NOT = { is_spouse_of = $LIEGE$ }
+	has_trait = poet
+}
+
+accou_can_be_court_musician_trigger = {
+	is_capable_adult = yes
+	NOT = { is_spouse_of = $LIEGE$ }
+}
+
+accou_can_be_bodyguard_trigger = {
+	is_capable_adult = yes
+	NOT = { is_spouse_of = $LIEGE$ }
+	can_be_combatant_based_on_gender_trigger = { ARMY_OWNER = $LIEGE$ }
+}
+
+accou_can_be_champion_trigger = {
+	is_capable_adult = yes
+	can_be_combatant_based_on_gender_trigger = { ARMY_OWNER = $LIEGE$ }
+}
+
+accou_can_be_executioner_trigger = {
+	is_capable_adult = yes
+	NOT = { is_spouse_of = $LIEGE$ }
+	is_ruler = no
+	$LIEGE$ = {
+		OR = {
+			has_imprisonment_reason = prev
+			has_strong_usable_hook = prev
+		}
+	}
+}
+
+accou_can_be_court_artificer_trigger = {
+	is_capable_adult = yes
+	NOT = { is_spouse_of = $LIEGE$ }
+	OR = {
+		has_completed_inspiration = yes
+		exists = inspiration
+	}
+}
+
+accou_can_be_court_cave_hermit_trigger = {
+	is_capable_adult = yes
+	NOT = { is_spouse_of = $LIEGE$ }
+	has_trait = lifestyle_mystic
+	has_trait_xp = {
+		trait = lifestyle_mystic
+		value >= 50
+	}
+}
+
+accou_is_court_position_available_to_vassals_trigger = {
+	OR = {
+		$POSITION$ = flag:master_of_horse_court_position
+		$POSITION$ = flag:master_of_hunt_court_position
+		$POSITION$ = flag:royal_architect_court_position
+		$POSITION$ = flag:court_jester_court_position
+	}
+}
+
+accou_has_children_to_nurse_or_tutor_trigger = {
+	OR = {
+		AND = {
+			exists = primary_heir
+			primary_heir = {
+				is_adult = no
+				is_courtier_of = prev
+			}
+		}
+		any_child = {
+			count >= 3
+			is_adult = no
+			is_courtier_of = prev
+		}
+	}
+}

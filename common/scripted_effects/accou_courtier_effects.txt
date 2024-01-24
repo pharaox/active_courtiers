@@ -1,0 +1,123 @@
+﻿accou_get_better_councillor_options_effect = {
+	clear_variable_list = $OPTIONS$
+	if = {
+		limit = { accou_can_be_better_chancellor_trigger = { LIEGE = $LIEGE$ } }
+		add_to_variable_list = { name = $OPTIONS$ target = flag:chancellor }
+	}
+	if = {
+		limit = { accou_can_be_better_steward_trigger = { LIEGE = $LIEGE$ } }
+		add_to_variable_list = { name = $OPTIONS$ target = flag:steward }
+	}
+	if = {
+		limit = { accou_can_be_better_marshal_trigger = { LIEGE = $LIEGE$ } }
+		add_to_variable_list = { name = $OPTIONS$ target = flag:marshal }
+	}
+	if = {
+		limit = { accou_can_be_better_spymaster_trigger = { LIEGE = $LIEGE$ } }
+		add_to_variable_list = { name = $OPTIONS$ target = flag:spymaster }
+	}
+	if = {
+		limit = { accou_can_be_better_court_chaplain_trigger = { LIEGE = $LIEGE$ } }
+		add_to_variable_list = { name = $OPTIONS$ target = flag:court_chaplain }
+	}
+}
+
+accou_get_better_court_position_options_effect = {
+	clear_variable_list = $OPTIONS$
+	if = {
+		limit = { accou_can_be_better_court_physician_trigger = { LIEGE = $LIEGE$ } }
+		add_to_variable_list = { name = $OPTIONS$ target = flag:court_physician }
+	}
+	if = {
+		limit = { accou_can_be_better_cultural_emissary_trigger = { LIEGE = $LIEGE$ } }
+		add_to_variable_list = { name = $OPTIONS$ target = flag:cultural_emissary }
+	}
+	if = {
+		limit = { accou_can_be_better_court_gardener_trigger = { LIEGE = $LIEGE$ } }
+		add_to_variable_list = { name = $OPTIONS$ target = flag:court_gardener }
+	}
+	if = {
+		limit = { accou_can_be_better_lady_in_waiting_trigger = { LIEGE = $LIEGE$ } }
+		add_to_variable_list = { name = $OPTIONS$ target = flag:lady_in_waiting }
+	}
+	if = {
+		limit = { accou_can_be_better_antiquarian_trigger = { LIEGE = $LIEGE$ } }
+		add_to_variable_list = { name = $OPTIONS$ target = flag:antiquarian }
+	}
+	if = {
+		limit = { accou_can_be_better_travel_leader_trigger = { LIEGE = $LIEGE$ } }
+		add_to_variable_list = { name = $OPTIONS$ target = flag:travel_leader }
+	}
+	if = {
+		limit = { accou_can_be_better_wet_nurse_trigger = { LIEGE = $LIEGE$ } }
+		add_to_variable_list = { name = $OPTIONS$ target = flag:wet_nurse }
+	}
+	if = {
+		limit = { accou_can_be_better_court_tutor_trigger = { LIEGE = $LIEGE$ } }
+		add_to_variable_list = { name = $OPTIONS$ target = flag:court_tutor }
+	}
+	if = {
+		limit = { accou_can_be_better_food_taster_trigger = { LIEGE = $LIEGE$ } }
+		add_to_variable_list = { name = $OPTIONS$ target = flag:food_taster }
+	}
+	if = {
+		limit = { accou_can_be_better_master_of_horse_trigger = { LIEGE = $LIEGE$ } }
+		add_to_variable_list = { name = $OPTIONS$ target = flag:master_of_horse }
+	}
+	if = {
+		limit = { accou_can_be_better_master_of_hunt_trigger = { LIEGE = $LIEGE$ } }
+		add_to_variable_list = { name = $OPTIONS$ target = flag:master_of_hunt }
+	}
+	if = {
+		limit = { accou_can_be_better_royal_architect_trigger = { LIEGE = $LIEGE$ } }
+		add_to_variable_list = { name = $OPTIONS$ target = flag:royal_architect }
+	}
+	if = {
+		limit = { accou_can_be_better_high_almoner_trigger = { LIEGE = $LIEGE$ } }
+		add_to_variable_list = { name = $OPTIONS$ target = flag:high_almoner }
+	}
+	if = {
+		limit = { accou_can_be_better_seneschal_trigger = { LIEGE = $LIEGE$ } }
+		add_to_variable_list = { name = $OPTIONS$ target = flag:seneschal }
+	}
+	if = {
+		limit = { accou_can_be_better_cupbearer_trigger = { LIEGE = $LIEGE$ } }
+		add_to_variable_list = { name = $OPTIONS$ target = flag:cupbearer }
+	}
+	if = {
+		limit = { accou_can_be_better_chief_eunuch_trigger = { LIEGE = $LIEGE$ } }
+		add_to_variable_list = { name = $OPTIONS$ target = flag:chief_eunuch }
+	}
+	if = {
+		limit = { accou_can_be_better_court_jester_trigger = { LIEGE = $LIEGE$ } }
+		add_to_variable_list = { name = $OPTIONS$ target = flag:court_jester }
+	}
+	if = {
+		limit = { accou_can_be_better_court_poet_trigger = { LIEGE = $LIEGE$ } }
+		add_to_variable_list = { name = $OPTIONS$ target = flag:court_poet }
+	}
+	if = {
+		limit = { accou_can_be_better_court_musician_trigger = { LIEGE = $LIEGE$ } }
+		add_to_variable_list = { name = $OPTIONS$ target = flag:court_musician }
+	}
+	if = {
+		limit = { accou_can_be_better_bodyguard_trigger = { LIEGE = $LIEGE$ } }
+		add_to_variable_list = { name = $OPTIONS$ target = flag:bodyguard }
+	}
+	if = {
+		limit = { accou_can_be_better_champion_trigger = { LIEGE = $LIEGE$ } }
+		add_to_variable_list = { name = $OPTIONS$ target = flag:champion }
+	}
+	if = {
+		limit = { accou_can_be_better_executioner_trigger = { LIEGE = $LIEGE$ } }
+		add_to_variable_list = { name = $OPTIONS$ target = flag:executioner }
+	}
+	if = {
+		limit = { accou_can_be_better_court_artificer_trigger = { LIEGE = $LIEGE$ } }
+		add_to_variable_list = { name = $OPTIONS$ target = flag:court_artificer }
+	}
+	if = {
+		limit = { accou_can_be_better_court_cave_hermit_trigger = { LIEGE = $LIEGE$ } }
+		add_to_variable_list = { name = $OPTIONS$ target = flag:court_cave_hermit }
+	}
+}

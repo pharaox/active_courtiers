@@ -1,0 +1,144 @@
+﻿accou_number_of_desired_court_physician_holders = {
+	value = 1
+}
+
+accou_number_of_desired_cultural_emissary_holders = {
+	value = 1
+}
+
+accou_number_of_desired_court_gardener_holders = {
+	value = 1
+}
+
+accou_number_of_desired_lady_in_waiting_holders = {
+	value = 1
+
+	# Opinion
+	if = {
+		limit = {
+			opinion = {
+				target = scope:character
+				value >= high_positive_opinion
+			}
+		}
+		add = 1
+	}
+}
+
+accou_number_of_desired_antiquarian_holders = {
+	value = 1
+}
+
+accou_number_of_desired_travel_leader_holders = {
+	value = 1
+}
+
+accou_number_of_desired_wet_nurse_holders = {
+	value = 0
+
+	# Has children to nurse
+	if = {
+		limit = { accou_has_children_to_nurse_or_tutor_trigger = yes }
+		add = 1
+	}
+}
+
+accou_number_of_desired_court_tutor_holders = {
+	value = 1
+}
+
+accou_number_of_desired_food_taster_holders = {
+	value = 1
+}
+
+accou_number_of_desired_master_of_horse_holders = {
+	value = 1
+}
+
+accou_number_of_desired_master_of_hunt_holders = {
+	value = 1
+}
+
+accou_number_of_desired_royal_architect_holders = {
+	value = 0
+
+	# Lots of gold to spend on buildings
+	if = {
+		limit = {
+			OR = {
+				short_term_gold >= 500
+				monthly_character_income >= monthly_character_expenses_plus_fourty_percent
+			}
+		}
+		add = 1
+	}
+}
+
+accou_number_of_desired_high_almoner_holders = {
+	value = 1
+}
+
+accou_number_of_desired_seneschal_holders = {
+	value = 1
+}
+
+accou_number_of_desired_cupbearer_holders = {
+	value = 1
+}
+
+accou_number_of_desired_chief_eunuch_holders = {
+	value = 1
+}
+
+accou_number_of_desired_court_jester_holders = {
+	value = 1
+}
+
+accou_number_of_desired_court_poet_holders = {
+	value = 1
+}
+
+accou_number_of_desired_court_musician_holders = {
+	value = 1
+}
+
+accou_number_of_desired_bodyguard_holders = {
+	value = 1
+	if = {
+		limit = { has_trait = paranoid }
+		add = 1
+	}
+}
+
+accou_number_of_desired_champion_holders = {
+	value = 0
+	if = {
+		limit = {
+			NOT = { can_be_combatant_based_on_gender_trigger = { ARMY_OWNER = this } }
+		}
+		add = 1
+	}
+}
+
+accou_number_of_desired_executioner_holders = {
+	value = 1
+}
+
+accou_number_of_desired_court_artificer_holders = {
+	value = 0
+
+	# Lots of gold to spend on artifacts
+	if = {
+		limit = {
+			OR = {
+				short_term_gold >= 500
+				monthly_character_income >= monthly_character_expenses_plus_fourty_percent
+			}
+		}
+		add = 1
+	}
+}
+
+accou_number_of_desired_court_cave_hermit_holders = {
+	value = 1
+}
