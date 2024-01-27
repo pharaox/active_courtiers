@@ -134,10 +134,43 @@ accou_is_valid_marriage_recipient_trigger = {
 
 accou_is_of_major_interest_trigger = {
 	OR = {
+		# Heirs
 		is_player_heir_of = $CHARACTER$
 		is_heir_of = $CHARACTER$
+
+		# Close family or consort
 		is_close_family_of = $CHARACTER$
 		is_consort_of = $CHARACTER$
+
+		# TODO Dynasty or house head
+		# TODO Head of faith
+	}
+}
+
+accou_is_of_minor_interest_trigger = {
+	OR = {
+		# Extended family or dynasty
+		is_extended_family_of = $CHARACTER$
+		accou_is_same_dynasty_trigger = { CHARACTER = $CHARACTER$ }
+
+		# Councillor, court position holder, or knight
+		is_councillor_of = $CHARACTER$
+		any_court_position_employer = {
+			this = $CHARACTER$
+		}
+		is_knight_of = $CHARACTER$
+
+		# Relations
+		has_relation_friend = $CHARACTER$
+		has_relation_rival = $CHARACTER$
+		has_relation_lover = $CHARACTER$
+		has_relation_guardian = $CHARACTER$
+		has_relation_ward = $CHARACTER$
+
+		# TODO Highly skilled courtiers
+
+		# Inspiration
+		exists = inspiration
 	}
 }
 
