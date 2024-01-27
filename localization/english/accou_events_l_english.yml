@@ -9,3 +9,6 @@
  accou_marriage.0002.a: "May [ROOT.Char.GetFaith.HighGodName] bless your union!"
  accou_marriage.0002.b: "I am not willing to let you marry right now"
  accou_marriage.0002.c: "Let me consider this..."
+ accou_marriage.0002.c.tt.consider: "Opens Arrange Marriage for [courtier.GetUIName] and [candidate.GetUIName]"
+ accou_marriage.0002.c.tt.accept: "If you arrange this marriage, after 15 days"
+ accou_marriage.0002.c.tt.reject: "If you don't arrange this marriage, after 15 days"

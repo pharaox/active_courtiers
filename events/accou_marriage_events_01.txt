@@ -13,6 +13,12 @@ scripted_trigger accou_marriage_0001_valid_courtier_trigger = {
 
 	# Not a female in a male-dominated faith and vice versa
 	NOT = { is_wrong_gender_in_faith_trigger = { FAITH = faith } }
+
+	# No previous attempt failed recently
+	NOR = {
+		has_character_flag = accou_marriage_0001_failed
+		has_character_flag = accou_marriage_0001_considering
+	}
 }
 
 scripted_trigger accou_marriage_0001_valid_marriage_candidate_trigger = {
@@ -67,7 +73,7 @@ scripted_trigger accou_marriage_0001_valid_marriage_candidate_trigger = {
 		RECIPIENT = scope:matchmaker1
 	}
 
-	# Either the initiated character is attracted to the spouse candidate
+	# Either the initiating character is attracted to the spouse candidate
 	# or both characters are visibly fertile
 	OR = {
 		$CHARACTER$ = {
@@ -78,6 +84,77 @@ scripted_trigger accou_marriage_0001_valid_marriage_candidate_trigger = {
 			$CHARACTER$ = {
 				is_visibly_fertile = yes
 			}
+		}
+	}
+
+	# Marriage between the initiating character and this character
+	# was not recently rejected
+	NOR = {
+		$CHARACTER$.var:accou_marriage_0001_rejected ?= scope:candidate1
+		has_character_flag = accou_marriage_0001_considering
+	}
+}
+
+scripted_effect accou_marriage_0001_on_accept_effect = {
+	# Actually marry courtier to candidate
+	scope:courtier = {
+		if = {
+			limit = { is_female = no }
+			marry = scope:candidate
+		}
+		else = {
+			marry_matrilineal = scope:candidate
+		}
+	}
+
+	# Save scopes used by marriage_interaction_on_accept_effect
+	root = { save_scope_as = actor }
+	scope:matchmaker = { save_scope_as = recipient }
+	scope:courtier = { save_scope_as = secondary_actor }
+	scope:candidate = { save_scope_as = secondary_recipient }
+	save_scope_value_as = { name = hook value = no }
+	save_scope_value_as = { name = grand_wedding_promise value = no }
+
+	# Execute marriage interaction effect
+	marriage_interaction_on_accept_effect = yes
+}
+
+scripted_effect accou_marriage_0001_on_approve_effect = {
+	# Add courtier opinion
+	scope:courtier = {
+		add_opinion = {
+			target = root
+			modifier = accou_accepted_my_marriage_request_opinion
+		}
+	}
+
+	# Stress impact for root
+	if = {
+		limit = { NOT = { scope:matchmaker = root } }
+		stress_impact = {
+			paranoid = minor_stress_gain
+			trusting = minor_stress_loss
+		}
+	}
+	else = {
+		stress_impact = {
+			ambitious = minor_stress_gain
+			content = minor_stress_loss
+		}
+	}
+}
+
+scripted_effect accou_marriage_0001_on_reject_effect = {
+	# Add courtier opinion
+	scope:courtier = {
+		add_opinion = {
+			target = root
+			modifier = accou_rejected_my_marriage_request_opinion
+		}
+		set_variable = {
+			name = accou_marriage_0001_rejected
+			value = scope:candidate
+			years = 5
 		}
 	}
 }
@@ -296,6 +373,13 @@ accou_marriage.0001 = {
 				NAME2 = candidate TYPE2 = flag:character
 				NAME3 = matchmaker TYPE3 = flag:character
 			}
+
+			scope:courtier ?= {
+				add_character_flag = {
+					flag = accou_marriage_0001_failed
+					years = 5
+				}
+			}
 		}
 
 		ai_chance = {
@@ -421,10 +505,11 @@ accou_marriage.0002 = {
 			NAME4 = candidate_quality TYPE4 = flag:value
 			NAME5 = outsider TYPE5 = flag:boolean
 		}
-		debug_log_scopes = yes
+		#debug_log_scopes = yes
 
 		if = {
 			limit = {
+				is_ai = yes
 				scope:matchmaker = { is_ai = no }
 			}
 			run_interaction = {
@@ -437,8 +522,10 @@ accou_marriage.0002 = {
 			}
 		}
 		else = {
-			trigger_event = accou_marriage.0003
+			accou_marriage_0001_on_accept_effect = yes
 		}
+
+		accou_marriage_0001_on_approve_effect = yes
 
 		ai_chance = {
 			base = 0
@@ -580,7 +667,9 @@ accou_marriage.0002 = {
 			NAME4 = candidate_quality TYPE4 = flag:value
 			NAME5 = outsider TYPE5 = flag:boolean
 		}
-		debug_log_scopes = yes
+		#debug_log_scopes = yes
+
+		accou_marriage_0001_on_reject_effect = yes
 
 		ai_chance = {
 			base = 1
@@ -602,14 +691,48 @@ accou_marriage.0002 = {
 			NAME4 = candidate_quality TYPE4 = flag:value
 			NAME5 = outsider TYPE5 = flag:boolean
 		}
-		debug_log_scopes = yes
+		#debug_log_scopes = yes
 
+		custom_tooltip = accou_marriage.0002.c.tt.consider
 		open_interaction_window = {
 			interaction = arrange_marriage_interaction
 			actor = root
 			recipient = scope:matchmaker
 			secondary_actor = scope:courtier
 			secondary_recipient = scope:candidate
+		}
+
+		show_as_tooltip = {
+			random_list = {
+				50 = {
+					desc = accou_marriage.0002.c.tt.accept
+					show_chance = no
+					accou_marriage_0001_on_approve_effect = yes
+				}
+				50 = {
+					desc = accou_marriage.0002.c.tt.reject
+					show_chance = no
+					accou_marriage_0001_on_reject_effect = yes
+				}
+			}
+		}
+
+		scope:courtier = {
+			add_character_flag = {
+				flag = accou_marriage_0001_considering
+				days = 15
+			}
+		}
+		scope:candidate = {
+			add_character_flag = {
+				flag = accou_marriage_0001_considering
+				days = 15
+			}
+		}
+
+		trigger_event = {
+			id = accou_marriage.0003
+			days = 15
 		}
 	}
 }
@@ -619,26 +742,16 @@ accou_marriage.0003 = {
 	hidden = yes
 
 	immediate = {
-		# Actually marry courtier to candidate
-		scope:courtier = {
-			if = {
-				limit = { is_female = no }
-				marry = scope:candidate
+		if = {
+			limit = {
+				scope:candidate = {
+					is_spouse_of = scope:courtier
+				}
 			}
-			else = {
-				marry_matrilineal = scope:candidate
-			}
+			accou_marriage_0001_on_approve_effect = yes
 		}
-
-		# Save scopes used by marriage_interaction_on_accept_effect
-		root = { save_scope_as = actor }
-		scope:matchmaker = { save_scope_as = recipient }
-		scope:courtier = { save_scope_as = secondary_actor }
-		scope:candidate = { save_scope_as = secondary_recipient }
-		save_scope_value_as = { name = hook value = no }
-		save_scope_value_as = { name = grand_wedding_promise value = no }
-
-		# Execute marriage interaction effect
-		marriage_interaction_on_accept_effect = yes
+		else = {
+			accou_marriage_0001_on_reject_effect = yes
+		}
 	}
 }

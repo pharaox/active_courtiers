@@ -1,0 +1,11 @@
+﻿accou_accepted_my_marriage_request_opinion = {
+	opinion = 20
+	decaying = yes
+	years = 5
+}
+
+accou_rejected_my_marriage_request_opinion = {
+	opinion = -20
+	decaying = yes
+	years = 5
+}
