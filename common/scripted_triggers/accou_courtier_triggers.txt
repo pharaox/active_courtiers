@@ -238,7 +238,7 @@ accou_can_be_better_court_cave_hermit_trigger = {
 accou_can_be_better_councillor_trigger = {
 	save_temporary_scope_as = character
 	can_be_$NAME$_trigger = { COURT_OWNER = $LIEGE$ }
-	#$SKILL$ >= decent_skill_rating
+	$SKILL$ >= decent_skill_rating
 	$LIEGE$ = {
 		exists = council_task:$TYPE$
 		trigger_if = {
@@ -266,7 +266,7 @@ accou_can_be_better_councillor_trigger = {
 accou_can_be_better_court_position_trigger = {
 	save_temporary_scope_as = character
 	accou_can_be_$NAME$_trigger = { LIEGE = $LIEGE$ }
-	#aptitude:$TYPE$ >= average_effectiveness
+	aptitude:$TYPE$ >= average_effectiveness
 	$LIEGE$ = {
 		OR = {
 			can_employ_court_position_type = $TYPE$
@@ -309,7 +309,7 @@ accou_can_be_better_court_position_trigger = {
 accou_can_be_better_knight_trigger = {
 	save_temporary_scope_as = character
 	can_be_knight_trigger = { ARMY_OWNER = $LIEGE$ }
-	#prowess > decent_skill_rating
+	prowess >= decent_skill_rating
 	$LIEGE$ = {
 		highest_held_title_tier >= tier_county
 		OR = {
@@ -336,7 +336,7 @@ accou_can_be_better_knight_trigger = {
 accou_can_be_better_commander_trigger = {
 	save_temporary_scope_as = character
 	can_be_commander_basic_trigger = { ARMY_OWNER = $LIEGE$ }
-	#martial >= decent_skill_rating
+	accou_commander_skill_value >= decent_skill_rating
 	$LIEGE$ = {
 		highest_held_title_tier >= tier_county
 		any_courtier = {
@@ -353,5 +353,11 @@ accou_can_be_better_commander_trigger = {
 			accou_commander_skill_value >= scope:character.accou_commander_skill_value
 			count < 3
 		}
+	}
+}
+
+accou_has_useful_claims_trigger = {
+	any_claim = {
+		neighboring_useful_courtier_or_guest_claim_trigger = { RULER = $RULER$ }
 	}
 }

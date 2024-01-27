@@ -146,7 +146,7 @@ accou_marriage.0001 = {
 			if = {
 				limit = { scope:marriage_candidate_quality > 0 }
 				set_variable = {
-					name = accou_marriage_candidate_quality_value
+					name = accou_marriage_candidate_quality
 					value = scope:marriage_candidate_quality
 					days = 1
 				}
@@ -236,8 +236,8 @@ accou_marriage.0001 = {
 		# Determine best candidate
 		ordered_in_list = {
 			list = accepting_candidates
-			limit = { has_variable = accou_marriage_candidate_quality_value }
-			order_by = var:accou_marriage_candidate_quality_value
+			limit = { has_variable = accou_marriage_candidate_quality }
+			order_by = var:accou_marriage_candidate_quality
 			save_scope_as = candidate
 		}
 
@@ -253,16 +253,19 @@ accou_marriage.0001 = {
 		}
 
 		# Save additional scopes for debugging
-		scope:candidate ?= {
-			scope:courtier ?= {
-				save_opinion_value_as = {
-					name = courtier_opinion_of_candidate
-					target = prev
+		if = {
+			limit = { debug_only = yes }
+			scope:candidate ?= {
+				scope:courtier ?= {
+					save_opinion_value_as = {
+						name = courtier_opinion_of_candidate
+						target = prev
+					}
 				}
-			}
-			save_scope_value_as = {
-				name = candidate_quality
-				value = var:accou_marriage_candidate_quality_value
+				save_scope_value_as = {
+					name = candidate_quality
+					value = var:accou_marriage_candidate_quality
+				}
 			}
 		}
 	}
@@ -323,26 +326,77 @@ accou_marriage.0002 = {
 			if = {
 				limit = { NOT = { scope:matchmaker = root } }
 
-				accou_get_better_councillor_options_effect = { LIEGE = root OPTIONS = accou_better_councillor_options }
-				accou_get_better_court_position_options_effect = { LIEGE = root OPTIONS = accou_better_court_position_options }
-
-				every_in_list = {
-					variable = accou_better_councillor_options
-					add_to_list = better_councillor_options
+				accou_get_better_councillor_options_effect = {
+					LIEGE = root
+					OPTIONS = accou_better_councillor_options
 				}
-				every_in_list = {
-					variable = accou_better_court_position_options
-					add_to_list = better_court_position_options
+				accou_get_better_court_position_options_effect = {
+					LIEGE = root
+					OPTIONS = accou_better_court_position_options
 				}
 
 				if = {
 					limit = { accou_can_be_better_knight_trigger = { LIEGE = root } }
-					save_scope_value_as = { name = better_knight value = yes }
+					set_variable = { name = accou_better_knight value = yes }
 				}
 				if = {
 					limit = { accou_can_be_better_commander_trigger = { LIEGE = root } }
-					save_scope_value_as = { name = better_commander value = yes }
+					set_variable = { name = accou_better_commander value = yes }
 				}
+
+				# Save additional scopes for debugging
+				if = {
+					limit = { debug_only = yes }
+
+					every_in_list = {
+						variable = accou_better_councillor_options
+						add_to_list = better_councillor_options
+					}
+					every_in_list = {
+						variable = accou_better_court_position_options
+						add_to_list = better_court_position_options
+					}
+
+					save_scope_value_as = {
+						name = better_councillor_best_skill_value
+						value = accou_better_councillor_best_skill_value
+					}
+					save_scope_value_as = {
+						name = better_court_position_best_aptitude_value
+						value = accou_better_court_position_best_aptitude_value
+					}
+
+					if = {
+						limit = { has_variable = accou_better_knight }
+						save_scope_value_as = { name = better_knight value = yes }
+					}
+					if = {
+						limit = { has_variable = accou_better_commander }
+						save_scope_value_as = { name = better_commander value = yes }
+					}
+				}
+			}
+		}
+
+		# Save additional scopes for debugging
+		if = {
+			limit = { debug_only = yes }
+
+			if = {
+				limit = { NOT = { scope:matchmaker = root } }
+				save_scope_value_as = { name = outsider value = yes }
+			}
+			else = {
+				save_scope_value_as = { name = outsider value = no }
+			}
+
+			save_opinion_value_as = {
+				name = root_opinion_of_courtier
+				target = scope:courtier
+			}
+			save_opinion_value_as = {
+				name = root_opinion_of_candidate
+				target = scope:candidate
 			}
 		}
 	}
@@ -351,18 +405,21 @@ accou_marriage.0002 = {
 		scope:candidate = {
 			clear_variable_list = accou_better_councillor_options
 			clear_variable_list = accou_better_court_position_options
+			remove_variable = accou_better_knight
+			remove_variable = accou_better_commander
 		}
 	}
 
 	option = {
 		name = accou_marriage.0002.a
 
-		accou_debug_log_4_effect = {
+		accou_debug_log_5_effect = {
 			MSG = accou_debug_msg_marriage_0002_a
 			NAME1 = courtier TYPE1 = flag:character
 			NAME2 = candidate TYPE2 = flag:character
 			NAME3 = matchmaker TYPE3 = flag:character
 			NAME4 = candidate_quality TYPE4 = flag:value
+			NAME5 = outsider TYPE5 = flag:boolean
 		}
 		debug_log_scopes = yes
 
@@ -384,29 +441,130 @@ accou_marriage.0002 = {
 		}
 
 		ai_chance = {
-			base = 1
+			base = 0
 
+			# Eagerness for marriages to outsiders (10, paranoid / trusting)
 			modifier = {
-				list_size = {
-					name = better_councillor_options
-					value > 0
+				NOT = { scope:matchmaker = root }
+				add = {
+					value = 10
+					if = {
+						limit = { has_trait = paranoid }
+						add = -10
+					}
+					else_if = {
+						limit = { has_trait = trusting }
+						add = 10
+					}
 				}
-				add = 50
 			}
+
+			# Reluctance for marriages to insiders (-10, ambitious / content)
 			modifier = {
-				list_size = {
-					name = better_court_position_options
-					value > 0
+				scope:matchmaker = root
+				add = {
+					value = -10
+					if = {
+						limit = { has_trait = ambitious }
+						add = -10
+					}
+					else_if = {
+						limit = { has_trait = content }
+						add = 10
+					}
 				}
-				add = 50
 			}
-			modifier = {
-				exists = scope:better_knight
-				add = 50
+
+			# Opinions of courtier and candidate (-20 to 20 depending on opinion)
+			opinion_modifier = {
+				opinion_target = scope:courtier
+				multiplier = 0.2
 			}
-			modifier = {
-				exists = scope:better_commander
-				add = 50
+			opinion_modifier = {
+				opinion_target = scope:candidate
+				multiplier = 0.2
+			}
+
+			# Family or dynasty members (10, doubled for close family, halved for just dynasty)
+			accou_family_or_dynasty_modifier = {
+				CHARACTER = scope:courtier
+				BASE = 10
+			}
+			accou_family_or_dynasty_modifier = {
+				CHARACTER = scope:candidate
+				BASE = 10
+			}
+
+			# Friends (20, doubled for best friend)
+			accou_friend_modifier = {
+				CHARACTER = scope:courtier
+				BASE = 20
+			}
+			accou_friend_modifier = {
+				CHARACTER = scope:candidate
+				BASE = 20
+			}
+
+			# Rivals (-20, doubled for nemesises)
+			accou_rival_modifier = {
+				CHARACTER = scope:courtier
+				BASE = -20
+			}
+			accou_rival_modifier = {
+				CHARACTER = scope:candidate
+				BASE = -20
+			}
+
+			# Lovers (-100, doubled for soulmates)
+			accou_lover_modifier = {
+				CHARACTER = scope:courtier
+				BASE = -100
+			}
+			accou_lover_modifier = {
+				CHARACTER = scope:candidate
+				BASE = -100
+			}
+
+			# Candidate quality, scaled by ai compassion (0 to ~10 with 0 compassion)
+			accou_marriage_candidate_quality_modifier = {
+				CHARACTER = scope:candidate
+				SCALE = 0.1
+			}
+
+			# Candidate dynasty prestige, only for outsiders (0 to ~20)
+			accou_dynasty_prestige_modifier = {
+				CHARACTER = scope:candidate
+				SCALE = 2
+			}
+
+			# Candidate is better councillor, court position holder, knight, or commander,
+			# only for outsiders, scaled by ai rationality
+			accou_better_councillor_modifier = { # 10 to ~30 with 0 rationality
+				CHARACTER = scope:candidate
+				BASE = 10
+				SCALE = 2
+			}
+			accou_better_court_position_modifier = { # 10 / 20 / 30 with 0 rationality
+				CHARACTER = scope:candidate
+				BASE = 10
+				SCALE = 10
+			}
+			accou_better_knight_modifier = { # 10 to ~20 with 0 rationality
+				CHARACTER = scope:candidate
+				BASE = 10
+				SCALE = 1
+			}
+			accou_better_commander_modifier = { # 10 to ~26 with 0 rationality
+				CHARACTER = scope:candidate
+				BASE = 10
+				SCALE = 1
+			}
+
+			# Candidate claims, only for outsiders, scaled by ai rationality (10 with 0 rationality)
+			accou_claims_modifier = {
+				CHARACTER = scope:candidate
+				RULER = root
+				BASE = 10
 			}
 		}
 	}
@@ -414,12 +572,13 @@ accou_marriage.0002 = {
 	option = {
 		name = accou_marriage.0002.b
 
-		accou_debug_log_4_effect = {
+		accou_debug_log_5_effect = {
 			MSG = accou_debug_msg_marriage_0002_b
 			NAME1 = courtier TYPE1 = flag:character
 			NAME2 = candidate TYPE2 = flag:character
 			NAME3 = matchmaker TYPE3 = flag:character
 			NAME4 = candidate_quality TYPE4 = flag:value
+			NAME5 = outsider TYPE5 = flag:boolean
 		}
 		debug_log_scopes = yes
 
@@ -435,12 +594,13 @@ accou_marriage.0002 = {
 			is_ai = no
 		}
 
-		accou_debug_log_4_effect = {
+		accou_debug_log_5_effect = {
 			MSG = accou_debug_msg_marriage_0002_c
 			NAME1 = courtier TYPE1 = flag:character
 			NAME2 = candidate TYPE2 = flag:character
 			NAME3 = matchmaker TYPE3 = flag:character
 			NAME4 = candidate_quality TYPE4 = flag:value
+			NAME5 = outsider TYPE5 = flag:boolean
 		}
 		debug_log_scopes = yes
 

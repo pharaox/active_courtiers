@@ -1,0 +1,186 @@
+﻿accou_family_or_dynasty_modifier = {
+	modifier = {
+		OR = {
+			is_close_or_extended_family_of = $CHARACTER$
+			is_spouse_of = $CHARACTER$
+			accou_is_same_dynasty_trigger = { CHARACTER = $CHARACTER$ }
+		}
+		add = {
+			value = $BASE$
+			if = {
+				limit = {
+					OR = {
+						is_close_family_of = $CHARACTER$
+						is_spouse_of = $CHARACTER$
+					}
+				}
+				multiply = 2
+			}
+			else_if = {
+				limit = { is_extended_family_of = $CHARACTER$ }
+				multiply = 1
+			}
+			else = {
+				multiply = 0.5
+			}
+			round = yes
+		}
+	}
+}
+
+accou_friend_modifier = {
+	modifier = {
+		has_relation_friend = $CHARACTER$
+		add = {
+			value = $BASE$
+			if = {
+				limit = { has_relation_best_friend = $CHARACTER$ }
+				multiply = 2
+			}
+		}
+	}
+}
+
+accou_rival_modifier = {
+	modifier = {
+		has_relation_rival = $CHARACTER$
+		add = {
+			value = $BASE$
+			if = {
+				limit = { has_relation_nemesis = $CHARACTER$ }
+				multiply = 2
+			}
+		}
+	}
+}
+
+accou_lover_modifier = {
+	modifier = {
+		has_relation_lover = $CHARACTER$
+		add = {
+			value = $BASE$
+			if = {
+				limit = { has_relation_soulmate = $CHARACTER$ }
+				multiply = 2
+			}
+		}
+	}
+}
+
+accou_marriage_candidate_quality_modifier = {
+	modifier = {
+		exists = $CHARACTER$.var:accou_marriage_candidate_quality
+		add = {
+			value = $CHARACTER$.var:accou_marriage_candidate_quality
+			multiply = $SCALE$
+			multiply = accou_ai_compassion_multiplier
+			round = yes
+		}
+	}
+}
+
+accou_dynasty_prestige_modifier = {
+	modifier = {
+		NOT = { $CHARACTER$.liege ?= this }
+		$CHARACTER$ = { has_dynasty = yes }
+		add = {
+			value = $CHARACTER$.dynasty.dynasty_prestige_level
+			multiply = $SCALE$
+			round = yes
+		}
+	}
+}
+
+accou_better_councillor_modifier = {
+	modifier = {
+		NOT = { $CHARACTER$.liege ?= this }
+		$CHARACTER$ = {
+			has_variable_list = accou_better_councillor_options
+			variable_list_size = {
+				name = accou_better_councillor_options
+				value > 0
+			}
+		}
+		add = {
+			value = $BASE$
+			add = {
+				value = $CHARACTER$.accou_better_councillor_best_skill_value
+				subtract = decent_skill_rating
+				multiply = $SCALE$
+			}
+			multiply = accou_ai_rationality_multiplier
+			round = yes
+		}
+	}
+}
+
+accou_better_court_position_modifier = {
+	modifier = {
+		NOT = { $CHARACTER$.liege ?= this }
+		$CHARACTER$ = {
+			has_variable_list = accou_better_court_position_options
+			variable_list_size = {
+				name = accou_better_court_position_options
+				value > 0
+			}
+		}
+		add = {
+			value = $BASE$
+			add = {
+				value = $CHARACTER$.accou_better_court_position_best_aptitude_value
+				subtract = 2 # average_effectiveness
+				multiply = $SCALE$
+			}
+			multiply = accou_ai_rationality_multiplier
+			round = yes
+		}
+	}
+}
+
+accou_better_knight_modifier = {
+	modifier = {
+		NOT = { $CHARACTER$.liege ?= this }
+		exists = $CHARACTER$.var:accou_better_knight
+		add = {
+			value = $BASE$
+			add = {
+				value = $CHARACTER$.prowess
+				subtract = decent_skill_rating
+				multiply = $SCALE$
+			}
+			multiply = accou_ai_rationality_multiplier
+			round = yes
+		}
+	}
+}
+
+accou_better_commander_modifier = {
+	modifier = {
+		NOT = { $CHARACTER$.liege ?= this }
+		exists = $CHARACTER$.var:accou_better_commander
+		add = {
+			value = $BASE$
+			add = {
+				value = $CHARACTER$.accou_commander_skill_value
+				subtract = decent_skill_rating
+				multiply = $SCALE$
+			}
+			multiply = accou_ai_rationality_multiplier
+			round = yes
+		}
+	}
+}
+
+accou_claims_modifier = {
+	modifier = {
+		NOT = { $CHARACTER$.liege ?= this }
+		$CHARACTER$ = {
+			accou_has_useful_claims_trigger = { RULER = $RULER$ }
+		}
+		add = {
+			value = $BASE$
+			multiply = accou_ai_rationality_multiplier
+			round = yes
+		}
+	}
+}

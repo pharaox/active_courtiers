@@ -1,7 +1,151 @@
-﻿accou_commander_skill_value = {
+﻿accou_better_councillor_best_skill_value = {
+	save_temporary_scope_as = character
+	value = 0
+	every_in_list = {
+		variable = accou_better_councillor_options
+		if = {
+			limit = { this = flag:chancellor }
+			min = scope:character.diplomacy
+		}
+		else_if = {
+			limit = { this = flag:steward }
+			min = scope:character.stewardship
+		}
+		else_if = {
+			limit = { this = flag:marshal }
+			min = scope:character.martial
+		}
+		else_if = {
+			limit = { this = flag:spymaster }
+			min = scope:character.intrigue
+		}
+		else_if = {
+			limit = { this = flag:court_chaplain }
+			min = scope:character.learning
+		}
+	}
+}
+
+accou_better_court_position_best_aptitude_value = {
+	save_temporary_scope_as = character
+	value = 0
+	every_in_list = {
+		variable = accou_better_court_position_options
+		if = {
+			limit = { this = flag:court_physician }
+			min = scope:character.aptitude:court_physician_court_position
+		}
+		else_if = {
+			limit = { this = flag:cultural_emissary }
+			min = scope:character.aptitude:cultural_emissary_court_position
+		}
+		else_if = {
+			limit = { this = flag:court_gardener }
+			min = scope:character.aptitude:court_gardener_court_position
+		}
+		else_if = {
+			limit = { this = flag:lady_in_waiting }
+			min = scope:character.aptitude:lady_in_waiting_court_position
+		}
+		else_if = {
+			limit = { this = flag:antiquarian }
+			min = scope:character.aptitude:antiquarian_court_position
+		}
+		else_if = {
+			limit = { this = flag:travel_leader }
+			min = scope:character.aptitude:travel_leader_court_position
+		}
+		else_if = {
+			limit = { this = flag:wet_nurse }
+			min = scope:character.aptitude:wet_nurse_court_position
+		}
+		else_if = {
+			limit = { this = flag:court_tutor }
+			min = scope:character.aptitude:court_tutor_court_position
+		}
+		else_if = {
+			limit = { this = flag:food_taster }
+			min = scope:character.aptitude:food_taster_court_position
+		}
+		else_if = {
+			limit = { this = flag:master_of_horse }
+			min = scope:character.aptitude:master_of_horse_court_position
+		}
+		else_if = {
+			limit = { this = flag:master_of_hunt }
+			min = scope:character.aptitude:master_of_hunt_court_position
+		}
+		else_if = {
+			limit = { this = flag:royal_architect }
+			min = scope:character.aptitude:royal_architect_court_position
+		}
+		else_if = {
+			limit = { this = flag:high_almoner }
+			min = scope:character.aptitude:high_almoner_court_position
+		}
+		else_if = {
+			limit = { this = flag:seneschal }
+			min = scope:character.aptitude:seneschal_court_position
+		}
+		else_if = {
+			limit = { this = flag:cupbearer }
+			min = scope:character.aptitude:cupbearer_court_position
+		}
+		else_if = {
+			limit = { this = flag:chief_eunuch }
+			min = scope:character.aptitude:chief_eunuch_court_position
+		}
+		else_if = {
+			limit = { this = flag:court_jester }
+			min = scope:character.aptitude:court_jester_court_position
+		}
+		else_if = {
+			limit = { this = flag:court_poet }
+			min = scope:character.aptitude:court_poet_court_position
+		}
+		else_if = {
+			limit = { this = flag:court_musician }
+			min = scope:character.aptitude:court_musician_court_position
+		}
+		else_if = {
+			limit = { this = flag:bodyguard }
+			min = scope:character.aptitude:bodyguard_court_position
+		}
+		else_if = {
+			limit = { this = flag:champion }
+			min = scope:character.aptitude:champion_court_position
+		}
+		else_if = {
+			limit = { this = flag:executioner }
+			min = scope:character.aptitude:executioner_court_position
+		}
+		else_if = {
+			limit = { this = flag:court_artificer }
+			min = scope:character.aptitude:court_artificer_court_position
+		}
+		else_if = {
+			limit = { this = flag:court_cave_hermit }
+			min = scope:character.aptitude:court_cave_hermit_position
+		}
+	}
+}
+
+accou_commander_skill_value = {
 	value = martial
 	add = {
 		value = number_of_commander_traits
 		multiply = 3
 	}
+}
+
+accou_ai_rationality_multiplier = {
+	value = ai_rationality
+	multiply = 0.01
+	add = 1
+}
+
+accou_ai_compassion_multiplier = {
+	value = ai_compassion
+	multiply = 0.01
+	add = 1
 }

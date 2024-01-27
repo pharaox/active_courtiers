@@ -100,6 +100,24 @@ accou_debug_log_4_effect = {
 	}
 }
 
+accou_debug_log_5_effect = {
+	if = {
+		limit = { debug_only = yes }
+
+		accou_debug_set_scope_variable_effect = { NAME = $NAME1$ TYPE = $TYPE1$ }
+		accou_debug_set_scope_variable_effect = { NAME = $NAME2$ TYPE = $TYPE2$ }
+		accou_debug_set_scope_variable_effect = { NAME = $NAME3$ TYPE = $TYPE3$ }
+		accou_debug_set_scope_variable_effect = { NAME = $NAME4$ TYPE = $TYPE4$ }
+		accou_debug_set_scope_variable_effect = { NAME = $NAME5$ TYPE = $TYPE5$ }
+		debug_log = $MSG$
+		accou_debug_remove_scope_variable_effect = { NAME = $NAME1$ TYPE = $TYPE1$ }
+		accou_debug_remove_scope_variable_effect = { NAME = $NAME2$ TYPE = $TYPE2$ }
+		accou_debug_remove_scope_variable_effect = { NAME = $NAME3$ TYPE = $TYPE3$ }
+		accou_debug_remove_scope_variable_effect = { NAME = $NAME4$ TYPE = $TYPE4$ }
+		accou_debug_remove_scope_variable_effect = { NAME = $NAME5$ TYPE = $TYPE5$ }
+	}
+}
+
 accou_debug_set_scope_variable_effect = {
 	if = {
 		limit = {
