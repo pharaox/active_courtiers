@@ -102,6 +102,26 @@ accou_search_range_ai = {
 	}
 }
 
+accou_wrong_gender_marriage_requests = {
+	categories = {
+		accou_active_courtiers tweaks historicity
+	}
+
+	default = accou_wrong_gender_marriage_requests_highborn_only
+
+	accou_wrong_gender_marriage_requests_not_allowed = {
+		flag = GG_can_change_rule
+	}
+
+	accou_wrong_gender_marriage_requests_highborn_only = {
+		flag = GG_can_change_rule
+	}
+
+	accou_wrong_gender_marriage_requests_allowed = {
+		flag = GG_can_change_rule
+	}
+}
+
 accou_marriage_ai_acceptance_check = {
 	categories = {
 		accou_active_courtiers tweaks

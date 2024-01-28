@@ -12,7 +12,20 @@ scripted_trigger accou_marriage_0001_valid_courtier_trigger = {
 	NOT = { accou_is_of_major_interest_trigger = { CHARACTER = root } }
 
 	# Not a female in a male-dominated faith and vice versa
-	NOT = { is_wrong_gender_in_faith_trigger = { FAITH = faith } }
+	trigger_if = {
+		limit = { is_wrong_gender_in_faith_trigger = { FAITH = faith } }
+		trigger_if = {
+			limit = { has_game_rule = accou_wrong_gender_marriage_requests_not_allowed }
+			always = no
+		}
+		trigger_else_if = {
+			limit = { has_game_rule = accou_wrong_gender_marriage_requests_highborn_only }
+			is_lowborn = no
+		}
+		trigger_else = {
+			always = yes
+		}
+	}
 
 	# No previous attempt failed recently
 	NOR = {
