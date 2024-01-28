@@ -12,12 +12,31 @@
 		}
 	}
 
+	liege ?= {
+		if = {
+			limit = { is_ai = no }
+			save_temporary_scope_value_as = {
+				name = search_range
+				value = accou_search_range_player_value
+			}
+		}
+		else = {
+			save_temporary_scope_value_as = {
+				name = search_range
+				value = accou_search_range_ai_value
+			}
+		}
+	}
+
 	liege.capital_province ?= {
 		save_temporary_scope_as = capital_province
 		every_in_list = {
 			list = temp_rulers
 			limit = {
-				accou_is_landed_ruler_within_range_trigger = { LOCATION = scope:capital_province }
+				accou_is_landed_ruler_within_range_trigger = {
+					LOCATION = scope:capital_province
+					RANGE = scope:search_range
+				}
 			}
 			add_to_temporary_list = $RULERS$
 		}

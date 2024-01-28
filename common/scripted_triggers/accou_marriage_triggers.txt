@@ -178,7 +178,7 @@ accou_is_landed_ruler_within_range_trigger = {
 	capital_province ?= {
 		squared_distance = {
 			target = $LOCATION$
-			value <= squared_distance_large # TODO Game rule
+			value <= $RANGE$
 		}
 	}
 }

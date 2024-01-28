@@ -290,7 +290,7 @@ accou_marriage.0001 = {
 			}
 			else = {
 				if = {
-					limit = { always = no } # TODO Game rule
+					limit = { has_game_rule = accou_marriage_ai_acceptance_check_original }
 
 					# Use vanilla marriage_ai_accept_modifier to check if the marriage will be accepted
 					random = {
@@ -382,15 +382,24 @@ accou_marriage.0001 = {
 				}
 			}
 
-			trigger_event = accou_marriage.0002
-		}
-		else = {
 			accou_debug_log_3_effect = {
-				MSG = accou_debug_msg_marriage_0001_a
+				MSG = accou_debug_msg_marriage_0001_a_success
 				NAME1 = courtier TYPE1 = flag:character
 				NAME2 = candidate TYPE2 = flag:character
 				NAME3 = matchmaker TYPE3 = flag:character
 			}
+			#debug_log_scopes = yes
+
+			trigger_event = accou_marriage.0002
+		}
+		else = {
+			accou_debug_log_3_effect = {
+				MSG = accou_debug_msg_marriage_0001_a_failure
+				NAME1 = courtier TYPE1 = flag:character
+				NAME2 = candidate TYPE2 = flag:character
+				NAME3 = matchmaker TYPE3 = flag:character
+			}
+			#debug_log_scopes = yes
 
 			scope:courtier ?= {
 				add_character_flag = {
@@ -527,8 +536,10 @@ accou_marriage.0002 = {
 
 		if = {
 			limit = {
-				is_ai = yes
-				scope:matchmaker = { is_ai = no }
+				scope:matchmaker = {
+					is_ai = no
+					NOT = { this = root }
+				}
 			}
 			run_interaction = {
 				interaction = arrange_marriage_interaction

@@ -1,0 +1,119 @@
+﻿accou_event_frequency_player = {
+	categories = {
+		accou_active_courtiers tweaks historicity
+	}
+
+	default = accou_event_frequency_player_1y
+
+	accou_event_frequency_player_1y = {
+		flag = GG_can_change_rule
+	}
+
+	accou_event_frequency_player_3y = {
+		flag = GG_can_change_rule
+	}
+
+	accou_event_frequency_player_5y = {
+		flag = GG_can_change_rule
+	}
+}
+
+accou_event_frequency_ai = {
+	categories = {
+		accou_active_courtiers tweaks historicity
+	}
+
+	default = accou_event_frequency_ai_3y
+
+	accou_event_frequency_ai_1y = {
+		flag = GG_can_change_rule
+	}
+
+	accou_event_frequency_ai_3y = {
+		flag = GG_can_change_rule
+	}
+
+	accou_event_frequency_ai_5y = {
+		flag = GG_can_change_rule
+	}
+}
+
+accou_search_range_player = {
+	categories = {
+		accou_active_courtiers tweaks historicity
+	}
+
+	default = accou_search_range_player_massive
+
+	accou_search_range_player_small = {
+		flag = GG_can_change_rule
+	}
+
+	accou_search_range_player_medium = {
+		flag = GG_can_change_rule
+	}
+
+	accou_search_range_player_large = {
+		flag = GG_can_change_rule
+	}
+
+	accou_search_range_player_huge = {
+		flag = GG_can_change_rule
+	}
+
+	accou_search_range_player_massive = {
+		flag = GG_can_change_rule
+	}
+
+	accou_search_range_player_all = {
+		flag = GG_can_change_rule
+	}
+}
+
+accou_search_range_ai = {
+	categories = {
+		accou_active_courtiers tweaks historicity
+	}
+
+	default = accou_search_range_ai_large
+
+	accou_search_range_ai_small = {
+		flag = GG_can_change_rule
+	}
+
+	accou_search_range_ai_medium = {
+		flag = GG_can_change_rule
+	}
+
+	accou_search_range_ai_large = {
+		flag = GG_can_change_rule
+	}
+
+	accou_search_range_ai_huge = {
+		flag = GG_can_change_rule
+	}
+
+	accou_search_range_ai_massive = {
+		flag = GG_can_change_rule
+	}
+
+	accou_search_range_ai_all = {
+		flag = GG_can_change_rule
+	}
+}
+
+accou_marriage_ai_acceptance_check = {
+	categories = {
+		accou_active_courtiers tweaks
+	}
+
+	default = accou_marriage_ai_acceptance_check_quick
+
+	accou_marriage_ai_acceptance_check_original = {
+		flag = GG_can_change_rule
+	}
+
+	accou_marriage_ai_acceptance_check_quick = {
+		flag = GG_can_change_rule
+	}
+}

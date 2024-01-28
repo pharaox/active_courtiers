@@ -9,7 +9,13 @@ random_yearly_playable_pulse = {
 
 accou_yearly_playable_pulse = {
 	trigger = {
-		always = no # TODO Game rule
+		trigger_if = {
+			limit = { is_ai = no }
+			has_game_rule = accou_event_frequency_player_1y
+		}
+		trigger_else = {
+			has_game_rule = accou_event_frequency_ai_1y
+		}
 		basic_is_valid_for_yearly_events_trigger = yes
 	}
 
@@ -29,7 +35,13 @@ three_year_playable_pulse = {
 
 accou_three_year_playable_pulse = {
 	trigger = {
-		always = yes # TODO Game rule
+		trigger_if = {
+			limit = { is_ai = no }
+			has_game_rule = accou_event_frequency_player_3y
+		}
+		trigger_else = {
+			has_game_rule = accou_event_frequency_ai_3y
+		}
 		basic_is_valid_for_yearly_events_trigger = yes
 	}
 
@@ -49,7 +61,13 @@ five_year_playable_pulse = {
 
 accou_five_year_playable_pulse = {
 	trigger = {
-		always = no # TODO Game rule
+		trigger_if = {
+			limit = { is_ai = no }
+			has_game_rule = accou_event_frequency_player_5y
+		}
+		trigger_else = {
+			has_game_rule = accou_event_frequency_ai_5y
+		}
 		basic_is_valid_for_yearly_events_trigger = yes
 	}
 
