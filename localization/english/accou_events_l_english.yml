@@ -5,10 +5,35 @@
  accou_marriage.0001.a: "OK"
  # accou_marriage.0002
  accou_marriage.0002.t: "Courtier Requests to Marry"
- accou_marriage.0002.desc: "My [ROOT.Char.Custom2('RelationToMe', SCOPE.sC('courtier'))] [courtier.GetUIName] is requesting to marry [candidate.GetUIName]."
+ accou_marriage.0002.desc: "My [ROOT.Char.Custom2('RelationToMe', SCOPE.sC('courtier'))] [courtier.GetUIName] is requesting to marry [Select_CString(ObjectsEqual(matchmaker, candidate), '', Concatenate(Select_CString(ObjectsEqual(matchmaker, ROOT.Char), 'my ', Concatenate(matchmaker.GetUIName, '\\'s ')), Concatenate(matchmaker.Custom2('RelationToMe', SCOPE.sC('candidate')), ' ')))][candidate.GetUIName].\n"
  accou_marriage.0002.a: "May [ROOT.Char.GetFaith.HighGodName] bless your union!"
  accou_marriage.0002.b: "I am not willing to let you marry right now"
  accou_marriage.0002.c: "Let me consider this..."
  accou_marriage.0002.c.tt.consider: "Opens Arrange Marriage for [courtier.GetUIName] and [candidate.GetUIName]"
  accou_marriage.0002.c.tt.accept: "If you arrange this marriage, after 15 days"
  accou_marriage.0002.c.tt.reject: "If you don't arrange this marriage, after 15 days"
+
+ accou_marriage.0002.better_councillor_options.desc: "\n$EFFECT_LIST_BULLET$$accou_better_councillor_options_start$ [candidate.Custom('accou_better_councillor_options')]"
+ accou_marriage.0002.better_court_position_options.desc: "\n$EFFECT_LIST_BULLET$$accou_better_court_position_options_start$ [candidate.Custom('accou_better_court_position_options')]"
+ accou_marriage.0002.better_knight.desc: "\n$EFFECT_LIST_BULLET$$accou_better_knight$"
+ accou_marriage.0002.better_commander.desc: "\n$EFFECT_LIST_BULLET$$accou_better_commander$"
+ accou_marriage.0002.claims.desc: "\n$EFFECT_LIST_BULLET$$guest_description.claim_start.desc$ [candidate.Custom2('accou_claims', ROOT.Char)]"
+
+ accou_better_councillor_options_start: "Better than all available options for the following council positions:"
+ accou_better_councillor_options_1: "[Localize(Concatenate('councillor_', SCOPE.GetFlagName('bc_option1')))]"
+ accou_better_councillor_options_2: "[Localize(Concatenate('councillor_', SCOPE.GetFlagName('bc_option1')))], [Localize(Concatenate('councillor_', SCOPE.GetFlagName('bc_option2')))]"
+ accou_better_councillor_options_3: "[Localize(Concatenate('councillor_', SCOPE.GetFlagName('bc_option1')))], [Localize(Concatenate('councillor_', SCOPE.GetFlagName('bc_option2')))], [Localize(Concatenate('councillor_', SCOPE.GetFlagName('bc_option3')))]"
+ accou_better_councillor_options_4: "[Localize(Concatenate('councillor_', SCOPE.GetFlagName('bc_option1')))], [Localize(Concatenate('councillor_', SCOPE.GetFlagName('bc_option2')))], [Localize(Concatenate('councillor_', SCOPE.GetFlagName('bc_option3')))], and others"
+
+ accou_better_court_position_options_start: "Better than all available options for the following court positions:"
+ accou_better_court_position_options_1: "[Localize(Concatenate(SCOPE.GetFlagName('bcp_option1'), '_court_position'))]"
+ accou_better_court_position_options_2: "[Localize(Concatenate(SCOPE.GetFlagName('bcp_option1'), '_court_position'))], [Localize(Concatenate(SCOPE.GetFlagName('bcp_option2'), '_court_position'))]"
+ accou_better_court_position_options_3: "[Localize(Concatenate(SCOPE.GetFlagName('bcp_option1'), '_court_position'))], [Localize(Concatenate(SCOPE.GetFlagName('bcp_option2'), '_court_position'))], [Localize(Concatenate(SCOPE.GetFlagName('bcp_option3'), '_court_position'))]"
+ accou_better_court_position_options_4: "[Localize(Concatenate(SCOPE.GetFlagName('bcp_option1'), '_court_position'))], [Localize(Concatenate(SCOPE.GetFlagName('bcp_option2'), '_court_position'))], [Localize(Concatenate(SCOPE.GetFlagName('bcp_option3'), '_court_position'))], and others"
+
+ accou_better_knight: "Better knight than other available options"
+ accou_better_commander: "Top 3 commander by martial skill and commander traits"
+
+ accou_empty: ""
+
+ court_cave_hermit_court_position: "$court_cave_hermit_position$"

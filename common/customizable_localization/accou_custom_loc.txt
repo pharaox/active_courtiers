@@ -1,0 +1,84 @@
+﻿accou_better_councillor_options = {
+	type = character
+
+	text = {
+		setup_scope = { accou_get_better_councillor_option_scopes_effect = yes }
+		trigger = { exists = scope:bc_option4 }
+		localization_key = accou_better_councillor_options_4
+	}
+	text = {
+		trigger = { exists = scope:bc_option3 }
+		localization_key = accou_better_councillor_options_3
+	}
+	text = {
+		trigger = { exists = scope:bc_option2 }
+		localization_key = accou_better_councillor_options_2
+	}
+	text = {
+		trigger = { exists = scope:bc_option1 }
+		localization_key = accou_better_councillor_options_1
+	}
+	text = {
+		localization_key = accou_empty
+	}
+}
+
+accou_better_court_position_options = {
+	type = character
+
+	text = {
+		setup_scope = { accou_get_better_court_position_option_scopes_effect = yes }
+		trigger = { exists = scope:bcp_option4 }
+		localization_key = accou_better_court_position_options_4
+	}
+	text = {
+		trigger = { exists = scope:bcp_option3 }
+		localization_key = accou_better_court_position_options_3
+	}
+	text = {
+		trigger = { exists = scope:bcp_option2 }
+		localization_key = accou_better_court_position_options_2
+	}
+	text = {
+		trigger = { exists = scope:bcp_option1 }
+		localization_key = accou_better_court_position_options_1
+	}
+	text = {
+		localization_key = accou_empty
+	}
+}
+
+accou_claims = {
+	type = character
+
+	text = {
+		trigger = {
+			any_claim = {
+				useful_courtier_or_guest_claim_trigger = { RULER = scope:second }
+				tier = tier_kingdom
+			}
+		}
+		localization_key = guest_description.kingdom_claim.desc
+	}
+	text = {
+		trigger = {
+			any_claim = {
+				useful_courtier_or_guest_claim_trigger = { RULER = scope:second }
+				tier = tier_duchy
+			}
+		}
+		localization_key = guest_description.duchy_claim.desc
+	}
+	text = {
+		trigger = {
+			any_claim = {
+				useful_courtier_or_guest_claim_trigger = { RULER = scope:second }
+				tier = tier_county
+			}
+		}
+		localization_key = guest_description.claim_claim.desc
+	}
+	text = {
+		localization_key = accou_empty
+	}
+}

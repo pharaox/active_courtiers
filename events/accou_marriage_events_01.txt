@@ -431,7 +431,52 @@ accou_marriage.0001 = {
 accou_marriage.0002 = {
 	type = character_event
 	title = accou_marriage.0002.t
-	desc = accou_marriage.0002.desc
+	desc = {
+		desc = accou_marriage.0002.desc
+		triggered_desc = {
+			trigger = {
+				scope:candidate = {
+					has_variable_list = accou_better_councillor_options
+				}
+			}
+			desc = accou_marriage.0002.better_councillor_options.desc
+		}
+		triggered_desc = {
+			trigger = {
+				scope:candidate = {
+					has_variable_list = accou_better_court_position_options
+				}
+			}
+			desc = accou_marriage.0002.better_court_position_options.desc
+		}
+		triggered_desc = {
+			trigger = {
+				scope:candidate = {
+					has_variable = accou_better_knight
+				}
+			}
+			desc = accou_marriage.0002.better_knight.desc
+		}
+		triggered_desc = {
+			trigger = {
+				scope:candidate = {
+					has_variable = accou_better_commander
+				}
+			}
+			desc = accou_marriage.0002.better_commander.desc
+		}
+		triggered_desc = {
+			trigger = {
+				NOT = { scope:matchmaker = root }
+				scope:candidate = {
+					any_claim = {
+						useful_courtier_or_guest_claim_trigger = { RULER = root }
+					}
+				}
+			}
+			desc = accou_marriage.0002.claims.desc
+		}
+	}
 
 	theme = family
 	left_portrait = {
