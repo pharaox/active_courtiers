@@ -176,7 +176,7 @@ accou_marriage.0001 = {
 	type = character_event
 	title = accou_marriage.0001.t
 	desc = accou_marriage.0001.desc
-	#hidden = yes
+	hidden = yes
 
 	theme = family
 	left_portrait = {
@@ -434,47 +434,142 @@ accou_marriage.0002 = {
 	desc = {
 		desc = accou_marriage.0002.desc
 		triggered_desc = {
-			trigger = {
-				scope:candidate = {
-					has_variable_list = accou_better_councillor_options
-				}
-			}
-			desc = accou_marriage.0002.better_councillor_options.desc
+			trigger = { NOT = { scope:matchmaker = root } }
+			desc = accou_marriage.0002.more.desc
 		}
 		triggered_desc = {
-			trigger = {
-				scope:candidate = {
-					has_variable_list = accou_better_court_position_options
-				}
-			}
-			desc = accou_marriage.0002.better_court_position_options.desc
-		}
-		triggered_desc = {
-			trigger = {
-				scope:candidate = {
-					has_variable = accou_better_knight
-				}
-			}
-			desc = accou_marriage.0002.better_knight.desc
-		}
-		triggered_desc = {
-			trigger = {
-				scope:candidate = {
-					has_variable = accou_better_commander
-				}
-			}
-			desc = accou_marriage.0002.better_commander.desc
-		}
-		triggered_desc = {
-			trigger = {
-				NOT = { scope:matchmaker = root }
-				scope:candidate = {
-					any_claim = {
-						useful_courtier_or_guest_claim_trigger = { RULER = root }
+			trigger = { NOT = { scope:matchmaker = root } }
+			desc = {
+				desc = accou_marriage.0002.reasons.desc
+				desc = {
+					triggered_desc = {
+						trigger = {
+							scope:candidate = {
+								has_variable_list = accou_better_councillor_options
+							}
+						}
+						desc = accou_marriage.0002.better_councillor_options.desc
+					}
+					triggered_desc = {
+						trigger = {
+							scope:candidate = {
+								has_variable_list = accou_better_court_position_options
+							}
+						}
+						desc = accou_marriage.0002.better_court_position_options.desc
+					}
+					triggered_desc = {
+						trigger = {
+							scope:candidate = {
+								has_variable = accou_better_knight
+							}
+						}
+						desc = accou_marriage.0002.better_knight.desc
+					}
+					triggered_desc = {
+						trigger = {
+							scope:candidate = {
+								has_variable = accou_better_commander
+							}
+						}
+						desc = accou_marriage.0002.better_commander.desc
+					}
+					triggered_desc = {
+						trigger = {
+							scope:candidate = {
+								any_claim = {
+									useful_courtier_or_guest_claim_trigger = { RULER = root }
+								}
+							}
+						}
+						desc = accou_marriage.0002.claims.desc
+					}
+					triggered_desc = {
+						trigger = {
+							scope:candidate = {
+								genetic_character_value > 0
+								accou_is_fertile_trigger = yes
+							}
+						}
+						desc = accou_marriage.0002.genetic_traits.desc
+					}
+					triggered_desc = {
+						trigger = {
+							scope:candidate = {
+								prowess >= decent_skill_rating
+								can_be_knight_trigger = { ARMY_OWNER = root }
+							}
+						}
+						desc = accou_marriage.0002.prowess.desc
+					}
+					triggered_desc = {
+						trigger = {
+							scope:candidate = {
+								martial >= decent_skill_rating
+								OR = {
+									can_be_marshal_trigger = { COURT_OWNER = root }
+									can_be_commander_basic_trigger = { ARMY_OWNER = root }
+								}
+							}
+						}
+						desc = accou_marriage.0002.martial.desc
+					}
+					triggered_desc = {
+						trigger = {
+							scope:candidate = {
+								diplomacy >= decent_skill_rating
+								can_be_chancellor_trigger = { COURT_OWNER = root }
+							}
+						}
+						desc = accou_marriage.0002.diplomacy.desc
+					}
+					triggered_desc = {
+						trigger = {
+							scope:candidate = {
+								stewardship >= decent_skill_rating
+								can_be_steward_trigger = { COURT_OWNER = root }
+							}
+						}
+						desc = accou_marriage.0002.stewardship.desc
+					}
+					triggered_desc = {
+						trigger = {
+							scope:candidate = {
+								intrigue >= decent_skill_rating
+								can_be_spymaster_trigger = { COURT_OWNER = root }
+							}
+						}
+						desc = accou_marriage.0002.intrigue.desc
+					}
+					triggered_desc = {
+						trigger = {
+							scope:candidate = {
+								learning >= decent_skill_rating
+							}
+						}
+						desc = accou_marriage.0002.learning.desc
+					}
+					triggered_desc = {
+						trigger = {
+							save_temporary_scope_as = host
+							scope:candidate = {
+								save_temporary_scope_as = guest
+								guest_vassal_candidate_trigger = yes
+								opinion = {
+									target = root
+									value > 0
+								}
+								OR = {
+									guest_vassal_candidate_good_traits_trigger = yes
+									stewardship >= decent_skill_rating
+									martial >= decent_skill_rating
+								}
+							}
+						}
+						desc = accou_marriage.0002.vassal.desc
 					}
 				}
 			}
-			desc = accou_marriage.0002.claims.desc
 		}
 	}
 
