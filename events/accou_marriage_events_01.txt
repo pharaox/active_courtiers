@@ -209,6 +209,27 @@ accou_marriage.0001 = {
 					add = 20
 				}
 
+				# More likely if not lowborn (10)
+				modifier = {
+					is_lowborn = no
+					add = 10
+				}
+
+				# More likely if younger (10 to -12)
+				modifier = {
+					add = {
+						value = 36
+						subtract = age
+						multiply = 0.5
+					}
+				}
+
+				# Less likely with various health conditions (-10)
+				modifier = {
+					has_std_trigger = yes
+					add = -10
+				}
+
 				# Root opinion (-10 to 10)
 				opinion_modifier = {
 					who = root

@@ -11,6 +11,11 @@
 	is_betrothed = no
 	is_diarch = no
 	has_been_promised_grand_wedding = no
+
+	# Age & health conditions
+	age <= 60
+	NOT = { has_trait = infirm }
+	has_serious_disease_trigger = no
 }
 
 accou_is_available_ai_adult_trigger = {

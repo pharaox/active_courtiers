@@ -5,6 +5,24 @@
 	# Includes: attraction, relations, faith, culture, traits, etc.
 	add = scope:suitor_opinion
 
+	# Lover relation (30, doubled for soulmate, already in opinion)
+	if = {
+		limit = {
+			scope:suitor = {
+				has_relation_lover = prev
+			}
+		}
+		add = {
+			value = 30 # Half of the scripted relation opinion
+			scope:suitor = {
+				if = {
+					limit = { has_relation_soulmate = prev }
+					multiply = 2
+				}
+			}
+		}
+	}
+
 	# Attraction (approx -25 to 25, lustful / chaste, already in opinion)
 	if = {
 		limit = {
@@ -54,13 +72,19 @@
 		multiply = 5
 	}
 
-	# Age (approx -34 to 20)
-	add = {
-		value = 36
-		subtract = age # 16 - ~70
+	# Health conditions
+	if = {
+		limit = { has_std_trigger = yes }
+		add = -50
 	}
 
-	# Age difference (approx -50 to 0)
+	# Age (approx -24 to 20)
+	add = {
+		value = 36
+		subtract = age # 16 - 60
+	}
+
+	# Age difference (approx -44 to 0)
 	add = {
 		if = {
 			limit = { age < scope:suitor.age }
@@ -71,7 +95,6 @@
 		else = {
 			value = scope:suitor.age
 			subtract = age
-			multiply = 2
 		}
 	}
 
@@ -101,13 +124,14 @@
 
 	save_temporary_scope_as = target_character
 
-	# Faith (-30 to 0, zealous / cynical, already in opinion)
+	# Faith (-15 to 0, zealous / cynical, already in opinion)
 	if = {
 		limit = {
 			NOT = { faith = scope:suitor.faith }
 		}
 		add = {
 			value = scope:suitor.accou_faith_hostility_opinion_value
+			multiply = 0.5
 			scope:suitor = {
 				if = {
 					limit = { has_trait = zealous }
@@ -121,13 +145,14 @@
 		}
 	}
 
-	# Culture & language (-15 to 0, gregarious / shy, already in opinion)
+	# Culture & language (-7 to 0, gregarious / shy, already in opinion)
 	if = {
 		limit = {
 			NOT = { culture = scope:suitor.culture }
 		}
 		add = {
 			value = scope:suitor.accou_cultural_acceptance_opinion_value
+			multiply = 0.5
 			scope:suitor = {
 				if = {
 					limit = { has_trait = gregarious }
