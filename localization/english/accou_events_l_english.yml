@@ -14,6 +14,12 @@
  accou_marriage.0002.c.tt.accept: "If you arrange this marriage, after 15 days"
  accou_marriage.0002.c.tt.reject: "If you don't arrange this marriage, after 15 days"
 
+ accou_marriage.0004.t: "Courtier Failed to Find a Spouse"
+ accou_marriage.0004.desc: "It looks like my [ROOT.Char.Custom2('RelationToMe', SCOPE.sC('courtier'))] [courtier.GetUIName] could not find a suitable spouse for [courtier.GetHerselfHimself]. [courtier.GetSheHe|U] explains that all candidates [courtier.GetSheHe] evaluated were either not a good match for [courtier.GetHerHim], or their matchmaker would not accept the proposal."
+ accou_marriage.0004.a: "Fine, perhaps next time."
+ accou_marriage.0004.b: "Let me help you find someone good enough for #EMP ME#!..."
+ accou_marriage.0004.b.tt.help: "Opens #EMP Find Spouse#! for [courtier.GetUIName]"
+
  accou_marriage.0002.reasons.desc: "#EMP \n\nReasons to accept [candidate.GetUIName] as courtier:\n#!"
  accou_marriage.0002.better_councillor_options.desc: "#EMP $EFFECT_LIST_BULLET$$accou_better_councillor_options_start$ [candidate.Custom('accou_better_councillor_options')]\n#!"
  accou_marriage.0002.better_court_position_options.desc: "#EMP $EFFECT_LIST_BULLET$$accou_better_court_position_options_start$ [candidate.Custom('accou_better_court_position_options')]\n#!"

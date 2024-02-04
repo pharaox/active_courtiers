@@ -14,17 +14,7 @@ scripted_trigger accou_marriage_0001_valid_courtier_trigger = {
 	# Not a female in a male-dominated faith and vice versa
 	trigger_if = {
 		limit = { is_wrong_gender_in_faith_trigger = { FAITH = faith } }
-		trigger_if = {
-			limit = { has_game_rule = accou_wrong_gender_marriage_requests_not_allowed }
-			always = no
-		}
-		trigger_else_if = {
-			limit = { has_game_rule = accou_wrong_gender_marriage_requests_highborn_only }
-			is_lowborn = no
-		}
-		trigger_else = {
-			always = yes
-		}
+		accou_are_wrong_gender_marriage_requests_allowed_trigger = yes
 	}
 
 	# No previous attempt failed recently
@@ -178,7 +168,7 @@ accou_marriage.0001 = {
 	desc = accou_marriage.0001.desc
 	hidden = yes
 
-	theme = family
+	theme = marriage
 	left_portrait = {
 		character = scope:courtier
 	}
@@ -195,50 +185,55 @@ accou_marriage.0001 = {
 
 	immediate = {
 		# Determine courtier
-		random_courtier = {
+		if = {
 			limit = {
-				accou_marriage_0001_valid_courtier_trigger = yes
+				NOT = { exists = scope:courtier }
 			}
-
-			weight = {
-				base = 10
-
-				# More likely if of interest to root (20)
-				modifier = {
-					accou_is_of_minor_interest_trigger = { CHARACTER = root }
-					add = 20
+			random_courtier = {
+				limit = {
+					accou_marriage_0001_valid_courtier_trigger = yes
 				}
 
-				# More likely if not lowborn (10)
-				modifier = {
-					is_lowborn = no
-					add = 10
-				}
+				weight = {
+					base = 10
 
-				# More likely if younger (10 to -12)
-				modifier = {
-					add = {
-						value = 36
-						subtract = age
-						multiply = 0.5
+					# More likely if of interest to root (20)
+					modifier = {
+						accou_is_of_minor_interest_trigger = { CHARACTER = root }
+						add = 20
+					}
+
+					# More likely if not lowborn (10)
+					modifier = {
+						is_lowborn = no
+						add = 10
+					}
+
+					# More likely if younger (10 to -12)
+					modifier = {
+						add = {
+							value = 36
+							subtract = age
+							multiply = 0.5
+						}
+					}
+
+					# Less likely with various health conditions (-10)
+					modifier = {
+						has_std_trigger = yes
+						add = -10
+					}
+
+					# Root opinion (-10 to 10)
+					opinion_modifier = {
+						who = root
+						opinion_target = this
+						multiplier = 0.1
 					}
 				}
 
-				# Less likely with various health conditions (-10)
-				modifier = {
-					has_std_trigger = yes
-					add = -10
-				}
-
-				# Root opinion (-10 to 10)
-				opinion_modifier = {
-					who = root
-					opinion_target = this
-					multiplier = 0.1
-				}
+				save_scope_as = courtier
 			}
-
-			save_scope_as = courtier
 		}
 
 		# Get nearby characters
@@ -284,8 +279,8 @@ accou_marriage.0001 = {
 		}
 
 		# Save actor and secondary actor scopes
-		root = { save_temporary_scope_as = actor }
-		scope:courtier ?= { save_temporary_scope_as = secondary_actor }
+		root = { save_scope_as = actor }
+		scope:courtier ?= { save_scope_as = secondary_actor }
 
 		# Save option scopes used by marriage_ai_accept_modifier
 		save_temporary_scope_value_as = { name = hook value = no }
@@ -308,13 +303,13 @@ accou_marriage.0001 = {
 			}
 
 			# Save secondary recipient and recipient scopes
-			save_temporary_scope_as = secondary_recipient
+			save_scope_as = secondary_recipient
 			if = {
 				limit = { exists = matchmaker }
-				matchmaker = { save_temporary_scope_as = recipient }
+				matchmaker = { save_scope_as = recipient }
 			}
 			else = {
-				save_temporary_scope_as = recipient
+				save_scope_as = recipient
 			}
 
 			# Determine if the candidate is accepting or not
@@ -361,6 +356,12 @@ accou_marriage.0001 = {
 				}
 			}
 		}
+
+		# Clear saved interaction scopes
+		clear_saved_scope = actor
+		clear_saved_scope = recipient
+		clear_saved_scope = secondary_actor
+		clear_saved_scope = secondary_recipient
 
 		# Determine best candidate
 		ordered_in_list = {
@@ -440,6 +441,15 @@ accou_marriage.0001 = {
 					flag = accou_marriage_0001_failed
 					years = 5
 				}
+			}
+
+			if = {
+				limit = {
+					scope:courtier ?= {
+						has_character_flag = accou_searching_for_someone_to_marry
+					}
+				}
+				trigger_event = accou_marriage.0004
 			}
 		}
 
@@ -594,7 +604,7 @@ accou_marriage.0002 = {
 		}
 	}
 
-	theme = family
+	theme = marriage
 	left_portrait = {
 		character = scope:courtier
 	}
@@ -955,6 +965,36 @@ accou_marriage.0003 = {
 		}
 		else = {
 			accou_marriage_0001_on_reject_effect = yes
+		}
+	}
+}
+
+accou_marriage.0004 = {
+	type = character_event
+	title = accou_marriage.0004.t
+	desc = accou_marriage.0004.desc
+
+	theme = marriage
+	left_portrait = {
+		character = scope:courtier
+		animation = sadness
+	}
+	override_background = {
+		reference = throne_room
+	}
+
+	option = {
+		name = accou_marriage.0004.a
+	}
+
+	option = {
+		name = accou_marriage.0004.b
+
+		custom_tooltip = accou_marriage.0004.b.tt.help
+		open_interaction_window = {
+			interaction = marry_off_interaction
+			actor = root
+			recipient = scope:courtier
 		}
 	}
 }

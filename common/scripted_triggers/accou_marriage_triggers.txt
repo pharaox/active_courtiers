@@ -225,3 +225,17 @@ accou_is_fertile_trigger = {
 		age < 45
 	}
 }
+
+accou_are_wrong_gender_marriage_requests_allowed_trigger = {
+	trigger_if = {
+		limit = { has_game_rule = accou_wrong_gender_marriage_requests_not_allowed }
+		always = no
+	}
+	trigger_else_if = {
+		limit = { has_game_rule = accou_wrong_gender_marriage_requests_highborn_only }
+		is_lowborn = no
+	}
+	trigger_else = {
+		always = yes
+	}
+}
