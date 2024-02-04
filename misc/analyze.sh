@@ -14,4 +14,8 @@ echo "- outsider: $(grep -a "accou_marriage.0002 event option b, .*, outsider: y
 echo "- insider: $(grep -a "accou_marriage.0002 event option b, .*, outsider: no" debug.log | wc -l)"
 pcre2grep -a -o1 "candidate quality: ([\d]+)" debug.log | awk '{s+=$1}END{print "average candidate quality:",s/NR}' RS="\n"
 echo
-
+echo "quick_marriage_ai_accept_modifier: $(grep -a "quick_marriage_ai_accept_modifier" debug.log | wc -l)"
+echo "- ok: $(grep -a "quick_marriage_ai_accept_modifier ok" debug.log | wc -l)"
+echo "- false positive: $(grep -a "quick_marriage_ai_accept_modifier false positive" debug.log | wc -l)"
+echo "- false negative: $(grep -a "quick_marriage_ai_accept_modifier false negative" debug.log | wc -l)"
+echo
