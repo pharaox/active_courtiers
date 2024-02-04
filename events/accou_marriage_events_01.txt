@@ -304,7 +304,10 @@ accou_marriage.0001 = {
 		if = {
 			limit = {
 				NOT = { has_game_rule = accou_marriage_ai_acceptance_check_original }
-				exists = scope:secondary_actor
+				list_size = {
+					name = shortlisted_candidates
+					value > 0
+				}
 			}
 
 			save_temporary_scope_value_as = {
@@ -313,61 +316,71 @@ accou_marriage.0001 = {
 			}
 		}
 
-		# Get accepting marriage canidates
-		every_in_list = {
+		# Determine the best candidate that will accept the proposal
+		ordered_in_list = {
 			list = shortlisted_candidates
+			limit = { has_variable = accou_marriage_candidate_quality }
+			order_by = var:accou_marriage_candidate_quality
+			max = 1000
+			check_range_bounds = no
 
-			# Save secondary recipient and recipient scopes
-			save_scope_as = secondary_recipient
 			if = {
-				limit = { exists = matchmaker }
-				matchmaker = { save_scope_as = recipient }
-			}
-			else = {
-				save_scope_as = recipient
-			}
+				limit = {
+					NOT = { exists = scope:candidate }
+				}
 
-			# Determine if the candidate is accepting or not
-			if = {
-				limit = { scope:actor = scope:recipient }
-				add_to_temporary_list = accepting_candidates
-			}
-			else = {
+				# Save secondary recipient and recipient scopes
+				save_scope_as = secondary_recipient
 				if = {
-					limit = { has_game_rule = accou_marriage_ai_acceptance_check_original }
-
-					# Use vanilla marriage_ai_accept_modifier to check if the marriage will be accepted
-					random = {
-						chance = 0
-						marriage_ai_accept_modifier = yes
-						modifier = {
-							factor = 100
-						}
-						add_to_temporary_list = accepting_candidates
-					}
+					limit = { exists = matchmaker }
+					matchmaker = { save_scope_as = recipient }
 				}
 				else = {
-					# Save additional scopes used by accou_quick_marriage_ai_accept_modifier_value
-					scope:recipient = {
-						save_temporary_opinion_value_as = { name = opinion_of_actor target = scope:actor }
-						save_temporary_opinion_value_as = { name = opinion_of_secondary_actor target = scope:secondary_actor }
-						save_temporary_opinion_value_as = { name = opinion_of_secondary_recipient target = scope:secondary_recipient }
-						accou_get_ruler_with_royal_court_effect = yes
-					}
+					save_scope_as = recipient
+				}
 
-					# Use accou_quick_marriage_ai_accept_modifier_value to check if the marriage will be accepted
-					# This is not always accurate but faster (current match rate > 99.99%)
-					# It may also be less compatible with some conversion mods
-					save_temporary_scope_value_as = {
-						name = quick_marriage_ai_accept_modifier
-						value = accou_quick_marriage_ai_accept_modifier_value
-					}
+				# Check if the marriage will be accepted
+				if = {
+					limit = { scope:actor = scope:recipient }
+					save_scope_as = candidate
+				}
+				else = {
 					if = {
-						limit = { scope:quick_marriage_ai_accept_modifier > 0 }
-						add_to_temporary_list = accepting_candidates
-					}
+						limit = { has_game_rule = accou_marriage_ai_acceptance_check_original }
 
-					#accou_debug_log_quick_marriage_ai_accept_modifier_mismatches_effect = yes
+						# Use vanilla marriage_ai_accept_modifier to check if the marriage will be accepted
+						random = {
+							chance = 0
+							marriage_ai_accept_modifier = yes
+							modifier = {
+								factor = 100
+							}
+							save_scope_as = candidate
+						}
+					}
+					else = {
+						# Save additional scopes used by accou_quick_marriage_ai_accept_modifier_value
+						scope:recipient = {
+							save_temporary_opinion_value_as = { name = opinion_of_actor target = scope:actor }
+							save_temporary_opinion_value_as = { name = opinion_of_secondary_actor target = scope:secondary_actor }
+							save_temporary_opinion_value_as = { name = opinion_of_secondary_recipient target = scope:secondary_recipient }
+							accou_get_ruler_with_royal_court_effect = yes
+						}
+
+						# Use accou_quick_marriage_ai_accept_modifier_value to check if the marriage will be accepted
+						# This is not always accurate but faster (current match rate > 99.99%)
+						# It may also be less compatible with some conversion mods
+						save_temporary_scope_value_as = {
+							name = quick_marriage_ai_accept_modifier
+							value = accou_quick_marriage_ai_accept_modifier_value
+						}
+						if = {
+							limit = { scope:quick_marriage_ai_accept_modifier > 0 }
+							save_scope_as = candidate
+						}
+
+						#accou_debug_log_quick_marriage_ai_accept_modifier_mismatches_effect = yes
+					}
 				}
 			}
 		}
@@ -377,14 +390,6 @@ accou_marriage.0001 = {
 		clear_saved_scope = recipient
 		clear_saved_scope = secondary_actor
 		clear_saved_scope = secondary_recipient
-
-		# Determine best candidate
-		ordered_in_list = {
-			list = accepting_candidates
-			limit = { has_variable = accou_marriage_candidate_quality }
-			order_by = var:accou_marriage_candidate_quality
-			save_scope_as = candidate
-		}
 
 		# Determine matchmaker
 		scope:candidate ?= {
