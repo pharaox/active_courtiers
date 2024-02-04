@@ -257,6 +257,10 @@ accou_marriage.0001 = {
 		scope:courtier ?= { save_temporary_scope_as = suitor }
 		every_in_list = {
 			list = characters
+			limit = {
+				accou_marriage_0001_valid_marriage_candidate_trigger = { CHARACTER = scope:courtier }
+			}
+
 			scope:suitor = {
 				save_temporary_opinion_value_as = {
 					name = suitor_opinion
@@ -295,12 +299,23 @@ accou_marriage.0001 = {
 			}
 		}
 
+		# Calculate the part of accou_quick_marriage_ai_accept_modifier_value
+		# that only depends on actor / secondary_actor only once to improve performance
+		if = {
+			limit = {
+				NOT = { has_game_rule = accou_marriage_ai_acceptance_check_original }
+				exists = scope:secondary_actor
+			}
+
+			save_temporary_scope_value_as = {
+				name = quick_marriage_ai_accept_modifier_actor
+				value = accou_quick_marriage_ai_accept_modifier_actor_value
+			}
+		}
+
 		# Get accepting marriage canidates
 		every_in_list = {
 			list = shortlisted_candidates
-			limit = {
-				accou_marriage_0001_valid_marriage_candidate_trigger = { CHARACTER = scope:courtier }
-			}
 
 			# Save secondary recipient and recipient scopes
 			save_scope_as = secondary_recipient

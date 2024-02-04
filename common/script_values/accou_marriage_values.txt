@@ -302,10 +302,8 @@ accou_spouse_personality_value = {
 	}
 }
 
-accou_quick_marriage_ai_accept_modifier_value = {
+accou_quick_marriage_ai_accept_modifier_actor_value = {
 	value = 0
-
-	# Hooks (no possible, skipped)
 
 	# Perks
 	if = {
@@ -336,6 +334,34 @@ accou_quick_marriage_ai_accept_modifier_value = {
 		add = khvarenah_legacy_marriage_acceptance
 	}
 
+	# Cultural traditions
+	if = {
+		limit = {
+			scope:actor.culture = {
+				has_cultural_parameter = marriage_acceptance_bonus
+			}
+		}
+		add = 10
+	}
+
+	# Grand Wedding
+	if = {
+		limit = {
+			scope:actor.dynasty ?= {
+				has_dynasty_perk = ep2_activities_legacy_2
+			}
+		}
+		add = ep2_activities_legacy_2_grand_weddings_acceptance_boost_value
+	}
+}
+
+accou_quick_marriage_ai_accept_modifier_value = {
+	value = scope:quick_marriage_ai_accept_modifier_actor
+
+	# Hooks (no possible, skipped)
+
+	# Perks (already calculated)
+
 	# Who is getting married
 	if = {
 		limit = { scope:recipient = scope:secondary_recipient }
@@ -346,22 +372,7 @@ accou_quick_marriage_ai_accept_modifier_value = {
 
 	# Alliances (not possible, skipped)
 
-	# Clan contract: Marriage Favor
-	if = {
-		limit = {
-			OR = {
-				scope:recipient = {
-					is_vassal_of = scope:actor
-					vassal_contract_has_flag = vassal_contract_marriage_favor
-				}
-				scope:actor = {
-					is_vassal_of = scope:recipient
-					vassal_contract_has_flag = vassal_contract_marriage_favor
-				}
-			}
-		}
-		add = 100
-	}
+	# Clan contract: Marriage Favor (not likely, MR 99.99% if removed)
 
 	# Tier differences (simplified)
 	if = {
@@ -420,44 +431,7 @@ accou_quick_marriage_ai_accept_modifier_value = {
 
 	# Opinions continued (not likely, skipped)
 
-	# Lovers / soulmates
-	if = {
-		limit = {
-			scope:secondary_recipient = scope:recipient
-			scope:secondary_recipient = {
-				OR = {
-					has_relation_lover = scope:secondary_actor
-					has_relation_soulmate = scope:secondary_actor
-				}
-				trigger_if = {
-					limit = {
-						any_secret = {
-							secret_type = secret_lover
-							secret_target = scope:secondary_actor
-						}
-					}
-					any_secret = {
-						secret_type = secret_lover
-						secret_target = scope:secondary_actor
-						any_secret_knower = {
-							this = scope:actor
-						}
-					}
-				}
-			}
-		}
-		if = {
-			limit = {
-				scope:secondary_recipient = {
-					has_relation_soulmate = scope:secondary_actor
-				}
-			}
-			add = 100
-		}
-		else = {
-			add = 25
-		}
-	}
+	# Lovers / soulmates (not likely, MR 99.99% if removed)
 
 	# Just widowed (not likely, skipped)
 
@@ -717,7 +691,7 @@ accou_quick_marriage_ai_accept_modifier_value = {
 		add = -10
 	}
 
-	# Parent of children
+	# Parent of children (MR 99.96% if removed)
 	if = {
 		limit = {
 			scope:secondary_recipient = {
@@ -878,15 +852,7 @@ accou_quick_marriage_ai_accept_modifier_value = {
 		}
 	}
 
-	# Cultural traditions
-	if = {
-		limit = {
-			scope:actor.culture = {
-				has_cultural_parameter = marriage_acceptance_bonus
-			}
-		}
-		add = 10
-	}
+	# Cultural traditions (partially already calculated)
 	if = {
 		limit = {
 			scope:recipient.culture = {
@@ -897,7 +863,7 @@ accou_quick_marriage_ai_accept_modifier_value = {
 		add = -50
 	}
 
-	# Struggles
+	# Struggles (MR 99.06% if removed)
 	if = {
 		limit = {
 			scope:actor = {
@@ -1043,25 +1009,9 @@ accou_quick_marriage_ai_accept_modifier_value = {
 
 	# Diarchies (not likely, skipped )
 
-	# Feud
-	if = {
-		limit = {
-			scope:recipient = {
-				existing_feud_against_target_trigger = { TARGET = scope:actor }
-			}
-		}
-		add = -25
-	}
+	# Feud (not likely, MR 99.99% if removed)
 
-	# Grand Wedding
-	if = {
-		limit = {
-			scope:actor.dynasty ?= {
-				has_dynasty_perk = ep2_activities_legacy_2
-			}
-		}
-		add = ep2_activities_legacy_2_grand_weddings_acceptance_boost_value
-	}
+	# Grand Wedding (already calculated)
 
 	# Grand Wedding continued (not possible, skipped)
 
