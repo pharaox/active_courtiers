@@ -9,7 +9,7 @@
  setting_accou_event_frequency_player_5y: "#high Every 5 years#!"
  setting_accou_event_frequency_player_5y_desc: "Events fire randomly every 5 years for players."
 
- rule_accou_event_frequency_ai: "#P Active Courtiers:#! Event Frequency for AI rulers"
+ rule_accou_event_frequency_ai: "#P Active Courtiers:#! Event Frequency for AI Rulers"
  setting_accou_event_frequency_ai_1y: "#high Every year#!"
  setting_accou_event_frequency_ai_1y_desc: "Events fire randomly every year for AI rulers (slowest)."
  setting_accou_event_frequency_ai_3y: "Every 3 years"
@@ -31,7 +31,7 @@
  setting_accou_search_range_player_all: "#high All#!"
  setting_accou_search_range_player_all_desc: "All characters in this and neighboring realms are included in searches for players."
 
- rule_accou_search_range_ai: "#P Active Courtiers:#! Character Search Range for AI rulers"
+ rule_accou_search_range_ai: "#P Active Courtiers:#! Character Search Range for AI Rulers"
  setting_accou_search_range_ai_small: "#high Small#!"
  setting_accou_search_range_ai_small_desc: "Characters in this and neighboring realms and located within 150 map-pixels are included in searches for AI rulers (fastest)."
  setting_accou_search_range_ai_medium: "#high Medium#!"
