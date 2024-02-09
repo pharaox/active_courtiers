@@ -1,52 +1,44 @@
-# Travelers
+# Active Courtiers
 
-[Subscribe on Steam](?)
+[Subscribe on Steam](https://steamcommunity.com/sharedfiles/filedetails/?id=3157170996)
 
 ## Overview
 
 Do you find yourself spending a lot of time finding spouses for your courtiers, or deciding on characters to invite to your court, who could be better councillors, court position holders, knights, or commanders? While both **Find Spouse** and **Invite to Court** interactions are great since they enable the player to attract better talent than by recruiting guests, and furthermore do it for free, they suffer from a few major drawbacks:
 
 * They require a lot of micromanagement on the player's part since the options could be either too numerous or (in some cases) hard to find.
-* The AI never uses them, ending up with a much worse talent pool as a result. On the other hand, the player can get the best courtiers via marriages at their leisure, since they are usually not married and therefore always available. This applies also to court invitations, and to an ever greater extent.
+* The AI never uses them, ending up with a much worse talent pool as a result. On the other hand, the player can get the best courtiers via marriages at their leisure, since they are usually not married and therefore always available.
 
-I personally find the above aspects to be tedious, unrealistic, and underwhelming. Why should it take so much effort to find good spouses for courtiers? Why would capable characters depend so much on their liege for getting married? And why should players enjoy such overwhelming advantages over the AI to attract valuable courtiers?
+I personally find the above aspects to be tedious, unrealistic, and underwhelming. Why should it take so much effort to find good spouses for courtiers? Why would courtiers depend so much on their liege for getting married? And why should players enjoy such overwhelming advantages over the AI to attract valuable courtiers?
 
 This mod attempts to address these drawbacks by enabling courtiers to actively search for spouses (and in the future also acquaintances to invite) by themselves and only ask their liege for approval, thereby reducing the effort for the player, improving the quality of AI talent pools and therefore the overall AI competitiveness, and also contributing to better roleplaying and immersion.
 
-### Event Chains
-
-This mod introduces a new **Courtier Requests to Marry** event chain for courtier marriages. It is triggered for playable (count or higher) rulers, every year for players and every 3 years for AI by default, if they are "available for events" (not traveling or involved in an activity). These event frequencies can be changed via game rules.
+This mod introduces a new **Courtier Requests to Marry** event for courtier marriages. It is triggered for playable (count or higher) rulers, every year for players and every 3 years for AI by default, if they are "available for events" (not traveling or involved in an activity). These event frequencies can be changed via game rules.
 
 When the event fires, first a random eligible *courtier* is selected who will search for a spouse for themselves. To be eligible, a courtier must satisfy a number of conditions, such as being an available adult, not already married or betrothed, younger than 60 years and not having a serious health condition, not an heir or close family to their liege (since these are already married by AI for alliances), and not "wrong gender in faith", e.g. a female in a faith with the male-dominated doctrine (the eligibility of such characters can be configured via a game rule).
 
-After the *courtier* has been selected, a marriage *candidate* is also selected among all eligible non-ruler characters (courtiers, guests, and wandering characters) in this and neighboring realms and located within a certain range of the original ruler's capital. This range is larger for players than for AI by default and can also be configured via game rules. The candidate selection proceeds in several stages:
+After the *courtier* has been selected, a marriage *candidate* is also selected among all eligible non-ruler characters in this and neighboring realms and located within a certain range of the original ruler's capital that can also be configured via game rules. The candidate selection proceeds in several stages:
 
 * First, all *eligible candidates* are determined. To be eligible, a candidate must satisfy many of the same conditions that apply when selecting a *courtier*, and in addition they must be someone whom the *courtier* can actually marry according to their gender and faith, and either someone to whose gender the *courtier* is attracted, or someone of the opposite gender if both characters are fertile.
 * Next, the *quality* of the eligible candidates from the perspective of the *courtier* is evaluated, based on various criteria such as opinion, attraction, fertility, health, age and age difference, dynasty prestige difference, faith hostility, cultural acceptance, genetic traits, skills, and prowess.
-* Next, all *shortlisted candidates* with quality above a certain threshold are checked if their *matchmaker* (their liege for courtiers, or themselves for guests and wandering characters) would accept the marriage proposal.
+* Next, all candidates with quality above a certain threshold are checked if their *matchmaker* (their liege for courtiers, or themselves otherwise) would accept the marriage proposal.
 * Finally, the highest quality candidate whose matchmaker would accept the marriage proposal is selected as the actual *candidate*.
 
-After both a *courtier* and a *candidate* have been successfully selected as described above, the event enables the *courtier*'s liege (either the player or an AI ruler) to approve or reject the marriage. If the *candidate* is an outsider, the event description lists some potential reasons to accept them as a courtier. If they are better than any other available options for any councillor positions (based on skill), court positions (based on aptitude), knight (based on prowess), or commander (based on martial skill and commander traits), this is explicitly mentioned in the description.
+After a *courtier* and a *candidate* have been successfully selected, the event enables the *courtier*'s liege to approve or reject the marriage. If the *candidate* is an outsider, the event description lists the reasons to accept them as a courtier. If they are better than any other available options for any councillor positions, court positions, knight, or commander, this is explicitly mentioned in the description.
 
 Note that since the *candidate* has been selected based on their quality from the *courtier*'s perspective, they are not automatically a good choice for their liege. However, often this is actually the case, since many of the criteria used to determine the quality (skills, genetic traits, age, fertility, etc.) would be relevant to the liege as well. So while courtiers would in most cases not make better choices than you as a player might make, they would usually make reasonable choices that are also of good roleplaying value.
 
 When the event fires for AI rulers, they evaluate the *candidate* carefully before approving or rejecting. AI rulers are in general more eager to approve outsiders rather than characters who are already their courtiers, since marriages to outsiders are a great way to attract talent to their court. They also take the into account various other criteria, such as their opinion of both *courtier* and *candidate*, family and other relations, and the *candidate* quality. For outsiders, there are also additional considerations such as is the *candidate* a better choice than any other available options for any councillor positions, court positions, knight, or commander, and does the *candidate* have any useful claims.
 
-### Interactions
-
-To make it more convenient for players to trigger the event chain for particular courtiers, this mod adds the new **Ask to Find Spouse** interaction. Only courtiers who are eligible according to the criteria mentioned above can be targeted by this interaction. Sending the interaction effectively triggers the event chain with the targeted courtier pre-selected as the *courtier*.
-
-If the candidate search does not yield any eligible candidates above the quality threshold whose matchmaker would accept the marriage proposal, the **Courtier Failed to Find a Spouse** event fires, giving the player the option to marry the courtier off anyway via the **Find Spouse** interaction.
+To make it more convenient for players to trigger the event for particular courtiers, this mod adds the new **Ask to Find Spouse** interaction. Only courtiers who are eligible according to the criteria mentioned above can be targeted by this interaction.
 
 ## Compatibility
 
-The current version is compatible with CK3 1.11.
+The current version is compatible with CK3 1.11 and is also savegame compatible.
 
 This mod does not modify any vanilla files and should be compatible with most other mods. Note that some total conversion mods remove parts of vanilla that may be referred to by this mod, so compatibility with such mods is not guaranteed. If you use such mods, set the game rule **Marriage Acceptance by AI** to **Original** to let the changes to marriage acceptance by the conversion mod take effect.
 
 This mod also supports changing its game rules mid-game with the [Gamerule Gadget](https://steamcommunity.com/sharedfiles/filedetails/?id=2826829936) mod.
-
-I strongly recommend using also the [Unofficial Patch](https://steamcommunity.com/sharedfiles/filedetails/?id=2871648329) mod as it fixes many vanilla issues. Put this mod after Unofficial Patch in the load order.
 
 This mod is also savegame compatible, you can enable or disable it at any time without adverse effects.
 
@@ -58,7 +50,7 @@ This mod is currently available in English. For other languages, it uses the ori
 
 ### Courtier Marriages
 
-This mod introduces a new **Courtier Requests to Marry** event chain for courtier marriages. This event chain is triggered for playable (count or higher) rulers, every year for players and every 3 years for AI by default, if they are "available for events" (not traveling or involved in an activity). These event frequencies can be changed via the **Event Frequency for Players** and **Event Frequency for AI Rulers** game rules. The player can also initiate the event chain for a particular courtier via the [Ask to Find Spouse Interaction](#ask-to-find-spouse-interaction).
+This mod introduces a new **Courtier Requests to Marry** event for courtier marriages. It is triggered for playable (count or higher) rulers, every year for players and every 3 years for AI by default, if they are "available for events" (not traveling or involved in an activity). These event frequencies can be changed via the **Event Frequency for Players** and **Event Frequency for AI Rulers** game rules. The player can also initiate the event for a particular courtier via the [Ask to Find Spouse Interaction](#ask-to-find-spouse-interaction).
 
 #### Preparation
 
@@ -118,17 +110,17 @@ When the event fires for AI rulers, they evaluate the *candidate* carefully befo
 
 Based on actual statistics collected in observer mode over a period of 50 years, AI rulers currently approve about 92% of all requests involving an outsider *candidate*, but only about 11% of all requests involving an insider one.
 
-Note that in some cases a courtier or a candidate matching the criteria mentioned above may not exist. In such cases, nothing happens, except if the event chain has been initiated by the player via the [Ask to Find Spouse Interaction](#ask-to-find-spouse-interaction).
+Note that in some cases a courtier or a candidate matching the criteria mentioned above may not exist. In such cases, nothing happens, except if the event has been initiated by the player via the [Ask to Find Spouse Interaction](#ask-to-find-spouse-interaction).
 
 #### Ask to Find Spouse Interaction
 
-To make it more convenient for players to trigger the event chain for particular courtiers, this mod adds the **Ask to Find Spouse** interaction. Only courtiers who are eligible according to the criteria described in [Preparation](#preparation) can be targeted by this interaction, and only if the player character is "available for events". Sending the interaction effectively triggers the event chain with the targeted courtier pre-selected as the *courtier*.
+To make it more convenient for players to trigger the event for particular courtiers, this mod adds the **Ask to Find Spouse** interaction. Only courtiers who are eligible according to the criteria described in [Preparation](#preparation) can be targeted by this interaction, and only if the player character is "available for events". Sending the interaction effectively triggers the event with the targeted courtier pre-selected as the *courtier*.
 
 If the candidate search does not yield any eligible candidates above the quality threshold whose matchmaker would accept the marriage proposal, the **Courtier Failed to Find a Spouse** event fires, giving the player the option to marry the courtier off anyway via the **Find Spouse** interaction.
 
 ## Performance
 
-Since the additional events introduced by this mod fire on a regular basis for a few hundred AI rulers and involve sophisticated character searches, they may negatively affect the overall game performance. Therefore, this mod introduces game rules to control the different factors that influence the performance and lets players find the best balance between a better AI and a smooth gameplay experience for their hardware and selection of other mods. With the default settings, this mod is about 10% slower than vanilla, a difference that is usually not noticeable except on the highest game speed.
+Since the additional events introduced by this mod fire on a regular basis for a few hundred AI rulers and involve sophisticated character searches, they may negatively affect the overall game performance. Therefore, this mod introduces game rules to control the different factors that influence the performance and lets players find the best balance between a better AI and a smooth gameplay experience for their hardware and selection of other mods. With the default settings, this mod is about 10% slower than vanilla if measured on max speed in observed mode, a difference that is usually not noticeable during an actual gameplay.
 
 The performance-influencing factors that can be configured via game rules are:
 
@@ -142,5 +134,5 @@ As a recommendation, if you don't notice any performance issues, just leave the 
 
 ## Links
 
-* [Steam Workshop](?)
+* [Steam Workshop](https://steamcommunity.com/sharedfiles/filedetails/?id=3157170996)
 * [GitHub Repository](https://github.com/pharaox/active_courtiers)
