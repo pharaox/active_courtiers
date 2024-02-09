@@ -1,0 +1,20 @@
+﻿l_german:
+ accou_debug_prefix: "[GetCurrentDate.GetStringShort]: [THIS.Char.GetFullNameNoTooltip] ([THIS.Char.GetID])"
+
+ accou_debug_msg_marriage_0001_a_success: "$accou_debug_prefix$: accou_marriage.0001 event option a success, courtier: $accou_courtier$, candidate: $accou_candidate$, matchmaker: $accou_matchmaker$"
+ accou_debug_msg_marriage_0001_a_failure: "$accou_debug_prefix$: accou_marriage.0001 event option a failure, courtier: $accou_courtier$, candidate: $accou_candidate$, matchmaker: $accou_matchmaker$"
+
+ accou_debug_msg_marriage_0002_a: "$accou_debug_prefix$: accou_marriage.0002 event option a, courtier: $accou_courtier$, candidate: $accou_candidate$, matchmaker: $accou_matchmaker$, candidate quality: $accou_candidate_quality$, outsider: $accou_outsider$"
+ accou_debug_msg_marriage_0002_b: "$accou_debug_prefix$: accou_marriage.0002 event option b, courtier: $accou_courtier$, candidate: $accou_candidate$, matchmaker: $accou_matchmaker$, candidate quality: $accou_candidate_quality$, outsider: $accou_outsider$"
+ accou_debug_msg_marriage_0002_c: "$accou_debug_prefix$: accou_marriage.0002 event option c, courtier: $accou_courtier$, candidate: $accou_candidate$, matchmaker: $accou_matchmaker$, candidate quality: $accou_candidate_quality$, outsider: $accou_outsider$"
+
+ accou_debug_msg_quick_marriage_ai_accept_modifier_fp: "$accou_debug_prefix$: quick_marriage_ai_accept_modifier false positive, courtier: $accou_courtier$, value:  $accou_quick_marriage_ai_accept_modifier$"
+ accou_debug_msg_quick_marriage_ai_accept_modifier_fn: "$accou_debug_prefix$: quick_marriage_ai_accept_modifier false negative, courtier: $accou_courtier$, value:  $accou_quick_marriage_ai_accept_modifier$"
+ accou_debug_msg_quick_marriage_ai_accept_modifier_ok: "$accou_debug_prefix$: quick_marriage_ai_accept_modifier ok"
+
+ accou_courtier: "[THIS.Var('courtier').Char.GetFullNameNoTooltip] ([THIS.Var('courtier').Char.GetID])"
+ accou_candidate: "[THIS.Var('candidate').Char.GetFullNameNoTooltip] ([THIS.Var('candidate').Char.GetID])"
+ accou_matchmaker: "[THIS.Var('matchmaker').Char.GetFullNameNoTooltip] ([THIS.Var('matchmaker').Char.GetID])"
+ accou_quick_marriage_ai_accept_modifier: "[THIS.Var('quick_marriage_ai_accept_modifier').GetValue]"
+ accou_candidate_quality: "[THIS.Var('candidate_quality').GetValue]"
+ accou_outsider: "[Select_CString(THIS.Var('outsider').IsSet, 'yes', 'no')]"

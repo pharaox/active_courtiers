@@ -1,0 +1,55 @@
+﻿l_russian:
+ # accou_marriage.0001
+ accou_marriage.0001.t: "Courtier Requests to Marry (Preparation)"
+ accou_marriage.0001.desc: "My [ROOT.Char.Custom2('RelationToMe', SCOPE.sC('courtier'))] [courtier.GetUIName] is requesting to marry [candidate.GetUIName]."
+ accou_marriage.0001.a: "OK"
+ # accou_marriage.0002
+ accou_marriage.0002.t: "Courtier Requests to Marry"
+ accou_marriage.0002.desc: "My [ROOT.Char.Custom2('RelationToMe', SCOPE.sC('courtier'))] [courtier.GetUIName] is requesting to marry [Select_CString(ObjectsEqual(matchmaker, candidate), '', Concatenate(Select_CString(ObjectsEqual(matchmaker, ROOT.Char), 'my ', Concatenate(matchmaker.GetUIName, '\\'s ')), Concatenate(matchmaker.Custom2('RelationToMe', SCOPE.sC('candidate')), ' ')))][candidate.GetUIName]. "
+ accou_marriage.0002.more.desc: "[courtier.GetSheHe|U] assures me that [matchmaker.GetUIName] will agree to this marriage if the proposal comes on my behalf."
+ accou_marriage.0002.a: "May [ROOT.Char.GetFaith.HighGodName] bless your union!"
+ accou_marriage.0002.b: "I am not willing to let you marry right now."
+ accou_marriage.0002.c: "Let me consider this..."
+ accou_marriage.0002.c.tt.consider: "Opens #EMP Arrange Marriage#! for [courtier.GetUIName] and [candidate.GetUIName]"
+ accou_marriage.0002.c.tt.accept: "If you arrange this marriage, after 15 days"
+ accou_marriage.0002.c.tt.reject: "If you don't arrange this marriage, after 15 days"
+ # accou_marriage.0004
+ accou_marriage.0004.t: "Courtier Failed to Find a Spouse"
+ accou_marriage.0004.desc: "It looks like my [ROOT.Char.Custom2('RelationToMe', SCOPE.sC('courtier'))] [courtier.GetUIName] could not find a suitable spouse for [courtier.GetHerselfHimself]. [courtier.GetSheHe|U] explains that all candidates [courtier.GetSheHe] evaluated were either not a good match for [courtier.GetHerHim], or their matchmaker would not accept the proposal."
+ accou_marriage.0004.a: "Fine, perhaps next time."
+ accou_marriage.0004.b: "Let me help you find someone good enough for #EMP ME#!..."
+ accou_marriage.0004.b.tt.help: "Opens #EMP Find Spouse#! for [courtier.GetUIName]"
+
+ accou_marriage.0002.reasons.desc: "#EMP \n\nReasons to accept [candidate.GetUIName] as courtier:\n#!"
+ accou_marriage.0002.better_councillor_options.desc: "#EMP $EFFECT_LIST_BULLET$$accou_better_councillor_options_start$ [candidate.Custom('accou_better_councillor_options')]\n#!"
+ accou_marriage.0002.better_court_position_options.desc: "#EMP $EFFECT_LIST_BULLET$$accou_better_court_position_options_start$ [candidate.Custom('accou_better_court_position_options')]\n#!"
+ accou_marriage.0002.better_knight.desc: "#EMP $EFFECT_LIST_BULLET$$accou_better_knight$\n#!"
+ accou_marriage.0002.better_commander.desc: "#EMP $EFFECT_LIST_BULLET$$accou_better_commander$\n#!"
+ accou_marriage.0002.claims.desc: "#EMP $EFFECT_LIST_BULLET$$guest_description.claim_start.desc$ [candidate.Custom2('accou_claims', ROOT.Char)]\n#!"
+ accou_marriage.0002.genetic_traits.desc: "#EMP $EFFECT_LIST_BULLET$[candidate.Custom('accou_genetic_traits')] [candidate.Custom('accou_genetic_end_desc')]\n#!"
+ accou_marriage.0002.prowess.desc: "#EMP $EFFECT_LIST_BULLET$[candidate.Custom('accou_prowess_skill')] [candidate.Custom('accou_prowess_desc')]\n#!"
+ accou_marriage.0002.martial.desc: "#EMP $EFFECT_LIST_BULLET$[candidate.Custom('accou_martial_skill')] $guest_description.martial_start.desc$ [candidate.Custom('accou_martial_desc')]\n#!"
+ accou_marriage.0002.diplomacy.desc: "#EMP $EFFECT_LIST_BULLET$[candidate.Custom('accou_diplomacy_skill')] [candidate.Custom('accou_diplomacy_desc')]\n#!"
+ accou_marriage.0002.stewardship.desc: "#EMP $EFFECT_LIST_BULLET$[candidate.Custom('accou_stewardship_skill')] [candidate.Custom('accou_stewardship_desc')]\n#!"
+ accou_marriage.0002.intrigue.desc: "#EMP $EFFECT_LIST_BULLET$[candidate.Custom('accou_intrigue_skill')] [candidate.Custom('accou_intrigue_desc')]\n#!"
+ accou_marriage.0002.learning.desc: "#EMP $EFFECT_LIST_BULLET$[candidate.Custom('accou_learning_skill')] $guest_description.learning_start.desc$ [candidate.Custom('accou_learning_desc')]\n#!"
+ accou_marriage.0002.vassal.desc: "#EMP $EFFECT_LIST_BULLET$$guest_description.vassal_start.desc$ [candidate.Custom('accou_vassal_qualities')]\n#!"
+
+ accou_better_councillor_options_start: "Better than all available options for the following [councillor|E] positions:"
+ accou_better_councillor_options_1: "[Localize(Concatenate('councillor_', SCOPE.GetFlagName('bc_option1')))]"
+ accou_better_councillor_options_2: "[Localize(Concatenate('councillor_', SCOPE.GetFlagName('bc_option1')))], [Localize(Concatenate('councillor_', SCOPE.GetFlagName('bc_option2')))]"
+ accou_better_councillor_options_3: "[Localize(Concatenate('councillor_', SCOPE.GetFlagName('bc_option1')))], [Localize(Concatenate('councillor_', SCOPE.GetFlagName('bc_option2')))], [Localize(Concatenate('councillor_', SCOPE.GetFlagName('bc_option3')))]"
+ accou_better_councillor_options_4: "[Localize(Concatenate('councillor_', SCOPE.GetFlagName('bc_option1')))], [Localize(Concatenate('councillor_', SCOPE.GetFlagName('bc_option2')))], [Localize(Concatenate('councillor_', SCOPE.GetFlagName('bc_option3')))], and others"
+
+ accou_better_court_position_options_start: "Better than all available options for the following [court_positions|E]:"
+ accou_better_court_position_options_1: "[Localize(Concatenate(SCOPE.GetFlagName('bcp_option1'), '_court_position'))]"
+ accou_better_court_position_options_2: "[Localize(Concatenate(SCOPE.GetFlagName('bcp_option1'), '_court_position'))], [Localize(Concatenate(SCOPE.GetFlagName('bcp_option2'), '_court_position'))]"
+ accou_better_court_position_options_3: "[Localize(Concatenate(SCOPE.GetFlagName('bcp_option1'), '_court_position'))], [Localize(Concatenate(SCOPE.GetFlagName('bcp_option2'), '_court_position'))], [Localize(Concatenate(SCOPE.GetFlagName('bcp_option3'), '_court_position'))]"
+ accou_better_court_position_options_4: "[Localize(Concatenate(SCOPE.GetFlagName('bcp_option1'), '_court_position'))], [Localize(Concatenate(SCOPE.GetFlagName('bcp_option2'), '_court_position'))], [Localize(Concatenate(SCOPE.GetFlagName('bcp_option3'), '_court_position'))], and others"
+
+ accou_better_knight: "Better [knight|E] than other available options"
+ accou_better_commander: "Top 3 [commander|E] by [martial|E] skill and [commander_traits|E]"
+
+ accou_empty: ""
+
+ court_cave_hermit_court_position: "$court_cave_hermit_position$"

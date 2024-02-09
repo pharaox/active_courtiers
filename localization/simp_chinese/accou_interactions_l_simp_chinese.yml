@@ -1,0 +1,9 @@
+﻿l_simp_chinese:
+ # accou_marry_someone_interaction
+ accou_marry_someone_interaction: "Ask to Find Spouse"
+ accou_marry_someone_interaction_desc: "Ask [recipient.GetShortUINameNoTooltip] to search for a suitable [spouse|E] [recipient.GetHerselfHimself]"
+
+ # Tooltips
+ accou_marriage_0001_failed_tt: "[recipient.GetShortUINameNoTooltip] recently failed to find a [spouse|E]"
+ accou_marriage_0001_considering_tt: "[recipient.GetShortUINameNoTooltip] is already being considered for a marriage"
+ accou_will_search_for_someone_to_marry_tt: "Will search for for a suitable [spouse|E]."
