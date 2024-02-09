@@ -83,6 +83,7 @@ scripted_trigger accou_marriage_0001_valid_marriage_candidate_trigger = {
 			is_attracted_to_gender_of = scope:candidate1
 		}
 		AND = {
+			sex_opposite_of = $CHARACTER$
 			is_visibly_fertile = yes
 			$CHARACTER$ = {
 				is_visibly_fertile = yes

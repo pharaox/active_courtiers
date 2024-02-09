@@ -48,6 +48,7 @@
 	# Fertility (-25 to 25)
 	if = {
 		limit = {
+			sex_opposite_of = scope:suitor
 			scope:suitor = {
 				accou_is_fertile_trigger = yes
 			}
@@ -175,6 +176,7 @@
 	# Genetic traits (-30 to 30 assuming a single genetic trait)
 	if = {
 		limit = {
+			sex_opposite_of = scope:suitor
 			accou_is_fertile_trigger = yes
 			scope:suitor = {
 				accou_is_fertile_trigger = yes
