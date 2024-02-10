@@ -26,26 +26,45 @@
 
 accou_search_range_ai_value = {
 	if = {
-		limit = { has_game_rule = accou_search_range_ai_small }
-		value = squared_distance_small
-	}
-	else_if = {
 		limit = { has_game_rule = accou_search_range_ai_medium }
-		value = squared_distance_medium
+		if = {
+			limit = { highest_held_title_tier <= tier_county }
+			value = squared_distance_small
+		}
+		else_if = {
+			limit = { highest_held_title_tier <= tier_duchy }
+			value = squared_distance_medium
+		}
+		else = {
+			value = squared_distance_large
+		}
 	}
 	else_if = {
 		limit = { has_game_rule = accou_search_range_ai_large }
-		value = squared_distance_large
+		if = {
+			limit = { highest_held_title_tier <= tier_county }
+			value = squared_distance_medium
+		}
+		else_if = {
+			limit = { highest_held_title_tier <= tier_duchy }
+			value = squared_distance_large
+		}
+		else = {
+			value = squared_distance_huge
+		}
 	}
 	else_if = {
 		limit = { has_game_rule = accou_search_range_ai_huge }
-		value = squared_distance_huge
-	}
-	else_if = {
-		limit = { has_game_rule = accou_search_range_ai_massive }
-		value = squared_distance_almost_massive
-	}
-	else = {
-		value = squared_distance_massive
+		if = {
+			limit = { highest_held_title_tier <= tier_county }
+			value = squared_distance_large
+		}
+		else_if = {
+			limit = { highest_held_title_tier <= tier_duchy }
+			value = squared_distance_huge
+		}
+		else = {
+			value = squared_distance_almost_massive
+		}
 	}
 }

@@ -16,6 +16,10 @@
 	accou_event_frequency_player_5y = {
 		flag = GG_can_change_rule
 	}
+
+	accou_event_frequency_player_never = {
+		flag = GG_can_change_rule
+	}
 }
 
 accou_event_frequency_ai = {
@@ -25,15 +29,15 @@ accou_event_frequency_ai = {
 
 	default = accou_event_frequency_ai_3y
 
-	accou_event_frequency_ai_1y = {
-		flag = GG_can_change_rule
-	}
-
 	accou_event_frequency_ai_3y = {
 		flag = GG_can_change_rule
 	}
 
 	accou_event_frequency_ai_5y = {
+		flag = GG_can_change_rule
+	}
+
+	accou_event_frequency_ai_never = {
 		flag = GG_can_change_rule
 	}
 }
@@ -77,10 +81,6 @@ accou_search_range_ai = {
 
 	default = accou_search_range_ai_large
 
-	accou_search_range_ai_small = {
-		flag = GG_can_change_rule
-	}
-
 	accou_search_range_ai_medium = {
 		flag = GG_can_change_rule
 	}
@@ -90,14 +90,6 @@ accou_search_range_ai = {
 	}
 
 	accou_search_range_ai_huge = {
-		flag = GG_can_change_rule
-	}
-
-	accou_search_range_ai_massive = {
-		flag = GG_can_change_rule
-	}
-
-	accou_search_range_ai_all = {
 		flag = GG_can_change_rule
 	}
 }

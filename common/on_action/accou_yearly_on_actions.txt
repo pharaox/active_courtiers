@@ -14,7 +14,8 @@ accou_yearly_playable_pulse = {
 			has_game_rule = accou_event_frequency_player_1y
 		}
 		trigger_else = {
-			has_game_rule = accou_event_frequency_ai_1y
+			has_game_rule = accou_event_frequency_ai_3y
+			highest_held_title_tier >= tier_duchy
 		}
 		basic_is_valid_for_yearly_events_trigger = yes
 	}
@@ -40,7 +41,16 @@ accou_three_year_playable_pulse = {
 			has_game_rule = accou_event_frequency_player_3y
 		}
 		trigger_else = {
-			has_game_rule = accou_event_frequency_ai_3y
+			OR = {
+				AND = {
+					has_game_rule = accou_event_frequency_ai_3y
+					highest_held_title_tier < tier_duchy
+				}
+				AND = {
+					has_game_rule = accou_event_frequency_ai_5y
+					highest_held_title_tier >= tier_duchy
+				}
+			}
 		}
 		basic_is_valid_for_yearly_events_trigger = yes
 	}
@@ -67,11 +77,29 @@ accou_five_year_playable_pulse = {
 		}
 		trigger_else = {
 			has_game_rule = accou_event_frequency_ai_5y
+			highest_held_title_tier < tier_duchy
 		}
 		basic_is_valid_for_yearly_events_trigger = yes
 	}
 
 	events = {
 		accou_marriage.0001 # Courtier Requests to Marry
+	}
+}
+
+# Called every Jan 1st
+# Root does not exist
+yearly_global_pulse = {
+	on_actions = { accou_yearly_global_pulse }
+}
+
+accou_yearly_global_pulse = {
+	trigger = { debug_only = yes }
+
+	effect = {
+		accou_debug_log_effect = { MSG = accou_debug_msg_stats_all }
+		accou_debug_log_effect = { MSG = accou_debug_msg_stats_counts }
+		accou_debug_log_effect = { MSG = accou_debug_msg_stats_dukes }
+		accou_debug_log_effect = { MSG = accou_debug_msg_stats_kings }
 	}
 }

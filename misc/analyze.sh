@@ -19,3 +19,16 @@ echo "- ok: $(grep -a "quick_marriage_ai_accept_modifier ok" debug.log | wc -l)"
 echo "- false positive: $(grep -a "quick_marriage_ai_accept_modifier false positive" debug.log | wc -l)"
 echo "- false negative: $(grep -a "quick_marriage_ai_accept_modifier false negative" debug.log | wc -l)"
 echo
+echo "Statistics"
+echo "Year,Rul,Cou,Adu,Mar,SoS,GCV,Ch,ChS,St,StS,Ma,MaS,Sp,SpS,CC,CCS,CP,CPA,An,AnA,TL,TLA,CT,CTA,Mh,MhA,Se,SeA,Kn,KnS"
+pcre2grep -a -o1 -o2 --om-separator=',' "([\d]+): Statistics \(all\): ([\d\.\,\-]+)" debug.log
+echo "Counts"
+echo "Year,Rul,Cou,Adu,Mar,SoS,GCV,Ch,ChS,St,StS,Ma,MaS,Sp,SpS,CC,CCS,CP,CPA,An,AnA,TL,TLA,CT,CTA,Mh,MhA,Se,SeA,Kn,KnS"
+pcre2grep -a -o1 -o2 --om-separator=',' "([\d]+): Statistics \(counts\): ([\d\.\,\-]+)" debug.log
+echo "Dukes"
+echo "Year,Rul,Cou,Adu,Mar,SoS,GCV,Ch,ChS,St,StS,Ma,MaS,Sp,SpS,CC,CCS,CP,CPA,An,AnA,TL,TLA,CT,CTA,Mh,MhA,Se,SeA,Kn,KnS"
+pcre2grep -a -o1 -o2 --om-separator=',' "([\d]+): Statistics \(dukes\): ([\d\.\,\-]+)" debug.log
+echo "Kings"
+echo "Year,Rul,Cou,Adu,Mar,SoS,GCV,Ch,ChS,St,StS,Ma,MaS,Sp,SpS,CC,CCS,CP,CPA,An,AnA,TL,TLA,CT,CTA,Mh,MhA,Se,SeA,Kn,KnS"
+pcre2grep -a -o1 -o2 --om-separator=',' "([\d]+): Statistics \(kings\): ([\d\.\,\-]+)" debug.log
+echo
