@@ -768,6 +768,17 @@ accou_marriage.0002 = {
 				days = { 15 30 }
 			}
 		}
+		if = {
+			limit = {
+				scope:candidate = {
+					has_variable_list = accou_better_court_position_options
+				}
+			}
+			trigger_event = {
+				id = accou_courtier.0002
+				days = { 30 45 }
+			}
+		}
 
 		ai_chance = {
 			base = 0

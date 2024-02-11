@@ -8,11 +8,14 @@
  accou_debug_msg_marriage_0002_b: "$accou_debug_prefix$: accou_marriage.0002 event option b, courtier: $accou_courtier$, candidate: $accou_candidate$, matchmaker: $accou_matchmaker$, candidate quality: $accou_candidate_quality$, outsider: $accou_outsider$"
  accou_debug_msg_marriage_0002_c: "$accou_debug_prefix$: accou_marriage.0002 event option c, courtier: $accou_courtier$, candidate: $accou_candidate$, matchmaker: $accou_matchmaker$, candidate quality: $accou_candidate_quality$, outsider: $accou_outsider$"
 
- accou_debug_msg_courtier_0001_a_success: "$accou_debug_prefix$: accou_courtier.0001 event option a success, candidate: $accou_candidate$, councillor: $accou_councillor$, incumbent: $accou_incumbent$"
+ accou_debug_msg_courtier_0001_a_success: "$accou_debug_prefix$: accou_courtier.0001 event option a success, candidate: $accou_candidate$, position: $accou_position$, incumbent: $accou_incumbent$"
  accou_debug_msg_courtier_0001_a_failure: "$accou_debug_prefix$: accou_courtier.0001 event option a failure, candidate: $accou_candidate$"
 
- accou_debug_msg_courtier_0002_a: "$accou_debug_prefix$: accou_courtier.0002 event option a, candidate: $accou_candidate$, councillor: $accou_councillor$, incumbent: $accou_incumbent$"
- accou_debug_msg_courtier_0002_b: "$accou_debug_prefix$: accou_courtier.0002 event option b, candidate: $accou_candidate$, councillor: $accou_councillor$, incumbent: $accou_incumbent$"
+ accou_debug_msg_courtier_0002_a_success: "$accou_debug_prefix$: accou_courtier.0002 event option a success, candidate: $accou_candidate$, position: $accou_position$, incumbent: $accou_incumbent$"
+ accou_debug_msg_courtier_0002_a_failure: "$accou_debug_prefix$: accou_courtier.0002 event option a failure, candidate: $accou_candidate$"
+
+ accou_debug_msg_courtier_0003_a: "$accou_debug_prefix$: accou_courtier.0003 event option a, candidate: $accou_candidate$, position: $accou_position$, incumbent: $accou_incumbent$"
+ accou_debug_msg_courtier_0003_b: "$accou_debug_prefix$: accou_courtier.0003 event option b, candidate: $accou_candidate$, position: $accou_position$, incumbent: $accou_incumbent$"
 
  accou_debug_msg_quick_marriage_ai_accept_modifier_fp: "$accou_debug_prefix$: quick_marriage_ai_accept_modifier false positive, courtier: $accou_courtier$, value:  $accou_quick_marriage_ai_accept_modifier$"
  accou_debug_msg_quick_marriage_ai_accept_modifier_fn: "$accou_debug_prefix$: quick_marriage_ai_accept_modifier false negative, courtier: $accou_courtier$, value:  $accou_quick_marriage_ai_accept_modifier$"
@@ -29,5 +32,5 @@
  accou_quick_marriage_ai_accept_modifier: "[THIS.Var('quick_marriage_ai_accept_modifier').GetValue]"
  accou_candidate_quality: "[THIS.Var('candidate_quality').GetValue]"
  accou_outsider: "[Select_CString(THIS.Var('outsider').IsSet, 'yes', 'no')]"
- accou_councillor: "[THIS.Var('councillor').GetFlagName]"
+ accou_position: "[THIS.Var('position').GetFlagName]"
  accou_incumbent: "[THIS.Var('incumbent').Char.GetFullNameNoTooltip] ([THIS.Var('incumbent').Char.GetID])"
