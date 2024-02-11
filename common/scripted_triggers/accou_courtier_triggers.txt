@@ -41,6 +41,11 @@ accou_can_be_better_court_chaplain_trigger = {
 		LIEGE = $LIEGE$
 		SKILL = learning
 	}
+	$LIEGE$ = {
+		faith = {
+			has_doctrine_parameter = clerical_appointment_ruler
+		}
+	}
 }
 
 accou_can_be_better_court_physician_trigger = {
@@ -243,9 +248,6 @@ accou_can_be_better_councillor_trigger = {
 		exists = council_task:$TYPE$
 		trigger_if = {
 			limit = { exists = cp:$TYPE$ }
-			council_task:$TYPE$ = {
-				can_fire_position = yes
-			}
 			cp:$TYPE$.$SKILL$ < scope:character.$SKILL$
 		}
 		NOR = {
@@ -359,5 +361,81 @@ accou_can_be_better_commander_trigger = {
 accou_has_useful_claims_trigger = {
 	any_claim = {
 		neighboring_useful_courtier_or_guest_claim_trigger = { RULER = $RULER$ }
+	}
+}
+
+accou_can_apply_for_chancellor_trigger = {
+	accou_can_apply_for_councillor_trigger = {
+		TYPE = councillor_chancellor
+		NAME = chancellor
+		LIEGE = $LIEGE$
+		SKILL = diplomacy
+	}
+}
+
+accou_can_apply_for_steward_trigger = {
+	accou_can_apply_for_councillor_trigger = {
+		TYPE = councillor_steward
+		NAME = steward
+		LIEGE = $LIEGE$
+		SKILL = stewardship
+	}
+}
+
+accou_can_apply_for_marshal_trigger = {
+	accou_can_apply_for_councillor_trigger = {
+		TYPE = councillor_marshal
+		NAME = marshal
+		LIEGE = $LIEGE$
+		SKILL = martial
+	}
+}
+
+accou_can_apply_for_spymaster_trigger = {
+	accou_can_apply_for_councillor_trigger = {
+		TYPE = councillor_spymaster
+		NAME = spymaster
+		LIEGE = $LIEGE$
+		SKILL = intrigue
+	}
+}
+
+accou_can_apply_for_court_chaplain_trigger = {
+	accou_can_apply_for_councillor_trigger = {
+		TYPE = councillor_court_chaplain
+		NAME = court_chaplain
+		LIEGE = $LIEGE$
+		SKILL = learning
+	}
+	$LIEGE$ = {
+		faith = {
+			has_doctrine_parameter = clerical_appointment_ruler
+		}
+		trigger_if = {
+			limit = { exists = cp:councillor_court_chaplain }
+			faith = {
+				NOT = { has_doctrine_parameter = clerical_appointment_fixed }
+			}
+		}
+	}
+}
+
+accou_can_apply_for_councillor_trigger = {
+	save_temporary_scope_as = character
+	is_courtier_of = $LIEGE$
+	NOT = { has_council_position = $TYPE$ }
+	can_be_$NAME$_trigger = { COURT_OWNER = $LIEGE$ }
+	$SKILL$ >= decent_skill_rating
+	$LIEGE$ = {
+		exists = council_task:$TYPE$
+		trigger_if = {
+			limit = { exists = cp:$TYPE$ }
+			cp:$TYPE$ = {
+				NOT = {
+					is_blocked_from_being_fired_from_council_trigger = { COURT_OWNER = $LIEGE$ }
+				}
+				$SKILL$ < scope:character.$SKILL$
+			}
+		}
 	}
 }

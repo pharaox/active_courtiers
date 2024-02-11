@@ -1,0 +1,361 @@
+﻿namespace = accou_courtier
+
+scripted_effect accou_courtier_0001_on_accept_effect = {
+	# Fire the incumbent if needed
+	if = {
+		limit = {
+			scope:incumbent ?= { is_councillor = yes }
+		}
+		fire_councillor = scope:incumbent
+	}
+
+	# Incumbent effects
+	scope:incumbent ?= {
+		progress_towards_rival_effect = {
+			CHARACTER = scope:candidate
+			REASON = rival_council_seat
+			OPINION = 0
+		}
+		add_opinion = {
+			target = scope:candidate
+			modifier = annoyed_opinion
+			opinion = -10
+		}
+		add_opinion = {
+			target = root
+			modifier = annoyed_opinion
+			opinion = -10
+		}
+	}
+
+	# Assign the candidate
+	if = {
+		limit = { exists = scope:councillor }
+		switch = {
+			trigger = scope:councillor
+			flag:chancellor = {
+				assign_councillor_type = {
+					type = councillor_chancellor
+					target = scope:candidate
+				}
+			}
+			flag:marshal = {
+				assign_councillor_type = {
+					type = councillor_marshal
+					target = scope:candidate
+				}
+			}
+			flag:steward = {
+				assign_councillor_type = {
+					type = councillor_steward
+					target = scope:candidate
+				}
+			}
+			flag:spymaster = {
+				assign_councillor_type = {
+					type = councillor_spymaster
+					target = scope:candidate
+				}
+			}
+			flag:court_chaplain = {
+				assign_councillor_type = {
+					type = councillor_court_chaplain
+					target = scope:candidate
+				}
+			}
+		}
+	}
+
+	# Candidate effects
+	scope:candidate = {
+		add_opinion = {
+			target = root
+			modifier = grateful_opinion
+			opinion = 10
+		}
+	}
+
+	# Block candidate from being fired, mainly to prevent AI from quickly
+	# reverting to the incumbent if they are a powerful vassal
+	if = {
+		limit = {
+			exists = scope:councillor
+			is_ai = yes
+		}
+		scope:candidate = {
+			set_variable = {
+				name = block_fire_councillor
+				value = root
+				years = 1
+			}
+		}
+	}
+}
+
+scripted_effect accou_courtier_0001_on_decline_effect = {
+	scope:candidate = {
+		add_opinion = {
+			target = root
+			modifier = disappointed_opinion
+			opinion = -10
+		}
+	}
+}
+
+accou_courtier.0001 = {
+	type = character_event
+	title = accou_courtier.0001.t
+	desc = accou_courtier.0001.desc
+	#hidden = yes
+
+	theme = court
+	left_portrait = {
+		character = scope:candidate
+	}
+	override_background = {
+		reference = throne_room
+	}
+
+	trigger = {
+		is_available = yes
+
+		scope:candidate = {
+			is_courtier_of = root
+			NOT = { is_councillor_of = root }
+			has_variable_list = accou_better_councillor_options
+		}
+	}
+
+	immediate = {
+		# Determine councillor position to apply for
+		scope:candidate = {
+			random_in_list = {
+				variable = accou_better_councillor_options
+				limit = {
+					save_temporary_scope_as = option
+					scope:candidate = {
+						OR = {
+							AND = {
+								scope:option = flag:chancellor
+								accou_can_apply_for_chancellor_trigger = { LIEGE = root }
+							}
+							AND = {
+								scope:option = flag:steward
+								accou_can_apply_for_steward_trigger = { LIEGE = root }
+							}
+							AND = {
+								scope:option = flag:marshal
+								accou_can_apply_for_marshal_trigger = { LIEGE = root }
+							}
+							AND = {
+								scope:option = flag:spymaster
+								accou_can_apply_for_spymaster_trigger = { LIEGE = root }
+							}
+							AND = {
+								scope:option = flag:court_chaplain
+								accou_can_apply_for_court_chaplain_trigger = { LIEGE = root }
+							}
+						}
+					}
+				}
+				save_scope_as = councillor
+			}
+		}
+
+		# Determine incumbent
+		if = {
+			limit = { exists = scope:councillor }
+			switch = {
+				trigger = scope:councillor
+				flag:chancellor = {
+					cp:councillor_chancellor ?= { save_scope_as = incumbent }
+				}
+				flag:steward = {
+					cp:councillor_steward ?= { save_scope_as = incumbent }
+				}
+				flag:marshal = {
+					cp:councillor_marshal ?= { save_scope_as = incumbent }
+				}
+				flag:spymaster = {
+					cp:councillor_spymaster ?= { save_scope_as = incumbent }
+				}
+				flag:court_chaplain = {
+					cp:councillor_court_chaplain ?= { save_scope_as = incumbent }
+				}
+			}
+		}
+	}
+
+	option = {
+		name = accou_courtier.0001.a
+
+		if = {
+			limit = {
+				exists = scope:councillor
+			}
+
+			accou_debug_log_3_effect = {
+				MSG = accou_debug_msg_courtier_0001_a_success
+				NAME1 = candidate TYPE1 = flag:character
+				NAME2 = councillor TYPE2 = flag:flag
+				NAME3 = incumbent TYPE3 = flag:character
+			}
+			#debug_log_scopes = yes
+
+			trigger_event = accou_courtier.0002
+		}
+		else = {
+			accou_debug_log_1_effect = {
+				MSG = accou_debug_msg_courtier_0001_a_failure
+				NAME1 = candidate TYPE1 = flag:character
+			}
+			#debug_log_scopes = yes
+		}
+
+		ai_chance = {
+			base = 100
+		}
+	}
+}
+
+accou_courtier.0002 = {
+	type = character_event
+	title = accou_courtier.0002.t
+	desc = {
+		desc = accou_courtier.0002.desc
+		triggered_desc = {
+			trigger = { exists = scope:incumbent }
+			desc = accou_courtier.0002.more.desc
+		}
+	}
+
+	theme = court
+	left_portrait = {
+		character = scope:candidate
+	}
+	right_portrait = {
+		character = scope:incumbent
+	}
+	override_background = {
+		reference = throne_room
+	}
+
+	# Accept
+	option = {
+		name = accou_courtier.0002.a
+
+		accou_debug_log_3_effect = {
+			MSG = accou_debug_msg_courtier_0002_a
+			NAME1 = candidate TYPE1 = flag:character
+			NAME2 = councillor TYPE2 = flag:flag
+			NAME3 = incumbent TYPE3 = flag:character
+		}
+		#debug_log_scopes = yes
+
+		accou_courtier_0001_on_accept_effect = yes
+
+		ai_chance = {
+			base = 0
+
+			# Opinions of candidate (-10 to 10 depending on opinion)
+			opinion_modifier = {
+				opinion_target = scope:candidate
+				multiplier = 0.1
+			}
+			opinion_modifier = {
+				trigger = { exists = scope:incumbent }
+				opinion_target = scope:incumbent
+				multiplier = -0.1
+			}
+
+			# Family or dynasty members (5 / -5, doubled for close family, halved for just dynasty)
+			accou_family_or_dynasty_modifier = {
+				CHARACTER = scope:candidate
+				BASE = 5
+			}
+			accou_family_or_dynasty_modifier = {
+				CHARACTER = scope:incumbent
+				BASE = -5
+			}
+
+			# Friends (10 / -10, doubled for best friend)
+			accou_friend_modifier = {
+				CHARACTER = scope:candidate
+				BASE = 10
+			}
+			accou_lover_modifier = {
+				CHARACTER = scope:incumbent
+				BASE = -10
+			}
+
+			# Rivals (-10 / 10, doubled for nemesises)
+			accou_rival_modifier = {
+				CHARACTER = scope:candidate
+				BASE = -10
+			}
+			accou_rival_modifier = {
+				CHARACTER = scope:incumbent
+				BASE = 10
+			}
+
+			# Lovers (10 / -10, doubled for soulmates)
+			accou_lover_modifier = {
+				CHARACTER = scope:candidate
+				BASE = 10
+			}
+			accou_lover_modifier = {
+				CHARACTER = scope:incumbent
+				BASE = -10
+			}
+
+			# Candidate has better councillor skill, scaled by ai rationality
+			accou_better_councillor_skill_modifier = { # 10 to ~30 with 0 rationality
+				CHARACTER = scope:candidate
+				COUNCILLOR = scope:councillor
+				BASE = 10
+				SCALE = 2
+			}
+
+			# Incumbent councillor is a powerful vassal (-40 to 0)
+			modifier = {
+				trigger = {
+					exists = scope:councillor
+					scope:incumbent ?= {
+						is_powerful_vassal_of = root
+					}
+				}
+				add = -20
+			}
+			opinion_modifier = {
+				trigger = {
+					exists = scope:councillor
+					scope:incumbent ?= {
+						is_powerful_vassal_of = root
+					}
+				}
+				who = scope:incumbent
+				opinion_target = root
+				multiplier = 0.2
+			}
+		}
+	}
+
+	# Decline
+	option = {
+		name = accou_courtier.0002.b
+
+		accou_debug_log_3_effect = {
+			MSG = accou_debug_msg_courtier_0002_b
+			NAME1 = candidate TYPE1 = flag:character
+			NAME2 = councillor TYPE2 = flag:flag
+			NAME3 = incumbent TYPE3 = flag:character
+		}
+		#debug_log_scopes = yes
+
+		accou_courtier_0001_on_decline_effect = yes
+
+		ai_chance = {
+			base = 1
+		}
+	}
+}

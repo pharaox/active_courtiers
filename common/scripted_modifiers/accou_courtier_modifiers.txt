@@ -1,5 +1,6 @@
 ﻿accou_family_or_dynasty_modifier = {
 	modifier = {
+		exists = $CHARACTER$
 		OR = {
 			is_close_or_extended_family_of = $CHARACTER$
 			is_spouse_of = $CHARACTER$
@@ -30,6 +31,7 @@
 
 accou_friend_modifier = {
 	modifier = {
+		exists = $CHARACTER$
 		has_relation_friend = $CHARACTER$
 		add = {
 			value = $BASE$
@@ -43,6 +45,7 @@ accou_friend_modifier = {
 
 accou_rival_modifier = {
 	modifier = {
+		exists = $CHARACTER$
 		has_relation_rival = $CHARACTER$
 		add = {
 			value = $BASE$
@@ -56,6 +59,7 @@ accou_rival_modifier = {
 
 accou_lover_modifier = {
 	modifier = {
+		exists = $CHARACTER$
 		has_relation_lover = $CHARACTER$
 		add = {
 			value = $BASE$
@@ -179,6 +183,83 @@ accou_claims_modifier = {
 		}
 		add = {
 			value = $BASE$
+			multiply = accou_ai_rationality_multiplier
+			round = yes
+		}
+	}
+}
+
+accou_better_councillor_skill_modifier = {
+	accou_better_councillor_skill_internal_modifier = {
+		CHARACTER = $CHARACTER$
+		COUNCILLOR = $COUNCILLOR$
+		TYPE = councillor_chancellor
+		NAME = chancellor
+		SKILL = diplomacy
+		BASE = $BASE$
+		SCALE = $SCALE$
+	}
+	accou_better_councillor_skill_internal_modifier = {
+		CHARACTER = $CHARACTER$
+		COUNCILLOR = $COUNCILLOR$
+		TYPE = councillor_steward
+		NAME = steward
+		SKILL = stewardship
+		BASE = $BASE$
+		SCALE = $SCALE$
+	}
+	accou_better_councillor_skill_internal_modifier = {
+		CHARACTER = $CHARACTER$
+		COUNCILLOR = $COUNCILLOR$
+		TYPE = councillor_marshal
+		NAME = marshal
+		SKILL = martial
+		BASE = $BASE$
+		SCALE = $SCALE$
+	}
+	accou_better_councillor_skill_internal_modifier = {
+		CHARACTER = $CHARACTER$
+		COUNCILLOR = $COUNCILLOR$
+		TYPE = councillor_spymaster
+		NAME = spymaster
+		SKILL = intrigue
+		BASE = $BASE$
+		SCALE = $SCALE$
+	}
+	accou_better_councillor_skill_internal_modifier = {
+		CHARACTER = $CHARACTER$
+		COUNCILLOR = $COUNCILLOR$
+		TYPE = councillor_court_chaplain
+		NAME = court_chaplain
+		SKILL = learning
+		BASE = $BASE$
+		SCALE = $SCALE$
+	}
+}
+
+accou_better_councillor_skill_internal_modifier = {
+	modifier = {
+		$COUNCILLOR$ ?= flag:$NAME$
+		trigger_if = {
+			limit = { exists = cp:$TYPE$ }
+			$CHARACTER$.$SKILL$ > cp:$TYPE$.$SKILL$
+		}
+		trigger_else = {
+			$CHARACTER$.$SKILL$ >= mediocre_skill_rating
+		}
+		add = {
+			value = $BASE$
+			add = {
+				value = $CHARACTER$.$SKILL$
+				if = {
+					limit = { exists = cp:$TYPE$ }
+					subtract = cp:$TYPE$.$SKILL$
+				}
+				else = {
+					subtract = mediocre_skill_rating
+				}
+				multiply = $SCALE$
+			}
 			multiply = accou_ai_rationality_multiplier
 			round = yes
 		}

@@ -639,6 +639,11 @@ accou_marriage.0002 = {
 	immediate = {
 		# Evaluate candidate
 		scope:candidate = {
+			clear_variable_list = accou_better_councillor_options
+			clear_variable_list = accou_better_court_position_options
+			remove_variable = accou_better_knight
+			remove_variable = accou_better_commander
+
 			if = {
 				limit = { NOT = { scope:matchmaker = root } }
 
@@ -717,15 +722,6 @@ accou_marriage.0002 = {
 		}
 	}
 
-	after = {
-		scope:candidate = {
-			clear_variable_list = accou_better_councillor_options
-			clear_variable_list = accou_better_court_position_options
-			remove_variable = accou_better_knight
-			remove_variable = accou_better_commander
-		}
-	}
-
 	option = {
 		name = accou_marriage.0002.a
 
@@ -760,6 +756,18 @@ accou_marriage.0002 = {
 		}
 
 		accou_marriage_0001_on_approve_effect = yes
+
+		if = {
+			limit = {
+				scope:candidate = {
+					has_variable_list = accou_better_councillor_options
+				}
+			}
+			trigger_event = {
+				id = accou_courtier.0001
+				days = { 15 30 }
+			}
+		}
 
 		ai_chance = {
 			base = 0
