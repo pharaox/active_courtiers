@@ -6,6 +6,32 @@ accou_cultural_emissary_candidate_score_value = {
 	value = 100
 }
 
+accou_keeper_of_swans_candidate_score_value = {
+	value = 25
+}
+
+accou_chief_qadi_candidate_score_value = {
+	value = 50
+	if = {
+		limit = {
+			ai_zeal >= -25
+		}
+		add = 50
+	}
+}
+
+accou_garuda_candidate_score_value = {
+	value = 100
+
+	# Less likely to hire an additional one if you're already employing one
+	if = {
+		limit = {
+			employs_court_position = garuda_court_position
+		}
+		add = -50
+	}
+}
+
 accou_court_gardener_candidate_score_value = {
 	value = 100
 }
@@ -422,5 +448,55 @@ accou_court_cave_hermit_candidate_score_value = {
 			monthly_character_income > monthly_character_expenses_plus_fourty_percent
 		}
 		add = 50
+	}
+}
+
+accou_master_assassin_candidate_score_value = {
+	value = 50
+
+	# More likely to hire one if you have high dread
+	if = {
+		limit = {
+			dread > medium_dread
+		}
+		add = 25
+	}
+
+	# More likely if you have dread-traits
+	if = {
+		limit = {
+			OR = {
+				has_trait = sadistic
+				has_trait = callous
+				has_trait = arbitrary
+			}
+		}
+		add = 25
+	}
+
+	# More likely if you are a zealous jihadist
+	if = {
+		limit = {
+			has_trait = zealous
+		}
+		add = 25
+	}
+}
+
+accou_court_scholar_candidate_score_value = {
+	value = 50
+	if = {
+		limit = { has_trait = scholar }
+		add = 25
+	}
+	if = {
+		limit = { has_education_learning_trigger = yes }
+		add = 50
+	}
+	if = {
+		limit = {
+			has_lifestyle = learning_lifestyle
+		}
+		add = 100
 	}
 }

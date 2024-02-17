@@ -254,6 +254,33 @@ accou_better_court_position_aptitude_modifier = {
 		CHARACTER = $CHARACTER$
 		COURT_POSITION = $COURT_POSITION$
 		INCUMBENT = $INCUMBENT$
+		TYPE = keeper_of_swans_court_position
+		NAME = keeper_of_swans
+		BASE = $BASE$
+		SCALE = $SCALE$
+	}
+	accou_better_court_position_aptitude_internal_modifier = {
+		CHARACTER = $CHARACTER$
+		COURT_POSITION = $COURT_POSITION$
+		INCUMBENT = $INCUMBENT$
+		TYPE = chief_qadi_court_position
+		NAME = chief_qadi
+		BASE = $BASE$
+		SCALE = $SCALE$
+	}
+	accou_better_court_position_aptitude_internal_modifier = {
+		CHARACTER = $CHARACTER$
+		COURT_POSITION = $COURT_POSITION$
+		INCUMBENT = $INCUMBENT$
+		TYPE = garuda_court_position
+		NAME = garuda
+		BASE = $BASE$
+		SCALE = $SCALE$
+	}
+	accou_better_court_position_aptitude_internal_modifier = {
+		CHARACTER = $CHARACTER$
+		COURT_POSITION = $COURT_POSITION$
+		INCUMBENT = $INCUMBENT$
 		TYPE = court_gardener_court_position
 		NAME = court_gardener
 		BASE = $BASE$
@@ -445,6 +472,24 @@ accou_better_court_position_aptitude_modifier = {
 		INCUMBENT = $INCUMBENT$
 		TYPE = court_cave_hermit_position
 		NAME = court_cave_hermit
+		BASE = $BASE$
+		SCALE = $SCALE$
+	}
+	accou_better_court_position_aptitude_internal_modifier = {
+		CHARACTER = $CHARACTER$
+		COURT_POSITION = $COURT_POSITION$
+		INCUMBENT = $INCUMBENT$
+		TYPE = master_assassin_court_position
+		NAME = master_assassin
+		BASE = $BASE$
+		SCALE = $SCALE$
+	}
+	accou_better_court_position_aptitude_internal_modifier = {
+		CHARACTER = $CHARACTER$
+		COURT_POSITION = $COURT_POSITION$
+		INCUMBENT = $INCUMBENT$
+		TYPE = court_scholar_court_position
+		NAME = court_scholar
 		BASE = $BASE$
 		SCALE = $SCALE$
 	}

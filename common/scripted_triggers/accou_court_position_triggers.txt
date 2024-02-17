@@ -9,6 +9,38 @@ accou_can_be_cultural_emissary_trigger = {
 	exists = $LIEGE$
 }
 
+accou_can_be_keeper_of_swans_trigger = {
+	is_capable_adult = yes
+	exists = $LIEGE$
+}
+
+accou_can_be_chief_qadi_trigger = {
+	is_capable_adult = yes
+	has_religion = religion:islam_religion
+	has_trait = education_learning
+	trigger_if = {
+		limit = {
+			$LIEGE$.faith = {
+				has_doctrine = doctrine_gender_male_dominated
+			}
+		}
+		is_male = yes
+	}
+	trigger_if = {
+		limit = {
+			$LIEGE$.faith = {
+				has_doctrine = doctrine_gender_female_dominated
+			}
+		}
+		is_female = yes
+	}
+}
+
+accou_can_be_garuda_trigger = {
+	is_capable_adult = yes
+	can_be_combatant_based_on_gender_trigger = { ARMY_OWNER = $LIEGE$ }
+}
+
 accou_can_be_court_gardener_trigger = {
 	is_capable_adult = yes
 	exists = $LIEGE$
@@ -170,8 +202,44 @@ accou_can_be_court_cave_hermit_trigger = {
 	}
 }
 
+accou_can_be_master_assassin_trigger = {
+	is_capable_adult = yes
+	has_no_particular_noble_roots_trigger = yes
+	NOT = { is_spouse_of = $LIEGE$ }
+	is_landed = no
+	faith = {
+		has_doctrine = tenet_fp3_fedayeen
+		NOR = {
+			has_doctrine = tenet_pacifism
+			has_doctrine = tenet_dharmic_pacifism
+		}
+	}
+	trigger_if = {
+		limit = {
+			$LIEGE$.faith = {
+				has_doctrine = doctrine_gender_male_dominated
+			}
+		}
+		is_male = yes
+	}
+	trigger_if = {
+		limit = {
+			$LIEGE$.faith = {
+				has_doctrine = doctrine_gender_female_dominated
+			}
+		}
+		is_female = yes
+	}
+}
+
+accou_can_be_court_scholar_trigger = {
+	is_capable_adult = yes
+	exists = $LIEGE$
+}
+
 accou_is_court_position_available_to_vassals_trigger = {
 	OR = {
+		$POSITION$ = flag:keeper_of_swans_court_position
 		$POSITION$ = flag:master_of_horse_court_position
 		$POSITION$ = flag:master_of_hunt_court_position
 		$POSITION$ = flag:royal_architect_court_position
