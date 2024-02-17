@@ -20,6 +20,22 @@
  accou_marriage.0004.b: "Let me help you find someone good enough for #EMP ME#!..."
  accou_marriage.0004.b.tt.help: "Opens #EMP Find Spouse#! for [courtier.GetUIName]"
 
+ # accou_courtier.0001
+ accou_courtier.0001.t: "Courtier Jostles for Position (Councillor)"
+ accou_courtier.0001.desc: "My [ROOT.Char.Custom2('RelationToMe', SCOPE.sC('candidate'))] [candidate.GetUIName] is requesting to be assigned as my [Localize(Concatenate('councillor_', SCOPE.GetFlagName('councillor')))]."
+ accou_courtier.0001.a: "OK"
+ # accou_courtier.0002
+ accou_courtier.0002.t: "Courtier Jostles for Position (Court Position)"
+ accou_courtier.0002.desc: "My [ROOT.Char.Custom2('RelationToMe', SCOPE.sC('candidate'))] [candidate.GetUIName] is requesting to be appointed as my [Localize(Concatenate(SCOPE.GetFlagName('court_position'), '_court_position'))]."
+ accou_courtier.0002.a: "OK"
+ # accou_courtier.0003
+ accou_courtier.0003.t: "Courtier Jostles for Position"
+ accou_courtier.0003.councillor.desc: "My [ROOT.Char.Custom2('RelationToMe', SCOPE.sC('candidate'))] [candidate.GetUIName] is requesting to be assigned as my [Localize(Concatenate('councillor_', SCOPE.GetFlagName('councillor')))]. [candidate.GetSheHe|U] claims that [candidate.GetSheHe] is the best choice for this job. "
+ accou_courtier.0003.court_position.desc: "My [ROOT.Char.Custom2('RelationToMe', SCOPE.sC('candidate'))] [candidate.GetUIName] is requesting to be appointed as my [Localize(Concatenate(SCOPE.GetFlagName('court_position'), '_court_position'))]. [candidate.GetSheHe|U] claims that [candidate.GetSheHe] is the best choice for this position. "
+ accou_courtier.0003.incumbent.desc: "Naturally, my [ROOT.Char.Custom2('RelationToMe', SCOPE.sC('incumbent'))] [incumbent.GetUIName] will be quite upset if I fire [incumbent.GetHerHim]."
+ accou_courtier.0003.a: "Fine, I am willing to give you a chance."
+ accou_courtier.0003.b: "No, I make my own choices."
+
  accou_marriage.0002.reasons.desc: "#EMP \n\nReasons to accept [candidate.GetUIName] as courtier:\n#!"
  accou_marriage.0002.better_councillor_options.desc: "#EMP $EFFECT_LIST_BULLET$$accou_better_councillor_options_start$ [candidate.Custom('accou_better_councillor_options')]\n#!"
  accou_marriage.0002.better_court_position_options.desc: "#EMP $EFFECT_LIST_BULLET$$accou_better_court_position_options_start$ [candidate.Custom('accou_better_court_position_options')]\n#!"
