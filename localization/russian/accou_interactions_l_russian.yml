@@ -1,9 +1,9 @@
 ﻿l_russian:
  # accou_marry_someone_interaction
- accou_marry_someone_interaction: "Ask to Find Spouse"
- accou_marry_someone_interaction_desc: "Ask [recipient.GetShortUINameNoTooltip] to search for a suitable [spouse|E] [recipient.GetHerselfHimself]"
+ accou_marry_someone_interaction: "Попросить найти супруга/супругу"
+ accou_marry_someone_interaction_desc: "Попросить [recipient.GetShortUINameNoTooltip] [Select_CString(recipient.IsFemale, 'самой поискать подходящего', 'самому поискать подходящую')] [Select_CString(recipient.IsFemale, Concept('spouse', 'супруга'), Concept('spouse', 'супругу'))|E]"
 
  # Tooltips
- accou_marriage_0001_failed_tt: "[recipient.GetShortUINameNoTooltip] recently failed to find a [spouse|E]"
- accou_marriage_0001_considering_tt: "[recipient.GetShortUINameNoTooltip] is already being considered for a marriage"
- accou_will_search_for_someone_to_marry_tt: "Will search for for a suitable [spouse|E]."
+ accou_marriage_0001_failed_tt: "Недавно [Select_CString(recipient.IsFemale, 'ей', 'ему')] не удалось найти [Select_CString(recipient.IsFemale, Concept('spouse', 'супруга'), Concept('spouse', 'супругу'))|E]"
+ accou_marriage_0001_considering_tt: "[Select_CString(recipient.IsFemale, 'Ее уже рассматривают для замужества', 'Его уже рассматривают для женитьбы')]"
+ accou_will_search_for_someone_to_marry_tt: "[Select_CString(recipient.IsFemale, 'Будет искать подходящего', 'Будет искать подходящую')] [Select_CString(recipient.IsFemale, Concept('spouse', 'супруга'), Concept('spouse', 'супругу'))|E]."
