@@ -73,7 +73,7 @@ accou_lover_modifier = {
 
 accou_marriage_candidate_quality_modifier = {
 	modifier = {
-		exists = $CHARACTER$.var:accou_marriage_candidate_quality
+		$CHARACTER$ ?= { exists = var:accou_marriage_candidate_quality }
 		add = {
 			value = $CHARACTER$.var:accou_marriage_candidate_quality
 			multiply = $SCALE$
@@ -85,8 +85,7 @@ accou_marriage_candidate_quality_modifier = {
 
 accou_dynasty_prestige_modifier = {
 	modifier = {
-		NOT = { $CHARACTER$.liege ?= this }
-		$CHARACTER$ = { has_dynasty = yes }
+		$CHARACTER$ ?= { has_dynasty = yes }
 		add = {
 			value = $CHARACTER$.dynasty.dynasty_prestige_level
 			multiply = $SCALE$
@@ -97,8 +96,7 @@ accou_dynasty_prestige_modifier = {
 
 accou_better_councillor_modifier = {
 	modifier = {
-		NOT = { $CHARACTER$.liege ?= this }
-		$CHARACTER$ = {
+		$CHARACTER$ ?= {
 			has_variable_list = accou_better_councillor_options
 			variable_list_size = {
 				name = accou_better_councillor_options
@@ -120,8 +118,7 @@ accou_better_councillor_modifier = {
 
 accou_better_court_position_modifier = {
 	modifier = {
-		NOT = { $CHARACTER$.liege ?= this }
-		$CHARACTER$ = {
+		$CHARACTER$ ?= {
 			has_variable_list = accou_better_court_position_options
 			variable_list_size = {
 				name = accou_better_court_position_options
@@ -143,8 +140,7 @@ accou_better_court_position_modifier = {
 
 accou_better_knight_modifier = {
 	modifier = {
-		NOT = { $CHARACTER$.liege ?= this }
-		exists = $CHARACTER$.var:accou_better_knight
+		$CHARACTER$ ?= { exists = var:accou_better_knight }
 		add = {
 			value = $BASE$
 			add = {
@@ -160,8 +156,7 @@ accou_better_knight_modifier = {
 
 accou_better_commander_modifier = {
 	modifier = {
-		NOT = { $CHARACTER$.liege ?= this }
-		exists = $CHARACTER$.var:accou_better_commander
+		$CHARACTER$ ?= { exists = var:accou_better_commander }
 		add = {
 			value = $BASE$
 			add = {
@@ -177,8 +172,7 @@ accou_better_commander_modifier = {
 
 accou_claims_modifier = {
 	modifier = {
-		NOT = { $CHARACTER$.liege ?= this }
-		$CHARACTER$ = {
+		$CHARACTER$ ?= {
 			accou_has_useful_claims_trigger = { RULER = $RULER$ }
 		}
 		add = {
@@ -493,7 +487,7 @@ accou_better_court_position_aptitude_internal_modifier = {
 			$CHARACTER$.aptitude:$TYPE$ > $INCUMBENT$.aptitude:$TYPE$
 		}
 		trigger_else = {
-			$CHARACTER$.aptitude:$TYPE$ >= average_effectiveness
+			$CHARACTER$.aptitude:$TYPE$ >= 2 # average_effectiveness
 		}
 		add = {
 			value = $BASE$
@@ -504,7 +498,7 @@ accou_better_court_position_aptitude_internal_modifier = {
 					subtract = $INCUMBENT$.aptitude:$TYPE$
 				}
 				else = {
-					subtract = average_effectiveness
+					subtract = 2 # average_effectiveness
 				}
 				multiply = $SCALE$
 			}

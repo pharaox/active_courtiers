@@ -644,57 +644,53 @@ accou_marriage.0002 = {
 			remove_variable = accou_better_knight
 			remove_variable = accou_better_commander
 
+			accou_get_better_councillor_options_effect = {
+				LIEGE = root
+				OPTIONS = accou_better_councillor_options
+			}
+			accou_get_better_court_position_options_effect = {
+				LIEGE = root
+				OPTIONS = accou_better_court_position_options
+			}
+
 			if = {
-				limit = { NOT = { scope:matchmaker = root } }
+				limit = { accou_can_be_better_knight_trigger = { LIEGE = root } }
+				set_variable = { name = accou_better_knight value = yes }
+			}
+			if = {
+				limit = { accou_can_be_better_commander_trigger = { LIEGE = root } }
+				set_variable = { name = accou_better_commander value = yes }
+			}
 
-				accou_get_better_councillor_options_effect = {
-					LIEGE = root
-					OPTIONS = accou_better_councillor_options
+			# Save additional scopes for debugging
+			if = {
+				limit = { debug_only = yes }
+
+				every_in_list = {
+					variable = accou_better_councillor_options
+					add_to_list = better_councillor_options
 				}
-				accou_get_better_court_position_options_effect = {
-					LIEGE = root
-					OPTIONS = accou_better_court_position_options
+				every_in_list = {
+					variable = accou_better_court_position_options
+					add_to_list = better_court_position_options
+				}
+
+				save_scope_value_as = {
+					name = better_councillor_best_skill_value
+					value = accou_better_councillor_best_skill_value
+				}
+				save_scope_value_as = {
+					name = better_court_position_best_aptitude_value
+					value = accou_better_court_position_best_aptitude_value
 				}
 
 				if = {
-					limit = { accou_can_be_better_knight_trigger = { LIEGE = root } }
-					set_variable = { name = accou_better_knight value = yes }
+					limit = { has_variable = accou_better_knight }
+					save_scope_value_as = { name = better_knight value = yes }
 				}
 				if = {
-					limit = { accou_can_be_better_commander_trigger = { LIEGE = root } }
-					set_variable = { name = accou_better_commander value = yes }
-				}
-
-				# Save additional scopes for debugging
-				if = {
-					limit = { debug_only = yes }
-
-					every_in_list = {
-						variable = accou_better_councillor_options
-						add_to_list = better_councillor_options
-					}
-					every_in_list = {
-						variable = accou_better_court_position_options
-						add_to_list = better_court_position_options
-					}
-
-					save_scope_value_as = {
-						name = better_councillor_best_skill_value
-						value = accou_better_councillor_best_skill_value
-					}
-					save_scope_value_as = {
-						name = better_court_position_best_aptitude_value
-						value = accou_better_court_position_best_aptitude_value
-					}
-
-					if = {
-						limit = { has_variable = accou_better_knight }
-						save_scope_value_as = { name = better_knight value = yes }
-					}
-					if = {
-						limit = { has_variable = accou_better_commander }
-						save_scope_value_as = { name = better_commander value = yes }
-					}
+					limit = { has_variable = accou_better_commander }
+					save_scope_value_as = { name = better_commander value = yes }
 				}
 			}
 		}
@@ -871,14 +867,14 @@ accou_marriage.0002 = {
 				SCALE = 0.1
 			}
 
-			# Candidate dynasty prestige, only for outsiders (0 to ~20)
+			# Candidate dynasty prestige (0 to ~20)
 			accou_dynasty_prestige_modifier = {
 				CHARACTER = scope:candidate
 				SCALE = 2
 			}
 
 			# Candidate is better councillor, court position holder, knight, or commander,
-			# only for outsiders, scaled by ai rationality
+			# scaled by ai rationality
 			accou_better_councillor_modifier = { # 10 to ~30 with 0 rationality
 				CHARACTER = scope:candidate
 				BASE = 10
@@ -900,7 +896,7 @@ accou_marriage.0002 = {
 				SCALE = 1
 			}
 
-			# Candidate claims, only for outsiders, scaled by ai rationality (10 with 0 rationality)
+			# Candidate claims, scaled by ai rationality (10 with 0 rationality)
 			accou_claims_modifier = {
 				CHARACTER = scope:candidate
 				RULER = root

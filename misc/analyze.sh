@@ -4,6 +4,8 @@
 echo "accou_marriage.0001 event option a: $(grep -a "accou_marriage.0001 event option a" debug.log | wc -l)"
 echo "- success: $(grep -a "accou_marriage.0001 event option a success" debug.log | wc -l)"
 echo "- failure: $(grep -a "accou_marriage.0001 event option a failure" debug.log | wc -l)"
+echo "  - no courtier: $(pcre2grep -a "accou_marriage.0001 event option a failure, courtier:  \(4294967295\)" debug.log | wc -l)"
+echo "  - no candidate: $(pcre2grep -a "accou_marriage.0001 event option a failure, courtier: .+ \([\d]+\), candidate:  \(4294967295\)" debug.log | wc -l)"
 echo "- failure fp: $(pcre2grep -a "accou_marriage.0001 event option a failure, courtier: .+ \([\d]+\), candidate: .+ \([\d]+\), matchmaker: .+ \([\d]+\)" debug.log | wc -l)"
 echo
 echo "accou_marriage.0002 event option a: $(grep -a "accou_marriage.0002 event option a" debug.log | wc -l)"
@@ -30,7 +32,7 @@ echo "- steward: $(grep -a "accou_courtier.0003 event option a, .*, position: St
 echo "- spymaster: $(grep -a "accou_courtier.0003 event option a, .*, position: Spymaster" debug.log | wc -l)"
 echo "- court_chaplain: $(grep -a "accou_courtier.0003 event option a, .*, position: court_chaplain" debug.log | wc -l)"
 echo "---"
-echo "- court_physician: $(grep -a "accou_courtier.0003 event option a, .*, position: court_physician" debug.log | wc -l)"
+echo "- court_physician: $(grep -a "accou_courtier.0003 event option a, .*, position: .*court_physician" debug.log | wc -l)"
 echo "- cultural_emissary: $(grep -a "accou_courtier.0003 event option a, .*, position: cultural_emissary" debug.log | wc -l)"
 echo "- court_gardener: $(grep -a "accou_courtier.0003 event option a, .*, position: court_gardener" debug.log | wc -l)"
 echo "- lady_in_waiting: $(grep -a "accou_courtier.0003 event option a, .*, position: lady_in_waiting" debug.log | wc -l)"

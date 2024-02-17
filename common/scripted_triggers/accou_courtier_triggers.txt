@@ -248,7 +248,10 @@ accou_can_be_better_councillor_trigger = {
 		exists = council_task:$TYPE$
 		trigger_if = {
 			limit = { exists = cp:$TYPE$ }
-			cp:$TYPE$.$SKILL$ < scope:character.$SKILL$
+			OR = {
+				cp:$TYPE$.$SKILL$ < scope:character.$SKILL$
+				this = scope:character
+			}
 		}
 		NOR = {
 			any_courtier = {
@@ -268,22 +271,19 @@ accou_can_be_better_councillor_trigger = {
 accou_can_be_better_court_position_trigger = {
 	save_temporary_scope_as = character
 	accou_can_be_$NAME$_trigger = { LIEGE = $LIEGE$ }
-	aptitude:$TYPE$ >= average_effectiveness
+	aptitude:$TYPE$ >= 2 # average_effectiveness
 	$LIEGE$ = {
 		OR = {
 			can_employ_court_position_type = $TYPE$
-			employs_court_position = $TYPE$
-		}
-		trigger_if = {
-			limit = {
+			AND = {
+				employs_court_position = $TYPE$
 				any_court_position_holder = {
 					type = $TYPE$
-					count >= $LIEGE$.accou_number_of_desired_$NAME$_holders
+					OR = {
+						aptitude:$TYPE$ < scope:character.aptitude:$TYPE$
+						this = scope:character
+					}
 				}
-			}
-			any_court_position_holder = {
-				type = $TYPE$
-				aptitude:$TYPE$ < scope:character.aptitude:$TYPE$
 			}
 		}
 		NOT = {
@@ -317,7 +317,10 @@ accou_can_be_better_knight_trigger = {
 		OR = {
 			number_of_knights < max_number_of_knights
 			any_knight = {
-				prowess < scope:character.prowess
+				OR = {
+					prowess < scope:character.prowess
+					this = scope:character
+				}
 			}
 		}
 		NOR = {
@@ -736,20 +739,16 @@ accou_can_apply_for_court_position_trigger = {
 	is_courtier_of = $LIEGE$
 	NOT = { has_court_position = $TYPE$ }
 	accou_can_be_$NAME$_trigger = { LIEGE = $LIEGE$ }
-	aptitude:$TYPE$ >= average_effectiveness
+	aptitude:$TYPE$ >= 2 # average_effectiveness
 	$LIEGE$ = {
 		OR = {
 			can_employ_court_position_type = $TYPE$
-			employs_court_position = $TYPE$
-		}
-		trigger_if = {
-			limit = {
-				NOT = { can_employ_court_position_type = $TYPE$ }
+			AND = {
 				employs_court_position = $TYPE$
-			}
-			any_court_position_holder = {
-				type = $TYPE$
-				aptitude:$TYPE$ < scope:character.aptitude:$TYPE$
+				any_court_position_holder = {
+					type = $TYPE$
+					aptitude:$TYPE$ < scope:character.aptitude:$TYPE$
+				}
 			}
 		}
 	}

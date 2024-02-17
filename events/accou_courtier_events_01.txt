@@ -127,6 +127,21 @@ accou_courtier.0001 = {
 						}
 					}
 				}
+
+				weight = {
+					base = 10
+
+					# More likely if higher councillor skill
+					modifier = {
+						add = {
+							save_temporary_scope_as = councillor
+							value = scope:candidate.accou_councillor_skill_value
+							subtract = decent_skill_rating
+							multiply = 2
+						}
+					}
+				}
+
 				save_scope_as = councillor
 			}
 		}
@@ -217,6 +232,30 @@ accou_courtier.0002 = {
 						}
 					}
 				}
+
+				weight = {
+					base = 10
+
+					# More likely if higher court position aptitude
+					modifier = {
+						add = {
+							save_temporary_scope_as = court_position
+							value = scope:candidate.accou_court_position_aptitude_value
+							subtract = 2 # average_effectiveness
+							multiply = 10
+						}
+					}
+
+					# More likely if higher court position candidate score
+					modifier = {
+						add = {
+							save_temporary_scope_as = court_position
+							value = root.accou_court_position_candidate_score_value
+							multiply = 0.2
+						}
+					}
+				}
+
 				save_scope_as = court_position
 			}
 		}
@@ -299,15 +338,30 @@ accou_courtier.0003 = {
 		reference = throne_room
 	}
 
+	immediate = {
+		# Save additional scopes for debugging
+		if = {
+			limit = {
+				debug_only = yes
+				exists = scope:court_position
+			}
+			save_scope_value_as = {
+				name = candidate_score
+				value = accou_court_position_candidate_score_value
+			}
+		}
+	}
+
 	# Accept
 	option = {
 		name = accou_courtier.0003.a
 
-		accou_debug_log_3_effect = {
+		accou_debug_log_4_effect = {
 			MSG = accou_debug_msg_courtier_0003_a
 			NAME1 = candidate TYPE1 = flag:character
 			NAME2 = position TYPE2 = flag:flag
 			NAME3 = incumbent TYPE3 = flag:character
+			NAME4 = candidate_score TYPE4 = flag:value
 		}
 		#debug_log_scopes = yes
 
@@ -407,7 +461,18 @@ accou_courtier.0003 = {
 				multiplier = 0.2
 			}
 
-			# TODO
+			# Court position candidate score (-20 to 20 for 0 to 100 candidate scores)
+			modifier = {
+				trigger = {
+					exists = scope:court_position
+					NOT = { exists = scope:incumbent }
+				}
+				add = {
+					value = accou_court_position_candidate_score_value
+					subtract = 50
+					multiply = 0.4
+				}
+			}
 		}
 	}
 
@@ -415,11 +480,12 @@ accou_courtier.0003 = {
 	option = {
 		name = accou_courtier.0003.b
 
-		accou_debug_log_3_effect = {
+		accou_debug_log_4_effect = {
 			MSG = accou_debug_msg_courtier_0003_b
 			NAME1 = candidate TYPE1 = flag:character
 			NAME2 = position TYPE2 = flag:flag
 			NAME3 = incumbent TYPE3 = flag:character
+			NAME4 = candidate_score TYPE4 = flag:value
 		}
 		#debug_log_scopes = yes
 
