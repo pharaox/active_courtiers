@@ -73,6 +73,7 @@ accou_can_be_better_keeper_of_swans_trigger = {
 }
 
 accou_can_be_better_chief_qadi_trigger = {
+	NOT = { has_global_variable = AGOT_is_loaded }
 	accou_can_be_better_court_position_trigger = {
 		TYPE = chief_qadi_court_position
 		NAME = chief_qadi
@@ -81,6 +82,7 @@ accou_can_be_better_chief_qadi_trigger = {
 }
 
 accou_can_be_better_garuda_trigger = {
+	NOT = { has_global_variable = AGOT_is_loaded }
 	accou_can_be_better_court_position_trigger = {
 		TYPE = garuda_court_position
 		NAME = garuda
@@ -169,6 +171,7 @@ accou_can_be_better_royal_architect_trigger = {
 }
 
 accou_can_be_better_high_almoner_trigger = {
+	NOT = { has_global_variable = AGOT_is_loaded }
 	accou_can_be_better_court_position_trigger = {
 		TYPE = high_almoner_court_position
 		NAME = high_almoner
@@ -599,6 +602,7 @@ accou_can_apply_for_keeper_of_swans_trigger = {
 }
 
 accou_can_apply_for_chief_qadi_trigger = {
+	NOT = { has_global_variable = AGOT_is_loaded }
 	accou_can_apply_for_court_position_trigger = {
 		TYPE = chief_qadi_court_position
 		LIEGE = $LIEGE$
@@ -606,6 +610,7 @@ accou_can_apply_for_chief_qadi_trigger = {
 }
 
 accou_can_apply_for_garuda_trigger = {
+	NOT = { has_global_variable = AGOT_is_loaded }
 	accou_can_apply_for_court_position_trigger = {
 		TYPE = garuda_court_position
 		LIEGE = $LIEGE$
@@ -683,6 +688,7 @@ accou_can_apply_for_royal_architect_trigger = {
 }
 
 accou_can_apply_for_high_almoner_trigger = {
+	NOT = { has_global_variable = AGOT_is_loaded }
 	accou_can_apply_for_court_position_trigger = {
 		TYPE = high_almoner_court_position
 		LIEGE = $LIEGE$
