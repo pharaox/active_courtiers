@@ -1,5 +1,11 @@
 # Changelog
 
+## Version 0.2.1
+
+### Compatibility
+
+* Added checks for compatibility with AGOT.
+
 ## Version 0.2.0
 
 ### Events
