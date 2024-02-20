@@ -304,7 +304,7 @@ accou_marriage.0001 = {
 		# that only depends on actor / secondary_actor only once to improve performance
 		if = {
 			limit = {
-				NOT = { has_game_rule = accou_marriage_ai_acceptance_check_original }
+				accou_is_marriage_ai_acceptance_check_original_trigger = no
 				list_size = {
 					name = shortlisted_candidates
 					value > 0
@@ -347,7 +347,7 @@ accou_marriage.0001 = {
 				}
 				else = {
 					if = {
-						limit = { has_game_rule = accou_marriage_ai_acceptance_check_original }
+						limit = { accou_is_marriage_ai_acceptance_check_original_trigger = yes }
 
 						# Use vanilla marriage_ai_accept_modifier to check if the marriage will be accepted
 						random = {

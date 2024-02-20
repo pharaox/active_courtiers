@@ -61,15 +61,16 @@
 			else = {
 				value = 0
 			}
-			subtract = medium_fertility # 0.5
+			subtract = define:NCharacter|BASE_FERTILITY # 0.5
 			multiply = 50
 		}
 	}
 
-	# Health (-15 to 20)
+	# Health (-20 to 20)
 	add = {
 		value = health # 0-7
-		subtract = fine_health # 3
+		subtract = define:NCharacter|BASE_HEALTH # 5
+		add = 1
 		multiply = 5
 	}
 
@@ -203,6 +204,7 @@
 }
 
 accou_faith_hostility_opinion_value = {
+	# Values match define:NReligion|HOSTILITY_OPINION_EFFECTS
 	if = {
 		limit = {
 			faith = {

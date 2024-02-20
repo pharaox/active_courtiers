@@ -447,7 +447,10 @@ accou_courtier.0003 = {
 						is_powerful_vassal_of = root
 					}
 				}
-				add = -20
+				add = { # -20
+					value = define:NCharacterOpinion|POWERFUL_VASSAL_WITHOUT_COUNCIL_POSITION # -40
+					multiply = 0.5
+				}
 			}
 			opinion_modifier = {
 				trigger = {
@@ -458,7 +461,10 @@ accou_courtier.0003 = {
 				}
 				who = scope:incumbent
 				opinion_target = root
-				multiplier = 0.2
+				multiplier = { # 0.2
+					value = define:NCharacterOpinion|POWERFUL_VASSAL_WITHOUT_COUNCIL_POSITION # -40
+					multiply = -0.005
+				}
 			}
 
 			# Court position candidate score (-20 to 20 for 0 to 100 candidate scores)

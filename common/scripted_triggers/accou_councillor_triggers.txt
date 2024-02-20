@@ -1,0 +1,21 @@
+﻿accou_can_appoint_chancellor_trigger = {
+	always = yes
+}
+
+accou_can_appoint_steward_trigger = {
+	always = yes
+}
+
+accou_can_appoint_marshal_trigger = {
+	always = yes
+}
+
+accou_can_appoint_spymaster_trigger = {
+	always = yes
+}
+
+accou_can_appoint_court_chaplain_trigger = {
+	faith = {
+		has_doctrine_parameter = clerical_appointment_ruler
+	}
+}

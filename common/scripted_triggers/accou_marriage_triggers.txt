@@ -34,6 +34,14 @@ accou_is_available_ai_adult_trigger = {
 }
 
 accou_is_valid_marriage_target_trigger = {
+	accou_is_valid_marriage_target_vanilla_trigger = {
+		CHARACTER = $CHARACTER$
+		ACTOR = $ACTOR$
+		RECIPIENT = $RECIPIENT$
+	}
+}
+
+accou_is_valid_marriage_target_vanilla_trigger = {
 	save_temporary_scope_as = target
 
 	# Could marry each other according to gender and faith hostility & consaguinity,
@@ -128,6 +136,10 @@ accou_could_marry_character_trigger = {
 }
 
 accou_is_valid_marriage_recipient_trigger = {
+	accou_is_valid_marriage_recipient_vanilla_trigger = { ACTOR = $ACTOR$ }
+}
+
+accou_is_valid_marriage_recipient_vanilla_trigger = {
 	is_imprisoned = no
 	is_busy_in_events_localised = yes
 
@@ -219,10 +231,10 @@ accou_has_real_dynasty_trigger = {
 }
 
 accou_is_fertile_trigger = {
-	fertility > 0.1
+	fertility > define:NChildbirth|LOW_FERTILITY
 	OR = {
 		is_female = no
-		age < 45
+		age < define:NChildbirth|MAX_FEMALE_REPRODUCTION_AGE
 	}
 }
 
@@ -238,4 +250,8 @@ accou_are_wrong_gender_marriage_requests_allowed_trigger = {
 	trigger_else = {
 		always = yes
 	}
+}
+
+accou_is_marriage_ai_acceptance_check_original_trigger = {
+	has_game_rule = accou_marriage_ai_acceptance_check_original
 }

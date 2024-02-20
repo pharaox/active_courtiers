@@ -41,11 +41,6 @@ accou_can_be_better_court_chaplain_trigger = {
 		LIEGE = $LIEGE$
 		SKILL = learning
 	}
-	$LIEGE$ = {
-		faith = {
-			has_doctrine_parameter = clerical_appointment_ruler
-		}
-	}
 }
 
 accou_can_be_better_court_physician_trigger = {
@@ -289,11 +284,14 @@ accou_can_be_better_councillor_trigger = {
 	$SKILL$ >= decent_skill_rating
 	$LIEGE$ = {
 		exists = council_task:$TYPE$
+		accou_can_appoint_$NAME$_trigger = yes
 		trigger_if = {
 			limit = { exists = cp:$TYPE$ }
-			OR = {
-				cp:$TYPE$.$SKILL$ < scope:character.$SKILL$
-				this = scope:character
+			cp:$TYPE$ = {
+				OR = {
+					$SKILL$ < scope:character.$SKILL$
+					this = scope:character
+				}
 			}
 		}
 		NOR = {
@@ -567,17 +565,6 @@ accou_can_apply_for_court_chaplain_trigger = {
 		LIEGE = $LIEGE$
 		SKILL = learning
 	}
-	$LIEGE$ = {
-		faith = {
-			has_doctrine_parameter = clerical_appointment_ruler
-		}
-		trigger_if = {
-			limit = { exists = cp:councillor_court_chaplain }
-			faith = {
-				NOT = { has_doctrine_parameter = clerical_appointment_fixed }
-			}
-		}
-	}
 }
 
 accou_can_apply_for_court_physician_trigger = {
@@ -794,6 +781,7 @@ accou_can_apply_for_councillor_trigger = {
 	$SKILL$ >= decent_skill_rating
 	$LIEGE$ = {
 		exists = council_task:$TYPE$
+		accou_can_appoint_$NAME$_trigger = yes
 		trigger_if = {
 			limit = { exists = cp:$TYPE$ }
 			cp:$TYPE$ = {
