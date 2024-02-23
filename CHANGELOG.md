@@ -1,5 +1,16 @@
 # Changelog
 
+## Version 0.2.2
+
+### Compatibility
+
+* Added changes needed for AGOT compatch.
+* Improved compatibility with total conversion mods.
+
+### Bug Fixes
+
+* Fixed a minor issue with evaluating candidates as better councillors.
+
 ## Version 0.2.1
 
 ### Compatibility
