@@ -299,11 +299,13 @@ accou_can_be_better_councillor_trigger = {
 				can_be_$NAME$_trigger = { COURT_OWNER = $LIEGE$ }
 				NOT = { has_council_position = $TYPE$ }
 				$SKILL$ >= scope:character.$SKILL$
+				NOT = { this = scope:character }
 			}
 			any_vassal = {
 				can_be_$NAME$_trigger = { COURT_OWNER = $LIEGE$ }
 				NOT = { has_council_position = $TYPE$ }
 				$SKILL$ >= scope:character.$SKILL$
+				NOT = { this = scope:character }
 			}
 		}
 	}
@@ -332,6 +334,7 @@ accou_can_be_better_court_position_trigger = {
 				can_be_employed_as = $TYPE$
 				NOT = { has_court_position = $TYPE$ }
 				aptitude:$TYPE$ >= scope:character.aptitude:$TYPE$
+				NOT = { this = scope:character }
 			}
 		}
 		trigger_if = {
@@ -343,6 +346,7 @@ accou_can_be_better_court_position_trigger = {
 					can_be_employed_as = $TYPE$
 					NOT = { has_court_position = $TYPE$ }
 					aptitude:$TYPE$ >= scope:character.aptitude:$TYPE$
+					NOT = { this = scope:character }
 				}
 			}
 		}
@@ -369,11 +373,13 @@ accou_can_be_better_knight_trigger = {
 				can_be_knight_trigger = { ARMY_OWNER = $LIEGE$ }
 				NOT = { is_knight_of = $LIEGE$ }
 				prowess >= scope:character.prowess
+				NOT = { this = scope:character }
 			}
 			any_vassal = {
 				can_be_knight_trigger = { ARMY_OWNER = $LIEGE$ }
 				NOT = { is_knight_of = $LIEGE$ }
 				prowess >= scope:character.prowess
+				NOT = { this = scope:character }
 			}
 		}
 	}
@@ -397,6 +403,7 @@ accou_can_be_better_commander_trigger = {
 			list = commanders
 			can_be_commander_basic_trigger = { ARMY_OWNER = $LIEGE$ }
 			accou_commander_skill_value >= scope:character.accou_commander_skill_value
+			NOT = { this = scope:character }
 			count < 3
 		}
 	}
