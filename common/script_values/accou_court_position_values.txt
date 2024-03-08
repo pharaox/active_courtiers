@@ -1,5 +1,6 @@
 ﻿accou_court_physician_candidate_score_value = {
 	value = 150
+	# Checking outbreak intensity is skipped on purpose
 }
 
 accou_cultural_emissary_candidate_score_value = {
@@ -498,5 +499,26 @@ accou_court_scholar_candidate_score_value = {
 			has_lifestyle = learning_lifestyle
 		}
 		add = 100
+	}
+}
+
+accou_chronicler_candidate_score_value = {
+	value = 50
+
+	# More likely for very generous characters
+	if = {
+		limit = {
+			ai_greed <= -75
+		}
+		add = 25
+	}
+
+	# Lots of gold to spend on inspirations!
+	if = {
+		limit = {
+			gold >= 500
+			monthly_character_income > monthly_character_expenses_plus_fourty_percent
+		}
+		add = 50
 	}
 }

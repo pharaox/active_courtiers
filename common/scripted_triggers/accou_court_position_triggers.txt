@@ -237,6 +237,11 @@ accou_can_be_court_scholar_trigger = {
 	exists = $LIEGE$
 }
 
+accou_can_be_chronicler_trigger = {
+	is_capable_adult = yes
+	exists = $LIEGE$
+}
+
 accou_is_court_position_available_to_vassals_trigger = {
 	OR = {
 		$POSITION$ = flag:keeper_of_swans_court_position

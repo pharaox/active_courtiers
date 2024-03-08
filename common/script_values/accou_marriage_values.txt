@@ -357,6 +357,58 @@ accou_quick_marriage_ai_accept_modifier_actor_value = {
 		}
 		add = ep2_activities_legacy_2_grand_weddings_acceptance_boost_value
 	}
+
+	# Low legitimacy
+	if = {
+		limit = {
+			scope:actor = {
+				has_legitimacy_flag = reduced_marriage_acceptance
+			}
+		}
+		add = -25
+	}
+	else_if = {
+		limit = {
+			scope:actor = {
+				has_legitimacy_flag = very_reduced_marriage_acceptance
+			}
+		}
+		add = -50
+	}
+	else_if = {
+		limit = {
+			scope:actor = {
+				has_legitimacy_flag = massively_reduced_marriage_acceptance
+			}
+		}
+		add = -100
+	}
+
+	# High legitimacy
+	if = {
+		limit = {
+			scope:actor = {
+				has_legitimacy_flag = increased_marriage_acceptance
+			}
+		}
+		add = 25
+	}
+	else_if = {
+		limit = {
+			scope:actor = {
+				has_legitimacy_flag = very_increased_marriage_acceptance
+			}
+		}
+		add = 50
+	}
+	else_if = {
+		limit = {
+			scope:actor = {
+				has_legitimacy_flag = extra_increased_marriage_acceptance
+			}
+		}
+		add = 100
+	}
 }
 
 accou_quick_marriage_ai_accept_modifier_value = {
