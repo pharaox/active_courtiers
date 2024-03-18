@@ -23,7 +23,7 @@ Finally, the courtier's liege must approve or reject the marriage. Note that sin
 
 AI rulers in general prefer outsiders than current courtiers, so they can attract talent to their court. They also take the into account their opinion of both the courtier and the candidate, family and other relations, the candidate quality, and are they better than other options for any councillor or court positions, knight, or commander. Players can take these into account as well, since they are listed in the event description.
 
-To make it more convenient for players to trigger the event for particular courtiers, this mod adds the new **Ask to Find Spouse** interaction. Only courtiers who are eligible according to the criteria mentioned above can be targeted by this interaction.
+To make it more convenient for players to trigger the event for particular courtiers, this mod adds the new **Ask to Find Spouse** interaction. Only courtiers who are eligible according to the criteria mentioned above can be targeted by it.
 
 Even if AI rulers get better talent pools, they tend to stick to councillors or court position holders with worse skills or aptitude than available. For this reason, and also to remind players, this mod also adds the new **Courtier Jostles for Position** event. It is triggered after a candidate has joined a court if they are better than other options for a councillor or court position. In it, the candidate requests to be appointed to that position, and their liege can accept or decline. The AI decision is based on their opinion of both the candidate and the *incumbent*, family and other relations, how much better is the candidate, is the incumbent councillor a powerful vassal, and other factors.
 
@@ -33,9 +33,9 @@ The current version is compatible with CK3 1.12. If you are still on CK3 1.11.x,
 
 This mod does not modify any vanilla files and should be compatible with most other mods. Note that some total conversion mods remove parts of vanilla that may be referred to by this mod, so compatibility with such mods is not guaranteed. Also, this mod cannot properly evaluate candidates for councillor or court positions introduced by conversion mods without a compatch.
 
-This mod is now fully compatible with [A Game of Thrones](https://steamcommunity.com/sharedfiles/filedetails/?id=2962333032) with a compatibility patch, see [Links](#links). Since AGOT is still on CK3 1.11.x, you need to use the older version mentioned above.
+This mod is now fully compatible with [A Game of Thrones](https://steamcommunity.com/sharedfiles/filedetails/?id=2962333032) with a compatibility patch, see [Links](#links).
 
-The [Love Marriage Family](https://steamcommunity.com/sharedfiles/filedetails/?id=3037969445) mod also features marriage requests by courtiers, but for different purposes and only limited to the player's realm. The two mods are compatible with each other and the frequency of their events can be configured via game rules. If you use LMF or other mods that change the marriage acceptance by AI, set the game rule **Marriage Acceptance by AI** to **Original**.
+The [Love Marriage Family](https://steamcommunity.com/sharedfiles/filedetails/?id=3037969445) mod also features marriage requests by courtiers, but only limited to the player's realm. The two mods are compatible with each other and the frequency of their events can be configured via game rules. If you use LMF or other mods that change the marriage acceptance by AI, set the game rule **Marriage Acceptance by AI** to **Original**.
 
 This mod also supports changing its game rules mid-game with the [Gamerule Gadget](https://steamcommunity.com/sharedfiles/filedetails/?id=2826829936) mod.
 
@@ -129,7 +129,7 @@ Before accepting or declining, AI rulers take the into account the following cri
 
 ## Performance
 
-Since the additional events introduced by this mod fire regularly for a few hundred AI rulers, they may negatively affect the overall game performance. Therefore, this mod adds game rules to enable players to find the best balance between a better AI and a smooth gameplay experience. With the default settings, this mod is about 10% slower than vanilla if measured on max speed in observer mode, a difference usually not noticeable during an actual gameplay.
+Since the events added by this mod fire regularly for many AI rulers, they may negatively affect the overall game performance. Therefore, this mod adds game rules to enable players to find the best balance. With the default settings, this mod is about 10% slower than vanilla on max speed in observer mode, a difference not noticeable during an actual gameplay.
 
 The performance-influencing factors that can be configured via game rules are:
 
@@ -139,10 +139,11 @@ The performance-influencing factors that can be configured via game rules are:
 
 The **Event Frequency for Players** and **Character Search Range for Players** game rules don't have any influence on the performance since there is only a single (or very few) player. They allow configuring more frequent events and wider search ranges for players than for AI rulers for a more rewarding gameplay experience.
 
-As a recommendation, if you don't notice any performance issues, just leave the default settings. Otherwise, you may try increasing the event frequency or reducing the character search range for AI rulers via the corresponding game rules.
+As a recommendation, if you don't notice any performance issues, just leave the default settings. Otherwise, you may try increasing the event frequency or reducing the character search range for AI rulers.
 
 ## Links
 
 * [Steam Workshop](https://steamcommunity.com/sharedfiles/filedetails/?id=3157170996)
 * [Active Courtiers AGOT Compatibility](https://steamcommunity.com/sharedfiles/filedetails/?id=3166721580)
+* [Chinese Translation (by @牛奶大魔王)](https://steamcommunity.com/sharedfiles/filedetails/?id=2903983628)
 * [GitHub Repository](https://github.com/pharaox/active_courtiers)
