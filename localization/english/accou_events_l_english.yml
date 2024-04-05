@@ -20,6 +20,11 @@
  accou_marriage.0004.b: "Let me help you find someone good enough for #EMP ME#!..."
  accou_marriage.0004.b.tt.help: "Opens #EMP Find Spouse#! for [courtier.GetUIName]"
 
+ # accou_invite.0001
+ accou_invite.0001.t: "Courtier Recommends an Acquaintance (Preparation)"
+ accou_invite.0001.desc: "My [ROOT.Char.Custom2('RelationToMe', SCOPE.sC('courtier'))] [courtier.GetUIName] is recommending to invite [candidate.GetUIName] to court."
+ accou_invite.0001.a: "OK"
+
  # accou_courtier.0001
  accou_courtier.0001.t: "Courtier Jostles for Position (Councillor)"
  accou_courtier.0001.desc: "My [ROOT.Char.Custom2('RelationToMe', SCOPE.sC('candidate'))] [candidate.GetUIName] is requesting to be assigned as my [Localize(Concatenate('councillor_', SCOPE.GetFlagName('councillor')))]."

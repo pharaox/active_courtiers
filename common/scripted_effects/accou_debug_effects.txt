@@ -41,6 +41,50 @@
 	}
 }
 
+accou_debug_log_quick_invite_ai_accept_modifier_mismatches_effect = {
+	# Use vanilla invite_to_court_interaction to check if the invite will be accepted
+	clear_saved_scope = invite_ai_accepted
+	if = {
+		limit = {
+			scope:actor = {
+				is_character_interaction_potentially_accepted = {
+					interaction = invite_to_court_interaction
+					recipient = scope:recipient
+				}
+			}
+		}
+		save_temporary_scope_value_as = {
+			name = invite_ai_accepted
+			value = yes
+		}
+	}
+
+	# Compare scope:invite_ai_accepted and scope:quick_invite_ai_accept_modifier
+	if = {
+		limit = {
+			exists = scope:invite_ai_accepted
+			scope:quick_invite_ai_accept_modifier <= -1
+		}
+		accou_debug_log_1_effect = {
+			MSG = accou_debug_msg_quick_invite_ai_accept_modifier_fn
+			NAME1 = quick_invite_ai_accept_modifier TYPE1 = flag:value
+		}
+	}
+	else_if = {
+		limit = {
+			NOT = { exists = scope:invite_ai_accepted }
+			scope:quick_invite_ai_accept_modifier >= 1
+		}
+		accou_debug_log_1_effect = {
+			MSG = accou_debug_msg_quick_invite_ai_accept_modifier_fp
+			NAME1 = quick_invite_ai_accept_modifier TYPE1 = flag:value
+		}
+	}
+	else = {
+		accou_debug_log_effect = { MSG = accou_debug_msg_quick_invite_ai_accept_modifier_ok }
+	}
+}
+
 accou_debug_log_effect = {
 	if = {
 		limit = { debug_only = yes }

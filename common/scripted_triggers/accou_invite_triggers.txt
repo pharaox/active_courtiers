@@ -1,0 +1,41 @@
+﻿accou_is_valid_invite_character_trigger = {
+	# Available
+	accou_is_available_ai_adult_trigger = yes
+	is_busy_in_events_localised = yes
+	bp2_valid_for_standard_interactions_trigger = yes
+
+	# Age & health conditions
+	NOT = { has_trait = infirm }
+	has_serious_disease_trigger = no
+}
+
+accou_is_valid_invite_recipient_trigger = {
+	accou_is_valid_invite_recipient_vanilla_trigger = { ACTOR = $ACTOR$ }
+}
+
+# Is this character a valid invite to court recipient
+# See invite_to_court_interaction (is_shown and is_valid_showing_failures_only)
+accou_is_valid_invite_recipient_vanilla_trigger = {
+	NOR = {
+		is_courtier_of = $ACTOR$
+		is_foreign_court_guest = yes
+		AND = {
+			exists = host
+			host = $ACTOR$
+		}
+		is_ruler = yes
+		# Added by Unofficial Patch
+		has_trait = order_member
+		location = { is_sea_province = yes }
+	}
+
+	save_temporary_scope_as = character
+	can_recruit_character_to_court_trigger = {
+		RECRUITER = $ACTOR$
+		RECRUITEE = scope:character
+	}
+	trigger_if = { # Added by Unofficial Patch
+		limit = { has_variable = unop_prevent_invitation }
+		NOT = { var:unop_prevent_invitation = $ACTOR$ }
+	}
+}

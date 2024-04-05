@@ -1,0 +1,269 @@
+﻿namespace = accou_invite
+
+scripted_trigger accou_invite_0001_valid_liege_trigger = {
+	is_available = yes
+}
+
+scripted_trigger accou_invite_0001_valid_courtier_trigger = {
+	# Valid invite character
+	accou_is_valid_invite_character_trigger = yes
+
+	# No previous attempt failed recently
+	NOR = {
+		has_character_flag = accou_invite_0001_considering
+	}
+}
+
+scripted_trigger accou_invite_0001_valid_invite_candidate_trigger = {
+	in_diplomatic_range = root
+
+	# Valid invite character
+	accou_is_valid_invite_character_trigger = yes
+
+	# Valid invite recipient
+	accou_is_valid_invite_recipient_trigger = { ACTOR = root }
+
+	# A recommendation for this character was not recently rejected by root
+	NOR = {
+		var:accou_invite_0001_rejected ?= root
+		has_character_flag = accou_invite_0001_considering
+	}
+}
+
+accou_invite.0001 = {
+	type = character_event
+	title = accou_invite.0001.t
+	desc = accou_invite.0001.desc
+	#hidden = yes
+
+	theme = court
+	left_portrait = {
+		character = scope:courtier
+	}
+	right_portrait = {
+		character = scope:candidate
+	}
+	override_background = {
+		reference = throne_room
+	}
+
+	trigger = {
+		accou_invite_0001_valid_liege_trigger = yes
+	}
+
+	immediate = {
+		# Get nearby characters
+		accou_get_nearby_characters_effect = {
+			PREDICATE = always
+			CHARACTERS = characters
+		}
+
+		# Get shortlisted invite candidates
+		save_temporary_scope_as = liege
+		every_in_list = {
+			list = characters
+			limit = {
+				accou_invite_0001_valid_invite_candidate_trigger = yes
+			}
+
+			root = {
+				save_temporary_opinion_value_as = {
+					name = liege_opinion
+					target = prev
+				}
+			}
+			save_temporary_opinion_value_as = {
+				name = opinion_of_liege
+				target = root
+			}
+			save_temporary_scope_value_as = {
+				name = invite_candidate_quality
+				value = accou_invite_candidate_quality_value
+			}
+			if = {
+				limit = { scope:invite_candidate_quality > 20 }
+				set_variable = {
+					name = accou_invite_candidate_quality
+					value = scope:invite_candidate_quality
+					days = 1
+				}
+				add_to_temporary_list = shortlisted_candidates
+			}
+		}
+
+		# Save actor scope
+		save_scope_as = actor
+
+		# Determine the best candidate that will accept the proposal
+		ordered_in_list = {
+			list = shortlisted_candidates
+			limit = { has_variable = accou_invite_candidate_quality }
+			order_by = var:accou_invite_candidate_quality
+			max = 1000
+			check_range_bounds = no
+
+			if = {
+				limit = {
+					NOT = { exists = scope:candidate }
+				}
+
+				# Save recipient scope
+				save_scope_as = recipient
+
+				# Check if the invite will be accepted
+				if = {
+					limit = { accou_is_marriage_ai_acceptance_check_original_trigger = yes }
+
+					# Use vanilla invite_courtier_interaction to check if the invite will be accepted
+					# TODO This is likely very slow
+					if = {
+						limit = {
+							scope:actor = {
+								is_character_interaction_potentially_accepted = {
+									interaction = invite_to_court_interaction
+									recipient = scope:recipient
+								}
+							}
+						}
+						save_scope_as = candidate
+					}
+				}
+				else = {
+					# Save additional scopes used by accou_quick_invite_ai_accept_modifier_value
+					save_temporary_opinion_value_as = {
+						name = opinion_of_actor
+						target = scope:actor
+					}
+					save_temporary_opinion_value_as = {
+						name = opinion_of_liege
+						target = liege
+					}
+
+					# Use accou_quick_invite_ai_accept_modifier_value to check if the invite will be accepted
+					# This should be always accurate, but may be less compatible with some conversion mods
+					save_scope_value_as = { # TODO make temporary
+						name = quick_invite_ai_accept_modifier
+						value = accou_quick_invite_ai_accept_modifier_value
+					}
+					if = {
+						limit = { scope:quick_invite_ai_accept_modifier > 0 }
+						save_scope_as = candidate
+					}
+
+					#accou_debug_log_quick_invite_ai_accept_modifier_mismatches_effect = yes
+				}
+			}
+		}
+
+		# Clear saved interaction scopes
+		clear_saved_scope = actor
+		clear_saved_scope = recipient
+
+		# Determine courtier
+		if = {
+			limit = { exists = scope:candidate }
+			random_courtier = {
+				limit = {
+					accou_invite_0001_valid_courtier_trigger = yes
+				}
+
+				weight = {
+					base = 10
+
+					# Courtier opinion of candidate (-50 to 50)
+					opinion_modifier = {
+						who = this
+						opinion_target = scope:candidate
+						multiplier = 0.5
+					}
+
+					# More likely if of interest to root (20)
+					modifier = {
+						accou_is_of_major_interest_trigger = { CHARACTER = root }
+						add = 20
+					}
+					modifier = {
+						accou_is_of_minor_interest_trigger = { CHARACTER = root }
+						add = 10
+					}
+
+					# More likely if not lowborn (10)
+					modifier = {
+						is_lowborn = no
+						add = 10
+					}
+
+					# Root opinion of courtier (-10 to 10)
+					opinion_modifier = {
+						who = root
+						opinion_target = this
+						multiplier = 0.1
+					}
+				}
+
+				save_scope_as = courtier
+			}
+		}
+
+		# Save additional scopes for debugging
+		if = {
+			limit = { debug_only = yes }
+			scope:candidate ?= {
+				root = {
+					save_opinion_value_as = {
+						name = root_opinion_of_candidate
+						target = prev
+					}
+				}
+				save_opinion_value_as = {
+					name = candidate_opinion_of_root
+					target = root
+				}
+				save_opinion_value_as = {
+					name = candidate_opinion_of_liege
+					target = liege
+				}
+				save_scope_value_as = {
+					name = candidate_quality
+					value = var:accou_invite_candidate_quality
+				}
+			}
+		}
+	}
+
+	option = {
+		name = accou_invite.0001.a
+
+		if = {
+			limit = {
+				exists = scope:candidate
+
+				is_character_interaction_potentially_accepted = {
+					interaction = invite_to_court_interaction
+					recipient = scope:candidate
+				}
+			}
+
+			accou_debug_log_2_effect = {
+				MSG = accou_debug_msg_invite_0001_a_success
+				NAME1 = candidate TYPE1 = flag:character
+				NAME2 = courtier TYPE2 = flag:character
+			}
+			debug_log_scopes = yes
+
+			#trigger_event = accou_invite.0002
+		}
+		else = {
+			accou_debug_log_2_effect = {
+				MSG = accou_debug_msg_invite_0001_a_failure
+				NAME1 = candidate TYPE1 = flag:character
+				NAME2 = courtier TYPE2 = flag:character
+			}
+			#debug_log_scopes = yes
+		}
+
+		ai_chance = {
+			base = 100
+		}
+	}
+}

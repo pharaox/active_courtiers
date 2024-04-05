@@ -22,6 +22,7 @@ accou_yearly_playable_pulse = {
 
 	events = {
 		accou_marriage.0001 # Courtier Requests to Marry
+		#accou_invite.0001 # Courtier Recommends an Acquaintance
 	}
 }
 
@@ -57,6 +58,7 @@ accou_three_year_playable_pulse = {
 
 	events = {
 		accou_marriage.0001 # Courtier Requests to Marry
+		#accou_invite.0001 # Courtier Recommends an Acquaintance
 	}
 }
 
@@ -84,6 +86,7 @@ accou_five_year_playable_pulse = {
 
 	events = {
 		accou_marriage.0001 # Courtier Requests to Marry
+		#accou_invite.0001 # Courtier Recommends an Acquaintance
 	}
 }
 
