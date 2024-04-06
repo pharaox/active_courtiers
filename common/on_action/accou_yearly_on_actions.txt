@@ -20,9 +20,9 @@ accou_yearly_playable_pulse = {
 		basic_is_valid_for_yearly_events_trigger = yes
 	}
 
-	events = {
-		accou_marriage.0001 # Courtier Requests to Marry
-		#accou_invite.0001 # Courtier Recommends an Acquaintance
+	random_events = {
+		100 = accou_marriage.0001 # Courtier Requests to Marry
+		100 = accou_invite.0001 # Courtier Recommends an Acquaintance
 	}
 }
 
@@ -56,9 +56,9 @@ accou_three_year_playable_pulse = {
 		basic_is_valid_for_yearly_events_trigger = yes
 	}
 
-	events = {
-		accou_marriage.0001 # Courtier Requests to Marry
-		#accou_invite.0001 # Courtier Recommends an Acquaintance
+	random_events = {
+		100 = accou_marriage.0001 # Courtier Requests to Marry
+		100 = accou_invite.0001 # Courtier Recommends an Acquaintance
 	}
 }
 
@@ -84,9 +84,9 @@ accou_five_year_playable_pulse = {
 		basic_is_valid_for_yearly_events_trigger = yes
 	}
 
-	events = {
-		accou_marriage.0001 # Courtier Requests to Marry
-		#accou_invite.0001 # Courtier Recommends an Acquaintance
+	random_events = {
+		100 = accou_marriage.0001 # Courtier Requests to Marry
+		100 = accou_invite.0001 # Courtier Recommends an Acquaintance
 	}
 }
 
