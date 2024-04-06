@@ -39,3 +39,109 @@ accou_is_valid_invite_recipient_vanilla_trigger = {
 		NOT = { var:unop_prevent_invitation = $ACTOR$ }
 	}
 }
+
+accou_could_accept_invite_trigger = {
+	OR = {
+		# Actor has royal court, consider opinion and amenities
+		accou_could_accept_invite_royal_court_trigger = { ACTOR = $ACTOR$ }
+
+		# Has positive relation or relative to actor
+		has_relation_lover = $ACTOR$
+		has_relation_friend = $ACTOR$
+		is_close_family_of = $ACTOR$
+		is_spouse_of = $ACTOR$
+
+		# Actor is their dynasty or house head
+		dynasty.dynast = $ACTOR$
+		house.house_head = $ACTOR$
+
+		# Wandering character located in the actor's realm
+		AND = {
+			is_pool_character = yes
+			is_pool_guest = no
+			location.province_owner ?= {
+				OR = {
+					this = $ACTOR$
+					any_liege_or_above = { this = $ACTOR$ }
+				}
+			}
+		}
+
+		# Actor has clan government, same house as actor, and house unity at least friendly
+		AND = {
+			$ACTOR$ = { government_has_flag = government_is_clan }
+			house ?= {
+				this = $ACTOR$.house
+				OR = {
+					has_house_unity_stage = harmonious
+					has_house_unity_stage = friendly
+				}
+			}
+		}
+	}
+}
+
+accou_could_accept_invite_royal_court_trigger = {
+	$ACTOR$ = {
+		has_royal_court = yes
+	}
+	trigger_if = {
+		limit = { exists = liege } # Could get 25 if they hate them (opinion -50)
+		trigger_if = {
+			limit = {
+				opinion = { target = $ACTOR$ value >= 40 } # 20 or 25
+			}
+			$ACTOR$ = {
+				amenity_level = { type = court_lodging_standards value >= medium_amenity_level } # 10
+			}
+		}
+		trigger_else_if = {
+			limit = {
+				opinion = { target = $ACTOR$ value >= 20 } # 10 or 15
+			}
+			$ACTOR$ = {
+				amenity_level = { type = court_lodging_standards value >= high_amenity_level } # 20
+			}
+		}
+		trigger_else_if = {
+			limit = {
+				opinion = { target = $ACTOR$ value >= 0 } # 0 or 5
+			}
+			$ACTOR$ = {
+				amenity_level = { type = court_lodging_standards value >= very_high_amenity_level } # 30
+			}
+		}
+		trigger_else_if = {
+			limit = {
+				opinion = { target = $ACTOR$ value > -50 } # -20 to -5
+			}
+			$ACTOR$ = {
+				amenity_level = { type = court_lodging_standards value >= max_amenity_level } # 50
+			}
+		}
+		trigger_else = {
+			always = no
+		}
+	}
+	trigger_else = {
+		trigger_if = {
+			limit = {
+				opinion = { target = $ACTOR$ value >= 50 } # 25
+			}
+			$ACTOR$ = {
+				amenity_level = { type = court_lodging_standards value >= very_high_amenity_level } # 30
+			}
+		}
+		trigger_else_if = {
+			limit = {
+				opinion = { target = $ACTOR$ value >= 10 } # 5 to 20
+			}
+			$ACTOR$ = {
+				amenity_level = { type = court_lodging_standards value >= max_amenity_level } # 50
+			}
+		}
+		trigger_else = {
+			always = no
+		}
+	}
+}

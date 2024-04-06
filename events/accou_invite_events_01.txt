@@ -23,6 +23,9 @@ scripted_trigger accou_invite_0001_valid_invite_candidate_trigger = {
 	# Valid invite recipient
 	accou_is_valid_invite_recipient_trigger = { ACTOR = root }
 
+	# Could actually accept an invitation
+	accou_could_accept_invite_trigger = { ACTOR = root }
+
 	# A recommendation for this character was not recently rejected by root
 	NOR = {
 		var:accou_invite_0001_rejected ?= root
@@ -228,6 +231,16 @@ accou_invite.0001 = {
 					value = var:accou_invite_candidate_quality
 				}
 			}
+			save_scope_value_as = {
+				name = shortlisted_candidates_count
+				value = {
+					value = 0
+					every_in_list = {
+						list = shortlisted_candidates
+						add = 1
+					}
+				}
+			}
 		}
 	}
 
@@ -259,7 +272,7 @@ accou_invite.0001 = {
 				NAME1 = candidate TYPE1 = flag:character
 				NAME2 = courtier TYPE2 = flag:character
 			}
-			#debug_log_scopes = yes
+			debug_log_scopes = yes
 		}
 
 		ai_chance = {
