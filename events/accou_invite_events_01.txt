@@ -307,7 +307,7 @@ accou_invite.0001 = {
 				NAME1 = candidate TYPE1 = flag:character
 				NAME2 = courtier TYPE2 = flag:character
 			}
-			debug_log_scopes = yes
+			#debug_log_scopes = yes
 
 			trigger_event = accou_invite.0002
 		}
@@ -317,7 +317,7 @@ accou_invite.0001 = {
 				NAME1 = candidate TYPE1 = flag:character
 				NAME2 = courtier TYPE2 = flag:character
 			}
-			debug_log_scopes = yes
+			#debug_log_scopes = yes
 		}
 
 		ai_chance = {
@@ -555,7 +555,7 @@ accou_invite.0002 = {
 			NAME2 = courtier TYPE2 = flag:character
 			NAME3 = candidate_quality TYPE3 = flag:value
 		}
-		debug_log_scopes = yes
+		#debug_log_scopes = yes
 
 		accou_invite_0001_on_accept_effect = yes
 
@@ -695,7 +695,7 @@ accou_invite.0002 = {
 			NAME2 = courtier TYPE2 = flag:character
 			NAME3 = candidate_quality TYPE3 = flag:value
 		}
-		debug_log_scopes = yes
+		#debug_log_scopes = yes
 
 		accou_invite_0001_on_reject_effect = yes
 
@@ -717,7 +717,7 @@ accou_invite.0002 = {
 			NAME2 = courtier TYPE2 = flag:character
 			NAME3 = candidate_quality TYPE3 = flag:value
 		}
-		debug_log_scopes = yes
+		#debug_log_scopes = yes
 
 		custom_tooltip = accou_invite.0002.c.tt.consider
 		open_interaction_window = {
