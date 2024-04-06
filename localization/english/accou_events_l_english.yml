@@ -34,6 +34,10 @@
  accou_invite.0002.c.tt.consider: "Opens #EMP Invite to Court#! for [candidate.GetUIName]"
  accou_invite.0002.c.tt.accept: "If [candidate.GetSheHe] joins your court, after 15 days"
  accou_invite.0002.c.tt.reject: "If [candidate.GetSheHe] doesn't join your court, after 15 days"
+ # accou_invite.0004
+ accou_invite.0004.t: "Failed to Get Recommendations"
+ accou_invite.0004.desc: "Unfortunately, none of the courtiers I asked could recommend a suitable character to invite to court. They explain that all candidates they evaluated were either not worthy, or would not accept my invitation."
+ accou_invite.0004.a: "Fine, perhaps next time."
 
  # accou_courtier.0001
  accou_courtier.0001.t: "Courtier Jostles for Position (Councillor)"

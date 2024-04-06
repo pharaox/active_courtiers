@@ -295,6 +295,7 @@ accou_invite.0001 = {
 		if = {
 			limit = {
 				exists = scope:candidate
+				exists = scope:courtier
 
 				is_character_interaction_potentially_accepted = {
 					interaction = invite_to_court_interaction
@@ -318,6 +319,13 @@ accou_invite.0001 = {
 				NAME2 = courtier TYPE2 = flag:character
 			}
 			#debug_log_scopes = yes
+
+			if = {
+				limit = {
+					has_character_flag = accou_searching_for_someone_to_invite
+				}
+				trigger_event = accou_invite.0004
+			}
 		}
 
 		ai_chance = {
@@ -777,5 +785,24 @@ accou_invite.0003 = {
 		else = {
 			accou_invite_0001_on_reject_effect = yes
 		}
+	}
+}
+
+accou_invite.0004 = {
+	type = character_event
+	title = accou_invite.0004.t
+	desc = accou_invite.0004.desc
+
+	theme = court
+	left_portrait = {
+		character = root
+		animation = sadness
+	}
+	override_background = {
+		reference = throne_room
+	}
+
+	option = {
+		name = accou_invite.0004.a
 	}
 }
