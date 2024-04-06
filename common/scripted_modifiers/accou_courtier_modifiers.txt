@@ -1,4 +1,15 @@
-﻿accou_family_or_dynasty_modifier = {
+﻿accou_heir_modifier = {
+	modifier = {
+		exists = $CHARACTER$
+		$CHARACTER$ = {
+			is_player_heir_of = prev
+			is_heir_of = prev
+		}
+		add = $BASE$
+	}
+}
+
+accou_family_or_dynasty_modifier = {
 	modifier = {
 		exists = $CHARACTER$
 		OR = {
@@ -78,6 +89,18 @@ accou_marriage_candidate_quality_modifier = {
 			value = $CHARACTER$.var:accou_marriage_candidate_quality
 			multiply = $SCALE$
 			multiply = accou_ai_compassion_multiplier
+			round = yes
+		}
+	}
+}
+
+accou_invite_candidate_quality_modifier = {
+	modifier = {
+		$CHARACTER$ ?= { exists = var:accou_invite_candidate_quality }
+		add = {
+			value = $CHARACTER$.var:accou_invite_candidate_quality
+			multiply = $SCALE$
+			multiply = accou_ai_rationality_multiplier
 			round = yes
 		}
 	}
@@ -175,6 +198,17 @@ accou_claims_modifier = {
 		$CHARACTER$ ?= {
 			accou_has_useful_claims_trigger = { RULER = $RULER$ }
 		}
+		add = {
+			value = $BASE$
+			multiply = accou_ai_rationality_multiplier
+			round = yes
+		}
+	}
+}
+
+accou_inspired_modifier = {
+	modifier = {
+		$CHARACTER$ ?= { exists = inspiration }
 		add = {
 			value = $BASE$
 			multiply = accou_ai_rationality_multiplier

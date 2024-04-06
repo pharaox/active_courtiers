@@ -79,7 +79,7 @@
 	# Not lowborn (10)
 	if = {
 		limit = { is_lowborn = no }
-		add = 10
+		add = 5
 	}
 
 	# Genetic traits (-15 to 15 assuming a single genetic trait)
@@ -123,6 +123,14 @@
 			value = prowess
 			subtract = 8
 		}
+	}
+
+	# Claims
+	if = {
+		limit = {
+			accou_has_useful_claims_trigger = { RULER = scope:liege }
+		}
+		add = 10
 	}
 
 	# Inspired
@@ -263,6 +271,8 @@ accou_best_skill_value = {
 	min = learning
 }
 
+# Quick checking of invite AI acceptance
+# See invite_to_court_interaction (ai_accept)
 accou_quick_invite_ai_accept_modifier_value = {
 	value = -50
 

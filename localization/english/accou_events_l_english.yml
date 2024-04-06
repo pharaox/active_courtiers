@@ -24,6 +24,16 @@
  accou_invite.0001.t: "Courtier Recommends an Acquaintance (Preparation)"
  accou_invite.0001.desc: "My [ROOT.Char.Custom2('RelationToMe', SCOPE.sC('courtier'))] [courtier.GetUIName] is recommending to invite [candidate.GetUIName] to court."
  accou_invite.0001.a: "OK"
+ # accou_invite.0002
+ accou_invite.0002.t: "Courtier Recommends an Acquaintance"
+ accou_invite.0002.desc: "My [ROOT.Char.Custom2('RelationToMe', SCOPE.sC('courtier'))] [courtier.GetUIName] is recommending to invite [Select_CString(candidate.GetLiege.IsValid, Concatenate(candidate.GetLiege.GetUIName, Concatenate('\\'s ', Concatenate(candidate.GetLiege.Custom2('RelationToMe', SCOPE.sC('candidate')), ' '))), '')][candidate.GetUIName] to court. "
+ accou_invite.0002.more.desc: "[courtier.GetSheHe|U] assures me that [candidate.GetUIName] will accept my invitation."
+ accou_invite.0002.a: "Certainly, [candidate.GetSheHe] is welcome to join us!"
+ accou_invite.0002.b: "I would rather not invite [candidate.GetHerHim] right now."
+ accou_invite.0002.c: "Let me consider this..."
+ accou_invite.0002.c.tt.consider: "Opens #EMP Invite to Court#! for [candidate.GetUIName]"
+ accou_invite.0002.c.tt.accept: "If [candidate.GetSheHe] joins your court, after 15 days"
+ accou_invite.0002.c.tt.reject: "If [candidate.GetSheHe] doesn't join your court, after 15 days"
 
  # accou_courtier.0001
  accou_courtier.0001.t: "Courtier Jostles for Position (Councillor)"

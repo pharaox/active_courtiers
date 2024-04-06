@@ -11,6 +11,10 @@
  accou_debug_msg_invite_0001_a_success: "$accou_debug_prefix$: accou_invite.0001 event option a success, candidate: $accou_candidate$, courtier: $accou_courtier$"
  accou_debug_msg_invite_0001_a_failure: "$accou_debug_prefix$: accou_invite.0001 event option a failure, candidate: $accou_candidate$, courtier: $accou_courtier$"
 
+ accou_debug_msg_invite_0002_a: "$accou_debug_prefix$: accou_invite.0002 event option a, candidate: $accou_candidate$, courtier: $accou_courtier$, candidate quality: $accou_candidate_quality$"
+ accou_debug_msg_invite_0002_b: "$accou_debug_prefix$: accou_invite.0002 event option b, candidate: $accou_candidate$, courtier: $accou_courtier$, candidate quality: $accou_candidate_quality$"
+ accou_debug_msg_invite_0002_c: "$accou_debug_prefix$: accou_invite.0002 event option c, candidate: $accou_candidate$, courtier: $accou_courtier$, candidate quality: $accou_candidate_quality$"
+
  accou_debug_msg_courtier_0001_a_success: "$accou_debug_prefix$: accou_courtier.0001 event option a success, candidate: $accou_candidate$, position: $accou_position$, incumbent: $accou_incumbent$"
  accou_debug_msg_courtier_0001_a_failure: "$accou_debug_prefix$: accou_courtier.0001 event option a failure, candidate: $accou_candidate$"
 

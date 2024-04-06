@@ -33,11 +33,56 @@ scripted_trigger accou_invite_0001_valid_invite_candidate_trigger = {
 	}
 }
 
+scripted_effect accou_invite_0001_on_accept_effect = {
+	# Save scopes used by accou_invite_to_court_on_accept_effect
+	root = { save_scope_as = actor }
+	scope:candidate = { save_scope_as = recipient }
+	save_scope_value_as = { name = hook value = no }
+
+	# Execute invite interaction effect
+	accou_invite_to_court_on_accept_effect = yes
+}
+
+scripted_effect accou_invite_0001_on_approve_effect = {
+	# Add courtier opinion
+	scope:courtier = {
+		add_opinion = {
+			target = root
+			modifier = accou_accepted_my_invite_recommendation_opinion
+		}
+	}
+
+	# Stress impact for root
+	stress_impact = {
+		paranoid = minor_stress_gain
+		trusting = minor_stress_loss
+	}
+}
+
+scripted_effect accou_invite_0001_on_reject_effect = {
+	# Add courtier opinion
+	scope:courtier = {
+		add_opinion = {
+			target = root
+			modifier = accou_declined_my_invite_recommendation_opinion
+		}
+	}
+
+	# Mark candidate as rejected by root
+	scope:candidate = {
+		set_variable = {
+			name = accou_invite_0001_rejected
+			value = root
+			years = 5
+		}
+	}
+}
+
 accou_invite.0001 = {
 	type = character_event
 	title = accou_invite.0001.t
 	desc = accou_invite.0001.desc
-	#hidden = yes
+	hidden = yes
 
 	theme = court
 	left_portrait = {
@@ -264,7 +309,7 @@ accou_invite.0001 = {
 			}
 			debug_log_scopes = yes
 
-			#trigger_event = accou_invite.0002
+			trigger_event = accou_invite.0002
 		}
 		else = {
 			accou_debug_log_2_effect = {
@@ -277,6 +322,460 @@ accou_invite.0001 = {
 
 		ai_chance = {
 			base = 100
+		}
+	}
+}
+
+accou_invite.0002 = {
+	type = character_event
+	title = accou_invite.0002.t
+	desc = {
+		desc = accou_invite.0002.desc
+		desc = accou_invite.0002.more.desc
+		desc = {
+			desc = accou_marriage.0002.reasons.desc
+			desc = {
+				triggered_desc = {
+					trigger = {
+						scope:candidate = {
+							has_variable_list = accou_better_councillor_options
+						}
+					}
+					desc = accou_marriage.0002.better_councillor_options.desc
+				}
+				triggered_desc = {
+					trigger = {
+						scope:candidate = {
+							has_variable_list = accou_better_court_position_options
+						}
+					}
+					desc = accou_marriage.0002.better_court_position_options.desc
+				}
+				triggered_desc = {
+					trigger = {
+						scope:candidate = {
+							has_variable = accou_better_knight
+						}
+					}
+					desc = accou_marriage.0002.better_knight.desc
+				}
+				triggered_desc = {
+					trigger = {
+						scope:candidate = {
+							has_variable = accou_better_commander
+						}
+					}
+					desc = accou_marriage.0002.better_commander.desc
+				}
+				triggered_desc = {
+					trigger = {
+						scope:candidate = {
+							any_claim = {
+								useful_courtier_or_guest_claim_trigger = { RULER = root }
+							}
+						}
+					}
+					desc = accou_marriage.0002.claims.desc
+				}
+				triggered_desc = {
+					trigger = {
+						scope:candidate = {
+							genetic_character_value > 0
+							accou_is_fertile_trigger = yes
+						}
+					}
+					desc = accou_marriage.0002.genetic_traits.desc
+				}
+				triggered_desc = {
+					trigger = {
+						scope:candidate = {
+							prowess >= decent_skill_rating
+							can_be_knight_trigger = { ARMY_OWNER = root }
+						}
+					}
+					desc = accou_marriage.0002.prowess.desc
+				}
+				triggered_desc = {
+					trigger = {
+						scope:candidate = {
+							martial >= decent_skill_rating
+							OR = {
+								can_be_marshal_trigger = { COURT_OWNER = root }
+								can_be_commander_basic_trigger = { ARMY_OWNER = root }
+							}
+						}
+					}
+					desc = accou_marriage.0002.martial.desc
+				}
+				triggered_desc = {
+					trigger = {
+						scope:candidate = {
+							diplomacy >= decent_skill_rating
+							can_be_chancellor_trigger = { COURT_OWNER = root }
+						}
+					}
+					desc = accou_marriage.0002.diplomacy.desc
+				}
+				triggered_desc = {
+					trigger = {
+						scope:candidate = {
+							stewardship >= decent_skill_rating
+							can_be_steward_trigger = { COURT_OWNER = root }
+						}
+					}
+					desc = accou_marriage.0002.stewardship.desc
+				}
+				triggered_desc = {
+					trigger = {
+						scope:candidate = {
+							intrigue >= decent_skill_rating
+							can_be_spymaster_trigger = { COURT_OWNER = root }
+						}
+					}
+					desc = accou_marriage.0002.intrigue.desc
+				}
+				triggered_desc = {
+					trigger = {
+						scope:candidate = {
+							learning >= decent_skill_rating
+						}
+					}
+					desc = accou_marriage.0002.learning.desc
+				}
+				triggered_desc = {
+					trigger = {
+						save_temporary_scope_as = host
+						scope:candidate = {
+							save_temporary_scope_as = guest
+							guest_vassal_candidate_trigger = yes
+							opinion = {
+								target = root
+								value > 0
+							}
+							OR = {
+								guest_vassal_candidate_good_traits_trigger = yes
+								stewardship >= decent_skill_rating
+								martial >= decent_skill_rating
+							}
+						}
+					}
+					desc = accou_marriage.0002.vassal.desc
+				}
+			}
+		}
+	}
+
+	theme = court
+	left_portrait = {
+		character = scope:courtier
+	}
+	right_portrait = {
+		character = scope:candidate
+	}
+	override_background = {
+		reference = throne_room
+	}
+
+	immediate = {
+		# Evaluate candidate
+		scope:candidate = {
+			clear_variable_list = accou_better_councillor_options
+			clear_variable_list = accou_better_court_position_options
+			remove_variable = accou_better_knight
+			remove_variable = accou_better_commander
+
+			accou_get_better_councillor_options_effect = {
+				LIEGE = root
+				OPTIONS = accou_better_councillor_options
+			}
+			accou_get_better_court_position_options_effect = {
+				LIEGE = root
+				OPTIONS = accou_better_court_position_options
+			}
+
+			if = {
+				limit = { accou_can_be_better_knight_trigger = { LIEGE = root } }
+				set_variable = { name = accou_better_knight value = yes }
+			}
+			if = {
+				limit = { accou_can_be_better_commander_trigger = { LIEGE = root } }
+				set_variable = { name = accou_better_commander value = yes }
+			}
+
+			# Save additional scopes for debugging
+			if = {
+				limit = { debug_only = yes }
+
+				every_in_list = {
+					variable = accou_better_councillor_options
+					add_to_list = better_councillor_options
+				}
+				every_in_list = {
+					variable = accou_better_court_position_options
+					add_to_list = better_court_position_options
+				}
+
+				save_scope_value_as = {
+					name = better_councillor_best_skill_value
+					value = accou_better_councillor_best_skill_value
+				}
+				save_scope_value_as = {
+					name = better_court_position_best_aptitude_value
+					value = accou_better_court_position_best_aptitude_value
+				}
+
+				if = {
+					limit = { has_variable = accou_better_knight }
+					save_scope_value_as = { name = better_knight value = yes }
+				}
+				if = {
+					limit = { has_variable = accou_better_commander }
+					save_scope_value_as = { name = better_commander value = yes }
+				}
+			}
+		}
+
+		# Save additional scopes for debugging
+		if = {
+			limit = { debug_only = yes }
+
+			save_opinion_value_as = {
+				name = root_opinion_of_candidate
+				target = scope:candidate
+			}
+		}
+	}
+
+	option = {
+		name = accou_invite.0002.a
+
+		accou_debug_log_3_effect = {
+			MSG = accou_debug_msg_invite_0002_a
+			NAME1 = candidate TYPE1 = flag:character
+			NAME2 = courtier TYPE2 = flag:character
+			NAME3 = candidate_quality TYPE3 = flag:value
+		}
+		debug_log_scopes = yes
+
+		accou_invite_0001_on_accept_effect = yes
+
+		accou_invite_0001_on_approve_effect = yes
+
+		if = {
+			limit = {
+				scope:candidate = {
+					has_variable_list = accou_better_councillor_options
+				}
+			}
+			trigger_event = {
+				id = accou_courtier.0001
+				days = { 15 30 }
+			}
+		}
+		if = {
+			limit = {
+				scope:candidate = {
+					has_variable_list = accou_better_court_position_options
+				}
+			}
+			trigger_event = {
+				id = accou_courtier.0002
+				days = { 30 45 }
+			}
+		}
+
+		ai_chance = {
+			base = 0
+
+			# Neutral to inviting (0, paranoid / trusting)
+			modifier = {
+				add = {
+					value = 0
+					if = {
+						limit = { has_trait = paranoid }
+						add = -10
+					}
+					else_if = {
+						limit = { has_trait = trusting }
+						add = 10
+					}
+				}
+			}
+
+			# Opinion of candidate (-20 to 20 depending on opinion)
+			opinion_modifier = {
+				opinion_target = scope:candidate
+				multiplier = 0.2
+			}
+
+			# Heir (20)
+			accou_heir_modifier = {
+				CHARACTER = scope:candidate
+				BASE = 20
+			}
+
+			# Family or dynasty member (10, doubled for close family, halved for just dynasty)
+			accou_family_or_dynasty_modifier = {
+				CHARACTER = scope:candidate
+				BASE = 10
+			}
+
+			# Friend or lover (20, doubled for best friend / soulmate)
+			accou_friend_modifier = {
+				CHARACTER = scope:candidate
+				BASE = 20
+			}
+			accou_lover_modifier = {
+				CHARACTER = scope:candidate
+				BASE = 20
+			}
+
+			# Rival (-20, doubled for nemesises)
+			accou_rival_modifier = {
+				CHARACTER = scope:candidate
+				BASE = -20
+			}
+
+			# Candidate quality, scaled by ai rationality (0 to ~10 with 0 rationality)
+			accou_invite_candidate_quality_modifier = {
+				CHARACTER = scope:candidate
+				SCALE = 0.1
+			}
+
+			# Candidate dynasty prestige (0 to ~10)
+			accou_dynasty_prestige_modifier = {
+				CHARACTER = scope:candidate
+				SCALE = 1
+			}
+
+			# Candidate is better councillor, court position holder, knight, or commander,
+			# scaled by ai rationality
+			accou_better_councillor_modifier = { # 10 to ~30 with 0 rationality
+				CHARACTER = scope:candidate
+				BASE = 10
+				SCALE = 2
+			}
+			accou_better_court_position_modifier = { # 10 / 20 / 30 with 0 rationality
+				CHARACTER = scope:candidate
+				BASE = 10
+				SCALE = 10
+			}
+			accou_better_knight_modifier = { # 10 to ~20 with 0 rationality
+				CHARACTER = scope:candidate
+				BASE = 10
+				SCALE = 1
+			}
+			accou_better_commander_modifier = { # 10 to ~26 with 0 rationality
+				CHARACTER = scope:candidate
+				BASE = 10
+				SCALE = 1
+			}
+
+			# Candidate claims, scaled by ai rationality (10 with 0 rationality)
+			accou_claims_modifier = {
+				CHARACTER = scope:candidate
+				RULER = root
+				BASE = 10
+			}
+
+			# Insipired candidate, scaled by ai rationality (10 with 0 rationality)
+			accou_inspired_modifier = {
+				CHARACTER = scope:candidate
+				BASE = 10
+			}
+		}
+	}
+
+	option = {
+		name = accou_invite.0002.b
+
+		accou_debug_log_3_effect = {
+			MSG = accou_debug_msg_invite_0002_b
+			NAME1 = candidate TYPE1 = flag:character
+			NAME2 = courtier TYPE2 = flag:character
+			NAME3 = candidate_quality TYPE3 = flag:value
+		}
+		debug_log_scopes = yes
+
+		accou_invite_0001_on_reject_effect = yes
+
+		ai_chance = {
+			base = 1
+		}
+	}
+
+	option = {
+		name = accou_invite.0002.c
+
+		trigger = {
+			is_ai = no
+		}
+
+		accou_debug_log_3_effect = {
+			MSG = accou_debug_msg_invite_0002_c
+			NAME1 = candidate TYPE1 = flag:character
+			NAME2 = courtier TYPE2 = flag:character
+			NAME3 = candidate_quality TYPE3 = flag:value
+		}
+		debug_log_scopes = yes
+
+		custom_tooltip = accou_invite.0002.c.tt.consider
+		open_interaction_window = {
+			interaction = invite_to_court_interaction
+			actor = root
+			recipient = scope:candidate
+		}
+
+		show_as_tooltip = {
+			random_list = {
+				50 = {
+					desc = accou_invite.0002.c.tt.accept
+					show_chance = no
+					accou_invite_0001_on_approve_effect = yes
+				}
+				50 = {
+					desc = accou_invite.0002.c.tt.reject
+					show_chance = no
+					accou_invite_0001_on_reject_effect = yes
+				}
+			}
+		}
+
+		scope:courtier = {
+			add_character_flag = {
+				flag = accou_invite_0001_considering
+				days = 15
+			}
+		}
+		scope:candidate = {
+			add_character_flag = {
+				flag = accou_invite_0001_considering
+				days = 15
+			}
+		}
+
+		trigger_event = {
+			id = accou_invite.0003
+			days = 15
+		}
+	}
+}
+
+accou_invite.0003 = {
+	type = character_event
+	hidden = yes
+
+	immediate = {
+		if = {
+			limit = {
+				scope:candidate = {
+					is_courtier_of = root
+				}
+			}
+			accou_invite_0001_on_approve_effect = yes
+		}
+		else = {
+			accou_invite_0001_on_reject_effect = yes
 		}
 	}
 }
