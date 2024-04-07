@@ -37,7 +37,13 @@ scripted_effect accou_invite_0001_on_accept_effect = {
 	# Save scopes used by accou_invite_to_court_on_accept_effect
 	root = { save_scope_as = actor }
 	scope:candidate = { save_scope_as = recipient }
-	save_scope_value_as = { name = hook value = no }
+	if = {
+		limit = { has_usable_hook = scope:candidate }
+		save_scope_value_as = { name = hook value = yes }
+	}
+	else = {
+		save_scope_value_as = { name = hook value = no }
+	}
 
 	# Execute invite interaction effect
 	accou_invite_to_court_on_accept_effect = yes
@@ -160,45 +166,53 @@ accou_invite.0001 = {
 
 				# Check if the invite will be accepted
 				if = {
-					limit = { accou_is_marriage_ai_acceptance_check_original_trigger = yes }
-
-					# Use vanilla invite_courtier_interaction to check if the invite will be accepted
-					# TODO This is likely very slow
-					if = {
-						limit = {
-							scope:actor = {
-								is_character_interaction_potentially_accepted = {
-									interaction = invite_to_court_interaction
-									recipient = scope:recipient
-								}
-							}
-						}
-						save_scope_as = candidate
+					limit = {
+						scope:actor = { has_usable_hook = scope:recipient }
 					}
+					save_scope_as = candidate
 				}
 				else = {
-					# Save additional scopes used by accou_quick_invite_ai_accept_modifier_value
-					save_temporary_opinion_value_as = {
-						name = opinion_of_actor
-						target = scope:actor
-					}
-					save_temporary_opinion_value_as = {
-						name = opinion_of_liege
-						target = liege
-					}
-
-					# Use accou_quick_invite_ai_accept_modifier_value to check if the invite will be accepted
-					# This should be always accurate, but may be less compatible with some conversion mods
-					save_scope_value_as = { # TODO make temporary
-						name = quick_invite_ai_accept_modifier
-						value = accou_quick_invite_ai_accept_modifier_value
-					}
 					if = {
-						limit = { scope:quick_invite_ai_accept_modifier > 0 }
-						save_scope_as = candidate
-					}
+						limit = { accou_is_invite_ai_acceptance_check_original_trigger = yes }
 
-					#accou_debug_log_quick_invite_ai_accept_modifier_mismatches_effect = yes
+						# Use vanilla invite_courtier_interaction to check if the invite will be accepted
+						# TODO This is likely very slow
+						if = {
+							limit = {
+								scope:actor = {
+									is_character_interaction_potentially_accepted = {
+										interaction = invite_to_court_interaction
+										recipient = scope:recipient
+									}
+								}
+							}
+							save_scope_as = candidate
+						}
+					}
+					else = {
+						# Save additional scopes used by accou_quick_invite_ai_accept_modifier_value
+						save_temporary_opinion_value_as = {
+							name = opinion_of_actor
+							target = scope:actor
+						}
+						save_temporary_opinion_value_as = {
+							name = opinion_of_liege
+							target = liege
+						}
+
+						# Use accou_quick_invite_ai_accept_modifier_value to check if the invite will be accepted
+						# This should be always accurate, but may be less compatible with some conversion mods
+						save_scope_value_as = {
+							name = quick_invite_ai_accept_modifier
+							value = accou_quick_invite_ai_accept_modifier_value
+						}
+						if = {
+							limit = { scope:quick_invite_ai_accept_modifier > 0 }
+							save_scope_as = candidate
+						}
+
+						#accou_debug_log_quick_invite_ai_accept_modifier_mismatches_effect = yes
+					}
 				}
 			}
 		}
@@ -262,6 +276,10 @@ accou_invite.0001 = {
 						name = root_opinion_of_candidate
 						target = prev
 					}
+					if = {
+						limit = { has_usable_hook = prev }
+						save_scope_value_as = { name = hooked_candidate value = yes }
+					}
 				}
 				save_opinion_value_as = {
 					name = candidate_opinion_of_root
@@ -297,9 +315,12 @@ accou_invite.0001 = {
 				exists = scope:candidate
 				exists = scope:courtier
 
-				is_character_interaction_potentially_accepted = {
-					interaction = invite_to_court_interaction
-					recipient = scope:candidate
+				OR = {
+					has_usable_hook = scope:candidate
+					is_character_interaction_potentially_accepted = {
+						interaction = invite_to_court_interaction
+						recipient = scope:candidate
+					}
 				}
 			}
 

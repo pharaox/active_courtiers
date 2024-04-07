@@ -219,6 +219,16 @@ accou_marriage.0001 = {
 						}
 					}
 
+					# More likely if they have a lover they can marry (20)
+					modifier = {
+						save_temporary_scope_as = potential_courtier
+						any_relation = {
+							type = lover
+							accou_marriage_0001_valid_marriage_candidate_trigger = { CHARACTER = scope:potential_courtier }
+						}
+						add = 20
+					}
+
 					# Less likely with various health conditions (-10)
 					modifier = {
 						has_std_trigger = yes
@@ -362,9 +372,18 @@ accou_marriage.0001 = {
 					else = {
 						# Save additional scopes used by accou_quick_marriage_ai_accept_modifier_value
 						scope:recipient = {
-							save_temporary_opinion_value_as = { name = opinion_of_actor target = scope:actor }
-							save_temporary_opinion_value_as = { name = opinion_of_secondary_actor target = scope:secondary_actor }
-							save_temporary_opinion_value_as = { name = opinion_of_secondary_recipient target = scope:secondary_recipient }
+							save_temporary_opinion_value_as = {
+								name = opinion_of_actor
+								target = scope:actor
+							}
+							save_temporary_opinion_value_as = {
+								name = opinion_of_secondary_actor
+								target = scope:secondary_actor
+							}
+							save_temporary_opinion_value_as = {
+								name = opinion_of_secondary_recipient
+								target = scope:secondary_recipient
+							}
 							accou_get_ruler_with_royal_court_effect = yes
 						}
 
@@ -411,6 +430,10 @@ accou_marriage.0001 = {
 					save_opinion_value_as = {
 						name = courtier_opinion_of_candidate
 						target = prev
+					}
+					if = {
+						limit = { has_relation_lover = prev }
+						save_scope_value_as = { name = lover_candidate value = yes }
 					}
 				}
 				save_scope_value_as = {

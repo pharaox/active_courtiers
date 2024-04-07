@@ -41,6 +41,8 @@ accou_is_valid_marriage_target_trigger = {
 	}
 }
 
+# Is this character a valid marriage target for marrying $CHARACTER$
+# See arrange_marriage_interaction (has_valid_target_showing_failures_only)
 accou_is_valid_marriage_target_vanilla_trigger = {
 	save_temporary_scope_as = target
 
@@ -135,6 +137,8 @@ accou_could_marry_character_trigger = {
 	}
 }
 
+# Is this character a valid marriage recipient
+# See arrange_marriage_interaction (is_shown and is_valid_showing_failures_only)
 accou_is_valid_marriage_recipient_trigger = {
 	accou_is_valid_marriage_recipient_vanilla_trigger = { ACTOR = $ACTOR$ }
 }

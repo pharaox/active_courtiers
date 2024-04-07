@@ -9,12 +9,12 @@
 	has_serious_disease_trigger = no
 }
 
+# Is this character a valid invite to court recipient
+# See invite_to_court_interaction (is_shown and is_valid_showing_failures_only)
 accou_is_valid_invite_recipient_trigger = {
 	accou_is_valid_invite_recipient_vanilla_trigger = { ACTOR = $ACTOR$ }
 }
 
-# Is this character a valid invite to court recipient
-# See invite_to_court_interaction (is_shown and is_valid_showing_failures_only)
 accou_is_valid_invite_recipient_vanilla_trigger = {
 	NOR = {
 		is_courtier_of = $ACTOR$
@@ -42,6 +42,9 @@ accou_is_valid_invite_recipient_vanilla_trigger = {
 
 accou_could_accept_invite_trigger = {
 	OR = {
+		# Actor has a hook on them
+		$ACTOR$ = { has_usable_hook = prev }
+
 		# Actor has royal court, consider opinion and amenities
 		accou_could_accept_invite_royal_court_trigger = { ACTOR = $ACTOR$ }
 
@@ -144,4 +147,8 @@ accou_could_accept_invite_royal_court_trigger = {
 			always = no
 		}
 	}
+}
+
+accou_is_invite_ai_acceptance_check_original_trigger = {
+	has_game_rule = accou_marriage_ai_acceptance_check_original
 }
