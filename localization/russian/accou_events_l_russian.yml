@@ -16,9 +16,28 @@
  # accou_marriage.0004
  accou_marriage.0004.t: "Придворному не удалось найти супруга/супругу"
  accou_marriage.0004.desc: "Похоже, [Select_CString(courtier.IsFemale, 'моя', 'мой')] [ROOT.Char.Custom2('RelationToMe', SCOPE.sC('courtier'))] [courtier.GetUIName] не [Select_CString(courtier.IsFemale, 'могла найти себе подходящего супруга', 'мог найти себе подходящую супругу')]. [courtier.GetSheHe|U] объясняет, что все кандидаты, которых [courtier.GetSheHe] оценивал[Select_CString(courtier.IsFemale, 'а', '')] либо не подходили [Select_CString(courtier.IsFemale, 'ей', 'ему')], либо их сват не принял бы предложение."
- accou_marriage.0004.a: "Хорошо, возможно, в следующий раз"
+ accou_marriage.0004.a: "Хорошо, возможно, в следующий раз."
  accou_marriage.0004.b: "Позвольте мне помочь вам найти кого-то подходящего для #EMP МЕНЯ#!..."
  accou_marriage.0004.b.tt.help: "Открывает #EMP Устроить брак#! для [courtier.GetUIName]"
+
+ # accou_invite.0001
+ accou_invite.0001.t: "Придворный рекомендует знакомого (подготовка)"
+ accou_invite.0001.desc: "Мой [ROOT.Char.Custom2('RelationToMe', SCOPE.sC('courtier'))] [courtier.GetUIName] рекомендует пригласить [candidate.GetUIName] ко двору."
+ accou_invite.0001.a: "Окей"
+ # accou_invite.0002
+ accou_invite.0002.t: "Придворный рекомендует знакомого"
+ accou_invite.0002.desc: "Мой [ROOT.Char.Custom2('RelationToMe', SCOPE.sC('courtier'))] [courtier.GetUIName] рекомендует пригласить [candidate.GetUIName] ко двору."
+ accou_invite.0002.more.desc: "[courtier.GetSheHe|U] уверяет меня, что [candidate.GetUIName] примет мое приглашение."
+ accou_invite.0002.a: "Конечно, [candidate.GetSheHe] может присоединиться к нам!"
+ accou_invite.0002.b: "Я бы предпочел не приглашать [Select_CString(candidate.IsFemale, 'ее', 'его')]."
+ accou_invite.0002.c: "Позвольте мне подумать..."
+ accou_invite.0002.c.tt.consider: "Открывает #EMP Пригласить ко двору#! для [candidate.GetUIName]"
+ accou_invite.0002.c.tt.accept: "Если [candidate.GetSheHe] присоединится к вашему двору, через 15 дней"
+ accou_invite.0002.c.tt.reject: "Если [candidate.GetSheHe] не присоединится к вашему двору, через 15 дней"
+ # accou_invite.0004
+ accou_invite.0004.t: "Не удалось получить рекомендации"
+ accou_invite.0004.desc: "К сожалению, ни один из придворных, которых я спрашивал, не смог порекомендовать подходящего персонажа для приглашения ко двору. Они объясняют, что все кандидаты, которых они оценивали, были либо не достойны, либо не приняли бы мое приглашение."
+ accou_invite.0004.a: "Хорошо, возможно, в следующий раз."
 
  # accou_courtier.0001
  accou_courtier.0001.t: "Придворный толкается за должность (советник)"
@@ -33,7 +52,7 @@
  accou_courtier.0003.councillor.desc: "[Select_CString(candidate.IsFemale, 'Моя', 'Мой')] [ROOT.Char.Custom2('RelationToMe', SCOPE.sC('candidate'))] [candidate.GetUIName] просит назначение на должность [Localize(Concatenate('councillor_', SCOPE.GetFlagName('councillor')))]. [candidate.GetSheHe|U] утверждает, что [candidate.GetSheHe] — лучший выбор на эту должность."
  accou_courtier.0003.court_position.desc: "[Select_CString(candidate.IsFemale, 'Моя', 'Мой')] [ROOT.Char.Custom2('RelationToMe', SCOPE.sC('candidate'))] [candidate.GetUIName] просит назначение на должность [Localize(Concatenate(SCOPE.GetFlagName('court_position'), '_court_position'))]. [candidate.GetSheHe|U] утверждает, что [candidate.GetSheHe] — лучший выбор на эту должность."
  accou_courtier.0003.incumbent.desc: "Естественно, [Select_CString(incumbent.IsFemale, 'моя', 'мой')] [ROOT.Char.Custom2('RelationToMe', SCOPE.sC('incumbent'))] [incumbent.GetUIName] очень расстроится, если я [Select_CString(incumbent.IsFemale, 'ee', 'его')] уволю."
- accou_courtier.0003.a: "Хорошо, я готов дать вам шанс"
+ accou_courtier.0003.a: "Хорошо, я готов дать вам шанс."
  accou_courtier.0003.b: "Нет, я делаю свой собственный выбор."
 
  accou_marriage.0002.reasons.desc: "#EMP \n\nПричины принять [candidate.GetUIName] в качестве придворного:\n#!"

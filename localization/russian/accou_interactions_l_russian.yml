@@ -3,7 +3,12 @@
  accou_marry_someone_interaction: "Попросить найти супруга/супругу"
  accou_marry_someone_interaction_desc: "Попросить [recipient.GetShortUINameNoTooltip] [Select_CString(recipient.IsFemale, 'самой поискать подходящего', 'самому поискать подходящую')] [Select_CString(recipient.IsFemale, Concept('spouse', 'супруга'), Concept('spouse', 'супругу'))|E]"
 
+ # accou_invite_someone_interaction
+ accou_invite_someone_interaction: "Найти персонажа для приглашения ко двору"
+ accou_invite_someone_interaction_desc: "Попросить моих придворных порекомендовать кого-нибудь для приглашения ко двору."
+
  # Tooltips
  accou_marriage_0001_failed_tt: "Недавно [Select_CString(recipient.IsFemale, 'ей', 'ему')] не удалось найти [Select_CString(recipient.IsFemale, Concept('spouse', 'супруга'), Concept('spouse', 'супругу'))|E]"
  accou_marriage_0001_considering_tt: "[Select_CString(recipient.IsFemale, 'Ее уже рассматривают для замужества', 'Его уже рассматривают для женитьбы')]"
  accou_will_search_for_someone_to_marry_tt: "[Select_CString(recipient.IsFemale, 'Будет искать подходящего', 'Будет искать подходящую')] [Select_CString(recipient.IsFemale, Concept('spouse', 'супруга'), Concept('spouse', 'супругу'))|E]."
+ accou_will_search_for_someone_to_invite_tt: "Вы попросите ваших придворных порекомендовать кого-нибудь для приглашения ко двору."

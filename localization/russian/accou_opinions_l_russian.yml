@@ -1,3 +1,6 @@
 ﻿l_russian:
  accou_accepted_my_marriage_request_opinion: "Принял мою просьбу о браке"
  accou_rejected_my_marriage_request_opinion: "Отклонил мою просьбу о браке"
+
+ accou_accepted_my_invite_recommendation_opinion: "Принял мою рекомендацию"
+ accou_declined_my_invite_recommendation_opinion: "Отклонил мою рекомендацию"

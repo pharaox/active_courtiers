@@ -49,9 +49,9 @@
  setting_accou_wrong_gender_marriage_requests_allowed: "#high Разрешены#!"
  setting_accou_wrong_gender_marriage_requests_allowed_desc: "Просьбы о браке от персонажей недоминирующего пола разрешены."
 
- rule_accou_marriage_ai_acceptance_check: "#P Active Courtiers:#! Принятие брака ИИ"
+ rule_accou_marriage_ai_acceptance_check: "#P Active Courtiers:#! Принятие взаимодействий ИИ"
  setting_accou_marriage_ai_acceptance_check_original: "#high Оригинальное#!"
- setting_accou_marriage_ai_acceptance_check_original_desc: "Принятие брака ИИ проверяется с использованием оригинального модификатора (медленнее, более совместимо, всегда точно)."
+ setting_accou_marriage_ai_acceptance_check_original_desc: "Принятие взаимодействий ИИ проверяется с использованием оригинальных модификаторов (медленнее, более совместимо, всегда точно)."
  setting_accou_marriage_ai_acceptance_check_quick: "Быстрое"
- setting_accou_marriage_ai_acceptance_check_quick_desc: "Принятие брака ИИ проверяется более быстрым методом (быстрее, менее совместимо, точность >99.99%)."
+ setting_accou_marriage_ai_acceptance_check_quick_desc: "Принятие взаимодействий ИИ проверяется более быстрым методом (быстрее, менее совместимо, точность >99.99%)."
 
