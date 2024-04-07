@@ -20,6 +20,25 @@
  accou_marriage.0004.b: "Let me help you find someone good enough for #EMP ME#!..."
  accou_marriage.0004.b.tt.help: "Opens #EMP Find Spouse#! for [courtier.GetUIName]"
 
+ # accou_invite.0001
+ accou_invite.0001.t: "Courtier Recommends an Acquaintance (Preparation)"
+ accou_invite.0001.desc: "My [ROOT.Char.Custom2('RelationToMe', SCOPE.sC('courtier'))] [courtier.GetUIName] is recommending to invite [candidate.GetUIName] to court."
+ accou_invite.0001.a: "OK"
+ # accou_invite.0002
+ accou_invite.0002.t: "Courtier Recommends an Acquaintance"
+ accou_invite.0002.desc: "My [ROOT.Char.Custom2('RelationToMe', SCOPE.sC('courtier'))] [courtier.GetUIName] is recommending to invite [Select_CString(candidate.GetLiege.IsValid, Concatenate(candidate.GetLiege.GetUIName, Concatenate('\\'s ', Concatenate(candidate.GetLiege.Custom2('RelationToMe', SCOPE.sC('candidate')), ' '))), '')][candidate.GetUIName] to court. "
+ accou_invite.0002.more.desc: "[courtier.GetSheHe|U] assures me that [candidate.GetUIName] will accept my invitation."
+ accou_invite.0002.a: "Certainly, [candidate.GetSheHe] is welcome to join us!"
+ accou_invite.0002.b: "I would rather not invite [candidate.GetHerHim] right now."
+ accou_invite.0002.c: "Let me consider this..."
+ accou_invite.0002.c.tt.consider: "Opens #EMP Invite to Court#! for [candidate.GetUIName]"
+ accou_invite.0002.c.tt.accept: "If [candidate.GetSheHe] joins your court, after 15 days"
+ accou_invite.0002.c.tt.reject: "If [candidate.GetSheHe] doesn't join your court, after 15 days"
+ # accou_invite.0004
+ accou_invite.0004.t: "Failed to Get Recommendations"
+ accou_invite.0004.desc: "Unfortunately, none of the courtiers I asked could recommend a suitable character to invite to court. They explain that all candidates they evaluated were either not worthy, or would not accept my invitation."
+ accou_invite.0004.a: "Fine, perhaps next time."
+
  # accou_courtier.0001
  accou_courtier.0001.t: "Courtier Jostles for Position (Councillor)"
  accou_courtier.0001.desc: "My [ROOT.Char.Custom2('RelationToMe', SCOPE.sC('candidate'))] [candidate.GetUIName] is requesting to be assigned as my [Localize(Concatenate('councillor_', SCOPE.GetFlagName('councillor')))]."

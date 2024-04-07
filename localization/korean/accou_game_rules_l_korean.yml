@@ -49,9 +49,9 @@
  setting_accou_wrong_gender_marriage_requests_allowed: "#high Allowed#!"
  setting_accou_wrong_gender_marriage_requests_allowed_desc: "Marriage requests by non-dominant gender characters are allowed."
 
- rule_accou_marriage_ai_acceptance_check: "#P Active Courtiers:#! Marriage Acceptance by AI"
+ rule_accou_marriage_ai_acceptance_check: "#P Active Courtiers:#! Interaction Acceptance by AI"
  setting_accou_marriage_ai_acceptance_check_original: "#high Original#!"
- setting_accou_marriage_ai_acceptance_check_original_desc: "Marriage acceptance by AI is checked using the original modifier (slower, more compatible, always accurate)."
+ setting_accou_marriage_ai_acceptance_check_original_desc: "Interaction acceptance by AI is checked using the original modifiers (slower, more compatible, always accurate)."
  setting_accou_marriage_ai_acceptance_check_quick: "Quick"
- setting_accou_marriage_ai_acceptance_check_quick_desc: "Marriage acceptance by AI is checked using a quicker method (faster, less compatible, >99.99% accurate)."
+ setting_accou_marriage_ai_acceptance_check_quick_desc: "Interaction acceptance by AI is checked using a quicker method (faster, less compatible, >99.99% accurate)."
 
