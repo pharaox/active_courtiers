@@ -1,5 +1,23 @@
 # Changelog
 
+## Version 0.4.0
+
+### Interactions
+
+* Added *Find Someone to Invite to Court* interaction to initiate the invite to court event chain for (`accou_invite_someone_interaction`).
+
+### Events
+
+* Added invite to court event chain (*Courtier Recommends an Acquaintance*, etc.) (`accou_invite.0001` to `accou_invite.0004`).
+
+### Game Rules
+
+* Rename game rule *Marriage Acceptance by AI* to *Interaction Acceptance by AI* since it now controls also invite to court acceptance.
+
+### Miscellaneous
+
+* Increased chances of courtiers with lovers to request marriages.
+
 ## Version 0.3.0
 
 ### Compatibility

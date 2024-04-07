@@ -1,26 +1,34 @@
 [h2]Overview[/h2]
 
-Do you find yourself spending a lot of time finding spouses for your courtiers, or deciding on characters to invite to your court, who could be better councillors, court position holders, knights, or commanders? While both [b]Find Spouse[/b] and [b]Invite to Court[/b] interactions are great since they enable the player to attract better talent and furthermore do it for free, they suffer from a few major drawbacks:
+Do you find yourself spending a lot of time finding spouses for your courtiers, or deciding on characters to invite to your court, who could be better councillors, court position holders, knights, or commanders? While both [b]Find Spouse[/b] and [b]Invite to Court[/b] interactions enable the player to attract better talent and furthermore do it for free, they suffer from a few major drawbacks:
 [list]
   [*] Choosing among numerous options and for many courtiers requires a lot of effort.
-  [*] The AI never uses them, ending up with a worse talent pool as a result, while the player can get the best courtiers at their leisure, as they are usually not married and there is hardly any competition.
+  [*] The AI never uses them, ending up with a worse talent pool, while the player can get the best courtiers, as they are usually not married and there is hardly any competition.
 [/list]
 
-I personally find the above aspects to be tedious, unrealistic, and underwhelming. Why should it take so much effort to find good spouses for courtiers? Why would courtiers depend so much on their liege for getting married? And why should players enjoy such overwhelming advantages over the AI to attract valuable courtiers?
+I personally find the above aspects to be tedious, unrealistic, and underwhelming. Why should it take so much effort to find good spouses for courtiers, or competent characters to invite? Why would courtiers depend so much on their liege for getting married? And why should players enjoy such overwhelming advantages over the AI to attract valuable courtiers?
 
-This mod attempts to address these drawbacks by enabling courtiers to actively search for spouses by themselves (and in the future also suggest to be invited) and only ask their liege for approval, thereby reducing the effort for the player, improving the quality of AI talent pools, and also contributing to better roleplaying and immersion.
+This mod attempts to address these drawbacks by enabling courtiers to actively search for spouses by themselves and only ask their liege for approval, as well as recommend characters to be invited by their liege, thereby reducing the effort for the player, improving the quality of AI talent pools, and also contributing to better roleplaying and immersion.
 
-The main feature of this mod is the new [b]Courtier Requests to Marry[/b] event. It is triggered for count or higher rulers, every year for players and every 1 to 3 years for the AI by default. These event frequencies can be changed via game rules.
+The main feature of this mod are the 2 new events [b]Courtier Requests to Marry[/b] and [b]Courtier Recommends an Acquaintance[/b]. They are triggered (with 50% chance each) for count or higher rulers, every year for players and every 1 to 3 years for the AI by default. These event frequencies can be changed via game rules.
 
-When the event fires, first a random eligible [i]courtier[/i] is selected who will search for a spouse. The conditions for courtier eligibility include being an available adult, not already married or betrothed, younger than 60 years, not having a serious health condition, not an heir or close family to their liege (these are already married by the AI), and not "wrong gender in faith", e.g. a female in a faith with the male-dominated doctrine (the eligibility of such characters can be configured via a game rule).
+When these event fire, two characters are selected using appropriate eligibility criteria that can be further configured via game rules:
+[list]
+  [*] a courtier who will search for a spouse or recommend a character
+  [*] a candidate to be married or invited
+[/list]
 
-After the courtier has been selected, a marriage [i]candidate[/i] is also selected among all non-ruler characters in this and neighboring realms and located within a certain range of the ruler's capital that can also be configured via game rules. The final candidate is the highest [i]quality[/i] candidate among all [i]eligible candidates[/i] whose matchmaker would accept the marriage proposal. To be eligible, a candidate must satisfy the conditions for courtier eligibility, and in addition they must be someone the courtier can actually marry according to their gender and faith. The candidates' quality is evaluated from the perspective of the courtier, based on criteria such as opinion, attraction, fertility, health, age and age difference, dynasty prestige difference, faith hostility, cultural acceptance, genetic traits, and skills.
+The characters considered when searching for a candidate include all non-ruler characters in this and neighboring realms and located within a certain range of the ruler's capital that can also be configured via game rules.
 
-Finally, the courtier's liege must approve or reject the marriage. Note that since the candidate has been selected based on their quality from the courtier's perspective, they are not automatically a good choice for their liege. However, often this is actually the case, since many of the quality criteria are relevant to the liege as well. So while courtiers would probably not make better choices than you as a player might make, they would usually make reasonable choices that are also of good roleplaying value.
+The final candidate is always the highest [i]quality[/i] candidate among all eligible candidates who (or whose matchmaker) would accept the marriage proposal or the invitation.
+[list]
+  [*] For marriages, the quality is evaluated from the perspective of the courtier, based on opinion, lover relations, attraction, fertility, health, age and age difference, dynasty prestige difference, faith hostility, cultural acceptance, genetic traits, and skills.
+  [*] For invitations, the quality is evaluated from the perspective of the ruler, based on opinions, family and relations, genetic and other traits, skills, claims, and other factors, with competence playing a much stronger role than for marriages.
+[/list]
 
-AI rulers in general prefer outsiders than current courtiers, so they can attract talent to their court. They also take the into account their opinion of both the courtier and the candidate, family and other relations, the candidate quality, and are they better than other options for any councillor or court positions, knight, or commander. Players can take these into account as well, since they are listed in the event description.
+Finally, the courtier's liege must approve the request or accept the recommendation. While marriage candidates are not automatically a good choice for their liege, invitation candidates usually are. AI rulers consider their opinion of the courtier and the candidate, family and other relations, the candidate quality, and are they better than other options for any councillor or court positions, knight, or commander. Players can take these into account as well, since they are listed in the event description.
 
-To make it more convenient for players to trigger the event for particular courtiers, this mod adds the new [b]Ask to Find Spouse[/b] interaction. Only courtiers who are eligible according to the criteria mentioned above can be targeted by it.
+To make it more convenient for players to trigger the above events, this mod also adds the 2 new interactions [b]Ask to Find Spouse[/b] and [b]Find Someone to Invite to Court[/b].
 
 Even if AI rulers get better talent pools, they tend to stick to councillors or court position holders with worse skills or aptitude than available. For this reason, and also to remind players, this mod also adds the new [b]Courtier Jostles for Position[/b] event. It is triggered after a candidate has joined a court if they are better than other options for a councillor or court position. In it, the candidate requests to be appointed to that position, and their liege can accept or decline. The AI decision is based on their opinion of both the candidate and the [i]incumbent[/i], family and other relations, how much better is the candidate, is the incumbent councillor a powerful vassal, and other factors.
 
@@ -32,7 +40,7 @@ This mod does not modify any vanilla files and should be compatible with most ot
 
 This mod is now fully compatible with [url=https://steamcommunity.com/sharedfiles/filedetails/?id=2962333032]A Game of Thrones[/url] with a compatibility patch, see [b]Links[/b] below.
 
-The [url=https://steamcommunity.com/sharedfiles/filedetails/?id=3037969445]Love Marriage Family[/url] mod also adds marriage requests by courtiers, but only limited to the player's realm. The two mods are compatible with each other and the frequency of their events can be configured via game rules. If you use LMF or other mods that change the marriage acceptance by AI, set the game rule [b]Marriage Acceptance by AI[/b] to [b]Original[/b].
+The [url=https://steamcommunity.com/sharedfiles/filedetails/?id=3037969445]Love Marriage Family[/url] mod also adds marriage requests by courtiers, but only limited to the player's realm. The two mods are compatible with each other and the frequency of their events can be configured via game rules. If you use LMF or other mods that change the marriage acceptance by AI, set the game rule [b]Interaction Acceptance by AI[/b] to [b]Original[/b].
 
 This mod also supports changing its game rules mid-game with the [url=https://steamcommunity.com/sharedfiles/filedetails/?id=2826829936]Gamerule Gadget[/url] mod.
 
@@ -50,6 +58,7 @@ As a recommendation, if you don't notice any performance issues, just leave the 
 [list]
   [*] [url=https://steamcommunity.com/sharedfiles/filedetails/?id=3166721580]Active Courtiers AGOT Compatibility[/url]
   [*] [url=https://steamcommunity.com/sharedfiles/filedetails/?id=2903983628]Chinese Translation (by @牛奶大魔王)[/url]
+  [*] [url=https://steamcommunity.com/sharedfiles/filedetails/?id=3201197071]Portuguese Translation (by @Alin)[/url]
   [*] [url=https://github.com/pharaox/active_courtiers]GitHub Repository[/url]
 [/list]
 
