@@ -19,7 +19,7 @@ accou_invite_someone_interaction = {
 		}
 	}
 
-	#cooldown = { months = 1 }
+	cooldown = { months = 1 }
 
 	on_accept = {
 		scope:actor = {
