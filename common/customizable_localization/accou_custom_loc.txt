@@ -364,3 +364,183 @@ accou_vassal_qualities = {
 		localization_key = guest_description.vassal_martial.desc
 	}
 }
+
+accou_educator_traits = {
+	type = character
+
+	text = {
+		trigger = { has_trait = intellect_good_3 }
+		localization_key = guest_description.intellect_good_3.desc
+	}
+	text = {
+		trigger = { has_trait = intellect_good_2 }
+		localization_key = guest_description.intellect_good_2.desc
+	}
+	text = {
+		trigger = { has_trait = intellect_good_1 }
+		localization_key = guest_description.intellect_good_1.desc
+	}
+	text = {
+		trigger = { has_trait = shrewd }
+		localization_key = accou_guardian_description.shrewd.desc
+	}
+	text = {
+		localization_key = accou_empty
+	}
+}
+
+accou_educator_end_desc = {
+	type = character
+
+	text = {
+		localization_key = accou_guardian_description.educator_end.desc
+	}
+}
+
+accou_guardian_diplomacy_skill = {
+	type = character
+
+	text = {
+		trigger = { diplomacy >= extremely_high_skill_rating }
+		localization_key = guest_description.outstanding_skill.desc
+	}
+	text = {
+		trigger = { diplomacy >= high_skill_rating }
+		localization_key = guest_description.experienced_skill.desc
+	}
+	text = {
+		trigger = { diplomacy >= decent_skill_rating }
+		localization_key = guest_description.competent_skill.desc
+	}
+	text = {
+		localization_key = accou_guardian_description.average_skill.desc
+	}
+}
+
+accou_guardian_diplomacy_desc = {
+	type = character
+
+	text = {
+		localization_key = accou_guardian_description.diplomacy.desc
+	}
+}
+
+accou_guardian_martial_skill = {
+	type = character
+
+	text = {
+		trigger = { martial >= extremely_high_skill_rating }
+		localization_key = guest_description.outstanding_skill.desc
+	}
+	text = {
+		trigger = { martial >= high_skill_rating }
+		localization_key = guest_description.experienced_skill.desc
+	}
+	text = {
+		trigger = { martial >= decent_skill_rating }
+		localization_key = guest_description.competent_skill.desc
+	}
+	text = {
+		localization_key = accou_guardian_description.average_skill.desc
+	}
+}
+
+accou_guardian_martial_desc = {
+	type = character
+
+	text = {
+		localization_key = accou_guardian_description.martial.desc
+	}
+}
+
+accou_guardian_stewardship_skill = {
+	type = character
+
+	text = {
+		trigger = { stewardship >= extremely_high_skill_rating }
+		localization_key = guest_description.outstanding_skill.desc
+	}
+	text = {
+		trigger = { stewardship >= high_skill_rating }
+		localization_key = guest_description.experienced_skill.desc
+	}
+	text = {
+		trigger = { stewardship >= decent_skill_rating }
+		localization_key = guest_description.competent_skill.desc
+	}
+	text = {
+		localization_key = accou_guardian_description.average_skill.desc
+	}
+}
+
+accou_guardian_stewardship_desc = {
+	type = character
+
+	text = {
+		localization_key = accou_guardian_description.stewardship.desc
+	}
+}
+
+accou_guardian_intrigue_skill = {
+	type = character
+
+	text = {
+		trigger = { intrigue >= extremely_high_skill_rating }
+		localization_key = guest_description.outstanding_skill.desc
+	}
+	text = {
+		trigger = { intrigue >= high_skill_rating }
+		localization_key = guest_description.experienced_skill.desc
+	}
+	text = {
+		trigger = { intrigue >= decent_skill_rating }
+		localization_key = guest_description.competent_skill.desc
+	}
+	text = {
+		localization_key = accou_guardian_description.average_skill.desc
+	}
+}
+
+accou_guardian_intrigue_desc = {
+	type = character
+
+	text = {
+		localization_key = accou_guardian_description.intrigue.desc
+	}
+}
+
+accou_guardian_learning_skill = {
+	type = character
+
+	text = {
+		trigger = { learning >= extremely_high_skill_rating }
+		localization_key = guest_description.outstanding_skill.desc
+	}
+	text = {
+		trigger = { learning >= high_skill_rating }
+		localization_key = guest_description.experienced_skill.desc
+	}
+	text = {
+		trigger = { learning >= decent_skill_rating }
+		localization_key = guest_description.competent_skill.desc
+	}
+	text = {
+		localization_key = accou_guardian_description.average_skill.desc
+	}
+}
+
+accou_guardian_learning_desc = {
+	type = character
+
+	text = {
+		localization_key = accou_guardian_description.learning.desc
+	}
+}
+
+accou_guardian_tutor_desc = {
+	type = character
+
+	text = {
+		localization_key = accou_guardian_description.tutor.desc
+	}
+}

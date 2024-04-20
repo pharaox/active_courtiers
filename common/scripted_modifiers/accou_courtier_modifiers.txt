@@ -106,6 +106,18 @@ accou_invite_candidate_quality_modifier = {
 	}
 }
 
+accou_guardian_candidate_quality_modifier = {
+	modifier = {
+		$CHARACTER$ ?= { exists = var:accou_guardian_candidate_quality }
+		add = {
+			value = $CHARACTER$.var:accou_guardian_candidate_quality
+			multiply = $SCALE$
+			multiply = accou_ai_rationality_multiplier
+			round = yes
+		}
+	}
+}
+
 accou_dynasty_prestige_modifier = {
 	modifier = {
 		$CHARACTER$ ?= { has_dynasty = yes }

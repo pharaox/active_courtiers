@@ -60,13 +60,88 @@ scripted_trigger accou_guardian_0001_valid_guardian_candidate_trigger = {
 	}
 }
 
+scripted_effect accou_guardian_0001_on_accept_effect = {
+	# Change education focus if needed
+	scope:child = {
+		accou_change_education_focus_effect = yes
+	}
+
+	# Save scopes used by accou_educate_child_on_accept_effect
+	save_scope_as = actor
+	save_scope_as = recipient
+	scope:candidate = { save_scope_as = secondary_actor }
+	scope:child = { save_scope_as = secondary_recipient }
+	if = {
+		limit = {
+			scope:candidate = {
+				culture = root.culture
+			}
+			scope:child = {
+				NOT = { culture = root.culture }
+			}
+		}
+		save_scope_value_as = { name = convert_culture value = yes }
+	}
+	else = {
+		save_scope_value_as = { name = convert_culture value = no }
+	}
+	if = {
+		limit = {
+			scope:candidate = {
+				faith = root.faith
+			}
+			scope:child = {
+				NOT = { faith = root.faith }
+			}
+		}
+		save_scope_value_as = { name = convert_faith value = yes }
+	}
+	else = {
+		save_scope_value_as = { name = convert_faith value = no }
+	}
+	save_scope_value_as = { name = send_to_university value = no }
+	save_scope_value_as = { name = education_hook value = no }
+
+	# Execute interaction effect
+	accou_educate_child_on_accept_effect = yes
+}
+
+scripted_effect accou_guardian_0001_on_approve_effect = {
+	# Add courtier opinion
+	scope:courtier = {
+		add_opinion = {
+			target = root
+			modifier = accou_accepted_my_guardian_suggestion_opinion
+		}
+	}
+}
+
+scripted_effect accou_guardian_0001_on_reject_effect = {
+	# Add courtier opinion
+	scope:courtier = {
+		add_opinion = {
+			target = root
+			modifier = accou_declined_my_guardian_suggestion_opinion
+		}
+	}
+
+	# Mark candidate as rejected by root
+	scope:child = {
+		set_variable = {
+			name = accou_guardian_0001_rejected
+			value = scope:candidate
+			years = 2
+		}
+	}
+}
+
 accou_guardian.0001 = {
 	type = character_event
 	title = accou_guardian.0001.t
 	desc = accou_guardian.0001.desc
-	#hidden = yes
+	hidden = yes
 
-	theme = court
+	theme = education
 	left_portrait = {
 		character = scope:courtier
 	}
@@ -142,7 +217,7 @@ accou_guardian.0001 = {
 				value = accou_guardian_candidate_quality_value
 			}
 			if = {
-				limit = { scope:guardian_candidate_quality > 0 }
+				limit = { scope:guardian_candidate_quality > 10 }
 				set_variable = {
 					name = accou_guardian_candidate_quality
 					value = scope:guardian_candidate_quality
@@ -261,9 +336,9 @@ accou_guardian.0001 = {
 				NAME2 = candidate TYPE2 = flag:character
 				NAME3 = courtier TYPE3 = flag:character
 			}
-			debug_log_scopes = yes
+			#debug_log_scopes = yes
 
-			#trigger_event = accou_guardian.0002
+			trigger_event = accou_guardian.0002
 		}
 		else = {
 			accou_debug_log_3_effect = {
@@ -272,7 +347,7 @@ accou_guardian.0001 = {
 				NAME2 = candidate TYPE2 = flag:character
 				NAME3 = courtier TYPE3 = flag:character
 			}
-			debug_log_scopes = yes
+			#debug_log_scopes = yes
 
 			scope:child ?= {
 				add_character_flag = {
@@ -287,3 +362,308 @@ accou_guardian.0001 = {
 		}
 	}
 }
+
+accou_guardian.0002 = {
+	type = character_event
+	title = accou_guardian.0002.t
+	desc = {
+		desc = accou_guardian.0002.desc
+		desc = {
+			desc = accou_guardian.0002.reasons.desc
+			desc = {
+				triggered_desc = {
+					trigger = {
+						scope:candidate = {
+							accou_educator_traits_character_value > 0
+						}
+					}
+					desc = accou_guardian.0002.educator_traits.desc
+				}
+				triggered_desc = {
+					trigger = {
+						scope:child = {
+							accou_has_education_focus_trigger = { FOCUS = education_diplomacy }
+						}
+						scope:candidate = {
+							diplomacy >= mediocre_skill_rating
+						}
+					}
+					desc = accou_guardian.0002.diplomacy.desc
+				}
+				triggered_desc = {
+					trigger = {
+						scope:child = {
+							accou_has_education_focus_trigger = { FOCUS = education_martial }
+						}
+						scope:candidate = {
+							martial >= mediocre_skill_rating
+						}
+					}
+					desc = accou_guardian.0002.martial.desc
+				}
+				triggered_desc = {
+					trigger = {
+						scope:child = {
+							accou_has_education_focus_trigger = { FOCUS = education_stewardship }
+						}
+						scope:candidate = {
+							stewardship >= mediocre_skill_rating
+						}
+					}
+					desc = accou_guardian.0002.stewardship.desc
+				}
+				triggered_desc = {
+					trigger = {
+						scope:child = {
+							accou_has_education_focus_trigger = { FOCUS = education_intrigue }
+						}
+						scope:candidate = {
+							intrigue >= mediocre_skill_rating
+						}
+					}
+					desc = accou_guardian.0002.intrigue.desc
+				}
+				triggered_desc = {
+					trigger = {
+						scope:child = {
+							accou_has_education_focus_trigger = { FOCUS = education_learning }
+						}
+						scope:candidate = {
+							learning >= mediocre_skill_rating
+						}
+					}
+					desc = accou_guardian.0002.learning.desc
+				}
+				triggered_desc = {
+					trigger = {
+						scope:candidate = {
+							learning >= mediocre_skill_rating
+						}
+					}
+					desc = accou_guardian.0002.tutor.desc
+				}
+				# TODO More reasons
+			}
+		}
+	}
+
+	theme = education
+	left_portrait = {
+		character = scope:courtier
+	}
+	right_portrait = {
+		character = scope:child
+	}
+	lower_right_portrait = {
+		character = scope:candidate
+	}
+	override_background = {
+		reference = throne_room
+	}
+
+	immediate = {
+		# Save additional scopes for debugging
+		if = {
+			limit = { debug_only = yes }
+			save_opinion_value_as = {
+				name = root_opinion_of_child
+				target = scope:child
+			}
+			save_opinion_value_as = {
+				name = root_opinion_of_candidate
+				target = scope:candidate
+			}
+		}
+	}
+
+	option = {
+		name = accou_guardian.0002.a
+
+		accou_debug_log_5_effect = {
+			MSG = accou_debug_msg_guardian_0002_a
+			NAME1 = child TYPE1 = flag:character
+			NAME2 = candidate TYPE2 = flag:character
+			NAME3 = courtier TYPE3 = flag:character
+			NAME4 = candidate_quality TYPE4 = flag:value
+			NAME5 = education_focus TYPE5 = flag:flag
+		}
+		#debug_log_scopes = yes
+
+		accou_guardian_0001_on_accept_effect = yes
+
+		accou_guardian_0001_on_approve_effect = yes
+
+		ai_chance = {
+			base = 0
+
+			# Opinion of child and candidate (-20 to 20 depending on opinion)
+			opinion_modifier = {
+				opinion_target = scope:child
+				multiplier = 0.2
+			}
+			opinion_modifier = {
+				opinion_target = scope:candidate
+				multiplier = 0.2
+			}
+
+			# Family or dynasty members (10, doubled for close family, halved for just dynasty)
+			accou_family_or_dynasty_modifier = {
+				CHARACTER = scope:child
+				BASE = 10
+			}
+			accou_family_or_dynasty_modifier = {
+				CHARACTER = scope:candidate
+				BASE = 10
+			}
+
+			# Friends or lovers (20, doubled for best friend / soulmate)
+			accou_friend_modifier = {
+				CHARACTER = scope:child
+				BASE = 20
+			}
+			accou_lover_modifier = {
+				CHARACTER = scope:child
+				BASE = 20
+			}
+			accou_friend_modifier = {
+				CHARACTER = scope:candidate
+				BASE = 20
+			}
+			accou_lover_modifier = {
+				CHARACTER = scope:candidate
+				BASE = 20
+			}
+
+			# Rivals (-20, doubled for nemesises)
+			accou_rival_modifier = {
+				CHARACTER = scope:child
+				BASE = -20
+			}
+			accou_rival_modifier = {
+				CHARACTER = scope:candidate
+				BASE = -20
+			}
+
+			# Candidate quality, scaled by ai rationality (0 to ~50 with 0 rationality)
+			accou_guardian_candidate_quality_modifier = {
+				CHARACTER = scope:candidate
+				SCALE = 1
+			}
+		}
+	}
+
+	option = {
+		name = accou_guardian.0002.b
+
+		accou_debug_log_5_effect = {
+			MSG = accou_debug_msg_guardian_0002_b
+			NAME1 = child TYPE1 = flag:character
+			NAME2 = candidate TYPE2 = flag:character
+			NAME3 = courtier TYPE3 = flag:character
+			NAME4 = candidate_quality TYPE4 = flag:value
+			NAME5 = education_focus TYPE5 = flag:flag
+		}
+		#debug_log_scopes = yes
+
+		accou_guardian_0001_on_reject_effect = yes
+
+		ai_chance = {
+			base = 1
+		}
+	}
+
+	option = {
+		name = accou_guardian.0002.c
+
+		trigger = {
+			is_ai = no
+		}
+
+		accou_debug_log_5_effect = {
+			MSG = accou_debug_msg_guardian_0002_c
+			NAME1 = child TYPE1 = flag:character
+			NAME2 = candidate TYPE2 = flag:character
+			NAME3 = courtier TYPE3 = flag:character
+			NAME4 = candidate_quality TYPE4 = flag:value
+			NAME5 = education_focus TYPE5 = flag:flag
+		}
+		#debug_log_scopes = yes
+
+		custom_tooltip = accou_guardian.0002.c.tt.consider
+		open_interaction_window = {
+			interaction = educate_child_interaction
+			actor = root
+			recipient = root
+			secondary_actor = scope:candidate
+			secondary_recipient = scope:child
+		}
+
+		show_as_tooltip = {
+			random_list = {
+				50 = {
+					desc = accou_guardian.0002.c.tt.accept
+					show_chance = no
+					accou_guardian_0001_on_approve_effect = yes
+				}
+				50 = {
+					desc = accou_guardian.0002.c.tt.reject
+					show_chance = no
+					accou_guardian_0001_on_reject_effect = yes
+				}
+			}
+		}
+
+		scope:child = {
+			add_character_flag = {
+				flag = accou_guardian_0001_considering
+				days = 15
+			}
+		}
+		scope:candidate = {
+			add_character_flag = {
+				flag = accou_guardian_0001_considering
+				days = 15
+			}
+		}
+		scope:courtier = {
+			add_character_flag = {
+				flag = accou_guardian_0001_considering
+				days = 15
+			}
+		}
+
+		trigger_event = {
+			id = accou_guardian.0003
+			days = 15
+		}
+	}
+
+	after = {
+		scope:child = {
+			remove_variable = accou_education_focus
+		}
+	}
+}
+
+accou_guardian.0003 = {
+	type = character_event
+	hidden = yes
+
+	immediate = {
+		if = {
+			limit = {
+				scope:child = {
+					any_relation = {
+						type = guardian
+						this = scope:candidate
+					}
+				}
+			}
+			accou_guardian_0001_on_approve_effect = yes
+		}
+		else = {
+			accou_guardian_0001_on_reject_effect = yes
+		}
+	}
+}
+
