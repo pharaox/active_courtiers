@@ -39,6 +39,11 @@
  accou_invite.0004.desc: "Unfortunately, none of the courtiers I asked could recommend a suitable character to invite to court. They explain that all candidates they evaluated were either not worthy, or would not accept my invitation."
  accou_invite.0004.a: "Fine, perhaps next time."
 
+ # accou_guardian.0001
+ accou_guardian.0001.t: "Courtier Suggests a Guardian (Preparation)"
+ accou_guardian.0001.desc: "My [ROOT.Char.Custom2('RelationToMe', SCOPE.sC('courtier'))] [courtier.GetUIName] is suggesting that my [ROOT.Char.Custom2('RelationToMe', SCOPE.sC('candidate'))] [candidate.GetUIName] should become a guardian of [child.GetUIName]."
+ accou_guardian.0001.a: "OK"
+
  # accou_courtier.0001
  accou_courtier.0001.t: "Courtier Jostles for Position (Councillor)"
  accou_courtier.0001.desc: "My [ROOT.Char.Custom2('RelationToMe', SCOPE.sC('candidate'))] [candidate.GetUIName] is requesting to be assigned as my [Localize(Concatenate('councillor_', SCOPE.GetFlagName('councillor')))]."

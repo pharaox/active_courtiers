@@ -1,15 +1,4 @@
-﻿accou_is_valid_invite_character_trigger = {
-	# Available
-	accou_is_available_ai_adult_trigger = yes
-	is_busy_in_events_localised = yes
-	bp2_valid_for_standard_interactions_trigger = yes
-
-	# Age & health conditions
-	NOT = { has_trait = infirm }
-	has_serious_disease_trigger = no
-}
-
-# Is this character a valid invite to court recipient
+﻿# Is this character a valid invite to court recipient
 # See invite_to_court_interaction (is_shown and is_valid_showing_failures_only)
 accou_is_valid_invite_recipient_trigger = {
 	accou_is_valid_invite_recipient_vanilla_trigger = { ACTOR = $ACTOR$ }

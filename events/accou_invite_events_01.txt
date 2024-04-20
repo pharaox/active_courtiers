@@ -5,8 +5,8 @@ scripted_trigger accou_invite_0001_valid_liege_trigger = {
 }
 
 scripted_trigger accou_invite_0001_valid_courtier_trigger = {
-	# Valid invite character
-	accou_is_valid_invite_character_trigger = yes
+	# Valid adult event participant
+	accou_is_valid_adult_event_participant_trigger = yes
 
 	# No previous attempt failed recently
 	NOR = {
@@ -17,8 +17,8 @@ scripted_trigger accou_invite_0001_valid_courtier_trigger = {
 scripted_trigger accou_invite_0001_valid_invite_candidate_trigger = {
 	in_diplomatic_range = root
 
-	# Valid invite character
-	accou_is_valid_invite_character_trigger = yes
+	# Valid adult event participant
+	accou_is_valid_adult_event_participant_trigger = yes
 
 	# Valid invite recipient
 	accou_is_valid_invite_recipient_trigger = { ACTOR = root }
@@ -253,13 +253,6 @@ accou_invite.0001 = {
 					modifier = {
 						is_lowborn = no
 						add = 10
-					}
-
-					# Root opinion of courtier (-10 to 10)
-					opinion_modifier = {
-						who = root
-						opinion_target = this
-						multiplier = 0.1
 					}
 				}
 

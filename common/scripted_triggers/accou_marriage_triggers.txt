@@ -1,8 +1,6 @@
 ﻿accou_is_valid_marriage_character_trigger = {
-	# Available
-	accou_is_available_ai_adult_trigger = yes
-	is_busy_in_events_localised = yes
-	bp2_valid_for_standard_interactions_trigger = yes
+	# Valid adult event participant
+	accou_is_valid_adult_event_participant_trigger = yes
 
 	# Can actually marry
 	can_marry_common_trigger = yes
@@ -12,25 +10,8 @@
 	is_diarch = no
 	has_been_promised_grand_wedding = no
 
-	# Age & health conditions
+	# Age conditions
 	age <= 60
-	NOT = { has_trait = infirm }
-	has_serious_disease_trigger = no
-}
-
-accou_is_available_ai_adult_trigger = {
-	is_alive = yes
-	is_ai = yes
-	is_adult = yes
-	is_imprisoned = no
-	is_incapable = no
-	is_in_army = no
-	is_travelling = no
-	has_contagious_deadly_disease_trigger = no
-	NOR = {
-		exists = involved_activity
-		has_variable = gone_adventuring
-	}
 }
 
 accou_is_valid_marriage_target_trigger = {

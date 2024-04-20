@@ -1,0 +1,19 @@
+﻿accou_set_alternate_education_focus_effect = {
+	if = {
+		limit = { has_focus = education_martial }
+		if = {
+			limit = { has_trait = bossy }
+			set_variable = {
+				name = accou_education_focus
+				value = flag:education_stewardship
+			}
+		}
+		else_if = {
+			limit = { has_trait = rowdy }
+			set_variable = {
+				name = accou_education_focus
+				value = flag:education_intrigue
+			}
+		}
+	}
+}

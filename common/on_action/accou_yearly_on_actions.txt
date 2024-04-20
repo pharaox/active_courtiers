@@ -2,7 +2,7 @@
 # Root is the character
 yearly_playable_pulse = {
 	on_actions = {
-		delay = { days = { 8 288 } }
+		delay = { days = { 8 188 } }
 		accou_yearly_playable_pulse
 	}
 }
@@ -24,13 +24,18 @@ accou_yearly_playable_pulse = {
 		100 = accou_marriage.0001 # Courtier Requests to Marry
 		100 = accou_invite.0001 # Courtier Recommends an Acquaintance
 	}
+
+	events = {
+		delay = { days = { 8 88 } }
+		accou_guardian.0001 # Courtier Suggests a Guardian
+	}
 }
 
 # Called from code once every three years for "playable" (count+) characters.
 # Root is the character
 three_year_playable_pulse = {
 	on_actions = {
-		delay = { days = { 8 288 } }
+		delay = { days = { 8 188 } }
 		accou_three_year_playable_pulse
 	}
 }
@@ -60,13 +65,18 @@ accou_three_year_playable_pulse = {
 		100 = accou_marriage.0001 # Courtier Requests to Marry
 		100 = accou_invite.0001 # Courtier Recommends an Acquaintance
 	}
+
+	events = {
+		delay = { days = { 8 88 } }
+		accou_guardian.0001 # Courtier Suggests a Guardian
+	}
 }
 
 # Called from code once every five years for "playable" (count+) characters.
 # Root is the character
 five_year_playable_pulse = {
 	on_actions = {
-		delay = { days = { 8 288 } }
+		delay = { days = { 8 188 } }
 		accou_five_year_playable_pulse
 	}
 }
@@ -87,6 +97,11 @@ accou_five_year_playable_pulse = {
 	random_events = {
 		100 = accou_marriage.0001 # Courtier Requests to Marry
 		100 = accou_invite.0001 # Courtier Recommends an Acquaintance
+	}
+
+	events = {
+		delay = { days = { 8 88 } }
+		accou_guardian.0001 # Courtier Suggests a Guardian
 	}
 }
 
