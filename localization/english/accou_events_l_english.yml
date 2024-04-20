@@ -52,6 +52,12 @@
  accou_guardian.0002.c.tt.consider: "Opens #EMP Educate Child#! for [candidate.GetUIName] and [child.GetUIName]"
  accou_guardian.0002.c.tt.accept: "If [candidate.GetSheHe] becomes a guardian of [child.GetUIName], after 15 days"
  accou_guardian.0002.c.tt.reject: "If [candidate.GetSheHe] doesn't become a guardian of [child.GetUIName], after 15 days"
+ # accou_guardian.0004
+ accou_guardian.0004.t: "Failed to Get Suggestions"
+ accou_guardian.0004.desc: "Unfortunately, none of the courtiers I asked could suggest a suitable guardian for [child.GetUIName]. They explain that all candidates they evaluated were either not available, or would not be a good fit for [child.GetHerHim]."
+ accou_guardian.0004.a: "Fine, perhaps next time."
+ accou_guardian.0004.b: "I wonder if this is really the case..."
+ accou_guardian.0004.b.tt.help: "Opens #EMP Educate Child#! for [child.GetUIName]"
 
  # accou_courtier.0001
  accou_courtier.0001.t: "Courtier Jostles for Position (Councillor)"

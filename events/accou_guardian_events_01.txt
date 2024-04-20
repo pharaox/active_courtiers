@@ -355,6 +355,15 @@ accou_guardian.0001 = {
 					years = 1
 				}
 			}
+
+			if = {
+				limit = {
+					scope:child ?= {
+						has_character_flag = accou_searching_for_guardian
+					}
+				}
+				trigger_event = accou_guardian.0004
+			}
 		}
 
 		ai_chance = {
@@ -667,3 +676,36 @@ accou_guardian.0003 = {
 	}
 }
 
+accou_guardian.0004 = {
+	type = character_event
+	title = accou_guardian.0004.t
+	desc = accou_guardian.0004.desc
+
+	theme = education
+	left_portrait = {
+		character = root
+		animation = sadness
+	}
+	right_portrait = {
+		character = scope:child
+	}
+	override_background = {
+		reference = throne_room
+	}
+
+	option = {
+		name = accou_guardian.0004.a
+	}
+
+	option = {
+		name = accou_guardian.0004.b
+
+		custom_tooltip = accou_guardian.0004.b.tt.help
+		open_interaction_window = {
+			interaction = educate_child_interaction
+			actor = root
+			recipient = root
+			secondary_recipient = scope:child
+		}
+	}
+}

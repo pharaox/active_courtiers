@@ -1,7 +1,7 @@
 ﻿# Find Someone to Invite to Court
 # Human player only.
 accou_invite_someone_interaction = {
-	category = interaction_category_diplomacy
+	category = interaction_category_vassal
 	desc = accou_invite_someone_interaction_desc
 	icon = guest
 

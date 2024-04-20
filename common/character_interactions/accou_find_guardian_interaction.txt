@@ -1,0 +1,78 @@
+﻿# Find Guardian
+# Human player only.
+accou_find_guardian_interaction = {
+	category = interaction_category_friendly
+	desc = accou_find_guardian_interaction_desc
+	icon = child
+
+	is_shown = {
+		scope:actor = {
+			is_ai = no
+		}
+
+		scope:recipient = {
+			is_courtier_of = scope:actor
+			is_adult = no
+
+			# Does not already have a guardian
+			num_of_relation_guardian = 0
+		}
+	}
+
+	is_valid_showing_failures_only = {
+		scope:actor = {
+			is_available = yes
+			is_busy_in_events_localised = yes
+		}
+
+		scope:recipient = {
+			# Valid child event participant
+			accou_is_valid_child_event_participant_trigger = yes
+
+			# Valid child recipient
+			accou_is_valid_child_recipient_trigger = { ACTOR = scope:actor }
+
+			# Older than education start age and education focus set
+			age >= childhood_education_start_age
+			custom_tooltip = {
+				text = accou_guardian_0001_no_education_focus_tt
+				has_education_focus_trigger = yes
+			}
+
+			# Not a close family of actor (AI will educate their close family)
+			NOT = { is_close_family_of = scope:actor }
+
+			# No previous attempt failed recently
+			custom_tooltip = {
+				text = accou_guardian_0001_failed_tt
+				NOT = { has_character_flag = accou_guardian_0001_failed }
+			}
+			custom_tooltip = {
+				text = accou_guardian_0001_considering_tt
+				NOT = { has_character_flag = accou_guardian_0001_considering }
+			}
+		}
+	}
+
+	cooldown_against_recipient = { months = 1 }
+
+	on_accept = {
+		scope:recipient = {
+			add_character_flag = {
+				flag = accou_searching_for_guardian
+				days = 10
+			}
+			save_scope_as = child
+		}
+
+		scope:actor = {
+			custom_tooltip = accou_will_search_for_guardian_tt
+			trigger_event = {
+				id = accou_guardian.0001
+				days = { 2 6 }
+			}
+		}
+	}
+
+	auto_accept = yes
+}
