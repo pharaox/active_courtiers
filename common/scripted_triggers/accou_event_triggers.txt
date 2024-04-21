@@ -8,26 +8,8 @@
 	has_serious_disease_trigger = no
 }
 
-accou_is_valid_inactive_event_participant_trigger = {
-	# Physically able
-	accou_is_physically_able_ai_trigger = yes
-	is_busy_in_events_localised = yes
-
-	# Health conditions
-	NOT = { has_trait = infirm }
-	has_serious_disease_trigger = no
-}
-
 accou_is_valid_adult_event_participant_trigger = {
 	accou_is_valid_event_participant_trigger = yes
-	is_adult = yes
-
-	# Not a hostage or traveling hostage, guardian, or ward
-	bp2_valid_for_standard_interactions_trigger = yes
-}
-
-accou_is_valid_inactive_adult_event_participant_trigger = {
-	accou_is_valid_inactive_event_participant_trigger = yes
 	is_adult = yes
 
 	# Not a hostage or traveling hostage, guardian, or ward
@@ -39,17 +21,12 @@ accou_is_valid_child_event_participant_trigger = {
 	is_adult = no
 }
 
-accou_is_physically_able_ai_trigger = {
+accou_is_available_ai_trigger = {
 	is_alive = yes
 	is_ai = yes
 	is_imprisoned = no
 	is_incapable = no
 	has_contagious_deadly_disease_trigger = no
-}
-
-accou_is_available_ai_trigger = {
-	accou_is_physically_able_ai_trigger = yes
-
 	is_in_army = no
 	is_travelling = no
 	NOR = {

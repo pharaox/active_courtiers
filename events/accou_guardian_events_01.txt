@@ -35,8 +35,8 @@ scripted_trigger accou_guardian_0001_valid_child_trigger = {
 }
 
 scripted_trigger accou_guardian_0001_valid_guardian_candidate_trigger = {
-	# Valid inactive adult event participant
-	accou_is_valid_inactive_adult_event_participant_trigger = yes
+	# Valid adult event participant
+	accou_is_valid_adult_event_participant_trigger = yes
 
 	# Valid guardian recipient
 	accou_is_valid_guardian_recipient_trigger = { ACTOR = root }
