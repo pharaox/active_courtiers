@@ -108,13 +108,14 @@ accou_guardian_candidate_education_points_aptitude_value = {
 		multiply = 0.5
 	}
 
-	# Cultural parameters (20)
-	# Not additive because it's also not in the vanilla effect
+	# Cultural parameters (10)
+	# It's not additive in the vanilla effect (probably a bug), but here it's additive
+	# because otherwise all educators of such a culture would have equal quality
 	if = {
 		limit = {
 			culture = { has_cultural_parameter = better_ward_education }
 		}
-		value = 20
+		add = 10
 	}
 
 	round = yes
