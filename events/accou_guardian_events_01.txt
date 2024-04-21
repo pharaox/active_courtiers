@@ -377,6 +377,14 @@ accou_guardian.0002 = {
 	title = accou_guardian.0002.t
 	desc = {
 		desc = accou_guardian.0002.desc
+		triggered_desc = {
+			trigger = {
+				scope:child = {
+					has_variable = accou_education_focus
+				}
+			}
+			desc = accou_guardian.0002.focus.desc
+		}
 		desc = {
 			desc = accou_guardian.0002.reasons.desc
 			desc = {
@@ -451,7 +459,95 @@ accou_guardian.0002 = {
 					}
 					desc = accou_guardian.0002.tutor.desc
 				}
-				# TODO More reasons
+				triggered_desc = {
+					trigger = {
+						scope:candidate = {
+							has_perk = pedagogy_perk
+						}
+					}
+					desc = accou_guardian.0002.pedagogy_perk.desc
+				}
+				triggered_desc = {
+					trigger = {
+						scope:candidate = {
+							dynasty ?= { has_dynasty_perk = fp2_urbanism_legacy_2 }
+						}
+					}
+					desc = accou_guardian.0002.dynasty_urbanism_legacy.desc
+				}
+				triggered_desc = {
+					trigger = {
+						scope:candidate = {
+							culture = { has_cultural_parameter = better_ward_education }
+						}
+					}
+					desc = accou_guardian.0002.culture_better_education.desc
+				}
+				triggered_desc = {
+					trigger = {
+						scope:candidate = {
+							culture = { has_cultural_parameter = guardian_education_better_outcomes }
+						}
+					}
+					desc = accou_guardian.0002.culture_better_outcomes.desc
+				}
+				triggered_desc = {
+					trigger = {
+						scope:child = {
+							accou_has_education_focus_trigger = { FOCUS = education_martial }
+						}
+						scope:candidate = {
+							culture = { has_cultural_parameter = guardians_can_transfer_commander_traits }
+						}
+					}
+					desc = accou_guardian.0002.culture_commander_traits.desc
+				}
+				triggered_desc = {
+					trigger = {
+						scope:child = {
+							accou_has_education_focus_trigger = { FOCUS = education_martial }
+							NOT = { culture = { has_innovation = innovation_knighthood } }
+						}
+						scope:candidate = {
+							culture = { has_innovation = innovation_knighthood }
+						}
+					}
+					desc = accou_guardian.0002.culture_knighthood.desc
+				}
+				triggered_desc = {
+					trigger = {
+						scope:child = {
+							accou_has_education_focus_trigger = { FOCUS = education_learning }
+							NOT = { faith = { has_doctrine_parameter = tenet_esotericism_mystic_education } }
+						}
+						scope:candidate = {
+							faith = { has_doctrine_parameter = tenet_esotericism_mystic_education }
+						}
+					}
+					desc = accou_guardian.0002.faith_esotericism_mystic.desc
+				}
+				triggered_desc = {
+					trigger = {
+						scope:candidate = {
+							culture = root.culture
+						}
+						scope:child = {
+							NOT = { culture = root.culture }
+						}
+					}
+					desc = accou_guardian.0002.convert_culture.desc
+				}
+				triggered_desc = {
+					trigger = {
+						scope:candidate = {
+							faith = root.faith
+						}
+						scope:child = {
+							NOT = { faith = root.faith }
+						}
+					}
+					desc = accou_guardian.0002.convert_faith.desc
+				}
 			}
 		}
 	}
