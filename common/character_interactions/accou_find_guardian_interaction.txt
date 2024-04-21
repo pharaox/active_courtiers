@@ -11,8 +11,11 @@ accou_find_guardian_interaction = {
 		}
 
 		scope:recipient = {
-			is_courtier_of = scope:actor
 			is_adult = no
+			OR = {
+				is_courtier_of = scope:actor
+				is_hostage_of = scope:actor
+			}
 
 			# Does not already have a guardian
 			num_of_relation_guardian = 0

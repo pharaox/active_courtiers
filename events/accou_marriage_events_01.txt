@@ -182,6 +182,13 @@ accou_marriage.0001 = {
 
 	trigger = {
 		accou_marriage_0001_valid_liege_trigger = yes
+
+		trigger_if = {
+			limit = { exists = scope:courtier }
+			scope:courtier = {
+				accou_marriage_0001_valid_courtier_trigger = yes
+			}
+		}
 	}
 
 	immediate = {

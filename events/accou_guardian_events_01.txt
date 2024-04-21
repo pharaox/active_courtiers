@@ -27,6 +27,9 @@ scripted_trigger accou_guardian_0001_valid_child_trigger = {
 	# Not a close family of root (AI will educate their close family)
 	NOT = { is_close_family_of = root }
 
+	# Not a foreign court guest (apparently such children can't be educated by courtiers)
+	is_foreign_court_guest = no
+
 	# No previous attempt failed recently
 	NOR = {
 		has_character_flag = accou_guardian_0001_failed
@@ -158,13 +161,20 @@ accou_guardian.0001 = {
 	trigger = {
 		accou_guardian_0001_valid_liege_trigger = yes
 
-		OR = {
-			exists = scope:child
-			any_courtier = {
+		trigger_if = {
+			limit = { exists = scope:child }
+			scope:child = {
 				accou_guardian_0001_valid_child_trigger = yes
 			}
-			any_warden_hostage = {
-				accou_guardian_0001_valid_child_trigger = yes
+		}
+		trigger_else = {
+			OR = {
+				any_courtier = {
+					accou_guardian_0001_valid_child_trigger = yes
+				}
+				any_warden_hostage = {
+					accou_guardian_0001_valid_child_trigger = yes
+				}
 			}
 		}
 	}
@@ -196,6 +206,7 @@ accou_guardian.0001 = {
 
 		# Set alternate education focus if needed
 		scope:child = {
+			remove_variable = accou_education_focus
 			if = {
 				limit = {
 					has_focus = education_martial
@@ -216,6 +227,7 @@ accou_guardian.0001 = {
 				name = guardian_candidate_quality
 				value = accou_guardian_candidate_quality_value
 			}
+			remove_variable = accou_guardian_candidate_quality
 			if = {
 				limit = { scope:guardian_candidate_quality > 10 }
 				set_variable = {
@@ -297,6 +309,10 @@ accou_guardian.0001 = {
 			limit = { debug_only = yes }
 			scope:child = {
 				var:accou_education_focus ?= { save_scope_as = education_focus }
+				if = {
+					limit = { is_hostage_of = root }
+					save_scope_value_as = { name = hostage_child value = yes }
+				}
 			}
 			scope:candidate ?= {
 				save_scope_value_as = {
