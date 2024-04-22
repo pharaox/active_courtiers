@@ -4,3 +4,6 @@
 
  accou_accepted_my_invite_recommendation_opinion: "Принял мою рекомендацию"
  accou_declined_my_invite_recommendation_opinion: "Отклонил мою рекомендацию"
+
+ accou_accepted_my_guardian_suggestion_opinion: "Принял мое предложение"
+ accou_declined_my_guardian_suggestion_opinion: "Отклонил мое предложение"

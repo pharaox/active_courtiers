@@ -22,11 +22,11 @@
 
  # accou_invite.0001
  accou_invite.0001.t: "Придворный рекомендует знакомого (подготовка)"
- accou_invite.0001.desc: "Мой [ROOT.Char.Custom2('RelationToMe', SCOPE.sC('courtier'))] [courtier.GetUIName] рекомендует пригласить [candidate.GetUIName] ко двору."
+ accou_invite.0001.desc: "[Select_CString(courtier.IsFemale, 'Моя', 'Мой')] [ROOT.Char.Custom2('RelationToMe', SCOPE.sC('courtier'))] [courtier.GetUIName] рекомендует пригласить [candidate.GetUIName] ко двору."
  accou_invite.0001.a: "Окей"
  # accou_invite.0002
  accou_invite.0002.t: "Придворный рекомендует знакомого"
- accou_invite.0002.desc: "Мой [ROOT.Char.Custom2('RelationToMe', SCOPE.sC('courtier'))] [courtier.GetUIName] рекомендует пригласить [candidate.GetUIName] ко двору."
+ accou_invite.0002.desc: "[Select_CString(courtier.IsFemale, 'Моя', 'Мой')] [ROOT.Char.Custom2('RelationToMe', SCOPE.sC('courtier'))] [courtier.GetUIName] рекомендует пригласить [candidate.GetUIName] ко двору."
  accou_invite.0002.more.desc: "[courtier.GetSheHe|U] уверяет меня, что [candidate.GetUIName] примет мое приглашение."
  accou_invite.0002.a: "Конечно, [candidate.GetSheHe] может присоединиться к нам!"
  accou_invite.0002.b: "Я бы предпочел не приглашать [Select_CString(candidate.IsFemale, 'ее', 'его')]."
@@ -36,8 +36,29 @@
  accou_invite.0002.c.tt.reject: "Если [candidate.GetSheHe] не присоединится к вашему двору, через 15 дней"
  # accou_invite.0004
  accou_invite.0004.t: "Не удалось получить рекомендации"
- accou_invite.0004.desc: "К сожалению, ни один из придворных, которых я спрашивал, не смог порекомендовать подходящего персонажа для приглашения ко двору. Они объясняют, что все кандидаты, которых они оценивали, были либо не достойны, либо не приняли бы мое приглашение."
+ accou_invite.0004.desc: "К сожалению, ни один из придворных, которых я спрашивал[Select_CString(ROOT.Char.IsFemale, 'а', '')], не смог порекомендовать подходящего персонажа для приглашения ко двору. Они объясняют, что все кандидаты, которых они оценивали, были либо не достойны, либо не приняли бы мое приглашение."
  accou_invite.0004.a: "Хорошо, возможно, в следующий раз."
+
+ # accou_guardian.0001
+ accou_guardian.0001.t: "Придворный предлагает опекуна (подготовка)"
+ accou_guardian.0001.desc: "[Select_CString(courtier.IsFemale, 'Моя', 'Мой')] [ROOT.Char.Custom2('RelationToMe', SCOPE.sC('courtier'))] [courtier.GetUIName] предлагает, чтобы [Select_CString(candidate.IsFemale, 'моя', 'мой')] [ROOT.Char.Custom2('RelationToMe', SCOPE.sC('candidate'))] [candidate.GetUIName] стал[Select_CString(candidate.IsFemale, 'а', '')] опекуном [child.GetUIName]."
+ accou_guardian.0001.a: "Окей"
+ # accou_guardian.0002
+ accou_guardian.0002.t: "Придворный предлагает опекуна"
+ accou_guardian.0002.desc: "[Select_CString(courtier.IsFemale, 'Моя', 'Мой')] [ROOT.Char.Custom2('RelationToMe', SCOPE.sC('courtier'))] [courtier.GetUIName] предлагает, чтобы [Select_CString(candidate.IsFemale, 'моя', 'мой')] [ROOT.Char.Custom2('RelationToMe', SCOPE.sC('candidate'))] [candidate.GetUIName] стал[Select_CString(candidate.IsFemale, 'а', '')] опекуном [child.GetUIName]. "
+ accou_guardian.0002.focus.desc: "[courtier.GetSheHe|U] также настаивает на том, чтобы [child.GetUIName] сменил[Select_CString(child.IsFemale, 'а', '')] образовательный фокус на другой, более подходящий для [Select_CString(child.IsFemale, 'ее', 'его')] пола."
+ accou_guardian.0002.a: "Да, [candidate.GetSheHe] может обучать [child.GetUIName]."
+ accou_guardian.0002.b: "Я бы предпочел не позволять [Select_CString(candidate.IsFemale, 'ей', 'ему')] обучать [child.GetUIName]."
+ accou_guardian.0002.c: "Позвольте мне подумать..."
+ accou_guardian.0002.c.tt.consider: "Открывает #EMP Дать ребенку образование#! для [candidate.GetUIName] и [child.GetUIName]"
+ accou_guardian.0002.c.tt.accept: "Если [candidate.GetSheHe] станет опекуном [child.GetUIName], через 15 дней"
+ accou_guardian.0002.c.tt.reject: "Если [candidate.GetSheHe] не станет опекуном [child.GetUIName], через 15 дней"
+ # accou_guardian.0004
+ accou_guardian.0004.t: "Не удалось получить предложений"
+ accou_guardian.0004.desc: "К сожалению, ни один из придворных, которых я спрашивал[Select_CString(ROOT.Char.IsFemale, 'а', '')], не смог предложить подходящего опекуна для [child.GetUIName]. Они объясняют, что все кандидаты, которых они оценивали, были либо недоступны, либо не подходили для [child.GetHerHim]."
+ accou_guardian.0004.a: "Хорошо, возможно, в следующий раз."
+ accou_guardian.0004.b: "Интересно, действительно ли это так..."
+ accou_guardian.0004.b.tt.help: "Открывает #EMP Дать ребенку образование#! для [child.GetUIName]"
 
  # accou_courtier.0001
  accou_courtier.0001.t: "Придворный толкается за должность (советник)"
@@ -70,6 +91,24 @@
  accou_marriage.0002.learning.desc: "#EMP $EFFECT_LIST_BULLET$[candidate.Custom('accou_learning_skill')] $guest_description.learning_start.desc$ [candidate.Custom('accou_learning_desc')]\n#!"
  accou_marriage.0002.vassal.desc: "#EMP $EFFECT_LIST_BULLET$$guest_description.vassal_start.desc$ [candidate.Custom('accou_vassal_qualities')]\n#!"
 
+ accou_guardian.0002.reasons.desc: "#EMP \n\nПричины, по которым [candidate.GetUIName] мог бы быть хорошим опекуном для [child.GetUIName]:\n#!"
+ accou_guardian.0002.educator_traits.desc: "#EMP $EFFECT_LIST_BULLET$[candidate.Custom('accou_educator_traits')] [candidate.Custom('accou_educator_end_desc')]\n#!"
+ accou_guardian.0002.diplomacy.desc: "#EMP $EFFECT_LIST_BULLET$[candidate.Custom('accou_guardian_diplomacy_skill')] [candidate.Custom('accou_guardian_diplomacy_desc')]\n#!"
+ accou_guardian.0002.martial.desc: "#EMP $EFFECT_LIST_BULLET$[candidate.Custom('accou_guardian_martial_skill')] [candidate.Custom('accou_guardian_martial_desc')]\n#!"
+ accou_guardian.0002.stewardship.desc: "#EMP $EFFECT_LIST_BULLET$[candidate.Custom('accou_guardian_stewardship_skill')] [candidate.Custom('accou_guardian_stewardship_desc')]\n#!"
+ accou_guardian.0002.intrigue.desc: "#EMP $EFFECT_LIST_BULLET$[candidate.Custom('accou_guardian_intrigue_skill')] [candidate.Custom('accou_guardian_intrigue_desc')]\n#!"
+ accou_guardian.0002.learning.desc: "#EMP $EFFECT_LIST_BULLET$[candidate.Custom('accou_guardian_learning_skill')] [candidate.Custom('accou_guardian_learning_desc')]\n#!"
+ accou_guardian.0002.tutor.desc: "#EMP $EFFECT_LIST_BULLET$[candidate.Custom('accou_guardian_learning_skill')] [candidate.Custom('accou_guardian_tutor_desc')]\n#!"
+ accou_guardian.0002.pedagogy_perk.desc: "#EMP $EFFECT_LIST_BULLET$$pedagogy_perk_name$: $CHILDREN_HAVE_CHANCE_OF_IMPROVEMENT$ ([perk|E])\n#!"
+ accou_guardian.0002.dynasty_urbanism_legacy.desc: "#EMP $EFFECT_LIST_BULLET$$fp2_urbanism_legacy_2_name$: $LEGACY_DYNASTY_EXTRA_TRAITS_FROM_CITIES$ ([dynasty_perk|E])\n#!"
+ accou_guardian.0002.culture_better_education.desc: "#EMP $EFFECT_LIST_BULLET$$culture_parameter_better_ward_education$ ([culture_tradition|E])\n#!"
+ accou_guardian.0002.culture_better_outcomes.desc: "#EMP $EFFECT_LIST_BULLET$$culture_parameter_guardian_education_better_outcomes$ ([culture_tradition|E])\n#!"
+ accou_guardian.0002.culture_commander_traits.desc: "#EMP $EFFECT_LIST_BULLET$$culture_parameter_guardians_can_transfer_commander_traits$ ([culture_tradition|E])\n#!"
+ accou_guardian.0002.culture_knighthood.desc: "#EMP $EFFECT_LIST_BULLET$$innovation_knighthood$: $students_of_knighthood$ ([innovation|E])\n#!"
+ accou_guardian.0002.faith_esotericism_mystic.desc: "#EMP $EFFECT_LIST_BULLET$$doctrine_parameter_tenet_esotericism_mystic_education$ ([doctrine|E])\n#!"
+ accou_guardian.0002.convert_culture.desc: "#EMP $EFFECT_LIST_BULLET$Может обратить [child.GetUIName] в вашу культуру\n#!"
+ accou_guardian.0002.convert_faith.desc: "#EMP $EFFECT_LIST_BULLET$Может обратить [child.GetUIName] в вашу веру\n#!"
+
  accou_better_councillor_options_start: "Лучше других доступных вариантов для следующих должностей [Concept('councillor', 'советников')|E]:"
  accou_better_councillor_options_1: "[Localize(Concatenate('councillor_', SCOPE.GetFlagName('bc_option1')))]"
  accou_better_councillor_options_2: "[Localize(Concatenate('councillor_', SCOPE.GetFlagName('bc_option1')))], [Localize(Concatenate('councillor_', SCOPE.GetFlagName('bc_option2')))]"
@@ -84,6 +123,16 @@
 
  accou_better_knight: "Лучший [Concept('knight', 'рыцарь')|E], чем другие доступные варианты"
  accou_better_commander: "Один из трех лучших [Concept('commander', 'командиров')|E]"
+
+ accou_guardian_description.shrewd.desc: "[GetTrait('shrewd').GetName(ROOT.Char)]"
+ accou_guardian_description.educator_end.desc: "человек ([traits|El])"
+ accou_guardian_description.average_skill.desc: "Неплохой"
+ accou_guardian_description.diplomacy.desc: "преподаватель дипломатии (#V [ROOT.Char.GetSkill('diplomacy')]#! [diplomacy|E])"
+ accou_guardian_description.martial.desc: "преподаватель военного дела (#V [ROOT.Char.GetSkill('martial')]#! [martial|E])"
+ accou_guardian_description.stewardship.desc: "преподаватель управления (#V [ROOT.Char.GetSkill('stewardship')]#! [stewardship|E])"
+ accou_guardian_description.intrigue.desc: "преподаватель интриг (#V [ROOT.Char.GetSkill('intrigue')]#! [intrigue|E])"
+ accou_guardian_description.learning.desc: "преподаватель учености (#V [ROOT.Char.GetSkill('learning')]#! [learning|E])"
+ accou_guardian_description.tutor.desc: "учитель (#V [ROOT.Char.GetSkill('learning')]#! [learning|E])"
 
  accou_empty: ""
 
