@@ -66,6 +66,7 @@
 	# Chance to gain education_martial_prowess trait (see coming_of_age.0003)
 	if = {
 		limit = {
+			accou_is_innovation_knighthood_better_guardians_trigger = yes
 			culture = { has_innovation = innovation_knighthood }
 			scope:child = {
 				accou_has_education_focus_trigger = { FOCUS = education_martial }

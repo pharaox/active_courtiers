@@ -43,3 +43,7 @@ accou_has_education_focus_trigger = {
 		has_focus = $FOCUS$
 	}
 }
+
+accou_is_innovation_knighthood_better_guardians_trigger = {
+	always = yes
+}
