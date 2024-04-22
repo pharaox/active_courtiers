@@ -39,6 +39,27 @@
  accou_invite.0004.desc: "Unfortunately, none of the courtiers I asked could recommend a suitable character to invite to court. They explain that all candidates they evaluated were either not worthy, or would not accept my invitation."
  accou_invite.0004.a: "Fine, perhaps next time."
 
+ # accou_guardian.0001
+ accou_guardian.0001.t: "Courtier Suggests a Guardian (Preparation)"
+ accou_guardian.0001.desc: "My [ROOT.Char.Custom2('RelationToMe', SCOPE.sC('courtier'))] [courtier.GetUIName] is suggesting that my [ROOT.Char.Custom2('RelationToMe', SCOPE.sC('candidate'))] [candidate.GetUIName] should become a guardian of [child.GetUIName]."
+ accou_guardian.0001.a: "OK"
+ # accou_guardian.0002
+ accou_guardian.0002.t: "Courtier Suggests a Guardian"
+ accou_guardian.0002.desc: "My [ROOT.Char.Custom2('RelationToMe', SCOPE.sC('courtier'))] [courtier.GetUIName] is suggesting that my [ROOT.Char.Custom2('RelationToMe', SCOPE.sC('candidate'))] [candidate.GetUIName] should become a guardian of [child.GetUIName]. "
+ accou_guardian.0002.focus.desc: "[courtier.GetSheHe|U] also insists that [child.GetUIName] should change [child.GetHerHis] education focus to one more appropriate for [child.GetHerHis] gender."
+ accou_guardian.0002.a: "Yes, [candidate.GetSheHe] may educate [child.GetUIName]."
+ accou_guardian.0002.b: "I would rather not let [candidate.GetHerHim] educate [child.GetUIName]."
+ accou_guardian.0002.c: "Let me consider this..."
+ accou_guardian.0002.c.tt.consider: "Opens #EMP Educate Child#! for [candidate.GetUIName] and [child.GetUIName]"
+ accou_guardian.0002.c.tt.accept: "If [candidate.GetSheHe] becomes a guardian of [child.GetUIName], after 15 days"
+ accou_guardian.0002.c.tt.reject: "If [candidate.GetSheHe] doesn't become a guardian of [child.GetUIName], after 15 days"
+ # accou_guardian.0004
+ accou_guardian.0004.t: "Failed to Get Suggestions"
+ accou_guardian.0004.desc: "Unfortunately, none of the courtiers I asked could suggest a suitable guardian for [child.GetUIName]. They explain that all candidates they evaluated were either not available, or would not be a good fit for [child.GetHerHim]."
+ accou_guardian.0004.a: "Fine, perhaps next time."
+ accou_guardian.0004.b: "I wonder if this is really the case..."
+ accou_guardian.0004.b.tt.help: "Opens #EMP Educate Child#! for [child.GetUIName]"
+
  # accou_courtier.0001
  accou_courtier.0001.t: "Courtier Jostles for Position (Councillor)"
  accou_courtier.0001.desc: "My [ROOT.Char.Custom2('RelationToMe', SCOPE.sC('candidate'))] [candidate.GetUIName] is requesting to be assigned as my [Localize(Concatenate('councillor_', SCOPE.GetFlagName('councillor')))]."
@@ -70,6 +91,24 @@
  accou_marriage.0002.learning.desc: "#EMP $EFFECT_LIST_BULLET$[candidate.Custom('accou_learning_skill')] $guest_description.learning_start.desc$ [candidate.Custom('accou_learning_desc')]\n#!"
  accou_marriage.0002.vassal.desc: "#EMP $EFFECT_LIST_BULLET$$guest_description.vassal_start.desc$ [candidate.Custom('accou_vassal_qualities')]\n#!"
 
+ accou_guardian.0002.reasons.desc: "#EMP \n\nReasons why [candidate.GetUIName] could be a good guardian for [child.GetUIName]:\n#!"
+ accou_guardian.0002.educator_traits.desc: "#EMP $EFFECT_LIST_BULLET$[candidate.Custom('accou_educator_traits')] [candidate.Custom('accou_educator_end_desc')]\n#!"
+ accou_guardian.0002.diplomacy.desc: "#EMP $EFFECT_LIST_BULLET$[candidate.Custom('accou_guardian_diplomacy_skill')] [candidate.Custom('accou_guardian_diplomacy_desc')]\n#!"
+ accou_guardian.0002.martial.desc: "#EMP $EFFECT_LIST_BULLET$[candidate.Custom('accou_guardian_martial_skill')] [candidate.Custom('accou_guardian_martial_desc')]\n#!"
+ accou_guardian.0002.stewardship.desc: "#EMP $EFFECT_LIST_BULLET$[candidate.Custom('accou_guardian_stewardship_skill')] [candidate.Custom('accou_guardian_stewardship_desc')]\n#!"
+ accou_guardian.0002.intrigue.desc: "#EMP $EFFECT_LIST_BULLET$[candidate.Custom('accou_guardian_intrigue_skill')] [candidate.Custom('accou_guardian_intrigue_desc')]\n#!"
+ accou_guardian.0002.learning.desc: "#EMP $EFFECT_LIST_BULLET$[candidate.Custom('accou_guardian_learning_skill')] [candidate.Custom('accou_guardian_learning_desc')]\n#!"
+ accou_guardian.0002.tutor.desc: "#EMP $EFFECT_LIST_BULLET$[candidate.Custom('accou_guardian_learning_skill')] [candidate.Custom('accou_guardian_tutor_desc')]\n#!"
+ accou_guardian.0002.pedagogy_perk.desc: "#EMP $EFFECT_LIST_BULLET$$pedagogy_perk_name$: $CHILDREN_HAVE_CHANCE_OF_IMPROVEMENT$ ([perk|E])\n#!"
+ accou_guardian.0002.dynasty_urbanism_legacy.desc: "#EMP $EFFECT_LIST_BULLET$$fp2_urbanism_legacy_2_name$: $LEGACY_DYNASTY_EXTRA_TRAITS_FROM_CITIES$ ([dynasty_perk|E])\n#!"
+ accou_guardian.0002.culture_better_education.desc: "#EMP $EFFECT_LIST_BULLET$$culture_parameter_better_ward_education$ ([culture_tradition|E])\n#!"
+ accou_guardian.0002.culture_better_outcomes.desc: "#EMP $EFFECT_LIST_BULLET$$culture_parameter_guardian_education_better_outcomes$ ([culture_tradition|E])\n#!"
+ accou_guardian.0002.culture_commander_traits.desc: "#EMP $EFFECT_LIST_BULLET$$culture_parameter_guardians_can_transfer_commander_traits$ ([culture_tradition|E])\n#!"
+ accou_guardian.0002.culture_knighthood.desc: "#EMP $EFFECT_LIST_BULLET$$innovation_knighthood$: $students_of_knighthood$ ([innovation|E])\n#!"
+ accou_guardian.0002.faith_esotericism_mystic.desc: "#EMP $EFFECT_LIST_BULLET$$doctrine_parameter_tenet_esotericism_mystic_education$ ([doctrine|E])\n#!"
+ accou_guardian.0002.convert_culture.desc: "#EMP $EFFECT_LIST_BULLET$Can convert [child.GetUIName] to your culture\n#!"
+ accou_guardian.0002.convert_faith.desc: "#EMP $EFFECT_LIST_BULLET$Can convert [child.GetUIName] to your faith\n#!"
+
  accou_better_councillor_options_start: "Better than all available options for the following [councillor|E] positions:"
  accou_better_councillor_options_1: "[Localize(Concatenate('councillor_', SCOPE.GetFlagName('bc_option1')))]"
  accou_better_councillor_options_2: "[Localize(Concatenate('councillor_', SCOPE.GetFlagName('bc_option1')))], [Localize(Concatenate('councillor_', SCOPE.GetFlagName('bc_option2')))]"
@@ -84,6 +123,16 @@
 
  accou_better_knight: "Better [knight|E] than other available options"
  accou_better_commander: "Top 3 [commander|E] by [martial|E] skill and [commander_traits|E]"
+
+ accou_guardian_description.shrewd.desc: "A [GetTrait('shrewd').GetName(ROOT.Char)]"
+ accou_guardian_description.educator_end.desc: "[ROOT.Char.GetWomanMan] ([trait|E])"
+ accou_guardian_description.average_skill.desc: "A decent"
+ accou_guardian_description.diplomacy.desc: "diplomacy educator (#V [ROOT.Char.GetSkill('diplomacy')]#! [diplomacy|E])"
+ accou_guardian_description.martial.desc: "martial educator (#V [ROOT.Char.GetSkill('martial')]#! [martial|E])"
+ accou_guardian_description.stewardship.desc: "stewardship educator (#V [ROOT.Char.GetSkill('stewardship')]#! [stewardship|E])"
+ accou_guardian_description.intrigue.desc: "intrigue educator (#V [ROOT.Char.GetSkill('intrigue')]#! [intrigue|E])"
+ accou_guardian_description.learning.desc: "learning educator (#V [ROOT.Char.GetSkill('learning')]#! [learning|E])"
+ accou_guardian_description.tutor.desc: "tutor (#V [ROOT.Char.GetSkill('learning')]#! [learning|E])"
 
  accou_empty: ""
 
