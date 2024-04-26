@@ -45,11 +45,11 @@
  setting_accou_invite_event_frequency_ai_never: "#high Never#!"
  setting_accou_invite_event_frequency_ai_never_desc: "Events never fire for AI rulers."
 
- rule_accou_guardian_events: "#P Active Courtiers:#! Guardian Events"
+ rule_accou_guardian_events: "#P Active Courtiers:#! Guardianship Events"
  setting_accou_guardian_events_enabled: "Enabled"
- setting_accou_guardian_events_enabled_desc: "Guardian events are enabled."
+ setting_accou_guardian_events_enabled_desc: "Guardianship events are enabled."
  setting_accou_guardian_events_disabled: "#high Disabled#!"
- setting_accou_guardian_events_disabled_desc: "Guardian events are disabled."
+ setting_accou_guardian_events_disabled_desc: "Guardianship events are disabled."
 
  rule_accou_courtier_events: "#P Active Courtiers:#! Courtier Jostling Events"
  setting_accou_courtier_events_enabled: "Enabled"
