@@ -103,6 +103,7 @@ accou_courtier.0001 = {
 	}
 
 	trigger = {
+		has_game_rule = accou_courtier_events_enabled
 		is_available = yes
 
 		scope:candidate = {
@@ -208,6 +209,7 @@ accou_courtier.0002 = {
 	}
 
 	trigger = {
+		has_game_rule = accou_courtier_events_enabled
 		is_available = yes
 
 		scope:candidate = {

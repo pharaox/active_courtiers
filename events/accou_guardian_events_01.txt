@@ -159,6 +159,7 @@ accou_guardian.0001 = {
 	}
 
 	trigger = {
+		has_game_rule = accou_guardian_events_enabled
 		accou_guardian_0001_valid_liege_trigger = yes
 
 		trigger_if = {

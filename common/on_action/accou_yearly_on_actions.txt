@@ -1,28 +1,111 @@
-﻿# Called from code once a year for "playable" (count+) characters.
+﻿# Called from code once a quarter for "playable" (count+) characters.
+# Root is the character
+# scope:quarter is which quarter it's for, from 1 to 4. Note that scope:quarter = 1 isn't necessarily in Q1 by calendar time
+quarterly_playable_pulse = {
+	on_actions = {
+		delay = { days = { 4 44 } }
+		accou_quarterly_marriage
+		delay = { days = { 4 44 } }
+		accou_quarterly_invite
+	}
+}
+
+accou_quarterly_marriage = {
+	trigger = {
+		trigger_if = {
+			limit = { is_ai = no }
+			has_game_rule = accou_event_frequency_player_q
+		}
+		trigger_else = {
+			has_game_rule = accou_event_frequency_ai_1y
+			highest_held_title_tier >= tier_duchy
+		}
+		basic_is_valid_for_yearly_events_trigger = yes
+	}
+
+	events = {
+		accou_marriage.0001 # Courtier Requests to Marry
+	}
+}
+
+accou_quarterly_invite = {
+	trigger = {
+		trigger_if = {
+			limit = { is_ai = no }
+			has_game_rule = accou_invite_event_frequency_player_q
+		}
+		trigger_else = {
+			has_game_rule = accou_invite_event_frequency_ai_1y
+			highest_held_title_tier >= tier_duchy
+		}
+		basic_is_valid_for_yearly_events_trigger = yes
+	}
+
+	events = {
+		accou_invite.0001 # Courtier Recommends an Acquaintance
+	}
+}
+
+# Called from code once a year for "playable" (count+) characters.
 # Root is the character
 yearly_playable_pulse = {
 	on_actions = {
 		delay = { days = { 8 188 } }
-		accou_yearly_playable_pulse
+		accou_yearly_marriage
+		delay = { days = { 8 188 } }
+		accou_yearly_invite
 	}
 }
 
-accou_yearly_playable_pulse = {
+accou_yearly_marriage = {
 	trigger = {
 		trigger_if = {
 			limit = { is_ai = no }
 			has_game_rule = accou_event_frequency_player_1y
 		}
 		trigger_else = {
-			has_game_rule = accou_event_frequency_ai_3y
-			highest_held_title_tier >= tier_duchy
+			OR = {
+				AND = {
+					has_game_rule = accou_event_frequency_ai_1y
+					highest_held_title_tier < tier_duchy
+				}
+				AND = {
+					has_game_rule = accou_event_frequency_ai_3y
+					highest_held_title_tier >= tier_duchy
+				}
+			}
 		}
 		basic_is_valid_for_yearly_events_trigger = yes
 	}
 
-	random_events = {
-		100 = accou_marriage.0001 # Courtier Requests to Marry
-		100 = accou_invite.0001 # Courtier Recommends an Acquaintance
+	events = {
+		accou_marriage.0001 # Courtier Requests to Marry
+	}
+}
+
+accou_yearly_invite = {
+	trigger = {
+		trigger_if = {
+			limit = { is_ai = no }
+			has_game_rule = accou_invite_event_frequency_player_1y
+		}
+		trigger_else = {
+			OR = {
+				AND = {
+					has_game_rule = accou_invite_event_frequency_ai_1y
+					highest_held_title_tier < tier_duchy
+				}
+				AND = {
+					has_game_rule = accou_invite_event_frequency_ai_3y
+					highest_held_title_tier >= tier_duchy
+				}
+			}
+		}
+		basic_is_valid_for_yearly_events_trigger = yes
+	}
+
+	events = {
+		accou_invite.0001 # Courtier Recommends an Acquaintance
 	}
 }
 
@@ -31,11 +114,13 @@ accou_yearly_playable_pulse = {
 three_year_playable_pulse = {
 	on_actions = {
 		delay = { days = { 8 188 } }
-		accou_three_year_playable_pulse
+		accou_three_year_marriage
+		delay = { days = { 8 188 } }
+		accou_three_year_invite
 	}
 }
 
-accou_three_year_playable_pulse = {
+accou_three_year_marriage = {
 	trigger = {
 		trigger_if = {
 			limit = { is_ai = no }
@@ -56,9 +141,34 @@ accou_three_year_playable_pulse = {
 		basic_is_valid_for_yearly_events_trigger = yes
 	}
 
-	random_events = {
-		100 = accou_marriage.0001 # Courtier Requests to Marry
-		100 = accou_invite.0001 # Courtier Recommends an Acquaintance
+	events = {
+		accou_marriage.0001 # Courtier Requests to Marry
+	}
+}
+
+accou_three_year_invite = {
+	trigger = {
+		trigger_if = {
+			limit = { is_ai = no }
+			has_game_rule = accou_invite_event_frequency_player_3y
+		}
+		trigger_else = {
+			OR = {
+				AND = {
+					has_game_rule = accou_invite_event_frequency_ai_3y
+					highest_held_title_tier < tier_duchy
+				}
+				AND = {
+					has_game_rule = accou_invite_event_frequency_ai_5y
+					highest_held_title_tier >= tier_duchy
+				}
+			}
+		}
+		basic_is_valid_for_yearly_events_trigger = yes
+	}
+
+	events = {
+		accou_invite.0001 # Courtier Recommends an Acquaintance
 	}
 }
 
@@ -67,11 +177,13 @@ accou_three_year_playable_pulse = {
 five_year_playable_pulse = {
 	on_actions = {
 		delay = { days = { 8 188 } }
-		accou_five_year_playable_pulse
+		accou_five_year_marriage
+		delay = { days = { 8 188 } }
+		accou_five_year_invite
 	}
 }
 
-accou_five_year_playable_pulse = {
+accou_five_year_marriage = {
 	trigger = {
 		trigger_if = {
 			limit = { is_ai = no }
@@ -84,9 +196,26 @@ accou_five_year_playable_pulse = {
 		basic_is_valid_for_yearly_events_trigger = yes
 	}
 
-	random_events = {
-		100 = accou_marriage.0001 # Courtier Requests to Marry
-		100 = accou_invite.0001 # Courtier Recommends an Acquaintance
+	events = {
+		accou_marriage.0001 # Courtier Requests to Marry
+	}
+}
+
+accou_five_year_invite = {
+	trigger = {
+		trigger_if = {
+			limit = { is_ai = no }
+			has_game_rule = accou_invite_event_frequency_player_5y
+		}
+		trigger_else = {
+			has_game_rule = accou_invite_event_frequency_ai_5y
+			highest_held_title_tier < tier_duchy
+		}
+		basic_is_valid_for_yearly_events_trigger = yes
+	}
+
+	events = {
+		accou_invite.0001 # Courtier Recommends an Acquaintance
 	}
 }
 

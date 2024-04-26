@@ -5,6 +5,10 @@
 
 	default = accou_event_frequency_player_1y
 
+	accou_event_frequency_player_q = {
+		flag = GG_can_change_rule
+	}
+
 	accou_event_frequency_player_1y = {
 		flag = GG_can_change_rule
 	}
@@ -29,6 +33,10 @@ accou_event_frequency_ai = {
 
 	default = accou_event_frequency_ai_3y
 
+	accou_event_frequency_ai_1y = {
+		flag = GG_can_change_rule
+	}
+
 	accou_event_frequency_ai_3y = {
 		flag = GG_can_change_rule
 	}
@@ -38,6 +46,90 @@ accou_event_frequency_ai = {
 	}
 
 	accou_event_frequency_ai_never = {
+		flag = GG_can_change_rule
+	}
+}
+
+accou_invite_event_frequency_player = {
+	categories = {
+		accou_active_courtiers tweaks historicity
+	}
+
+	default = accou_invite_event_frequency_player_1y
+
+	accou_invite_event_frequency_player_q = {
+		flag = GG_can_change_rule
+	}
+
+	accou_invite_event_frequency_player_1y = {
+		flag = GG_can_change_rule
+	}
+
+	accou_invite_event_frequency_player_3y = {
+		flag = GG_can_change_rule
+	}
+
+	accou_invite_event_frequency_player_5y = {
+		flag = GG_can_change_rule
+	}
+
+	accou_invite_event_frequency_player_never = {
+		flag = GG_can_change_rule
+	}
+}
+
+accou_invite_event_frequency_ai = {
+	categories = {
+		accou_active_courtiers tweaks historicity
+	}
+
+	default = accou_invite_event_frequency_ai_5y
+
+	accou_invite_event_frequency_ai_1y = {
+		flag = GG_can_change_rule
+	}
+
+	accou_invite_event_frequency_ai_3y = {
+		flag = GG_can_change_rule
+	}
+
+	accou_invite_event_frequency_ai_5y = {
+		flag = GG_can_change_rule
+	}
+
+	accou_invite_event_frequency_ai_never = {
+		flag = GG_can_change_rule
+	}
+}
+
+accou_guardian_events = {
+	categories = {
+		accou_active_courtiers tweaks historicity
+	}
+
+	default = accou_guardian_events_enabled
+
+	accou_guardian_events_enabled = {
+		flag = GG_can_change_rule
+	}
+
+	accou_guardian_events_disabled = {
+		flag = GG_can_change_rule
+	}
+}
+
+accou_courtier_events = {
+	categories = {
+		accou_active_courtiers tweaks historicity
+	}
+
+	default = accou_courtier_events_enabled
+
+	accou_courtier_events_enabled = {
+		flag = GG_can_change_rule
+	}
+
+	accou_courtier_events_disabled = {
 		flag = GG_can_change_rule
 	}
 }
