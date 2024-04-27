@@ -10,7 +10,7 @@ I personally find the above aspects to be tedious, unrealistic, and underwhelmin
 
 This mod attempts to address these drawbacks by enabling courtiers to actively search for spouses by themselves and only ask their liege for approval, as well as recommend characters to be invited by their liege, thereby reducing the effort for the player, improving the quality of AI talent pools, and also contributing to better roleplaying and immersion.
 
-The main feature of this mod are the 2 new events [b]Courtier Requests to Marry[/b] and [b]Courtier Recommends an Acquaintance[/b]. They are triggered (with 50% chance each) for count or higher rulers, every year for players and every 1 to 3 years for the AI by default. These event frequencies can be changed via game rules.
+The main feature of this mod are the 2 new events [b]Courtier Requests to Marry[/b] and [b]Courtier Recommends an Acquaintance[/b]. They are triggered for count or higher rulers, every year for players and every 1 to 5 years for the AI by default. These event frequencies can be changed via game rules.
 
 When these event fire, two characters are selected using appropriate eligibility criteria that can be further configured via game rules:
 [list]
@@ -28,7 +28,9 @@ The final candidate is always the highest [i]quality[/i] candidate among all eli
 
 Finally, the courtier's liege must approve the request or accept the recommendation. While marriage candidates are not automatically a good choice for their liege, invitation candidates usually are. AI rulers consider their opinion of the courtier and the candidate, family and other relations, the candidate quality, and are they better than other options for any councillor or court positions, knight, or commander. Players can take these into account as well, since they are listed in the event description.
 
-To make it more convenient for players to trigger the above events, this mod also adds the 2 new interactions [b]Ask to Find Spouse[/b] and [b]Find Someone to Invite to Court[/b].
+This mod introduces also a [b]Courtier Suggests a Guardian[/b] event. It is triggered on every birthday for eligible courtier children that don't have a guardian. When it fires, a candidate to be assigned as a guardian and a courtier to suggest it are selected among all eligible courtiers. The quality of guardian candidates captures their effectiveness as guardians and is evaluated based on their skills, traits, perks, faith, and culture.
+
+To make it more convenient for players to trigger the above events, this mod also adds the 2 new interactions [b]Ask to Find Spouse[/b], [b]Find Someone to Invite to Court[/b], and [b]Find Guardian[/b].
 
 Even if AI rulers get better talent pools, they tend to stick to councillors or court position holders with worse skills or aptitude than available. For this reason, and also to remind players, this mod also adds the new [b]Courtier Jostles for Position[/b] event. It is triggered after a candidate has joined a court if they are better than other options for a councillor or court position. In it, the candidate requests to be appointed to that position, and their liege can accept or decline. The AI decision is based on their opinion of both the candidate and the [i]incumbent[/i], family and other relations, how much better is the candidate, is the incumbent councillor a powerful vassal, and other factors.
 

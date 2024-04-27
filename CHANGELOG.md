@@ -1,5 +1,21 @@
 # Changelog
 
+## Version 0.5.0
+
+### Interactions
+
+* Added *Find Guardian* interaction to initiate the guardianship event chain for (`accou_find_guardian_interaction`).
+
+### Events
+
+* Added guardianship event chain (*Courtier Suggests a Guardian*, etc.) (`accou_guardian.0001` to `accou_guardian.0004`).
+
+### Game Rules
+
+* Make marriage events and invite to court events use independent schedules and add game rules for the frequency of invite to court events (*Invitation Event Frequency for Players* and *Invitation Event Frequency for AI Rulers*).
+* Add game rules to enable / disable guardianship and courtier events (*Guardianship Events*, *Courtier Jostling Events*).
+* Add new *Every quarter* setting to frequency game rules.
+
 ## Version 0.4.0
 
 ### Interactions
