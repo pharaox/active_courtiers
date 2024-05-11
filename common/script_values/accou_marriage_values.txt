@@ -309,6 +309,17 @@ accou_spouse_personality_value = {
 accou_quick_marriage_ai_accept_modifier_actor_value = {
 	value = 0
 
+	# Abandoned their marriage
+	if = {
+		limit = {
+			scope:actor = { 
+				has_character_modifier = abandoned_marriage_modifier
+			}
+			scope:actor = scope:secondary_actor
+		}
+		add = -150
+	}
+
 	# Perks
 	if = {
 		limit = {

@@ -1,5 +1,11 @@
 # Changelog
 
+## Version 0.5.1
+
+### Compatibility
+
+* Adapted to CK3 1.12.5
+
 ## Version 0.5.0
 
 ### Interactions
@@ -38,7 +44,7 @@
 
 ### Compatibility
 
-* Adapted to CK3 1.12
+* Adapted to CK3 1.12.2.1
 
 ## Version 0.2.2
 
