@@ -116,6 +116,9 @@ accou_could_marry_character_trigger = {
 			target = $CHARACTER$
 		}
 	}
+
+	# Not the same character
+	NOT = { this = $CHARACTER$ }
 }
 
 # Is this character a valid marriage recipient
