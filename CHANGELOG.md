@@ -1,5 +1,11 @@
 # Changelog
 
+## Version 0.5.2
+
+### Bug Fixes
+
+* Courtiers may no longer marry themselves if same-sex marriage is enabled.
+
 ## Version 0.5.1
 
 ### Compatibility
