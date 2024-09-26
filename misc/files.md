@@ -25,6 +25,9 @@
       * `accou_is_valid_guardian_recipient_vanilla_trigger`
       * `accou_is_valid_child_recipient_vanilla_trigger`
 * `common/character_interactions/00_marriage_interactions.txt`
+  * `arrange_marriage_interaction`, `on_accept` section
+    * => `common/scripted_effects/accou_marriage_effects.txt`
+      * `accou_arrange_marriage_on_accept_effect`
   * `arrange_marriage_interaction`,`is_shown` / `is_valid_showing_failures_only` / `has_valid_target_showing_failures_only` sections
     * => `common/scripted_triggers/accou_marriage_triggers.txt`
       * `accou_is_valid_marriage_target_vanilla_trigger`
@@ -54,3 +57,6 @@
   * `marriage_ai_accept_modifier`
     * => `common/script_values/accou_marriage_values.txt`
       * `accou_quick_marriage_ai_accept_modifier_value`
+* `common/scripted_triggers/00_court_position_triggers.txt`
+  * Court position validity triggers
+    * => `common/scripted_triggers/accou_court_position_triggers.txt`

@@ -4,3 +4,4 @@ common/character_interactions/00_marriage_interactions.txt
 common/council_positions/00_council_positions.txt
 common/court_positions/types/00_court_positions.txt
 common/scripted_modifiers/00_marriage_scripted_modifiers.txt
+common/scripted_triggers/00_court_position_triggers.txt
