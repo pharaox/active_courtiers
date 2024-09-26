@@ -4,12 +4,12 @@
 
 ### Compatibility
 
-* Adapt to CK3 1.13.0.3
+* Adapted to CK3 1.13.0.3
 * Added support for 3 new court positions: Charioteer, Bookmaker, Akolouthos
 
 ### Performance
 
-* Landless AI character have less frequent events and and use smaller search range
+* Landless AI characters now have less frequent events and and use smaller search range.
 
 ## Version 0.5.2
 
