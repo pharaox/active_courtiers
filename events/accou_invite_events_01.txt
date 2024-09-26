@@ -1,7 +1,7 @@
 ﻿namespace = accou_invite
 
 scripted_trigger accou_invite_0001_valid_liege_trigger = {
-	is_available = yes
+	accou_is_valid_event_liege_trigger = yes
 }
 
 scripted_trigger accou_invite_0001_valid_courtier_trigger = {
@@ -16,6 +16,7 @@ scripted_trigger accou_invite_0001_valid_courtier_trigger = {
 
 scripted_trigger accou_invite_0001_valid_invite_candidate_trigger = {
 	in_diplomatic_range = root
+	is_ruler = no
 
 	# Valid adult event participant
 	accou_is_valid_adult_event_participant_trigger = yes
@@ -107,7 +108,9 @@ accou_invite.0001 = {
 
 	immediate = {
 		# Get nearby characters
+		accou_get_nearby_rulers_effect = { RULERS = rulers }
 		accou_get_nearby_characters_effect = {
+			RULERS = rulers
 			PREDICATE = always
 			CHARACTERS = characters
 		}

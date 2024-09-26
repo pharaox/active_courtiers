@@ -14,8 +14,7 @@ accou_invite_someone_interaction = {
 
 	is_valid_showing_failures_only = {
 		scope:actor = {
-			is_available = yes
-			is_busy_in_events_localised = yes
+			accou_is_valid_event_liege_trigger = yes
 		}
 	}
 

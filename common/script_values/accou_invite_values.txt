@@ -228,7 +228,7 @@ accou_vanilla_court_position_traits_character_value = {
 		add = 1
 	}
 	if = {
-		limit = { has_trait = strong } # Wet Nurse
+		limit = { has_trait = strong } # Wet Nurse, Akolouthos
 		add = 1
 	}
 	if = {
@@ -248,12 +248,103 @@ accou_vanilla_court_position_traits_character_value = {
 		add = 1
 	}
 	if = {
-		limit = { has_trait = poet } # Court Jester, Chronicler
+		limit = { has_trait = poet } # Court Jester, Court Poet, Chronicler
+		add = 1
+	}
+	if = {
+		limit = { # Court Eunuch
+			OR = {
+				has_trait = eunuch
+				has_trait = beardless_eunuch
+			}
+		}
 		add = 1
 	}
 	if = {
 		limit = { has_completed_inspiration = yes } # Antiquarian
 		add = 2
+	}
+	if = {
+		limit = { has_trait = charioteer_blue } # Charioteer
+		add = {
+			value = 0
+			if = {
+				limit = {
+					has_trait_xp = { trait = charioteer_blue value >= 40 }
+				}
+				add = 1
+			}
+			if = {
+				limit = {
+					has_trait_xp = { trait = charioteer_blue value >= 90 }
+				}
+				add = 1
+			}
+		}
+	}
+	if = {
+		limit = { has_trait = charioteer_green } # Charioteer
+		add = {
+			value = 0
+			if = {
+				limit = {
+					has_trait_xp = { trait = charioteer_green value >= 40 }
+				}
+				add = 1
+			}
+			if = {
+				limit = {
+					has_trait_xp = { trait = charioteer_green value >= 90 }
+				}
+				add = 1
+			}
+		}
+	}
+	if = {
+		limit = { has_trait = charioteer_white } # Charioteer
+		add = {
+			value = 0
+			if = {
+				limit = {
+					has_trait_xp = { trait = charioteer_white value >= 40 }
+				}
+				add = 1
+			}
+			if = {
+				limit = {
+					has_trait_xp = { trait = charioteer_white value >= 90 }
+				}
+				add = 1
+			}
+		}
+	}
+	if = {
+		limit = { has_trait = charioteer_red } # Charioteer
+		add = {
+			value = 0
+			if = {
+				limit = {
+					has_trait_xp = { trait = charioteer_red value >= 40 }
+				}
+				add = 1
+			}
+			if = {
+				limit = {
+					has_trait_xp = { trait = charioteer_red value >= 90 }
+				}
+				add = 1
+			}
+		}
+	}
+
+	# Modifiers and flags
+	if = {
+		limit = { has_character_modifier = possessed_prophetic_visions } # Court Poet, Court Musician, Cave Hermit, Chronicler
+		add = 2
+	}
+	if = {
+		limit = { has_character_flag = best_knight_position } # Bodyguard, Champion, Akolouthos
+		add = 1
 	}
 
 	# Negative
@@ -306,6 +397,15 @@ accou_quick_invite_ai_accept_modifier_value = {
 		max = 25
 	}
 
+	# Stooge modifier
+	if = {
+		limit = {
+			has_variable = non_recruitable_var
+			var:non_recruitable_var = scope:actor
+		}
+		add = -200
+	}
+
 	# Current roles (simplified)
 	if = {
 		limit = { is_knight = yes }
@@ -341,6 +441,10 @@ accou_quick_invite_ai_accept_modifier_value = {
 		limit = { is_close_family_of = scope:actor }
 		add = 75
 	}
+	else_if = {
+		limit = { is_extended_family_of = scope:actor }
+		add = 30
+	}
 
 	if = {
 		limit = { is_spouse_of = scope:actor }
@@ -354,6 +458,10 @@ accou_quick_invite_ai_accept_modifier_value = {
 	if = {
 		limit = { this.house.house_head = scope:actor }
 		add = 30
+	}
+	if = {
+		limit = { this.top_liege = scope:actor }
+		add = 60
 	}
 
 	# Relations & relatives (with host)
@@ -438,6 +546,29 @@ accou_quick_invite_ai_accept_modifier_value = {
 		add = -500
 	}
 
+	# Eluding castrator
+	if = {
+		limit = {
+			is_adult = no
+			any_memory = {
+				has_memory_type = family_castration_fled_memory
+				memory_participant:castrator ?= {
+					this = scope:actor
+				}
+			}
+		}
+		add = -180
+	}
+
+	# Landed liege, unlanded actor
+	if = {
+		limit = {
+			liege ?= { is_landed = yes }
+			scope:actor = { is_landed = no }
+		}
+		add = -50
+	}
+
 	# Wandering characters (who aren't doing anything else)
 	if = {
 		limit = {
@@ -507,7 +638,10 @@ accou_quick_invite_ai_accept_modifier_value = {
 	# Actor's amenities increases acceptance
 	if = {
 		limit = {
-			scope:actor = { has_royal_court = yes }
+			scope:actor = { 
+				has_royal_court = yes
+				has_dlc_feature = royal_court
+			}
 		}
 		add = {
 			value = scope:actor.accou_court_lodging_standards_amenity_level_value
@@ -519,7 +653,10 @@ accou_quick_invite_ai_accept_modifier_value = {
 		limit = {
 			exists = liege
 			is_courtier_of = liege
-			liege = { has_royal_court = yes }
+			liege = {
+				has_royal_court = yes
+				has_dlc_feature = royal_court
+			}
 		}
 		add = {
 			value = liege.accou_court_lodging_standards_amenity_level_value
@@ -547,6 +684,19 @@ accou_quick_invite_ai_accept_modifier_value = {
 			value = scope:actor.house.house_unity_value
 			multiply = 0.5
 		}
+	}
+
+	# Imperial eunuchs
+	if = {
+		limit = {
+			is_eunuch_trigger = yes
+			liege ?= {
+				government_allows = administrative
+				primary_title.tier = tier_empire
+				culture = { has_cultural_parameter = can_appoint_chief_eunuch }
+			}
+		}
+		add = -1000
 	}
 }
 

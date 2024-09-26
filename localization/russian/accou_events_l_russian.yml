@@ -135,5 +135,3 @@
  accou_guardian_description.tutor.desc: "учитель (#V [ROOT.Char.GetSkill('learning')]#! [learning|E])"
 
  accou_empty: ""
-
- court_cave_hermit_court_position: "$court_cave_hermit_position$"

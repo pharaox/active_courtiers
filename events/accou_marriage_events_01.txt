@@ -1,7 +1,7 @@
 ﻿namespace = accou_marriage
 
 scripted_trigger accou_marriage_0001_valid_liege_trigger = {
-	is_available = yes
+	accou_is_valid_event_liege_trigger = yes
 }
 
 scripted_trigger accou_marriage_0001_valid_courtier_trigger = {
@@ -118,9 +118,10 @@ scripted_effect accou_marriage_0001_on_accept_effect = {
 	scope:candidate = { save_scope_as = secondary_recipient }
 	save_scope_value_as = { name = hook value = no }
 	save_scope_value_as = { name = grand_wedding_promise value = no }
+	save_scope_value_as = { name = influence_send_option value = no }
 
 	# Execute marriage interaction effect
-	marriage_interaction_on_accept_effect = yes
+	accou_arrange_marriage_on_accept_effect = yes
 }
 
 scripted_effect accou_marriage_0001_on_approve_effect = {
@@ -255,16 +256,22 @@ accou_marriage.0001 = {
 		}
 
 		# Get nearby characters
+		if = {
+			limit = { exists = scope:courtier }
+			accou_get_nearby_rulers_effect = { RULERS = rulers }
+		}
 		scope:courtier ?= {
 			if = {
 				limit = { allowed_to_marry_same_sex_trigger = yes }
 				accou_get_nearby_characters_effect = {
+					RULERS = rulers
 					PREDICATE = always
 					CHARACTERS = characters
 				}
 			}
 			else = {
 				accou_get_nearby_characters_effect = {
+					RULERS = rulers
 					PREDICATE = accou_is_opposite_sex_trigger
 					CHARACTERS = characters
 				}
@@ -307,6 +314,7 @@ accou_marriage.0001 = {
 		# Save option scopes used by marriage_ai_accept_modifier
 		save_temporary_scope_value_as = { name = hook value = no }
 		save_temporary_scope_value_as = { name = grand_wedding_promise value = no }
+		save_temporary_scope_value_as = { name = influence_send_option value = no }
 		scope:courtier ?= {
 			if = {
 				limit = { is_female = yes }

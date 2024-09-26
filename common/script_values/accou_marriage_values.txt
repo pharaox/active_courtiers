@@ -441,33 +441,66 @@ accou_quick_marriage_ai_accept_modifier_value = {
 
 	# Clan contract: Marriage Favor (not likely, MR 99.99% if removed)
 
-	# Tier differences (simplified)
+	# Tier differences
 	if = {
 		limit = {
-			scope:secondary_recipient = {
-				OR = {
-					is_close_or_extended_family_of = scope:recipient
-					accou_is_same_dynasty_trigger = { CHARACTER = scope:recipient }
-				}
+			scope:actor = {
+				is_landless_adventurer = no
 			}
 		}
-		if = {
-			limit = {
-				scope:secondary_actor = {
-					is_close_or_extended_family_of = scope:actor
-				}
+		add = marry_close_family_tiers_acceptance_value
+	}
+
+	# Government differences
+	if = {
+		limit = {
+			scope:actor = {
+				government_has_flag = government_is_administrative
 			}
-			add = {
-				value = scope:actor.highest_held_title_tier
-				subtract = scope:recipient.highest_held_title_tier
-				multiply = 40 # Simplified
+			scope:recipient = {
+				NOT = { government_has_flag = government_is_administrative }
 			}
 		}
-		else = {
-			add = {
-				value = scope:secondary_actor.highest_held_title_tier
-				subtract = scope:recipient.highest_held_title_tier
-				multiply = 40
+		add = -15
+	}
+	else_if = {
+		limit = {
+			scope:actor = {
+				NOT = { government_has_flag = government_is_administrative }
+			}
+			scope:recipient = {
+				government_has_flag = government_is_administrative
+			}
+		}
+		add = -15
+	}
+	if = {
+		limit = {
+			scope:actor = {
+				government_has_flag = government_is_landless_adventurer
+			}
+			scope:recipient = {
+				NOT = { government_has_flag = government_is_landless_adventurer }
+			}
+		}
+		add = {
+			if = {
+				limit = {
+					scope:secondary_recipient = {
+						is_close_or_extended_family_of = scope:recipient
+					}
+				}
+				value = -50
+			}
+			else_if = {
+				limit = {
+					exists = scope:recipient.house
+					scope:secondary_recipient.house ?= scope:recipient.house
+				}
+				value = -30
+			}
+			else = {
+				value = -20
 			}
 		}
 	}
@@ -517,6 +550,7 @@ accou_quick_marriage_ai_accept_modifier_value = {
 		limit = {
 			scope:actor = {
 				has_royal_court = yes
+				has_dlc_feature = royal_court
 			}
 			NOT = { scope:actor.top_liege = scope:recipient.top_liege }
 			scope:ruler_with_royal_court ?= {
@@ -534,6 +568,16 @@ accou_quick_marriage_ai_accept_modifier_value = {
 		else = {
 			add = 5
 		}
+	}
+
+	# Contact list for Laamps
+	if = {
+		limit = {
+			scope:recipient = {
+				is_contact_of = scope:actor
+			}
+		}
+		add = 25
 	}
 
 	# Dynasty prestige levels
@@ -863,7 +907,19 @@ accou_quick_marriage_ai_accept_modifier_value = {
 		}
 		add = {
 			value = scope:opinion_of_secondary_recipient
-			multiply = -0.15
+			multiply = {
+				if = {
+					limit = {
+						scope:actor = {
+							is_landless_adventurer = yes
+						}
+					}
+					value = -1
+				}
+				else = {
+					value = -0.15
+				}
+			}
 			if = {
 				limit = { scope:opinion_of_secondary_recipient <= 0 }
 				floor = yes
@@ -907,7 +963,10 @@ accou_quick_marriage_ai_accept_modifier_value = {
 	# Court grandeur
 	scope:actor = {
 		if = {
-			limit = { has_royal_court = yes }
+			limit = { 
+				has_royal_court = yes
+				has_dlc_feature = royal_court
+			}
 			if = {
 				limit = { court_grandeur_current_level > court_grandeur_minimum_expected_level }
 				add = ep1_court_grandeur_marriage_acceptance_value
@@ -928,6 +987,17 @@ accou_quick_marriage_ai_accept_modifier_value = {
 			}
 		}
 		add = -50
+	}
+
+	# Wedding Ceremonies
+	if = {
+		limit = {
+			scope:actor.house ?= {
+				has_variable = intermarrying_with_var
+				var:intermarrying_with_var = scope:recipient.house
+			}
+		}
+		add = 20
 	}
 
 	# Struggles (MR 99.06% if removed)
@@ -1073,6 +1143,8 @@ accou_quick_marriage_ai_accept_modifier_value = {
 	}
 
 	# Stuggles piety cost (not possible, skipped)
+
+	# Influence option (not possible, skipped)
 
 	# Diarchies (not likely, skipped )
 

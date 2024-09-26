@@ -76,6 +76,24 @@ scripted_effect accou_courtier_0001_on_accept_effect = {
 			}
 		}
 	}
+	else_if = {
+		limit = {
+			exists = scope:court_position
+			is_ai = yes
+		}
+		scope:candidate = {
+			set_variable = {
+				name = petition_court_position_liege
+				value = root
+				years = 1
+			}
+			set_variable = {
+				name = petition_court_position_role
+				value = scope:court_position
+				years = 1
+			}
+		}
+	}
 }
 
 scripted_effect accou_courtier_0001_on_decline_effect = {
@@ -104,7 +122,7 @@ accou_courtier.0001 = {
 
 	trigger = {
 		has_game_rule = accou_courtier_events_enabled
-		is_available = yes
+		accou_is_valid_event_liege_trigger = yes
 
 		scope:candidate = {
 			is_courtier_of = root
@@ -210,7 +228,7 @@ accou_courtier.0002 = {
 
 	trigger = {
 		has_game_rule = accou_courtier_events_enabled
-		is_available = yes
+		accou_is_valid_event_liege_trigger = yes
 
 		scope:candidate = {
 			is_courtier_of = root

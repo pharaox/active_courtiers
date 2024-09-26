@@ -18,6 +18,10 @@ accou_is_valid_invite_recipient_vanilla_trigger = {
 		location = { is_sea_province = yes }
 	}
 
+	OR = {
+		NOT = { exists = liege }
+		NOT = { has_variable = invite_to_court_cooldown }
+	}
 	save_temporary_scope_as = character
 	can_recruit_character_to_court_trigger = {
 		RECRUITER = $ACTOR$
@@ -41,11 +45,13 @@ accou_could_accept_invite_trigger = {
 		has_relation_lover = $ACTOR$
 		has_relation_friend = $ACTOR$
 		is_close_family_of = $ACTOR$
+		is_extended_family_of = $ACTOR$
 		is_spouse_of = $ACTOR$
 
-		# Actor is their dynasty or house head
+		# Actor is their dynasty or house head, or top liege
 		dynasty.dynast = $ACTOR$
 		house.house_head = $ACTOR$
+		top_liege = $ACTOR$
 
 		# Wandering character located in the actor's realm
 		AND = {
@@ -76,6 +82,7 @@ accou_could_accept_invite_trigger = {
 accou_could_accept_invite_royal_court_trigger = {
 	$ACTOR$ = {
 		has_royal_court = yes
+		has_dlc_feature = royal_court
 	}
 	trigger_if = {
 		limit = { exists = liege } # Could get 25 if they hate them (opinion -50)

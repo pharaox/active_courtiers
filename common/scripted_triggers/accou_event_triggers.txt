@@ -1,6 +1,26 @@
-﻿accou_is_valid_event_participant_trigger = {
+﻿accou_is_valid_event_liege_trigger = {
 	# Available
-	accou_is_available_ai_trigger = yes
+	trigger_if = {
+		limit = { is_landless_adventurer = yes }
+		is_available_allow_travelling = yes
+	}
+	trigger_else = {
+		is_available = yes
+	}
+	is_busy_in_events_localised = yes
+}
+
+accou_is_valid_event_participant_trigger = {
+	# Available
+	trigger_if = {
+		limit = {
+			liege ?= { is_landless_adventurer = yes }
+		}
+		accou_is_available_ai_allow_travelling_trigger = yes
+	}
+	trigger_else = {
+		accou_is_available_ai_trigger = yes
+	}
 	is_busy_in_events_localised = yes
 
 	# Health conditions
@@ -22,13 +42,17 @@ accou_is_valid_child_event_participant_trigger = {
 }
 
 accou_is_available_ai_trigger = {
+	accou_is_available_ai_allow_travelling_trigger = yes
+	is_travelling = no
+}
+
+accou_is_available_ai_allow_travelling_trigger = {
 	is_alive = yes
 	is_ai = yes
 	is_imprisoned = no
 	is_incapable = no
 	has_contagious_deadly_disease_trigger = no
 	is_in_army = no
-	is_travelling = no
 	NOR = {
 		exists = involved_activity
 		has_variable = gone_adventuring

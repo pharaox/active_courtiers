@@ -6,6 +6,13 @@ accou_invite_to_court_on_accept_effect = {
 
 accou_invite_to_court_on_accept_vanilla_effect = {
 	hidden_effect = {
+		scope:recipient = {
+			set_variable = {
+				name = invite_to_court_cooldown
+				years = 5
+			}
+		}
+
 		if = {
 			limit = {
 				exists = scope:recipient.liege
@@ -44,12 +51,6 @@ accou_invite_to_court_on_accept_vanilla_effect = {
 				limit = { always = scope:hook }
 				scope:actor = {
 					use_hook = scope:recipient
-				}
-			}
-
-			scope:actor = {
-				stress_impact = {
-					shy = minor_stress_impact_gain
 				}
 			}
 		}

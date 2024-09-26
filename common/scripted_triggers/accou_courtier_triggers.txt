@@ -51,6 +51,30 @@ accou_can_be_better_court_physician_trigger = {
 	}
 }
 
+accou_can_be_better_charioteer_trigger = {
+	accou_can_be_better_court_position_trigger = {
+		TYPE = charioteer_court_position
+		NAME = charioteer
+		LIEGE = $LIEGE$
+	}
+}
+
+accou_can_be_better_bookmaker_trigger = {
+	accou_can_be_better_court_position_trigger = {
+		TYPE = bookmaker_court_position
+		NAME = bookmaker
+		LIEGE = $LIEGE$
+	}
+}
+
+accou_can_be_better_akolouthos_trigger = {
+	accou_can_be_better_court_position_trigger = {
+		TYPE = akolouthos_court_position
+		NAME = akolouthos
+		LIEGE = $LIEGE$
+	}
+}
+
 accou_can_be_better_cultural_emissary_trigger = {
 	accou_can_be_better_court_position_trigger = {
 		TYPE = cultural_emissary_court_position
@@ -254,10 +278,10 @@ accou_can_be_better_court_artificer_trigger = {
 	}
 }
 
-accou_can_be_better_court_cave_hermit_trigger = {
+accou_can_be_better_cave_hermit_trigger = {
 	accou_can_be_better_court_position_trigger = {
-		TYPE = court_cave_hermit_position
-		NAME = court_cave_hermit
+		TYPE = cave_hermit_court_position
+		NAME = cave_hermit
 		LIEGE = $LIEGE$
 	}
 }
@@ -450,6 +474,15 @@ accou_can_apply_for_court_position_option_trigger = {
 		flag:court_physician = {
 			accou_can_apply_for_court_physician_trigger = { LIEGE = $LIEGE$ }
 		}
+		flag:charioteer = {
+			accou_can_apply_for_charioteer_trigger = { LIEGE = $LIEGE$ }
+		}
+		flag:bookmaker = {
+			accou_can_apply_for_bookmaker_trigger = { LIEGE = $LIEGE$ }
+		}
+		flag:akolouthos = {
+			accou_can_apply_for_akolouthos_trigger = { LIEGE = $LIEGE$ }
+		}
 		flag:cultural_emissary = {
 			accou_can_apply_for_cultural_emissary_trigger = { LIEGE = $LIEGE$ }
 		}
@@ -525,8 +558,8 @@ accou_can_apply_for_court_position_option_trigger = {
 		flag:court_artificer = {
 			accou_can_apply_for_court_artificer_trigger = { LIEGE = $LIEGE$ }
 		}
-		flag:court_cave_hermit = {
-			accou_can_apply_for_court_cave_hermit_trigger = { LIEGE = $LIEGE$ }
+		flag:cave_hermit = {
+			accou_can_apply_for_cave_hermit_trigger = { LIEGE = $LIEGE$ }
 		}
 		flag:master_assassin = {
 			accou_can_apply_for_master_assassin_trigger = { LIEGE = $LIEGE$ }
@@ -588,6 +621,27 @@ accou_can_apply_for_court_chaplain_trigger = {
 accou_can_apply_for_court_physician_trigger = {
 	accou_can_apply_for_court_position_trigger = {
 		TYPE = court_physician_court_position
+		LIEGE = $LIEGE$
+	}
+}
+
+accou_can_apply_for_charioteer_trigger = {
+	accou_can_apply_for_court_position_trigger = {
+		TYPE = charioteer_court_position
+		LIEGE = $LIEGE$
+	}
+}
+
+accou_can_apply_for_bookmaker_trigger = {
+	accou_can_apply_for_court_position_trigger = {
+		TYPE = bookmaker_court_position
+		LIEGE = $LIEGE$
+	}
+}
+
+accou_can_apply_for_akolouthos_trigger = {
+	accou_can_apply_for_court_position_trigger = {
+		TYPE = akolouthos_court_position
 		LIEGE = $LIEGE$
 	}
 }
@@ -770,9 +824,9 @@ accou_can_apply_for_court_artificer_trigger = {
 	}
 }
 
-accou_can_apply_for_court_cave_hermit_trigger = {
+accou_can_apply_for_cave_hermit_trigger = {
 	accou_can_apply_for_court_position_trigger = {
-		TYPE = court_cave_hermit_position
+		TYPE = cave_hermit_court_position
 		LIEGE = $LIEGE$
 	}
 }

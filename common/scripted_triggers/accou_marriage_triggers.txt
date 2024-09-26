@@ -135,6 +135,24 @@ accou_is_valid_marriage_recipient_vanilla_trigger = {
 	NOT = {
 		is_at_war_with = $ACTOR$
 	}
+
+	# Allow landless adventurers to marry only within their camp, or with contact list courtiers
+	trigger_if = {
+		limit = {
+			$ACTOR$ = {
+				is_landless_adventurer = yes
+			}
+		}
+		OR = {
+			this = $ACTOR$
+			$ACTOR$ = {
+				is_target_in_variable_list = {
+					name = contact_list_marriage
+					target = prev
+				}
+			}
+		}
+	}
 }
 
 accou_is_of_major_interest_trigger = {
@@ -179,7 +197,7 @@ accou_is_of_minor_interest_trigger = {
 	}
 }
 
-accou_is_landed_ruler_within_range_trigger = {
+accou_is_playable_character_within_range_trigger = {
 	capital_province ?= {
 		squared_distance = {
 			target = $LOCATION$

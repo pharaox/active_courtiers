@@ -1,7 +1,7 @@
 ﻿namespace = accou_guardian
 
 scripted_trigger accou_guardian_0001_valid_liege_trigger = {
-	is_available = yes
+	accou_is_valid_event_liege_trigger = yes
 }
 
 scripted_trigger accou_guardian_0001_valid_courtier_trigger = {

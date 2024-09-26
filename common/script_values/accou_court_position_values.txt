@@ -3,6 +3,85 @@
 	# Checking outbreak intensity is skipped on purpose
 }
 
+accou_charioteer_candidate_score_value = {
+	value = 100
+
+	# More likely for very generous characters
+	if = {
+		limit = {
+			ai_greed <= -75
+		}
+		add = 25
+	}
+
+	# Lots of gold to spend on inspirations!
+	if = {
+		limit = {
+			gold >= 500
+			monthly_character_income > monthly_character_expenses_plus_fourty_percent
+		}
+		add = 50
+	}
+
+	# Emperor should always have one
+	if = {
+		limit = {
+			highest_held_title_tier >= tier_empire
+		}
+		add = 100
+	}
+
+	# Most governors should have them
+	if = {
+		limit = {
+			has_trait = governor
+		}
+		add = 50
+	}
+}
+
+accou_bookmaker_candidate_score_value = {
+	value = 100
+
+	# More likely for very generous characters
+	if = {
+		limit = {
+			ai_greed <= -75
+		}
+		add = 25
+	}
+
+	# Emperor should always have one
+	if = {
+		limit = {
+			highest_held_title_tier >= tier_empire
+		}
+		add = 100
+	}
+}
+
+accou_akolouthos_candidate_score_value = {
+	value = 50
+
+	# More likely if you're scared all the time
+	if = {
+		limit = {
+			has_trait = paranoid
+		}
+		add = 50
+	}
+
+	if = {
+		limit = {
+			number_maa_regiments_of_base_type = {
+				type = heavy_infantry
+				value >= 5
+			}
+		}
+		add = 50
+	}
+}
+
 accou_cultural_emissary_candidate_score_value = {
 	value = 100
 }
@@ -431,7 +510,7 @@ accou_court_artificer_candidate_score_value = {
 	}
 }
 
-accou_court_cave_hermit_candidate_score_value = {
+accou_cave_hermit_candidate_score_value = {
 	value = 50
 
 	# More likely for very generous characters
