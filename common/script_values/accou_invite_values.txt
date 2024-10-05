@@ -254,7 +254,7 @@ accou_vanilla_court_position_traits_character_value = {
 	if = {
 		limit = { # Court Eunuch
 			OR = {
-				has_trait = eunuch
+				has_trait = eunuch_1
 				has_trait = beardless_eunuch
 			}
 		}
