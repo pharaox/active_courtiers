@@ -257,23 +257,48 @@ accou_marriage.0001 = {
 
 		# Get nearby characters
 		if = {
-			limit = { exists = scope:courtier }
-			accou_get_nearby_rulers_effect = { RULERS = rulers }
-		}
-		scope:courtier ?= {
+			limit = { is_landless_adventurer = no }
 			if = {
-				limit = { allowed_to_marry_same_sex_trigger = yes }
-				accou_get_nearby_characters_effect = {
-					RULERS = rulers
-					PREDICATE = always
-					CHARACTERS = characters
+				limit = { exists = scope:courtier }
+				accou_get_nearby_rulers_effect = { RULERS = rulers }
+			}
+			scope:courtier ?= {
+				if = {
+					limit = { allowed_to_marry_same_sex_trigger = yes }
+					accou_get_nearby_characters_effect = {
+						RULERS = rulers
+						PREDICATE = always
+						CHARACTERS = characters
+					}
+				}
+				else = {
+					accou_get_nearby_characters_effect = {
+						RULERS = rulers
+						PREDICATE = accou_is_opposite_sex_trigger
+						CHARACTERS = characters
+					}
 				}
 			}
-			else = {
-				accou_get_nearby_characters_effect = {
-					RULERS = rulers
-					PREDICATE = accou_is_opposite_sex_trigger
-					CHARACTERS = characters
+		}
+		else = {
+			# LA followers can only marry within the camp
+			scope:courtier ?= {
+				save_temporary_scope_as = character
+				if = {
+					limit = { allowed_to_marry_same_sex_trigger = yes }
+					root = {
+						every_courtier = {
+							add_to_temporary_list = character
+						}
+					}
+				}
+				else = {
+					root = {
+						every_courtier = {
+							limit = { accou_is_opposite_sex_trigger = yes }
+							add_to_temporary_list = character
+						}
+					}
 				}
 			}
 		}

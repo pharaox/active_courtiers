@@ -2,6 +2,7 @@
 
 scripted_trigger accou_invite_0001_valid_liege_trigger = {
 	accou_is_valid_event_liege_trigger = yes
+	is_landless_adventurer = no
 }
 
 scripted_trigger accou_invite_0001_valid_courtier_trigger = {
