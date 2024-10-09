@@ -16,6 +16,6 @@ accou_can_appoint_spymaster_trigger = {
 
 accou_can_appoint_court_chaplain_trigger = {
 	faith = {
-		has_doctrine_parameter = clerical_appointment_ruler
+		NOT = { has_doctrine_parameter = clerical_appointment_fixed }
 	}
 }
