@@ -1,5 +1,15 @@
 # Changelog
 
+## Version 0.6.1
+
+### Compatibility
+
+* Adapted to CK3 1.13.1
+
+### Performance
+
+* Improved performance by avoiding expensive logic for landless adventurers.
+
 ## Version 0.6.0
 
 ### Compatibility
