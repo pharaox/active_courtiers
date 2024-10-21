@@ -288,7 +288,7 @@ accou_marriage.0001 = {
 					limit = { allowed_to_marry_same_sex_trigger = yes }
 					root = {
 						every_courtier = {
-							add_to_temporary_list = character
+							add_to_temporary_list = characters
 						}
 					}
 				}
@@ -296,7 +296,7 @@ accou_marriage.0001 = {
 					root = {
 						every_courtier = {
 							limit = { accou_is_opposite_sex_trigger = yes }
-							add_to_temporary_list = character
+							add_to_temporary_list = characters
 						}
 					}
 				}
