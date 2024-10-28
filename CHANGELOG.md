@@ -1,5 +1,11 @@
 # Changelog
 
+## Version 0.6.2
+
+### Bug Fixes
+
+* Fixed marriage events not firing for landless adventurers.
+
 ## Version 0.6.1
 
 ### Compatibility
