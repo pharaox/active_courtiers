@@ -216,7 +216,8 @@ As a recommendation, if you don't notice any performance issues, just leave the 
 ## Links
 
 * [Steam Workshop](https://steamcommunity.com/sharedfiles/filedetails/?id=3157170996)
-* [Active Courtiers AGOT Compatibility](https://steamcommunity.com/sharedfiles/filedetails/?id=3166721580)
+* [AGOT Compatibility](https://steamcommunity.com/sharedfiles/filedetails/?id=3166721580)
 * [Chinese Translation (by @牛奶大魔王)](https://steamcommunity.com/sharedfiles/filedetails/?id=2903983628)
 * [Portuguese Translation (by @Alin)](https://steamcommunity.com/sharedfiles/filedetails/?id=3201197071)
+* [German Translation (by @finallyciv)](https://steamcommunity.com/sharedfiles/filedetails/?id=3355568022)
 * [GitHub Repository](https://github.com/pharaox/active_courtiers)
