@@ -1,8 +1,8 @@
-version="0.6.2"
+version="0.7.0"
 tags={
 	"Gameplay"
 	"Character Interactions"
 	"Events"
 }
 name="Active Courtiers"
-supported_version="1.13.*"
+supported_version="1.14.*"
