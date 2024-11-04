@@ -312,7 +312,7 @@ accou_quick_marriage_ai_accept_modifier_actor_value = {
 	# Abandoned their marriage
 	if = {
 		limit = {
-			scope:actor = { 
+			scope:actor = {
 				has_character_modifier = abandoned_marriage_modifier
 			}
 			scope:actor = scope:secondary_actor
@@ -428,6 +428,29 @@ accou_quick_marriage_ai_accept_modifier_value = {
 	# Hooks (no possible, skipped)
 
 	# Perks (already calculated)
+
+	# Perks that depend on the recipient
+	if = {
+		limit = {
+			scope:actor = {
+				has_perk = know_your_land_know_your_people_perk
+			}
+			scope:recipient.top_liege = scope:actor.top_liege
+		}
+		if = {
+			limit = { scope:actor = scope:secondary_actor }
+			add = surveyor_marriage_perk_self_value
+		}
+		else_if = {
+			limit = {
+				scope:secondary_actor.top_liege = scope:actor.top_liege
+				scope:secondary_actor = {
+					is_close_or_extended_family_of = scope:actor
+				}
+			}
+			add = surveyor_marriage_perk_other_value
+		}
+	}
 
 	# Who is getting married
 	if = {
@@ -963,7 +986,7 @@ accou_quick_marriage_ai_accept_modifier_value = {
 	# Court grandeur
 	scope:actor = {
 		if = {
-			limit = { 
+			limit = {
 				has_royal_court = yes
 				has_dlc_feature = royal_court
 			}

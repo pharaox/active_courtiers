@@ -310,6 +310,14 @@ accou_can_be_better_chronicler_trigger = {
 	}
 }
 
+accou_can_be_better_court_brewmaster_trigger = {
+	accou_can_be_better_court_position_trigger = {
+		TYPE = court_brewmaster_court_position
+		NAME = court_brewmaster
+		LIEGE = $LIEGE$
+	}
+}
+
 accou_can_be_better_councillor_trigger = {
 	save_temporary_scope_as = character
 	can_be_$NAME$_trigger = { COURT_OWNER = $LIEGE$ }
@@ -569,6 +577,9 @@ accou_can_apply_for_court_position_option_trigger = {
 		}
 		flag:chronicler = {
 			accou_can_apply_for_chronicler_trigger = { LIEGE = $LIEGE$ }
+		}
+		flag:court_brewmaster = {
+			accou_can_apply_for_court_brewmaster_trigger = { LIEGE = $LIEGE$ }
 		}
 	}
 }
@@ -848,6 +859,13 @@ accou_can_apply_for_court_scholar_trigger = {
 accou_can_apply_for_chronicler_trigger = {
 	accou_can_apply_for_court_position_trigger = {
 		TYPE = chronicler_court_position
+		LIEGE = $LIEGE$
+	}
+}
+
+accou_can_apply_for_court_brewmaster_trigger = {
+	accou_can_apply_for_court_position_trigger = {
+		TYPE = court_brewmaster_court_position
 		LIEGE = $LIEGE$
 	}
 }

@@ -601,3 +601,7 @@ accou_chronicler_candidate_score_value = {
 		add = 50
 	}
 }
+
+accou_court_brewmaster_candidate_score_value = {
+	value = 50
+}

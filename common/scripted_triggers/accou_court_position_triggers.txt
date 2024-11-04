@@ -26,7 +26,7 @@ accou_can_be_akolouthos_trigger = {
 			OR = {
 				has_cultural_tradition = tradition_fp1_coastal_warriors
 				has_cultural_tradition = tradition_hird
-				has_cultural_tradition = tradition_fp1_performative_honour 
+				has_cultural_tradition = tradition_fp1_performative_honour
 				has_cultural_pillar = heritage_north_germanic
 				has_cultural_pillar = heritage_west_germanic
 			}
@@ -97,6 +97,12 @@ accou_can_be_lady_in_waiting_trigger = {
 
 accou_can_be_antiquarian_trigger = {
 	is_capable_adult = yes
+	trigger_if = {
+		limit = {
+			$LIEGE$ = { is_ai = yes }
+		}
+		$LIEGE$ = { has_any_artifact = yes }
+	}
 	NOT = { is_spouse_of = $LIEGE$ }
 }
 
@@ -153,8 +159,6 @@ accou_can_be_master_of_hunt_trigger = {
 accou_can_be_royal_architect_trigger = {
 	is_capable_adult = yes
 	exists = $LIEGE$
-	# Only available to vassals
-	always = no
 }
 
 accou_can_be_high_almoner_trigger = {
@@ -276,6 +280,17 @@ accou_can_be_court_scholar_trigger = {
 accou_can_be_chronicler_trigger = {
 	is_capable_adult = yes
 	exists = $LIEGE$
+}
+
+accou_can_be_court_brewmaster_trigger = {
+	is_capable_adult = yes
+	exists = $LIEGE$
+	OR = {
+		learning >= 12
+		has_trait = lifestyle_reveler
+		has_trait = diligent
+		has_trait = patient
+	}
 }
 
 accou_is_court_position_available_to_vassals_trigger = {

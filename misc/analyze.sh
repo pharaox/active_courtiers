@@ -94,6 +94,7 @@ echo "- cave_hermit: $(grep -a "accou_courtier.0003 event option a, .*, position
 echo "- master_assassin: $(grep -a "accou_courtier.0003 event option a, .*, position: master_assassin" debug.log | wc -l)"
 echo "- court_scholar: $(grep -a "accou_courtier.0003 event option a, .*, position: court_scholar" debug.log | wc -l)"
 echo "- chronicler: $(grep -a "accou_courtier.0003 event option a, .*, position: chronicler" debug.log | wc -l)"
+echo "- court_brewmaster: $(grep -a "accou_courtier.0003 event option a, .*, position: court_brewmaster" debug.log | wc -l)"
 echo "---"
 echo "accou_courtier.0003 event option b: $(grep -a "accou_courtier.0003 event option b" debug.log | wc -l)"
 echo
