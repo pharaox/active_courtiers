@@ -37,7 +37,7 @@ Even if AI rulers get better talent pools, they tend to stick to councillors or 
 
 ## Compatibility
 
-The current version is compatible with CK3 1.13. If you are still on CK3 1.12.x, use [version 0.5.2](https://github.com/pharaox/active_courtiers/releases/download/0.5.2/active_courtiers-0.5.2.zip) instead.
+The current version is compatible with CK3 1.14. If you are still on CK3 1.13.x, use [version 0.6.2](https://github.com/pharaox/active_courtiers/releases/download/0.6.2/active_courtiers-0.6.2.zip) instead.
 
 This mod does not modify any vanilla files and should be compatible with most other mods. Note that some total conversion mods remove parts of vanilla that may be referred to by this mod, so compatibility with such mods is not guaranteed. Also, this mod cannot properly evaluate candidates for councillor or court positions introduced by conversion mods without a compatch.
 
