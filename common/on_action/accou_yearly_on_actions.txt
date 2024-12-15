@@ -63,19 +63,6 @@ accou_yearly_marriage = {
 			limit = { is_ai = no }
 			has_game_rule = accou_event_frequency_player_1y
 		}
-		trigger_else_if = {
-			limit = { is_landed = no }
-			OR = {
-				AND = {
-					has_game_rule = accou_event_frequency_ai_1y
-					highest_held_title_tier < tier_kingdom
-				}
-				AND = {
-					has_game_rule = accou_event_frequency_ai_3y
-					highest_held_title_tier >= tier_kingdom
-				}
-			}
-		}
 		trigger_else = {
 			OR = {
 				AND = {
@@ -101,19 +88,6 @@ accou_yearly_invite = {
 		trigger_if = {
 			limit = { is_ai = no }
 			has_game_rule = accou_invite_event_frequency_player_1y
-		}
-		trigger_else_if = {
-			limit = { is_landed = no }
-			OR = {
-				AND = {
-					has_game_rule = accou_invite_event_frequency_ai_1y
-					highest_held_title_tier < tier_kingdom
-				}
-				AND = {
-					has_game_rule = accou_invite_event_frequency_ai_3y
-					highest_held_title_tier >= tier_kingdom
-				}
-			}
 		}
 		trigger_else = {
 			OR = {
@@ -152,19 +126,6 @@ accou_three_year_marriage = {
 			limit = { is_ai = no }
 			has_game_rule = accou_event_frequency_player_3y
 		}
-		trigger_else_if = {
-			limit = { is_landed = no }
-			OR = {
-				AND = {
-					has_game_rule = accou_event_frequency_ai_3y
-					highest_held_title_tier < tier_kingdom
-				}
-				AND = {
-					has_game_rule = accou_event_frequency_ai_5y
-					highest_held_title_tier >= tier_kingdom
-				}
-			}
-		}
 		trigger_else = {
 			OR = {
 				AND = {
@@ -190,19 +151,6 @@ accou_three_year_invite = {
 		trigger_if = {
 			limit = { is_ai = no }
 			has_game_rule = accou_invite_event_frequency_player_3y
-		}
-		trigger_else_if = {
-			limit = { is_landed = no }
-			OR = {
-				AND = {
-					has_game_rule = accou_invite_event_frequency_ai_3y
-					highest_held_title_tier < tier_kingdom
-				}
-				AND = {
-					has_game_rule = accou_invite_event_frequency_ai_5y
-					highest_held_title_tier >= tier_kingdom
-				}
-			}
 		}
 		trigger_else = {
 			OR = {
@@ -241,11 +189,6 @@ accou_five_year_marriage = {
 			limit = { is_ai = no }
 			has_game_rule = accou_event_frequency_player_5y
 		}
-		trigger_else_if = {
-			limit = { is_landed = no }
-			has_game_rule = accou_event_frequency_ai_5y
-			highest_held_title_tier < tier_kingdom
-		}
 		trigger_else = {
 			has_game_rule = accou_event_frequency_ai_5y
 			highest_held_title_tier < tier_duchy
@@ -263,11 +206,6 @@ accou_five_year_invite = {
 		trigger_if = {
 			limit = { is_ai = no }
 			has_game_rule = accou_invite_event_frequency_player_5y
-		}
-		trigger_else_if = {
-			limit = { is_landed = no }
-			has_game_rule = accou_invite_event_frequency_ai_5y
-			highest_held_title_tier < tier_kingdom
 		}
 		trigger_else = {
 			has_game_rule = accou_invite_event_frequency_ai_5y
