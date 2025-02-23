@@ -1,5 +1,15 @@
 # Changelog
 
+## Version 0.7.1
+
+### Compatibility
+
+* Improved compatibility with submods.
+
+### Bug Fixes
+
+* Fixed unintended event frequency penalty for unlanded rulers.
+
 ## Version 0.7.0
 
 ### Compatibility
