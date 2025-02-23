@@ -1,20 +1,55 @@
-﻿accou_can_appoint_chancellor_trigger = {
-	always = yes
+﻿accou_can_be_chancellor_trigger = {
+	# valid_character
+	exists = $COURT_OWNER$
+	can_be_chancellor_trigger = { COURT_OWNER = $COURT_OWNER$ }
+}
+
+accou_can_be_steward_trigger = {
+	# valid_character
+	exists = $COURT_OWNER$
+	can_be_steward_trigger = { COURT_OWNER = $COURT_OWNER$ }
+}
+
+accou_can_be_marshal_trigger = {
+	# valid_character
+	exists = $COURT_OWNER$
+	can_be_marshal_trigger = { COURT_OWNER = $COURT_OWNER$ }
+}
+
+accou_can_be_spymaster_trigger = {
+	# valid_character
+	exists = $COURT_OWNER$
+	can_be_spymaster_trigger = { COURT_OWNER = $COURT_OWNER$ }
+}
+
+accou_can_be_court_chaplain_trigger = {
+	# valid_character
+	exists = $COURT_OWNER$
+	can_be_court_chaplain_trigger = { COURT_OWNER = $COURT_OWNER$ }
+}
+
+accou_can_appoint_chancellor_trigger = {
+	# valid_position
+	NOT = { government_has_flag = government_is_landless_adventurer }
 }
 
 accou_can_appoint_steward_trigger = {
-	always = yes
+	# valid_position
+	NOT = { government_has_flag = government_is_landless_adventurer }
 }
 
 accou_can_appoint_marshal_trigger = {
-	always = yes
+	# valid_position
+	NOT = { government_has_flag = government_is_landless_adventurer }
 }
 
 accou_can_appoint_spymaster_trigger = {
-	always = yes
+	# valid_position
+	NOT = { government_has_flag = government_is_landless_adventurer }
 }
 
 accou_can_appoint_court_chaplain_trigger = {
+	# can_fire / can_reassign
 	faith = {
 		NOT = { has_doctrine_parameter = clerical_appointment_fixed }
 	}

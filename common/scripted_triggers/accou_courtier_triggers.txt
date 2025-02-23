@@ -320,7 +320,7 @@ accou_can_be_better_court_brewmaster_trigger = {
 
 accou_can_be_better_councillor_trigger = {
 	save_temporary_scope_as = character
-	can_be_$NAME$_trigger = { COURT_OWNER = $LIEGE$ }
+	accou_can_be_$NAME$_trigger = { COURT_OWNER = $LIEGE$ }
 	$SKILL$ >= decent_skill_rating
 	$LIEGE$ = {
 		exists = council_task:$TYPE$
@@ -336,13 +336,13 @@ accou_can_be_better_councillor_trigger = {
 		}
 		NOR = {
 			any_courtier = {
-				can_be_$NAME$_trigger = { COURT_OWNER = $LIEGE$ }
+				accou_can_be_$NAME$_trigger = { COURT_OWNER = $LIEGE$ }
 				NOT = { has_council_position = $TYPE$ }
 				$SKILL$ >= scope:character.$SKILL$
 				NOT = { this = scope:character }
 			}
 			any_vassal = {
-				can_be_$NAME$_trigger = { COURT_OWNER = $LIEGE$ }
+				accou_can_be_$NAME$_trigger = { COURT_OWNER = $LIEGE$ }
 				NOT = { has_council_position = $TYPE$ }
 				$SKILL$ >= scope:character.$SKILL$
 				NOT = { this = scope:character }
@@ -874,7 +874,7 @@ accou_can_apply_for_councillor_trigger = {
 	save_temporary_scope_as = character
 	is_courtier_of = $LIEGE$
 	NOT = { has_council_position = $TYPE$ }
-	can_be_$NAME$_trigger = { COURT_OWNER = $LIEGE$ }
+	accou_can_be_$NAME$_trigger = { COURT_OWNER = $LIEGE$ }
 	$SKILL$ >= decent_skill_rating
 	$LIEGE$ = {
 		exists = council_task:$TYPE$
