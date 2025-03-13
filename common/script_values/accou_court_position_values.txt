@@ -41,7 +41,7 @@ accou_charioteer_candidate_score_value = {
 }
 
 accou_bookmaker_candidate_score_value = {
-	value = 100
+	value = 300
 
 	# More likely for very generous characters
 	if = {
@@ -96,7 +96,7 @@ accou_chief_qadi_candidate_score_value = {
 		limit = {
 			ai_zeal >= -25
 		}
-		add = 50
+		add = 150
 	}
 }
 
@@ -162,6 +162,12 @@ accou_lady_in_waiting_candidate_score_value = {
 
 accou_antiquarian_candidate_score_value = {
 	value = 50
+	if = {
+		limit = {
+			government_allows = administrative
+		}
+		add = 150
+	}
 	if = {
 		limit = {
 			highest_held_title_tier >= tier_duchy
@@ -288,6 +294,12 @@ accou_food_taster_candidate_score_value = {
 
 accou_master_of_horse_candidate_score_value = {
 	value = 50
+	if = {
+		limit = {
+			ai_has_warlike_personality = yes
+		}
+		add = 200
+	}
 }
 
 accou_master_of_hunt_candidate_score_value = {
@@ -299,6 +311,12 @@ accou_master_of_hunt_candidate_score_value = {
 			has_trait = lifestyle_hunter
 		}
 		add = 25
+	}
+	if = {
+		limit = {
+			has_character_flag = hunts_a_lot
+		}
+		add = 1000
 	}
 }
 
@@ -330,26 +348,9 @@ accou_high_almoner_candidate_score_value = {
 accou_seneschal_candidate_score_value = {
 	value = 50
 
-	# Having a seneschal is excellent if you have low control
-	if = {
+	if = { # Having a seneschal is excellent if you have legitimacy
 		limit = {
-			is_at_war = no
-			any_held_title = {
-				count >= 2
-				tier = tier_county
-				county_control < 100
-			}
-		}
-		add = 100
-	}
-	if = {
-		limit = {
-			is_at_war = no
-			any_held_title = {
-				count >= 4
-				tier = tier_county
-				county_control < 100
-			}
+			has_legitimacy = yes
 		}
 		add = 200
 	}
@@ -425,6 +426,12 @@ accou_court_poet_candidate_score_value = {
 
 accou_court_musician_candidate_score_value = {
 	value = 50
+	if = { # Having a musician is good if you have legitimacy
+		limit = {
+			has_legitimacy = yes
+		}
+		add = 50
+	}
 }
 
 accou_bodyguard_candidate_score_value = {
