@@ -313,6 +313,14 @@ accou_can_be_court_brewmaster_trigger = {
 	}
 }
 
+accou_can_be_eparch_trigger = {
+	is_capable_adult = yes
+	is_landed = no
+	# Eunuchs were historically not allowed to have this position
+	NOT = { has_trait = eunuch }
+	exists = $LIEGE$
+}
+
 accou_is_court_position_available_to_vassals_trigger = {
 	exists = $POSITION$
 }

@@ -160,6 +160,10 @@ accou_get_better_court_position_options_effect = {
 		limit = { accou_can_be_better_court_brewmaster_trigger = { LIEGE = $LIEGE$ } }
 		add_to_variable_list = { name = $OPTIONS$ target = flag:court_brewmaster }
 	}
+	if = {
+		limit = { accou_can_be_better_eparch_trigger = { LIEGE = $LIEGE$ } }
+		add_to_variable_list = { name = $OPTIONS$ target = flag:eparch }
+	}
 }
 
 accou_get_incumbent_councillor_effect = {
@@ -339,6 +343,9 @@ accou_get_incumbent_court_position_holder_effect = {
 		}
 		flag:court_brewmaster = {
 			court_position:court_brewmaster_court_position ?= { save_scope_as = $INCUMBENT$ }
+		}
+		flag:eparch = {
+			court_position:eparch_court_position ?= { save_scope_as = $INCUMBENT$ }
 		}
 	}
 }
@@ -550,6 +557,12 @@ accou_appoint_court_position_effect = {
 				recipient = $RECIPIENT$
 			}
 		}
+		flag:eparch = {
+			appoint_court_position = {
+				court_position = eparch_court_position
+				recipient = $RECIPIENT$
+			}
+		}
 	}
 }
 
@@ -757,6 +770,12 @@ accou_revoke_court_position_effect = {
 		flag:court_brewmaster = {
 			revoke_court_position = {
 				court_position = court_brewmaster_court_position
+				recipient = $RECIPIENT$
+			}
+		}
+		flag:eparch = {
+			revoke_court_position = {
+				court_position = eparch_court_position
 				recipient = $RECIPIENT$
 			}
 		}

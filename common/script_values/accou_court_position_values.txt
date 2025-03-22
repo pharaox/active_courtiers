@@ -612,3 +612,23 @@ accou_chronicler_candidate_score_value = {
 accou_court_brewmaster_candidate_score_value = {
 	value = 50
 }
+
+accou_eparch_candidate_score_value = {
+	value = 100
+
+	# More likely if you have a lot of gold and can afford it
+	if = {
+		limit = {
+			monthly_character_income > monthly_character_expenses_plus_fourty_percent
+		}
+		add = 50
+	}
+	
+	# More likely if you are a builder
+	if = {
+		limit = {
+			ai_has_economical_boom_personality = yes
+		}
+		add = 50
+	}
+}

@@ -584,6 +584,15 @@ accou_better_court_position_aptitude_modifier = {
 		BASE = $BASE$
 		SCALE = $SCALE$
 	}
+	accou_better_court_position_aptitude_internal_modifier = {
+		CHARACTER = $CHARACTER$
+		COURT_POSITION = $COURT_POSITION$
+		INCUMBENT = $INCUMBENT$
+		TYPE = eparch_court_position
+		NAME = eparch
+		BASE = $BASE$
+		SCALE = $SCALE$
+	}
 }
 
 accou_better_councillor_skill_internal_modifier = {
