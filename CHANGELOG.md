@@ -1,5 +1,13 @@
 # Changelog
 
+## Version 0.9.0
+
+### Compatibility
+
+* Adapted to CK3 1.16.0.1
+* Added support for the Kurultai council position introduced in CK3 1.16.
+* Added support for all new court positions (9 in total) introduced in CK3 1.15 and CK3 1.16.
+
 ## Version 0.8.0
 
 ### Compatibility
