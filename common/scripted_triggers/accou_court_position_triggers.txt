@@ -321,6 +321,72 @@ accou_can_be_eparch_trigger = {
 	exists = $LIEGE$
 }
 
+accou_can_be_court_astrologer_trigger = {
+	is_capable_adult = yes
+	is_landed = no
+	OR = {
+		has_religion = religion:tengrism_religion
+		culture = { has_cultural_pillar = heritage_mongolic }
+		culture = { has_cultural_pillar = heritage_turkic }
+		has_trait = nomadic_philosophy
+		has_trait = lifestyle_mystic
+		$LIEGE$.domicile.domicile_culture ?= culture
+	}
+}
+
+accou_can_be_boyan_trigger = {
+	is_capable_adult = yes
+	is_landed = no
+	can_be_combatant_based_on_gender_trigger = { ARMY_OWNER = $LIEGE$ }
+	government_has_flag = government_is_nomadic
+	martial >= 12
+}
+
+accou_can_be_siege_engineer_trigger = {
+	is_capable_adult = yes
+	exists = $LIEGE$
+	is_landed = no
+	has_trait = military_engineer
+}
+
+accou_can_be_yurtchi_trigger = {
+	is_capable_adult = yes
+	exists = $LIEGE$
+	is_landed = no
+	government_has_flag = government_is_nomadic
+	stewardship >= 12
+}
+
+accou_can_be_cherbi_trigger = {
+	is_capable_adult = yes
+	is_landed = no
+	can_be_combatant_based_on_gender_trigger = { ARMY_OWNER = $LIEGE$ }
+	government_has_flag = government_is_nomadic
+	prowess >= 12
+}
+
+accou_can_be_yeke_jarquchi_trigger = {
+	is_capable_adult = yes
+	exists = $LIEGE$
+	is_landed = no
+	government_has_flag = government_is_nomadic
+	diplomacy >= 12
+}
+
+accou_can_be_foreign_emissary_trigger = {
+	is_capable_adult = yes
+	is_landed = no
+	NOT = { culture = $LIEGE$.culture }
+}
+
+accou_can_be_keeper_of_the_horses_trigger = {
+	is_capable_adult = yes
+	exists = $LIEGE$
+	is_landed = no
+	government_has_flag = government_is_nomadic
+	prowess >= 12
+}
+
 accou_is_court_position_available_to_vassals_trigger = {
 	exists = $POSITION$
 }

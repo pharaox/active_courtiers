@@ -154,8 +154,7 @@ accou_courtier.0001 = {
 					modifier = {
 						add = {
 							save_temporary_scope_as = councillor
-							value = scope:candidate.accou_councillor_skill_value
-							subtract = decent_skill_rating
+							value = scope:candidate.accou_councillor_skill_delta_value
 							multiply = 2
 						}
 					}

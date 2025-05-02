@@ -261,3 +261,21 @@ accou_are_wrong_gender_marriage_requests_allowed_trigger = {
 accou_is_marriage_ai_acceptance_check_original_trigger = {
 	has_game_rule = accou_marriage_ai_acceptance_check_original
 }
+
+accou_is_not_nomadic_or_tributary_trigger = {
+	trigger_if = {
+		limit = {
+			OR = {
+				government_has_flag = government_is_nomadic
+				government_has_flag = government_is_herder
+			}
+		}
+		$PARTY$ = {
+			NOR = {
+				government_has_flag = government_is_nomadic
+				government_has_flag = government_is_herder
+				is_tributary_of = prev
+			}
+		}
+	}
+}

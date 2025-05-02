@@ -40,7 +40,7 @@
     * => `common/scripted_triggers/accou_courtier_triggers.txt`
   * Entire file, `can_reassign` sections
     * => `common/scripted_triggers/accou_councillor_triggers.txt`
-* `common/court_positions/types/00_court_positions.txt`
+* `common/court_positions/types/00_court_positions.txt`, `common/court_positions/types/00_mpo_court_positions.txt`
   * Entire file, court positions themselves
     * => `common/script_values/accou_courtier_values.txt`
     * => `common/scripted_effects/accou_courtier_effects.txt`

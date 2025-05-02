@@ -27,6 +27,13 @@ accou_is_valid_invite_recipient_vanilla_trigger = {
 		RECRUITER = $ACTOR$
 		RECRUITEE = scope:character
 	}
+	NAND = {
+		has_variable = nomad_defector_var
+		var:nomad_defector_var = {
+			this = $ACTOR$
+		}
+	}
+
 	trigger_if = { # Added by Unofficial Patch
 		limit = { has_variable = unop_prevent_invitation }
 		NOT = { var:unop_prevent_invitation = $ACTOR$ }

@@ -349,6 +349,16 @@ accou_quick_marriage_ai_accept_modifier_actor_value = {
 		add = khvarenah_legacy_marriage_acceptance
 	}
 
+	# Yurts
+	if = {
+		limit = {
+			scope:actor.domicile ?= {
+				has_domicile_building_or_higher = marriage_yurt_01
+			}
+		}
+		add = mpo_domicile_yurt_marriage_acceptance_value
+	}
+
 	# Cultural traditions
 	if = {
 		limit = {
@@ -357,6 +367,16 @@ accou_quick_marriage_ai_accept_modifier_actor_value = {
 			}
 		}
 		add = 10
+	}
+
+	# Nomadic base malus
+	if = {
+		limit = {
+			scope:actor = {
+				government_has_flag = government_is_nomadic
+			}
+		}
+		add = -20
 	}
 
 	# Grand Wedding
@@ -463,6 +483,8 @@ accou_quick_marriage_ai_accept_modifier_value = {
 	# Alliances (not possible, skipped)
 
 	# Clan contract: Marriage Favor (not likely, MR 99.99% if removed)
+
+	# You're in a confederation together and marriage yields alliance (not possible, skipped)
 
 	# Tier differences
 	if = {
@@ -693,36 +715,46 @@ accou_quick_marriage_ai_accept_modifier_value = {
 	# Faith (simplified)
 	if = {
 		limit = {
-			scope:recipient.faith = {
-				faith_hostility_level = {
-					target = scope:actor.faith
-					value >= faith_hostility_prevents_marriage_level
-				}
+			scope:actor = {
+				accou_is_not_nomadic_or_tributary_trigger = { PARTY = scope:recipient }
+			}
+			scope:recipient = {
+				accou_is_not_nomadic_or_tributary_trigger = { PARTY = scope:actor }
 			}
 		}
-		add = -1000
-	}
-	else_if = {
-		limit = {
-			scope:recipient.faith = {
-				faith_hostility_level = {
-					target = scope:actor.faith
-					value >= faith_hostile_level
+		if = {
+			limit = {
+				scope:recipient.faith = {
+					faith_hostility_level = {
+						target = scope:actor.faith
+						value >= faith_hostility_prevents_marriage_level
+					}
 				}
 			}
+			add = -1000
 		}
-		add = -25
-	}
-	else_if = {
-		limit = {
-			scope:recipient.faith = {
-				faith_hostility_level = {
-					target = scope:actor.faith
-					value >= faith_astray_level
+		else_if = {
+			limit = {
+				scope:recipient.faith = {
+					faith_hostility_level = {
+						target = scope:actor.faith
+						value >= faith_hostile_level
+					}
 				}
 			}
+			add = -25
 		}
-		add = -10
+		else_if = {
+			limit = {
+				scope:recipient.faith = {
+					faith_hostility_level = {
+						target = scope:actor.faith
+						value >= faith_astray_level
+					}
+				}
+			}
+			add = -10
+		}
 	}
 
 	# Poligamy (not possible, skipped)
@@ -1169,9 +1201,60 @@ accou_quick_marriage_ai_accept_modifier_value = {
 
 	# Influence option (not possible, skipped)
 
+	# Herd option (not possible, skipped)
+
 	# Diarchies (not likely, skipped )
 
 	# Feud (not likely, MR 99.99% if removed)
+
+	# Nomad / tributary
+	if = {
+		limit = {
+			scope:recipient = {
+				is_tributary_of_suzerain_or_above = scope:actor
+			}
+		}
+		add = 50
+	}
+	if = {
+		limit = {
+			scope:recipient = {
+				is_obedient_to = scope:actor
+			}
+		}
+		add = 100
+	}
+
+	# Stronger prejudice against nomads in some cases (fixed)
+	if = {
+		limit = {
+			scope:actor = {
+				government_has_flag = government_is_nomadic
+			}
+			scope:recipient = {
+				NOT = { government_has_flag = government_is_nomadic }
+				NAND = {
+					is_vassal_or_below_of = scope:actor
+					is_obedient_to = scope:actor
+				}
+			}
+		}
+		if = {
+			limit = {
+				scope:recipient = {
+					OR = {
+						government_has_flag = government_is_tribal
+						is_vassal_or_below_of = scope:actor
+						is_obedient_to = scope:actor
+					}
+				}
+			}
+			add = -50
+		}
+		else = {
+			add = -100
+		}
+	}
 
 	# Grand Wedding (already calculated)
 
@@ -1196,4 +1279,6 @@ accou_quick_marriage_ai_accept_modifier_value = {
 	# Player continued (not likely, skipped)
 
 	# Harold (not possible, skipped)
+
+	# A little extra challenge for latin empire players (not likely, skipped)
 }

@@ -28,19 +28,40 @@ accou_can_be_court_chaplain_trigger = {
 	can_be_court_chaplain_trigger = { COURT_OWNER = $COURT_OWNER$ }
 }
 
+accou_can_be_kurultai_trigger = {
+	# valid_character
+	exists = $COURT_OWNER$
+	can_be_kurultai_trigger = { 
+		COURT_OWNER = $COURT_OWNER$
+		CP1 = councillor_kurultai_1
+		CP2 = councillor_kurultai_2
+		CP3 = councillor_kurultai_3
+	}
+	NOT = { has_council_position = councillor_kurultai_4 }
+}
+
 accou_can_appoint_chancellor_trigger = {
 	# valid_position
-	NOT = { government_has_flag = government_is_landless_adventurer }
+	NOR = { 
+		government_has_flag = government_is_landless_adventurer 
+		government_has_flag = government_is_nomadic
+	}
 }
 
 accou_can_appoint_steward_trigger = {
 	# valid_position
-	NOT = { government_has_flag = government_is_landless_adventurer }
+	NOR = { 
+		government_has_flag = government_is_landless_adventurer 
+		government_has_flag = government_is_nomadic
+	}
 }
 
 accou_can_appoint_marshal_trigger = {
 	# valid_position
-	NOT = { government_has_flag = government_is_landless_adventurer }
+	NOR = { 
+		government_has_flag = government_is_landless_adventurer 
+		government_has_flag = government_is_nomadic
+	}
 }
 
 accou_can_appoint_spymaster_trigger = {
@@ -49,8 +70,18 @@ accou_can_appoint_spymaster_trigger = {
 }
 
 accou_can_appoint_court_chaplain_trigger = {
+	# valid_position
+	NOR = { 
+		government_has_flag = government_is_landless_adventurer 
+		government_has_flag = government_is_nomadic
+	}
 	# can_fire / can_reassign
 	faith = {
 		NOT = { has_doctrine_parameter = clerical_appointment_fixed }
 	}
+}
+
+accou_can_appoint_kurultai_trigger = {
+	# valid_position
+	government_has_flag = government_is_nomadic
 }

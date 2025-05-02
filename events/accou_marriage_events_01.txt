@@ -340,6 +340,7 @@ accou_marriage.0001 = {
 		save_temporary_scope_value_as = { name = hook value = no }
 		save_temporary_scope_value_as = { name = grand_wedding_promise value = no }
 		save_temporary_scope_value_as = { name = influence_send_option value = no }
+		save_temporary_scope_value_as = { name = herd_send_option value = no }
 		scope:courtier ?= {
 			if = {
 				limit = { is_female = yes }

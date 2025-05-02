@@ -632,3 +632,42 @@ accou_eparch_candidate_score_value = {
 		add = 50
 	}
 }
+
+accou_court_astrologer_candidate_score_value = {
+	value = 100
+}
+
+
+accou_boyan_candidate_score_value = {
+	value = 100
+}
+
+
+accou_siege_engineer_candidate_score_value = {
+	value = 100
+}
+
+
+accou_yurtchi_candidate_score_value = {
+	value = 100
+}
+
+
+accou_cherbi_candidate_score_value = {
+	value = 100
+}
+
+
+accou_yeke_jarquchi_candidate_score_value = {
+	value = 100
+}
+
+
+accou_foreign_emissary_candidate_score_value = {
+	value = 100
+}
+
+
+accou_keeper_of_the_horses_candidate_score_value = {
+	value = 100
+}

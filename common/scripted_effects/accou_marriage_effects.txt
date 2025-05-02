@@ -41,7 +41,10 @@ accou_get_nearby_rulers_effect = {
 	}
 	every_independent_ruler = {
 		limit = {
-			is_landless_adventurer = yes
+			OR = {
+				is_landless_adventurer = yes
+				is_landless_nomad = yes
+			}
 		}
 		add_to_temporary_list = temp_rulers
 	}
