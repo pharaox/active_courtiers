@@ -1,5 +1,15 @@
 # Changelog
 
+## Version 0.9.1
+
+### Compatibility
+
+* Added more triggers to be overridden by compatibility submods.
+
+### Bug Fixes
+
+* Fixed minor issues with candidate eligibility for court positions.
+
 ## Version 0.9.0
 
 ### Compatibility
