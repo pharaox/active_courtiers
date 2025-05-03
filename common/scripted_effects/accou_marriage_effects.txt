@@ -40,12 +40,7 @@ accou_get_nearby_rulers_effect = {
 		}
 	}
 	every_independent_ruler = {
-		limit = {
-			OR = {
-				is_landless_adventurer = yes
-				is_landless_nomad = yes
-			}
-		}
+		limit = { accou_is_landless_ruler_trigger = yes }
 		add_to_temporary_list = temp_rulers
 	}
 

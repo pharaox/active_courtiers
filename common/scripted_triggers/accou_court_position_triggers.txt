@@ -1,5 +1,6 @@
 ﻿accou_can_be_court_physician_trigger = {
 	is_capable_adult = yes
+	is_landed = no
 	exists = $LIEGE$
 }
 
@@ -17,6 +18,7 @@ accou_can_be_bookmaker_trigger = {
 
 accou_can_be_akolouthos_trigger = {
 	is_capable_adult = yes
+	is_landed = no
 	NOT = { is_spouse_of = $LIEGE$ }
 	can_be_combatant_based_on_gender_trigger = { ARMY_OWNER = $LIEGE$ } # check culture of warrior not liege
 	OR = {
@@ -108,16 +110,18 @@ accou_can_be_antiquarian_trigger = {
 
 accou_can_be_travel_leader_trigger = {
 	is_capable_adult = yes
+	is_landed = no
 	is_clergy = no
-	NOT = { has_variable = gone_adventuring }
 	NOT = { is_spouse_of = $LIEGE$ }
+	NOT = { has_variable = gone_adventuring }
 }
 
 accou_can_be_wet_nurse_trigger = {
 	is_capable_adult = yes
-	NOT = { is_close_family_of = $LIEGE$ }
-	age <= 45
+	is_playable_character = no
 	is_female = yes
+	age <= 45
+	NOT = { is_close_family_of = $LIEGE$ }
 	has_no_particular_noble_roots_trigger = yes
 	# Nuns cannot be wet nurses
 	NOT = { has_trait = devoted }
@@ -190,6 +194,7 @@ accou_can_be_cupbearer_trigger = {
 
 accou_can_be_chief_eunuch_trigger = {
 	is_capable_adult = yes
+	is_landed = no
 	is_eunuch_trigger = yes
 	exists = $LIEGE$
 }
@@ -224,6 +229,7 @@ accou_can_be_court_musician_trigger = {
 
 accou_can_be_bodyguard_trigger = {
 	is_capable_adult = yes
+	is_landed = no
 	NOT = { is_spouse_of = $LIEGE$ }
 	NOR = {
 		has_trait = blind
@@ -234,6 +240,7 @@ accou_can_be_bodyguard_trigger = {
 
 accou_can_be_champion_trigger = {
 	is_capable_adult = yes
+	is_landed = no
 	NOR = {
 		has_trait = blind
 		has_trait = infirm
@@ -243,8 +250,8 @@ accou_can_be_champion_trigger = {
 
 accou_can_be_executioner_trigger = {
 	is_capable_adult = yes
+	is_landed = no
 	NOT = { is_spouse_of = $LIEGE$ }
-	is_ruler = no
 	$LIEGE$ = {
 		OR = {
 			has_imprisonment_reason = prev
@@ -255,6 +262,7 @@ accou_can_be_executioner_trigger = {
 
 accou_can_be_court_artificer_trigger = {
 	is_capable_adult = yes
+	is_landed = no
 	NOT = { is_spouse_of = $LIEGE$ }
 	OR = {
 		has_completed_inspiration = yes
@@ -264,6 +272,7 @@ accou_can_be_court_artificer_trigger = {
 
 accou_can_be_cave_hermit_trigger = {
 	is_capable_adult = yes
+	is_playable_character = no
 	NOT = { is_spouse_of = $LIEGE$ }
 	has_trait = lifestyle_mystic
 	has_trait_xp = {
@@ -274,6 +283,7 @@ accou_can_be_cave_hermit_trigger = {
 
 accou_can_be_master_assassin_trigger = {
 	is_capable_adult = yes
+	is_playable_character = no
 	has_no_particular_noble_roots_trigger = yes
 	NOT = { is_spouse_of = $LIEGE$ }
 	is_landed = no
@@ -289,6 +299,7 @@ accou_can_be_master_assassin_trigger = {
 
 accou_can_be_court_scholar_trigger = {
 	is_capable_adult = yes
+	is_landed = no
 	exists = $LIEGE$
 }
 
@@ -304,13 +315,13 @@ accou_can_be_chronicler_trigger = {
 accou_can_be_court_brewmaster_trigger = {
 	is_capable_adult = yes
 	drinks_alcohol_trigger = yes
-	exists = $LIEGE$
 	OR = {
 		learning >= 12
 		has_trait = lifestyle_reveler
 		has_trait = diligent
 		has_trait = patient
 	}
+	exists = $LIEGE$
 }
 
 accou_can_be_eparch_trigger = {
@@ -338,39 +349,35 @@ accou_can_be_boyan_trigger = {
 	is_capable_adult = yes
 	is_landed = no
 	can_be_combatant_based_on_gender_trigger = { ARMY_OWNER = $LIEGE$ }
-	government_has_flag = government_is_nomadic
 	martial >= 12
 }
 
 accou_can_be_siege_engineer_trigger = {
 	is_capable_adult = yes
-	exists = $LIEGE$
 	is_landed = no
 	has_trait = military_engineer
+	exists = $LIEGE$
 }
 
 accou_can_be_yurtchi_trigger = {
 	is_capable_adult = yes
-	exists = $LIEGE$
 	is_landed = no
-	government_has_flag = government_is_nomadic
 	stewardship >= 12
+	exists = $LIEGE$
 }
 
 accou_can_be_cherbi_trigger = {
 	is_capable_adult = yes
 	is_landed = no
 	can_be_combatant_based_on_gender_trigger = { ARMY_OWNER = $LIEGE$ }
-	government_has_flag = government_is_nomadic
 	prowess >= 12
 }
 
 accou_can_be_yeke_jarquchi_trigger = {
 	is_capable_adult = yes
-	exists = $LIEGE$
 	is_landed = no
-	government_has_flag = government_is_nomadic
 	diplomacy >= 12
+	exists = $LIEGE$
 }
 
 accou_can_be_foreign_emissary_trigger = {
@@ -381,14 +388,22 @@ accou_can_be_foreign_emissary_trigger = {
 
 accou_can_be_keeper_of_the_horses_trigger = {
 	is_capable_adult = yes
-	exists = $LIEGE$
 	is_landed = no
-	government_has_flag = government_is_nomadic
 	prowess >= 12
+	exists = $LIEGE$
 }
 
 accou_is_court_position_available_to_vassals_trigger = {
-	exists = $POSITION$
+	NOR = {
+		$POSITION$ = flag:court_astrologer_court_position
+		$POSITION$ = flag:boyan_court_position
+		$POSITION$ = flag:siege_engineer_court_position
+		$POSITION$ = flag:yurtchi_court_position
+		$POSITION$ = flag:cherbi_court_position
+		$POSITION$ = flag:yeke_jarquchi_court_position
+		$POSITION$ = flag:foreign_emissary_court_position
+		$POSITION$ = flag:keeper_of_the_horses_court_position
+	}
 }
 
 accou_has_children_to_nurse_or_tutor_trigger = {
