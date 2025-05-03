@@ -4,8 +4,8 @@
 echo "accou_marriage.0001 event option a: $(grep -a "accou_marriage.0001 event option a" debug.log | wc -l)"
 echo "- success: $(grep -a "accou_marriage.0001 event option a success" debug.log | wc -l)"
 echo "- failure: $(grep -a "accou_marriage.0001 event option a failure" debug.log | wc -l)"
-echo "  - no courtier: $(pcre2grep -a "accou_marriage.0001 event option a failure, courtier:  \(4294967295\)" debug.log | wc -l)"
-echo "  - no candidate: $(pcre2grep -a "accou_marriage.0001 event option a failure, courtier: .+ \([\d]+\), candidate:  \(4294967295\)" debug.log | wc -l)"
+#echo "  - no courtier: $(pcre2grep -a "accou_marriage.0001 event option a failure, courtier:  \(4294967295\)" debug.log | wc -l)"
+#echo "  - no candidate: $(pcre2grep -a "accou_marriage.0001 event option a failure, courtier: .+ \([\d]+\), candidate:  \(4294967295\)" debug.log | wc -l)"
 echo "- failure fp: $(pcre2grep -a "accou_marriage.0001 event option a failure, courtier: .+ \([\d]+\), candidate: .+ \([\d]+\), matchmaker: .+ \([\d]+\)" debug.log | wc -l)"
 echo
 echo "accou_marriage.0002 event option a: $(grep -a "accou_marriage.0002 event option a" debug.log | wc -l)"
@@ -21,8 +21,8 @@ echo
 echo "accou_invite.0001 event option a: $(grep -a "accou_invite.0001 event option a" debug.log | wc -l)"
 echo "- success: $(grep -a "accou_invite.0001 event option a success" debug.log | wc -l)"
 echo "- failure: $(grep -a "accou_invite.0001 event option a failure" debug.log | wc -l)"
-echo "  - no candidate: $(pcre2grep -a "accou_invite.0001 event option a failure, candidate:  \(4294967295\)" debug.log | wc -l)"
-echo "  - no courtier: $(pcre2grep -a "invite.0001 event option a failure, candidate: .+ \([\d]+\), courtier:  \(4294967295\)" debug.log | wc -l)"
+#echo "  - no candidate: $(pcre2grep -a "accou_invite.0001 event option a failure, candidate:  \(4294967295\)" debug.log | wc -l)"
+#echo "  - no courtier: $(pcre2grep -a "invite.0001 event option a failure, candidate: .+ \([\d]+\), courtier:  \(4294967295\)" debug.log | wc -l)"
 echo "- failure fp: $(pcre2grep -a "accou_invite.0001 event option a failure, candidate: .+ \([\d]+\), courtier: .+ \([\d]+\)" debug.log | wc -l)"
 echo
 echo "accou_invite.0002 event option a: $(grep -a "accou_invite.0002 event option a" debug.log | wc -l)"
@@ -34,8 +34,8 @@ echo
 echo "accou_guardian.0001 event option a: $(grep -a "accou_guardian.0001 event option a" debug.log | wc -l)"
 echo "- success: $(grep -a "accou_guardian.0001 event option a success" debug.log | wc -l)"
 echo "- failure: $(grep -a "accou_guardian.0001 event option a failure" debug.log | wc -l)"
-echo "  - no candidate: $(pcre2grep -a "accou_guardian.0001 event option a failure, child: .+ \([\d]+\), candidate:  \(4294967295\)" debug.log | wc -l)"
-echo "  - no courtier: $(pcre2grep -a "accou_guardian.0001 event option a failure, child: .+ \([\d]+\), candidate: .+ \([\d]+\), courtier:  \(4294967295\)" debug.log | wc -l)"
+#echo "  - no candidate: $(pcre2grep -a "accou_guardian.0001 event option a failure, child: .+ \([\d]+\), candidate:  \(4294967295\)" debug.log | wc -l)"
+#echo "  - no courtier: $(pcre2grep -a "accou_guardian.0001 event option a failure, child: .+ \([\d]+\), candidate: .+ \([\d]+\), courtier:  \(4294967295\)" debug.log | wc -l)"
 echo "- failure fp: $(pcre2grep -a "accou_guardian.0001 event option a failure, child: .+ \([\d]+\), candidate: .+ \([\d]+\), courtier: .+ \([\d]+\)" debug.log | wc -l)"
 echo
 echo "accou_guardian.0002 event option a: $(grep -a "accou_guardian.0002 event option a" debug.log | wc -l)"
