@@ -6,12 +6,17 @@
 
 accou_can_be_charioteer_trigger = {
 	is_capable_adult = yes
+	is_landed = no
+	has_no_particular_noble_roots_trigger = yes
 	NOT = { is_spouse_of = $LIEGE$ }
 	can_be_combatant_based_on_gender_trigger = { ARMY_OWNER = $LIEGE$ }
 }
 
 accou_can_be_bookmaker_trigger = {
 	is_capable_adult = yes
+	is_playable_character = no
+	is_landed = no
+	has_no_particular_noble_roots_trigger = yes
 	NOT = { is_spouse_of = $LIEGE$ }
 	stewardship >= 8
 }
@@ -286,7 +291,6 @@ accou_can_be_master_assassin_trigger = {
 	is_playable_character = no
 	has_no_particular_noble_roots_trigger = yes
 	NOT = { is_spouse_of = $LIEGE$ }
-	is_landed = no
 	faith = {
 		has_doctrine = tenet_fp3_fedayeen
 		NOR = {
