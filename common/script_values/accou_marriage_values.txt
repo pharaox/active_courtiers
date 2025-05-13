@@ -1232,6 +1232,7 @@ accou_quick_marriage_ai_accept_modifier_value = {
 				government_has_flag = government_is_nomadic
 			}
 			scope:recipient = {
+				is_ruler = yes
 				NOT = { government_has_flag = government_is_nomadic }
 				NAND = {
 					is_vassal_or_below_of = scope:actor
