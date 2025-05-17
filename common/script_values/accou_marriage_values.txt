@@ -454,6 +454,7 @@ accou_quick_marriage_ai_accept_modifier_value = {
 		limit = {
 			scope:actor = {
 				has_perk = know_your_land_know_your_people_perk
+				government_has_flag = government_is_settled
 			}
 			scope:recipient.top_liege = scope:actor.top_liege
 		}
@@ -1254,6 +1255,64 @@ accou_quick_marriage_ai_accept_modifier_value = {
 		}
 		else = {
 			add = -100
+		}
+	}
+
+	# Low prowess if nomadic recipient
+	if = {
+		limit = {
+			scope:recipient = {
+				government_has_flag = government_is_nomadic
+			}
+			scope:actor = {
+				prowess < 14
+			}
+		}
+		add = {
+			value = 14
+			subtract = scope:actor.prowess
+			multiply = -4
+		}
+	}
+
+	# Nomadic authority
+	if = {
+		limit = {
+			scope:recipient = {
+				government_has_flag = government_is_nomadic
+			}
+		}
+		if = {
+			limit = {
+				scope:actor = {
+					has_realm_law = nomadic_authority_1
+				}
+			}
+			add = -40
+		}
+		else_if = {
+			limit = {
+				scope:actor = {
+					has_realm_law = nomadic_authority_2
+				}
+			}
+			add = -20
+		}
+		else_if = {
+			limit = {
+				scope:actor = {
+					has_realm_law = nomadic_authority_4
+				}
+			}
+			add = 10
+		}
+		else_if = {
+			limit = {
+				scope:actor = {
+					has_realm_law = nomadic_authority_5
+				}
+			}
+			add = 20
 		}
 	}
 
