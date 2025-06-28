@@ -221,3 +221,5 @@ As a recommendation, if you don't notice any performance issues, just leave the 
 * [Portuguese Translation (by @Alin)](https://steamcommunity.com/sharedfiles/filedetails/?id=3201197071)
 * [German Translation (by @finallyciv)](https://steamcommunity.com/sharedfiles/filedetails/?id=3355568022)
 * [GitHub Repository](https://github.com/pharaox/active_courtiers)
+
+Thumbnail Source: [*Aveu René* by Maître de Jeanne de Laval](https://commons.wikimedia.org/wiki/File:Aveu_Ren%C3%A9_2.jpg)

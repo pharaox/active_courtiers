@@ -19,6 +19,10 @@ clean:
 	rm -rf tmp
 	rm -f ck3-tiger.out
 
+.PHONY: thumbnail
+thumbnail:
+	convert images/Aveu_René_2.jpeg -crop 620x620+30+80 +repage -resize 512x512^ -gravity center -extent 512x512 thumbnail.png
+
 .PHONY: update-version
 update-version:
 	sed -i 's/$(VERSION)/$(NEW_VERSION)/g' descriptor.mod VERSION
