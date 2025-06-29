@@ -71,7 +71,7 @@ accou_can_be_chief_qadi_trigger = {
 		}
 		is_male = yes
 	}
-	trigger_if = {
+	trigger_else_if = { #Unop Use trigger_else_if
 		limit = {
 			$LIEGE$.faith = {
 				has_doctrine = doctrine_gender_female_dominated
@@ -167,6 +167,10 @@ accou_can_be_master_of_hunt_trigger = {
 		has_trait = infirm
 	}
 	can_be_combatant_based_on_gender_trigger = { ARMY_OWNER = $LIEGE$ }
+	#Unop
+	NOT = {
+		culture = { has_cultural_parameter = cannot_hunt }
+	}
 }
 
 accou_can_be_royal_architect_trigger = {
