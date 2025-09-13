@@ -658,6 +658,19 @@ accou_quick_marriage_ai_accept_modifier_value = {
 		}
 	}
 
+	# Oath from allied ruler
+	if = {
+		limit = {
+			scope:recipient = {
+				is_allied_to = scope:actor
+			}
+			scope:actor = {
+				has_character_modifier = oath_of_alliances
+			}
+		}
+		add = 10
+	}
+
 	# Incorrect lineality (simplified)
 	if = {
 		limit = {
