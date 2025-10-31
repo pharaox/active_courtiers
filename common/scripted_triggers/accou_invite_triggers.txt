@@ -36,7 +36,7 @@ accou_is_valid_invite_recipient_vanilla_trigger = {
 
 	trigger_if = { # Added by Unofficial Patch
 		limit = { has_variable = unop_prevent_invitation }
-		NOT = { var:unop_prevent_invitation = $ACTOR$ }
+		var:unop_prevent_invitation != $ACTOR$
 	}
 }
 
@@ -98,7 +98,7 @@ accou_could_accept_invite_royal_court_trigger = {
 				opinion = { target = $ACTOR$ value >= 40 } # 20 or 25
 			}
 			$ACTOR$ = {
-				amenity_level = { type = court_lodging_standards value >= medium_amenity_level } # 10
+				amenity_level = { target = court_lodging_standards value >= medium_amenity_level } # 10
 			}
 		}
 		trigger_else_if = {
@@ -106,7 +106,7 @@ accou_could_accept_invite_royal_court_trigger = {
 				opinion = { target = $ACTOR$ value >= 20 } # 10 or 15
 			}
 			$ACTOR$ = {
-				amenity_level = { type = court_lodging_standards value >= high_amenity_level } # 20
+				amenity_level = { target = court_lodging_standards value >= high_amenity_level } # 20
 			}
 		}
 		trigger_else_if = {
@@ -114,7 +114,7 @@ accou_could_accept_invite_royal_court_trigger = {
 				opinion = { target = $ACTOR$ value >= 0 } # 0 or 5
 			}
 			$ACTOR$ = {
-				amenity_level = { type = court_lodging_standards value >= very_high_amenity_level } # 30
+				amenity_level = { target = court_lodging_standards value >= very_high_amenity_level } # 30
 			}
 		}
 		trigger_else_if = {
@@ -122,7 +122,7 @@ accou_could_accept_invite_royal_court_trigger = {
 				opinion = { target = $ACTOR$ value > -50 } # -20 to -5
 			}
 			$ACTOR$ = {
-				amenity_level = { type = court_lodging_standards value >= max_amenity_level } # 50
+				amenity_level = { target = court_lodging_standards value >= max_amenity_level } # 50
 			}
 		}
 		trigger_else = {
@@ -135,7 +135,7 @@ accou_could_accept_invite_royal_court_trigger = {
 				opinion = { target = $ACTOR$ value >= 50 } # 25
 			}
 			$ACTOR$ = {
-				amenity_level = { type = court_lodging_standards value >= very_high_amenity_level } # 30
+				amenity_level = { target = court_lodging_standards value >= very_high_amenity_level } # 30
 			}
 		}
 		trigger_else_if = {
@@ -143,7 +143,7 @@ accou_could_accept_invite_royal_court_trigger = {
 				opinion = { target = $ACTOR$ value >= 10 } # 5 to 20
 			}
 			$ACTOR$ = {
-				amenity_level = { type = court_lodging_standards value >= max_amenity_level } # 50
+				amenity_level = { target = court_lodging_standards value >= max_amenity_level } # 50
 			}
 		}
 		trigger_else = {

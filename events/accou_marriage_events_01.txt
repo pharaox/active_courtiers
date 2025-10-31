@@ -44,7 +44,7 @@ scripted_trigger accou_marriage_0001_valid_marriage_candidate_trigger = {
 
 	trigger_if = {
 		limit = {
-			NOT = { this = scope:matchmaker1 }
+			this != scope:matchmaker1
 		}
 
 		scope:matchmaker1 = {
@@ -135,7 +135,7 @@ scripted_effect accou_marriage_0001_on_approve_effect = {
 
 	# Stress impact for root
 	if = {
-		limit = { NOT = { scope:matchmaker = root } }
+		limit = { scope:matchmaker != root }
 		stress_impact = {
 			paranoid = minor_stress_gain
 			trusting = minor_stress_loss
@@ -550,11 +550,11 @@ accou_marriage.0002 = {
 	desc = {
 		desc = accou_marriage.0002.desc
 		triggered_desc = {
-			trigger = { NOT = { scope:matchmaker = root } }
+			trigger = { scope:matchmaker != root }
 			desc = accou_marriage.0002.more.desc
 		}
 		triggered_desc = {
-			trigger = { NOT = { scope:matchmaker = root } }
+			trigger = { scope:matchmaker != root }
 			desc = {
 				desc = accou_marriage.0002.reasons.desc
 				desc = {
@@ -764,7 +764,7 @@ accou_marriage.0002 = {
 			limit = { debug_only = yes }
 
 			if = {
-				limit = { NOT = { scope:matchmaker = root } }
+				limit = { scope:matchmaker != root }
 				save_scope_value_as = { name = outsider value = yes }
 			}
 			else = {
@@ -799,7 +799,7 @@ accou_marriage.0002 = {
 			limit = {
 				scope:matchmaker = {
 					is_ai = no
-					NOT = { this = root }
+					this != root
 				}
 			}
 			run_interaction = {
@@ -845,7 +845,7 @@ accou_marriage.0002 = {
 
 			# Eagerness for marriages to outsiders (10, paranoid / trusting)
 			modifier = {
-				NOT = { scope:matchmaker = root }
+				scope:matchmaker != root
 				add = {
 					value = 10
 					if = {

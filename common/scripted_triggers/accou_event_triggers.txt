@@ -12,7 +12,6 @@
 	trigger_else = {
 		is_available = yes
 	}
-	is_busy_in_events_localised = yes
 }
 
 accou_is_valid_event_participant_trigger = {
@@ -31,7 +30,6 @@ accou_is_valid_event_participant_trigger = {
 	trigger_else = {
 		accou_is_available_ai_trigger = yes
 	}
-	is_busy_in_events_localised = yes
 
 	# Health conditions
 	NOT = { has_trait = infirm }
@@ -57,16 +55,16 @@ accou_is_available_ai_trigger = {
 }
 
 accou_is_available_ai_allow_travelling_trigger = {
-	is_alive = yes
-	is_ai = yes
-	is_imprisoned = no
-	is_incapable = no
-	has_contagious_deadly_disease_trigger = no
-	is_in_army = no
-	NOR = {
-		exists = involved_activity
-		has_variable = gone_adventuring
+	is_available_quick = {
+		alive = yes
+		ai = yes
+		imprisoned = no
+		incapable = no
+		in_army = no
+		activity = no
 	}
+	has_contagious_deadly_disease_trigger = no
+	NOT = { has_variable = gone_adventuring }
 }
 
 accou_is_landless_ruler_trigger = {

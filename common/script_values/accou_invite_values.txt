@@ -248,7 +248,7 @@ accou_vanilla_court_position_traits_character_value = {
 		add = 1
 	}
 	if = {
-		limit = { has_trait = poet } # Court Jester, Court Poet, Chronicler
+		limit = { has_trait = lifestyle_poet } # Court Jester, Court Poet, Chronicler
 		add = 1
 	}
 	if = {
@@ -551,7 +551,7 @@ accou_quick_invite_ai_accept_modifier_value = {
 		limit = {
 			is_adult = no
 			any_memory = {
-				has_memory_type = family_castration_fled_memory
+				memory_type = family_castration_fled_memory
 				memory_participant:castrator ?= {
 					this = scope:actor
 				}
@@ -686,6 +686,16 @@ accou_quick_invite_ai_accept_modifier_value = {
 		}
 	}
 
+	# Estate parameters
+	if = {
+		limit = {
+			scope:actor = {
+				domicile ?= { has_domicile_parameter = estate_increase_invite_to_court_acceptance }
+			}
+		}
+		add = estate_invite_to_court_acceptance_value
+	}
+
 	# Imperial eunuchs
 	if = {
 		limit = {
@@ -698,31 +708,41 @@ accou_quick_invite_ai_accept_modifier_value = {
 		}
 		add = -1000
 	}
+
+	# Additional reasons
+	if = {
+		limit = {
+			scope:actor.culture = {
+				has_cultural_parameter = invite_courtiers_reasons
+			}
+		}
+		add = 15
+	}
 }
 
 accou_court_lodging_standards_amenity_level_value = {
 	value = 0
 	if = {
 		limit = {
-			amenity_level = { type = court_lodging_standards value >= medium_amenity_level }
+			amenity_level = { target = court_lodging_standards value >= medium_amenity_level }
 		}
 		add = 1
 	}
 	if = {
 		limit = {
-			amenity_level = { type = court_lodging_standards value >= high_amenity_level }
+			amenity_level = { target = court_lodging_standards value >= high_amenity_level }
 		}
 		add = 1
 	}
 	if = {
 		limit = {
-			amenity_level = { type = court_lodging_standards value >= very_high_amenity_level }
+			amenity_level = { target = court_lodging_standards value >= very_high_amenity_level }
 		}
 		add = 1
 	}
 	if = {
 		limit = {
-			amenity_level = { type = court_lodging_standards value >= max_amenity_level }
+			amenity_level = { target = court_lodging_standards value >= max_amenity_level }
 		}
 		add = 2
 	}

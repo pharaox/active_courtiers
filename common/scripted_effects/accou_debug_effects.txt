@@ -165,7 +165,7 @@ accou_debug_log_5_effect = {
 accou_debug_set_scope_variable_effect = {
 	if = {
 		limit = {
-			NOT = { $TYPE$ = flag:variable }
+			$TYPE$ != flag:variable
 			exists = scope:$NAME$
 			trigger_if = {
 				limit = { $TYPE$ = flag:boolean }
@@ -179,7 +179,7 @@ accou_debug_set_scope_variable_effect = {
 accou_debug_remove_scope_variable_effect = {
 	if = {
 		limit = {
-			NOT = { $TYPE$ = flag:variable }
+			$TYPE$ != flag:variable
 			has_variable = $NAME$
 		}
 		remove_variable = $NAME$

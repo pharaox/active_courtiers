@@ -80,7 +80,7 @@ scripted_effect accou_guardian_0001_on_accept_effect = {
 				culture = root.culture
 			}
 			scope:child = {
-				NOT = { culture = root.culture }
+				culture != root.culture
 			}
 		}
 		save_scope_value_as = { name = convert_culture value = yes }
@@ -94,7 +94,7 @@ scripted_effect accou_guardian_0001_on_accept_effect = {
 				faith = root.faith
 			}
 			scope:child = {
-				NOT = { faith = root.faith }
+				faith != root.faith
 			}
 		}
 		save_scope_value_as = { name = convert_faith value = yes }
@@ -253,7 +253,7 @@ accou_guardian.0001 = {
 			limit = { exists = scope:candidate }
 			random_courtier = {
 				limit = {
-					NOT = { this = scope:candidate }
+					this != scope:candidate
 					accou_guardian_0001_valid_courtier_trigger = yes
 				}
 
@@ -550,7 +550,7 @@ accou_guardian.0002 = {
 							culture = root.culture
 						}
 						scope:child = {
-							NOT = { culture = root.culture }
+							culture != root.culture
 						}
 					}
 					desc = accou_guardian.0002.convert_culture.desc
@@ -561,7 +561,7 @@ accou_guardian.0002 = {
 							faith = root.faith
 						}
 						scope:child = {
-							NOT = { faith = root.faith }
+							faith != root.faith
 						}
 					}
 					desc = accou_guardian.0002.convert_faith.desc

@@ -85,6 +85,13 @@ accou_is_valid_marriage_target_vanilla_trigger = {
 			}
 		}
 	}
+
+	#trigger_if = {
+	#	limit = {
+	#		$CHARACTER$.culture = { has_cultural_parameter = reduced_marriage_acceptance_distant_realms }
+	#	}
+	#	top_liege.culture = $CHARACTER$.top_liege.culture
+	#}
 }
 
 accou_could_marry_character_trigger = {
@@ -118,7 +125,7 @@ accou_could_marry_character_trigger = {
 	}
 
 	# Not the same character
-	NOT = { this = $CHARACTER$ }
+	this != $CHARACTER$
 }
 
 # Is this character a valid marriage recipient
@@ -129,7 +136,6 @@ accou_is_valid_marriage_recipient_trigger = {
 
 accou_is_valid_marriage_recipient_vanilla_trigger = {
 	is_imprisoned = no
-	is_busy_in_events_localised = yes
 
 	# Not at war with actor
 	NOT = {

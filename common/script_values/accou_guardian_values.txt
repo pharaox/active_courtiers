@@ -7,7 +7,7 @@
 	if = {
 		limit = {
 			scope:child = {
-				NOT = { faith = scope:liege.faith }
+				faith != scope:liege.faith
 			}
 			faith = scope:liege.faith
 		}
@@ -18,7 +18,7 @@
 	if = {
 		limit = {
 			scope:child = {
-				NOT = { culture = scope:liege.culture }
+				culture != scope:liege.culture
 			}
 			culture = scope:liege.culture
 		}

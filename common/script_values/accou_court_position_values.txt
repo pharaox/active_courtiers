@@ -671,3 +671,63 @@ accou_foreign_emissary_candidate_score_value = {
 accou_keeper_of_the_horses_candidate_score_value = {
 	value = 100
 }
+
+accou_grand_preceptor_candidate_score_value = {
+	value = 275
+}
+
+accou_grand_mentor_candidate_score_value = {
+	value = 275
+}
+
+accou_grand_guardian_candidate_score_value = {
+	value = 275
+}
+
+accou_fire_dragon_engineer_candidate_score_value = {
+	value = 50
+	if = {
+		limit = {
+			ai_has_warlike_personality = yes
+		}
+		add = 200
+	}
+}
+
+accou_keeper_of_the_harem_candidate_score_value = {
+	value = 525
+}
+
+accou_favored_minister_candidate_score_value = {
+	value = 525
+}
+
+accou_minister_bureaucrat_candidate_score_value = {
+	value = 275
+}
+
+accou_court_guru_candidate_score_value = {
+	value = 2525
+}
+
+accou_court_brahmin_candidate_score_value = {
+	value = 75
+
+	# Zealous AI's like this
+	if = {
+		limit = {
+			ai_zeal > 75
+		}
+		add = 50
+	}
+	if = { # Having a Court Brahmin is excellent if you have legitimacy
+		limit = {
+			has_legitimacy = yes
+		}
+		add = 200
+	}
+}
+
+accou_khlon_glan_candidate_score_value = {
+	value = 75
+}

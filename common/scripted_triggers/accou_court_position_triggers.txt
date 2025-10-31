@@ -401,6 +401,68 @@ accou_can_be_keeper_of_the_horses_trigger = {
 	exists = $LIEGE$
 }
 
+accou_can_be_grand_preceptor_trigger = {
+	is_capable_adult = yes
+	exists = $LIEGE$
+}
+
+accou_can_be_grand_mentor_trigger = {
+	is_capable_adult = yes
+	exists = $LIEGE$
+}
+
+accou_can_be_grand_guardian_trigger = {
+	is_capable_adult = yes
+	exists = $LIEGE$
+}
+
+accou_can_be_fire_dragon_engineer_trigger = {
+	is_capable_adult = yes
+	exists = $LIEGE$
+}
+
+accou_can_be_keeper_of_the_harem_trigger = {
+	is_capable_adult = yes
+	exists = $LIEGE$
+}
+
+accou_can_be_favored_minister_trigger = {
+	always = no # only councilors
+	exists = $LIEGE$
+}
+
+accou_can_be_minister_bureaucrat_trigger = {
+	always = no # aptitude depends on liege
+	exists = $LIEGE$
+}
+
+accou_can_be_court_guru_trigger = {
+	is_capable_adult = yes
+	has_trait = lifestyle_mystic
+	OR = {
+		has_religion = religion:buddhism_religion
+		has_religion = religion:hinduism_religion
+	}
+	NOT = { is_spouse_of = $LIEGE$ }
+}
+
+accou_can_be_court_brahmin_trigger = {
+	is_capable_adult = yes
+	OR = {
+		has_religion = religion:buddhism_religion
+		has_religion = religion:hinduism_religion
+	}
+	learning >= 12
+	exists = $LIEGE$
+}
+
+accou_can_be_khlon_glan_trigger = {
+	is_capable_adult = yes
+	stewardship >= 10
+	martial >= 10
+	NOT = { is_spouse_of = $LIEGE$ }
+}
+
 accou_is_court_position_available_to_vassals_trigger = {
 	NOR = {
 		$POSITION$ = flag:court_astrologer_court_position

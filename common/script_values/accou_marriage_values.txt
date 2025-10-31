@@ -129,7 +129,7 @@
 	# Faith (-15 to 0, zealous / cynical, already in opinion)
 	if = {
 		limit = {
-			NOT = { faith = scope:suitor.faith }
+			faith != scope:suitor.faith
 		}
 		add = {
 			value = scope:suitor.accou_faith_hostility_opinion_value
@@ -150,7 +150,7 @@
 	# Culture & language (-7 to 0, gregarious / shy, already in opinion)
 	if = {
 		limit = {
-			NOT = { culture = scope:suitor.culture }
+			culture != scope:suitor.culture
 		}
 		add = {
 			value = scope:suitor.accou_cultural_acceptance_opinion_value
@@ -401,6 +401,8 @@ accou_quick_marriage_ai_accept_modifier_actor_value = {
 	else_if = {
 		limit = {
 			scope:actor = {
+				highest_held_title_tier > tier_county
+				highest_held_title_tier < tier_empire
 				has_legitimacy_flag = very_reduced_marriage_acceptance
 			}
 		}
@@ -409,6 +411,7 @@ accou_quick_marriage_ai_accept_modifier_actor_value = {
 	else_if = {
 		limit = {
 			scope:actor = {
+				highest_held_title_tier = tier_empire
 				has_legitimacy_flag = massively_reduced_marriage_acceptance
 			}
 		}
@@ -427,6 +430,7 @@ accou_quick_marriage_ai_accept_modifier_actor_value = {
 	else_if = {
 		limit = {
 			scope:actor = {
+				highest_held_title_tier <= tier_kingdom
 				has_legitimacy_flag = very_increased_marriage_acceptance
 			}
 		}
@@ -435,6 +439,7 @@ accou_quick_marriage_ai_accept_modifier_actor_value = {
 	else_if = {
 		limit = {
 			scope:actor = {
+				highest_held_title_tier <= tier_duchy
 				has_legitimacy_flag = extra_increased_marriage_acceptance
 			}
 		}
@@ -491,7 +496,7 @@ accou_quick_marriage_ai_accept_modifier_value = {
 	if = {
 		limit = {
 			scope:actor = {
-				is_landless_adventurer = no
+				NOT = { has_government = landless_adventurer_government }
 			}
 		}
 		add = marry_close_family_tiers_acceptance_value
@@ -501,24 +506,84 @@ accou_quick_marriage_ai_accept_modifier_value = {
 	if = {
 		limit = {
 			scope:actor = {
-				government_has_flag = government_is_administrative
+				government_allows = administrative
 			}
 			scope:recipient = {
-				NOT = { government_has_flag = government_is_administrative }
+				NOT = { government_allows = administrative }
 			}
 		}
-		add = -15
+		add = {
+			value = -25
+			if = {
+				limit = {
+					scope:recipient = { government_is_japanese_trigger = yes }
+					scope:actor = { government_is_japanese_trigger = yes }
+				}
+				multiply = 3
+			}
+		}
 	}
 	else_if = {
 		limit = {
 			scope:actor = {
-				NOT = { government_has_flag = government_is_administrative }
+				NOT = { government_allows = administrative }
 			}
 			scope:recipient = {
-				government_has_flag = government_is_administrative
+				government_allows = administrative
 			}
 		}
-		add = -15
+		add = {
+			value = -25
+			if = {
+				limit = {
+					scope:recipient = { government_is_japanese_trigger = yes }
+					scope:actor = { government_is_japanese_trigger = yes }
+				}
+				multiply = 3
+			}
+		}
+	}
+	if = {
+		limit = {
+			scope:actor = {
+				government_allows = merit
+			}
+			scope:recipient = {
+				government_allows = merit
+				culture = {
+					has_same_culture_heritage = scope:actor.culture
+				}
+			}
+			scope:secondary_actor = {
+				merit_level > 1
+			}
+		}
+		add = {
+			value = 5
+			multiply = scope:secondary_actor.merit_level
+		}
+	}
+	if = {
+		limit = {
+			scope:actor = {
+				government_allows = merit
+				merit_level >= 3
+			}
+			scope:recipient = {
+				government_allows = merit
+				culture = {
+					has_same_culture_heritage = scope:actor.culture
+				}
+			}
+			scope:secondary_actor = {
+				NOT = { this = scope:actor }
+				is_close_family_of = scope:actor
+			}
+		}
+		add = {
+			value = 5
+			multiply = scope:actor.merit_level
+		}
 	}
 	if = {
 		limit = {
@@ -598,7 +663,7 @@ accou_quick_marriage_ai_accept_modifier_value = {
 				has_royal_court = yes
 				has_dlc_feature = royal_court
 			}
-			NOT = { scope:actor.top_liege = scope:recipient.top_liege }
+			scope:actor.top_liege != scope:recipient.top_liege
 			scope:ruler_with_royal_court ?= {
 				has_same_court_language = scope:actor
 			}
@@ -814,9 +879,7 @@ accou_quick_marriage_ai_accept_modifier_value = {
 			if = {
 				limit = {
 					scope:secondary_recipient = {
-						any_child = {
-							count >= 1
-						}
+						any_child = {}
 					}
 				}
 				add = -100
@@ -828,6 +891,16 @@ accou_quick_marriage_ai_accept_modifier_value = {
 	}
 
 	# Procreation continued (not possible, skipped)
+
+	# Incapable
+	if = {
+		limit = {
+			scope:secondary_actor = {
+				is_incapable = yes
+			}
+		}
+		add = -50
+	}
 
 	# Importance
 	if = {
@@ -858,12 +931,8 @@ accou_quick_marriage_ai_accept_modifier_value = {
 					has_relation_friend = scope:recipient
 					has_relation_best_friend = scope:recipient
 					is_knight_of = scope:recipient
-					AND = {
-						exists = inspiration
-						inspiration = {
-							exists = inspiration_sponsor
-							inspiration_sponsor = scope:recipient
-						}
+					inspiration ?= {
+						inspiration_sponsor ?= scope:recipient
 					}
 				}
 			}
@@ -875,7 +944,7 @@ accou_quick_marriage_ai_accept_modifier_value = {
 	if = {
 		limit = {
 			scope:secondary_recipient = {
-				NOT = { this = scope:recipient }
+				this != scope:recipient
 				any_child = {
 					is_child_of = scope:recipient
 				}
@@ -888,6 +957,7 @@ accou_quick_marriage_ai_accept_modifier_value = {
 	if = {
 		limit = {
 			scope:recipient = {
+				tgp_is_ceremonial_liege_trigger = no
 				target_is_liege_or_above = scope:actor
 			}
 		}
@@ -919,7 +989,7 @@ accou_quick_marriage_ai_accept_modifier_value = {
 			}
 			if = {
 				limit = {
-					NOT = { this = scope:secondary_recipient }
+					this != scope:secondary_recipient
 				}
 				if = {
 					limit = { target_is_liege_or_above = scope:actor }
@@ -943,7 +1013,7 @@ accou_quick_marriage_ai_accept_modifier_value = {
 			}
 			if = {
 				limit = {
-					NOT = { this = scope:secondary_recipient }
+					this != scope:secondary_recipient
 				}
 				if = {
 					limit = { target_is_liege_or_above = scope:actor }
@@ -982,7 +1052,7 @@ accou_quick_marriage_ai_accept_modifier_value = {
 				if = {
 					limit = {
 						scope:actor = {
-							is_landless_adventurer = yes
+							has_government = landless_adventurer_government
 						}
 					}
 					value = -1
@@ -1001,7 +1071,17 @@ accou_quick_marriage_ai_accept_modifier_value = {
 		}
 	}
 
-	# Consaguinity (not possible, skipped)
+	# Consaguinity (now possible)
+	if = {
+		limit = {
+			scope:recipient.faith = {
+				NOT = {
+					faith_allows_marriage_consanguinity_trigger = { CHARACTER_1 = scope:secondary_recipient CHARACTER_2 = scope:secondary_actor }
+				}
+			}
+		}
+		add = -1000
+	}
 
 	# Age
 	if = {
@@ -1054,7 +1134,7 @@ accou_quick_marriage_ai_accept_modifier_value = {
 		limit = {
 			scope:recipient.culture = {
 				has_cultural_parameter = dislikes_marrying_outside_of_culture
-				NOT = { this = scope:actor.culture }
+				this != scope:actor.culture
 			}
 		}
 		add = -50
@@ -1356,6 +1436,228 @@ accou_quick_marriage_ai_accept_modifier_value = {
 	# Harold (not possible, skipped)
 
 	# A little extra challenge for latin empire players (not likely, skipped)
+
+	# House Relations
+	if = {
+		limit = {
+			scope:secondary_recipient.house ?= {
+				NOT = { scope:secondary_actor.house ?= this }
+				any_house_relation = {
+					has_house_relation_parameter = increased_marriage_acceptance
+					any_relation_house = { scope:secondary_actor.house ?= this }
+				}
+			}
+		}
+		add = house_relation_increased_marriage_acceptance
+	}
+	if = {
+		limit = {
+			scope:secondary_recipient.house ?= {
+				NOT = { scope:secondary_actor.house ?= this }
+				any_house_relation = {
+					has_house_relation_parameter = decreased_marriage_acceptance
+					any_relation_house = { scope:secondary_actor.house ?= this }
+				}
+			}
+		}
+		add = house_relation_decreased_marriage_acceptance
+	}
+
+	# Cultural parameter which makes other cultures less attractive to marry with
+	if = {
+		limit = {
+			scope:secondary_recipient.culture = { has_cultural_parameter = reduced_marriage_acceptance_outside_culture }
+			NOT = { scope:secondary_actor.culture = scope:secondary_recipient.culture }
+			# if the recipient is the Chinese Emperor and the actor is their tributary, check for investiture_marriage_yes
+			trigger_if = { 
+				limit = { 
+					scope:recipient.primary_title = title:h_china
+					scope:actor.overlord = scope:recipient
+				}
+				NOT = { scope:actor = { subject_contract_has_flag = celestial_investiture_marriage } }
+			}
+		}
+		add = {
+			value = -25
+			if = { # Further reduction from other heritages
+				limit = {
+					NOT = { scope:secondary_actor.culture = { has_same_culture_heritage = scope:secondary_recipient.culture } }
+				}
+				add = -25
+			}
+		}
+	}
+
+	# Reversed willingness blockers for AI using certain interactions (e.g. arrange_marriage_interaction)
+	if = {
+		limit = {
+			trigger_if = {
+				limit = { exists = scope:actor }
+				scope:actor = { is_ai = yes }
+			}
+			trigger_else = {
+				scope:secondary_actor = { is_ai = yes }
+			}
+			scope:secondary_actor.culture = { has_cultural_parameter = reduced_marriage_acceptance_outside_culture }
+			NOT = { scope:secondary_actor.culture = scope:secondary_recipient.culture }
+		}
+		add = {
+			value = -100
+			if = { # Further reduction from other heritages
+				limit = {
+					NOT = { scope:secondary_actor.culture = { has_same_culture_heritage = scope:secondary_recipient.culture } }
+				}
+				add = -100
+			}
+		}
+	}
+
+	# Cultural parameter which makes foreign realms less attractive to marry with based on distance
+	if = {
+		limit = {
+			tgp_distant_realm_marriage_trigger = {
+				RECIPIENT_SPOUSE = scope:secondary_recipient
+				ACTOR_SPOUSE = scope:secondary_actor
+			}
+			# if the recipient is the Chinese Emperor and the actor is their tributary, check for investiture_marriage_yes
+			trigger_if = { 
+				limit = { 
+					scope:recipient.primary_title = title:h_china
+					scope:actor.overlord = scope:recipient
+				}
+				NOT = { scope:actor = { subject_contract_has_flag = celestial_investiture_marriage } }
+			}
+		}
+		add = {
+			value = -1
+			multiply = {
+				value = "scope:from.squared_distance(scope:to)"
+				divide = 20000
+			}
+			min = -50
+			max = -1
+		}
+	}
+
+	# Inverted - cultural parameter which makes foreign realms less attractive to marry with based on distance
+	if = {
+		limit = {
+			tgp_distant_realm_marriage_trigger = {
+				RECIPIENT_SPOUSE = scope:secondary_actor
+				ACTOR_SPOUSE = scope:secondary_recipient
+			}
+		}
+		add = {
+			value = -1
+			multiply = {
+				value = "scope:from.squared_distance(scope:to)"
+				divide = 40000
+			}
+			min = -50
+			max = -1
+		}
+	}
+
+	if = {
+		limit = {
+			scope:recipient.primary_title = title:h_china
+			scope:actor = { 
+				overlord = scope:recipient
+				subject_contract_has_flag = celestial_investiture_marriage
+			}
+		}
+		add = {
+			add = scope:actor.subject_standing
+			divide = 4
+		}
+	}
+
+	# Reversed willingness blockers for AI using certain interactions (e.g. arrange_marriage_interaction)
+	if = {
+		limit = {
+			trigger_if = {
+				limit = { exists = scope:actor }
+				scope:actor = { is_ai = yes }
+			}
+			trigger_else = {
+				scope:secondary_actor = { is_ai = yes }
+			}
+			tgp_distant_realm_marriage_trigger = {
+				RECIPIENT_SPOUSE = scope:secondary_actor
+				ACTOR_SPOUSE = scope:secondary_recipient
+			}
+		}
+		add = {
+			value = -1
+			multiply = {
+				value = "scope:from.squared_distance(scope:to)"
+				divide = 20000
+			}
+			multiply = 2
+			min = -100
+			max = -1
+		}
+	}
+
+	if = {
+		limit = { # YOU PETITIONED THE CEREMONIAL HOUSE AND THEY SAID YES
+			scope:secondary_recipient = { tgp_is_in_ceremonial_house_trigger = yes }
+			scope:secondary_actor.house.var:petition_liege_wedding_permission_flag ?= scope:secondary_recipient.house
+		}
+		add = 50
+	}
+
+	if = {
+		limit = { # IMPERIAL HOUSE DOES NOT LIKE LOWER HOUSES
+		scope:secondary_recipient = { tgp_is_in_ceremonial_house_trigger = yes }
+			NOR = {
+				tgp_shared_ceremonial_house_trigger = {
+					COMPARE_1 = scope:secondary_recipient
+					COMPARE_2 = scope:secondary_actor
+				}
+				scope:secondary_actor.house.var:petition_liege_wedding_permission_flag ?= scope:secondary_recipient.house
+			}
+			scope:secondary_recipient.top_liege.primary_title.var:administrative_ui_special_title ?= {
+				tier > scope:secondary_actor.highest_held_title_tier
+			}
+		}
+		add = {
+			value = -25
+			multiply = {
+				value = scope:secondary_recipient.top_liege.primary_title.var:administrative_ui_special_title.holder.dynasty.dynasty_prestige_level
+				subtract = scope:secondary_actor.dynasty.dynasty_prestige_level
+			}
+			max = -25 # Base is -25
+		}
+	}
+	if = {
+		limit = { # IMPERIAL HOUSE DOES NOT LIKE NON-HOUSE HEADS EVEN MORE
+			scope:secondary_recipient = { tgp_is_in_ceremonial_house_trigger = yes }
+			NOR = {
+				tgp_shared_ceremonial_house_trigger = {
+					COMPARE_1 = scope:secondary_recipient
+					COMPARE_2 = scope:secondary_actor
+				}
+				scope:secondary_actor.house.var:petition_liege_wedding_permission_flag ?= scope:secondary_recipient.house
+				scope:secondary_actor = {
+					any_held_title = { is_noble_family_title = yes }
+				}
+			}
+		}
+		add  = -50
+	}
+	if = {
+		limit = { # IMPERIAL HOUSE DOES NOT LIKE TO BE SECONDARY SPOUSE
+			NOT = {
+				tgp_shared_ceremonial_house_trigger = {
+					COMPARE_1 = scope:secondary_recipient
+					COMPARE_2 = scope:secondary_actor
+				}
+			}
+			scope:secondary_actor = { is_married = yes }
+		}
+		add = -50
+	}
 
 	# On Hard/Very Hard, highly skilled characters are unwilling to marry player courtiers
 	if = {
