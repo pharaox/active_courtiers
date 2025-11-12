@@ -1655,6 +1655,7 @@ accou_quick_marriage_ai_accept_modifier_value = {
 				}
 			}
 			scope:secondary_actor = { is_married = yes }
+			scope:secondary_recipient = { tgp_is_in_ceremonial_house_trigger = yes }
 		}
 		add = -50
 	}
