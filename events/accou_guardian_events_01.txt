@@ -381,6 +381,14 @@ accou_guardian.0001 = {
 				}
 				trigger_event = accou_guardian.0004
 			}
+			else = {
+				send_interface_message = {
+					type = accou_search_failed_neutral
+					title = accou_guardian_0001_failed_title
+					right_icon = scope:child
+					custom_tooltip = accou_guardian_0001_failed_message
+				}
+			}
 		}
 
 		ai_chance = {

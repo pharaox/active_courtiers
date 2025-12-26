@@ -545,6 +545,14 @@ accou_marriage.0001 = {
 				}
 				trigger_event = accou_marriage.0004
 			}
+			else = {
+				send_interface_message = {
+					type = accou_search_failed_neutral
+					title = accou_marriage_0001_failed_title
+					right_icon = scope:courtier
+					custom_tooltip = accou_marriage_0001_failed_message
+				}
+			}
 		}
 
 		ai_chance = {

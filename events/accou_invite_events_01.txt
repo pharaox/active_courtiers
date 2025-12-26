@@ -344,6 +344,13 @@ accou_invite.0001 = {
 				}
 				trigger_event = accou_invite.0004
 			}
+			else = {
+				send_interface_message = {
+					type = accou_search_failed_neutral
+					title = accou_invite_0001_failed_title
+					custom_tooltip = accou_invite_0001_failed_message
+				}
+			}
 		}
 
 		ai_chance = {
