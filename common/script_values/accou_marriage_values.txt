@@ -1724,3 +1724,29 @@ accou_quick_marriage_ai_accept_modifier_value = {
 
 	# And slightly less likely to marry player children etc. (not possible, skipped)
 }
+
+accou_marriage_candidate_quality_threshold_value = {
+	if = {
+		limit = { has_game_rule = accou_marriage_candidate_quality_threshold_very_high }
+		value = 10
+	}
+	else_if = {
+		limit = { has_game_rule = accou_marriage_candidate_quality_threshold_high }
+		value = 0
+	}
+	else_if = {
+		limit = { has_game_rule = accou_marriage_candidate_quality_threshold_medium }
+		value = -10
+	}
+	else_if = {
+		limit = { has_game_rule = accou_marriage_candidate_quality_threshold_low }
+		value = -20
+	}
+	else_if = {
+		limit = { has_game_rule = accou_marriage_candidate_quality_threshold_very_low }
+		value = -30
+	}
+	else = {
+		value = 0
+	}
+}

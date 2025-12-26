@@ -322,7 +322,7 @@ accou_marriage.0001 = {
 				value = accou_marriage_candidate_quality_value
 			}
 			if = {
-				limit = { scope:marriage_candidate_quality > 0 }
+				limit = { scope:marriage_candidate_quality > accou_marriage_candidate_quality_threshold_value }
 				set_variable = {
 					name = accou_marriage_candidate_quality
 					value = scope:marriage_candidate_quality

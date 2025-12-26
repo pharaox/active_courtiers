@@ -198,3 +198,29 @@ accou_child_focus_skill_value = {
 		}
 	}
 }
+
+accou_guardian_candidate_quality_threshold_value = {
+	if = {
+		limit = { has_game_rule = accou_guardian_candidate_quality_threshold_very_high }
+		value = 30
+	}
+	else_if = {
+		limit = { has_game_rule = accou_guardian_candidate_quality_threshold_high }
+		value = 20
+	}
+	else_if = {
+		limit = { has_game_rule = accou_guardian_candidate_quality_threshold_medium }
+		value = 10
+	}
+	else_if = {
+		limit = { has_game_rule = accou_guardian_candidate_quality_threshold_low }
+		value = 0
+	}
+	else_if = {
+		limit = { has_game_rule = accou_guardian_candidate_quality_threshold_very_low }
+		value = -10
+	}
+	else = {
+		value = 10
+	}
+}

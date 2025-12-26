@@ -230,7 +230,7 @@ accou_guardian.0001 = {
 			}
 			remove_variable = accou_guardian_candidate_quality
 			if = {
-				limit = { scope:guardian_candidate_quality > 10 }
+				limit = { scope:guardian_candidate_quality > accou_guardian_candidate_quality_threshold_value }
 				set_variable = {
 					name = accou_guardian_candidate_quality
 					value = scope:guardian_candidate_quality

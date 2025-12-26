@@ -139,7 +139,7 @@ accou_invite.0001 = {
 				value = accou_invite_candidate_quality_value
 			}
 			if = {
-				limit = { scope:invite_candidate_quality > 20 }
+				limit = { scope:invite_candidate_quality > accou_invite_candidate_quality_threshold_value }
 				set_variable = {
 					name = accou_invite_candidate_quality
 					value = scope:invite_candidate_quality

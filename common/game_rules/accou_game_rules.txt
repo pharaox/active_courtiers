@@ -134,6 +134,90 @@ accou_courtier_events = {
 	}
 }
 
+accou_marriage_candidate_quality_threshold = {
+	categories = {
+		accou_active_courtiers tweaks
+	}
+
+	default = accou_marriage_candidate_quality_threshold_medium
+
+	accou_marriage_candidate_quality_threshold_very_high = {
+		flag = GG_can_change_rule
+	}
+
+	accou_marriage_candidate_quality_threshold_high = {
+		flag = GG_can_change_rule
+	}
+
+	accou_marriage_candidate_quality_threshold_medium = {
+		flag = GG_can_change_rule
+	}
+
+	accou_marriage_candidate_quality_threshold_low = {
+		flag = GG_can_change_rule
+	}
+
+	accou_marriage_candidate_quality_threshold_very_low = {
+		flag = GG_can_change_rule
+	}
+}
+
+accou_invite_candidate_quality_threshold = {
+	categories = {
+		accou_active_courtiers tweaks
+	}
+
+	default = accou_invite_candidate_quality_threshold_medium
+
+	accou_invite_candidate_quality_threshold_very_high = {
+		flag = GG_can_change_rule
+	}
+
+	accou_invite_candidate_quality_threshold_high = {
+		flag = GG_can_change_rule
+	}
+
+	accou_invite_candidate_quality_threshold_medium = {
+		flag = GG_can_change_rule
+	}
+
+	accou_invite_candidate_quality_threshold_low = {
+		flag = GG_can_change_rule
+	}
+
+	accou_invite_candidate_quality_threshold_very_low = {
+		flag = GG_can_change_rule
+	}
+}
+
+accou_guardian_candidate_quality_threshold = {
+	categories = {
+		accou_active_courtiers tweaks
+	}
+
+	default = accou_guardian_candidate_quality_threshold_medium
+
+	accou_guardian_candidate_quality_threshold_very_high = {
+		flag = GG_can_change_rule
+	}
+
+	accou_guardian_candidate_quality_threshold_high = {
+		flag = GG_can_change_rule
+	}
+
+	accou_guardian_candidate_quality_threshold_medium = {
+		flag = GG_can_change_rule
+	}
+
+	accou_guardian_candidate_quality_threshold_low = {
+		flag = GG_can_change_rule
+	}
+
+	accou_guardian_candidate_quality_threshold_very_low = {
+		flag = GG_can_change_rule
+	}
+}
+
 accou_search_range_player = {
 	categories = {
 		accou_active_courtiers tweaks historicity
