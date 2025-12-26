@@ -1,5 +1,16 @@
 # Changelog
 
+## Version 0.11.1
+
+### Game Rules
+
+* Added new game rules to make the quality thresholds for marriage, invitation, and guardian candidates configurable.
+* Added a new game rule to allow or disallow marriage requests for the player's lovers.
+
+### Miscellaneous
+
+* Added notifications for failed courtier searches (can be switched off via *Message Settings*).
+
 ## Version 0.11.0
 
 ### Compatibility

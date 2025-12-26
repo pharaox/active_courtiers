@@ -4,36 +4,35 @@
 
 ## Overview
 
-Do you find yourself spending a lot of time finding spouses for your courtiers, or deciding on characters to invite to your court, who could be better councillors, court position holders, knights, or commanders? While both **Find Spouse** and **Invite to Court** interactions enable the player to attract better talent and furthermore do it for free, they suffer from a few major drawbacks:
+Do you find yourself spending a lot of time finding spouses for courtiers or deciding on characters to invite who could be better councillors, court position holders, knights, or commanders? While **Find Spouse** and **Invite to Court** let players attract better talent for free, they have major drawbacks:
 
 * Choosing among numerous options and for many courtiers requires a lot of effort.
 * The AI never uses them, ending up with a worse talent pool, while the player can get the best courtiers, as they are usually not married and there is hardly any competition.
 
-I personally find the above aspects to be tedious, unrealistic, and underwhelming. Why should it take so much effort to find good spouses for courtiers, or competent characters to invite? Why would courtiers depend so much on their liege for getting married? And why should players enjoy such overwhelming advantages over the AI to attract valuable courtiers?
+These aspects are tedious, unrealistic, and underwhelming. Why should finding good spouses or competent characters take so much effort? Why would courtiers depend on their liege to get married? Why should players have such overwhelming advantages over AI?
 
-This mod attempts to address these drawbacks by enabling courtiers to actively search for spouses by themselves and only ask their liege for approval, as well as recommend characters to be invited by their liege, thereby reducing the effort for the player, improving the quality of AI talent pools, and also contributing to better roleplaying and immersion.
+This mod addresses these issues by letting courtiers search for spouses and ask their liege for approval, and recommend characters to invite, thereby reducing the effort for the player, improving AI talent pools, and enhancing roleplay and immersion.
 
-The main feature of this mod are the 2 new events **Courtier Requests to Marry** and **Courtier Recommends an Acquaintance**. They are triggered for count or higher rulers, every year for players and every 1 to 5 years for the AI by default. These event frequencies can be changed via game rules.
+The main features of this mod are the 2 new events **Courtier Requests to Marry** and **Courtier Recommends an Acquaintance**, triggered for count+ rulers yearly for players and every 1-5 years for AI by default. These event frequencies can be changed via game rules.
 
-When these event fire, two characters are selected using appropriate eligibility criteria that can be further configured via game rules:
+When triggered, two characters are selected using appropriate eligibility criteria that can be further configured via game rules: a courtier who searches for a spouse or recommends a character, and a candidate to marry or invite.
 
-* a courtier who will search for a spouse or recommend a character
-* a candidate to be married or invited
+Candidates include non-ruler characters in this and neighboring realms within a configurable range of the ruler's capital.
 
-The characters considered when searching for a candidate include all non-ruler characters in this and neighboring realms and located within a certain range of the ruler's capital that can also be configured via game rules.
+The final candidate is the highest *quality* candidate who (or whose matchmaker) would accept.
 
-The final candidate is always the highest *quality* candidate among all eligible candidates who (or whose matchmaker) would accept the marriage proposal or the invitation.
+* For marriages, quality is evaluated from the courtier's perspective based on opinion, lover relations, attraction, fertility, health, age and age difference, dynasty prestige difference, faith hostility, cultural acceptance, genetic traits, and skills.
+* For invitations, quality is evaluated from the ruler's perspective based on opinions, relations, traits, skills, claims, and other factors, with competence playing a stronger role.
 
-* For marriages, the quality is evaluated from the perspective of the courtier, based on opinion, lover relations, attraction, fertility, health, age and age difference, dynasty prestige difference, faith hostility, cultural acceptance, genetic traits, and skills.
-* For invitations, the quality is evaluated from the perspective of the ruler, based on opinions, family and relations, genetic and other traits, skills, claims, and other factors, with competence playing a much stronger role than for marriages.
+Only candidates above a quality threshold are considered. If none qualify, events don't fire. The thresholds are configurable via game rules.
 
-Finally, the courtier's liege must approve the request or accept the recommendation. While marriage candidates are not automatically a good choice for their liege, invitation candidates usually are. AI rulers consider their opinion of the courtier and the candidate, family and other relations, the candidate quality, and are they better than other options for any councillor or court positions, knight, or commander. Players can take these into account as well, since they are listed in the event description.
+Finally, the courtier's liege must approve the request or accept the recommendation. While marriage candidates aren't automatically good choices for the liege, invitation candidates usually are. AI rulers consider opinions, relations, quality, and whether candidates are better than other options for councillor or court positions. Players can review these factors in the event description.
 
-This mod introduces also a **Courtier Suggests a Guardian** event. It is triggered on every birthday for eligible courtier children that don't have a guardian. When it fires, a candidate to be assigned as a guardian and a courtier to suggest it are selected among all eligible courtiers. The quality of guardian candidates captures their effectiveness as guardians and is evaluated based on their skills, traits, perks, faith, and culture.
+This mod also adds a **Courtier Suggests a Guardian** event, triggered on birthdays for eligible children without guardians. A guardian candidate and suggesting courtier are selected. In this case, quality reflects effectiveness based on skills, traits, perks, faith, and culture.
 
-To make it more convenient for players to trigger the above events, this mod also adds the 3 new interactions **Ask to Find Spouse**, **Find Someone to Invite to Court**, and **Find Guardian**.
+For convenience, the mod also adds the 3 new interactions **Ask to Find Spouse**, **Find Someone to Invite to Court**, and **Find Guardian**.
 
-Even if AI rulers get better talent pools, they tend to stick to councillors or court position holders with worse skills or aptitude than available. For this reason, and also to remind players, this mod also adds the new **Courtier Jostles for Position** event. It is triggered after a candidate has joined a court if they are better than other options for a councillor or court position. In it, the candidate requests to be appointed to that position, and their liege can accept or decline. The AI decision is based on their opinion of both the candidate and the *incumbent*, family and other relations, how much better is the candidate, is the incumbent councillor a powerful vassal, and other factors.
+AI rulers often keep councillors or position holders with worse skills than available. To address this, the mod adds a **Courtier Jostles for Position** event, triggered when a better candidate for a councillor or court position joins the court. The candidate requests appointment, and the liege decides. AI rulers consider their opinions of both the candidate and the *incumbent*, relations, competence gap, whether the incumbent is a powerful vassal, and other factors.
 
 ## Compatibility
 
@@ -79,6 +78,7 @@ The candidate selection proceeds in several stages. First, all *eligible candida
 * not an heir or close family to their liege (these are already married by the AI for alliances)
 * someone whom the *courtier* can actually marry according to their gender and faith
 * either someone to whose gender the *courtier* is attracted, or someone of the opposite gender if both characters are fertile
+* not the player's lover or soulmate, if the game rule **Marriage Requests for Player's Lovers** is set to **Not Allowed**.
 
 Next, the *quality* of the eligible candidates from the perspective of the *courtier* is evaluated, based on the following criteria:
 
@@ -98,6 +98,8 @@ Next, the *quality* of the eligible candidates from the perspective of the *cour
 Of the above factors, the *courtier* opinion of the candidate has the strongest impact, and some of the factors that already influence that opinion (attraction, faith, culture, lover, etc.) are actually reinforced. The candidate's competence (skills and traits) is also considered, but has a weaker impact.
 
 Next, all *shortlisted candidates* with quality above a certain threshold are checked if their *matchmaker* (their liege for courtiers, or themselves for guests and wandering characters) would accept the marriage proposal. For performance reasons, this check by default skips some of the impossible or unlikely conditions that are evaluated by the original AI acceptance modifier; this can be configured via the **Interaction Acceptance by AI** game rule. Note that this quicker method is still very accurate, it has an accuracy of at least 99.9% compared to the vanilla modifier.
+
+Note that if there are no candidates with quality above the threshold, the follow-up events don't fire. In this case, a notification message for the failed search is sent to the player. The quality thresholds are configurable via 3 different **Quality Threshold** game rules, and the notification message can be switched off via **Message Settings**. 
 
 Finally, the highest quality candidate whose matchmaker would accept the marriage proposal is selected as the actual *candidate*.
 
