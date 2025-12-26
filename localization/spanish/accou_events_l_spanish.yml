@@ -20,6 +20,10 @@
  accou_marriage.0004.b: "Let me help you find someone good enough for #EMP ME#!..."
  accou_marriage.0004.b.tt.help: "Opens #EMP Find Spouse#! for [courtier.GetUIName]"
 
+ # accou_marriage.* messages
+ accou_marriage_0001_failed_title: "$accou_marriage.0004.t$"
+ accou_marriage_0001_failed_message: "My [THIS.GetCharacter.Custom2('RelationToMe', SCOPE.sC('courtier'))] [courtier.GetUIName] searched for a suitable spouse for [courtier.GetHerselfHimself], but could not find one."
+
  # accou_invite.0001
  accou_invite.0001.t: "Courtier Recommends an Acquaintance (Preparation)"
  accou_invite.0001.desc: "My [ROOT.Char.Custom2('RelationToMe', SCOPE.sC('courtier'))] [courtier.GetUIName] is recommending to invite [candidate.GetUIName] to court."
@@ -38,6 +42,10 @@
  accou_invite.0004.t: "Failed to Get Recommendations"
  accou_invite.0004.desc: "Unfortunately, none of the courtiers I asked could recommend a suitable character to invite to court. They explain that all candidates they evaluated were either not worthy, or would not accept my invitation."
  accou_invite.0004.a: "Fine, perhaps next time."
+
+ # accou_invite.* messages
+ accou_invite_0001_failed_title: "$accou_invite.0004.t$"
+ accou_invite_0001_failed_message: "Some of my courtiers searched for a suitable character to invite to court, but could not find one."
 
  # accou_guardian.0001
  accou_guardian.0001.t: "Courtier Suggests a Guardian (Preparation)"
@@ -59,6 +67,10 @@
  accou_guardian.0004.a: "Fine, perhaps next time."
  accou_guardian.0004.b: "I wonder if this is really the case..."
  accou_guardian.0004.b.tt.help: "Opens #EMP Educate Child#! for [child.GetUIName]"
+
+ # accou_guardian.* messages
+ accou_guardian_0001_failed_title: "$accou_guardian.0004.t$"
+ accou_guardian_0001_failed_message: "Some of my courtiers searched for a suitable guardian for [child.GetUIName], but could not find one."
 
  # accou_courtier.0001
  accou_courtier.0001.t: "Courtier Jostles for Position (Councillor)"

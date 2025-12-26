@@ -1,0 +1,6 @@
+﻿l_russian:
+ # Message group types
+ message_group_type_accou_active_courtiers: "@courtier_icon! Active Courtiers"
+ # Message filter types
+ message_filter_accou_search_failed: "@courtier_icon! Неудачные поиски активных придворных"
+ message_filter_accou_search_failed_desc: "Неудачные попытки придворных найти подходящих супругов, персонажей для приглашения ко двору или опекунов"

@@ -20,6 +20,10 @@
  accou_marriage.0004.b: "Позвольте мне помочь вам найти кого-то подходящего для #EMP МЕНЯ#!..."
  accou_marriage.0004.b.tt.help: "Открывает #EMP Устроить брак#! для [courtier.GetUIName]"
 
+ # accou_marriage.* messages
+ accou_marriage_0001_failed_title: "$accou_marriage.0004.t$"
+ accou_marriage_0001_failed_message: "[Select_CString(courtier.IsFemale, 'Моя', 'Мой')] [THIS.GetCharacter.Custom2('RelationToMe', SCOPE.sC('courtier'))] [courtier.GetUIName] [Select_CString(courtier.IsFemale, 'искала', 'искал')] подходящего [Select_CString(courtier.IsFemale, 'супруга', 'супругу')] для себя, но не [Select_CString(courtier.IsFemale, 'смогла', 'смог')] найти."
+
  # accou_invite.0001
  accou_invite.0001.t: "Придворный рекомендует знакомого (подготовка)"
  accou_invite.0001.desc: "[Select_CString(courtier.IsFemale, 'Моя', 'Мой')] [ROOT.Char.Custom2('RelationToMe', SCOPE.sC('courtier'))] [courtier.GetUIName] рекомендует пригласить [candidate.GetUIName] ко двору."
@@ -38,6 +42,10 @@
  accou_invite.0004.t: "Не удалось получить рекомендации"
  accou_invite.0004.desc: "К сожалению, ни один из придворных, которых я спрашивал[Select_CString(ROOT.Char.IsFemale, 'а', '')], не смог порекомендовать подходящего персонажа для приглашения ко двору. Они объясняют, что все кандидаты, которых они оценивали, были либо не достойны, либо не приняли бы мое приглашение."
  accou_invite.0004.a: "Хорошо, возможно, в следующий раз."
+
+ # accou_invite.* messages
+ accou_invite_0001_failed_title: "$accou_invite.0004.t$"
+ accou_invite_0001_failed_message: "Некоторые из моих придворных искали подходящего персонажа для приглашения ко двору, но не смогли найти."
 
  # accou_guardian.0001
  accou_guardian.0001.t: "Придворный предлагает опекуна (подготовка)"
@@ -59,6 +67,10 @@
  accou_guardian.0004.a: "Хорошо, возможно, в следующий раз."
  accou_guardian.0004.b: "Интересно, действительно ли это так..."
  accou_guardian.0004.b.tt.help: "Открывает #EMP Дать ребенку образование#! для [child.GetUIName]"
+
+ # accou_guardian.* messages
+ accou_guardian_0001_failed_title: "$accou_guardian.0004.t$"
+ accou_guardian_0001_failed_message: "Некоторые из моих придворных искали подходящего наставника для [child.GetUIName], но не смогли найти."
 
  # accou_courtier.0001
  accou_courtier.0001.t: "Придворный толкается за должность (советник)"
