@@ -91,6 +91,15 @@ scripted_trigger accou_marriage_0001_valid_marriage_candidate_trigger = {
 		}
 	}
 
+	# Not a player's lover (if not allowed by game rules)
+	trigger_if = {
+		limit = {
+			root = { is_ai = no }
+			has_game_rule = accou_marriage_requests_for_players_lovers_not_allowed
+		}
+		NOT = { has_relation_lover = root }
+	}
+
 	# Marriage between the initiating character and this character
 	# was not recently rejected
 	NOR = {

@@ -290,6 +290,22 @@ accou_wrong_gender_marriage_requests = {
 	}
 }
 
+accou_marriage_requests_for_players_lovers = {
+	categories = {
+		accou_active_courtiers tweaks
+	}
+
+	default = accou_marriage_requests_for_players_lovers_allowed
+
+	accou_marriage_requests_for_players_lovers_not_allowed = {
+		flag = GG_can_change_rule
+	}
+
+	accou_marriage_requests_for_players_lovers_allowed = {
+		flag = GG_can_change_rule
+	}
+}
+
 accou_marriage_ai_acceptance_check = {
 	categories = {
 		accou_active_courtiers tweaks
