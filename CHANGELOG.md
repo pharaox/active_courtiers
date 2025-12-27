@@ -11,6 +11,14 @@
 
 * Added notifications for failed courtier searches (can be switched off via *Message Settings*).
 
+### Localization
+
+* Updated and improved the Russian translation.
+
+### Compatibility
+
+* Adapted to CK3 1.18.2.
+
 ## Version 0.11.0
 
 ### Compatibility
