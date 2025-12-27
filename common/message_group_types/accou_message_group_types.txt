@@ -1,3 +1,3 @@
 ﻿accou_active_courtiers = {
-	sort_order = 269 # Just below court group messages
+	sort_order = 310 # Before vanilla groups
 }
