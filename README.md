@@ -99,7 +99,7 @@ Of the above factors, the *courtier* opinion of the candidate has the strongest 
 
 Next, all *shortlisted candidates* with quality above a certain threshold are checked if their *matchmaker* (their liege for courtiers, or themselves for guests and wandering characters) would accept the marriage proposal. For performance reasons, this check by default skips some of the impossible or unlikely conditions that are evaluated by the original AI acceptance modifier; this can be configured via the **Interaction Acceptance by AI** game rule. Note that this quicker method is still very accurate, it has an accuracy of at least 99.9% compared to the vanilla modifier.
 
-Note that if there are no candidates with quality above the threshold, the follow-up events don't fire. In this case, a notification message for the failed search is sent to the player. The quality thresholds are configurable via 3 different **Quality Threshold** game rules, and the notification message can be switched off via **Message Settings**. 
+Note that if there are no candidates with quality above the threshold, the follow-up events don't fire. In this case, a notification message for the failed search is sent to the player. The quality thresholds are configurable via 3 different **Quality Threshold** game rules, and the notification message can be switched off via **Message Settings**.
 
 Finally, the highest quality candidate whose matchmaker would accept the marriage proposal is selected as the actual *candidate*.
 
