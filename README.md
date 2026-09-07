@@ -82,7 +82,7 @@ The candidate selection proceeds in several stages. First, all *eligible candida
 
 Next, the *quality* of the eligible candidates from the perspective of the *courtier* is evaluated, based on the following criteria:
 
-* *courter* opinion of candidate
+* *courtier* opinion of candidate
 * lover / soulmate relation to *courtier*
 * attraction, if the *courtier* is attracted to their gender (more important if the *courtier* is lustful, less if they are chaste)
 * fertility, if the *courtier* is of the opposite gender and fertile
@@ -193,7 +193,7 @@ If the candidate search does not yield any eligible candidates above the quality
 
 Even though AI rulers get better talent pools, they are not always good at using them. In particular, they often stick to councillors or court position holders with worse skills or aptitude than available. For this reason, and also to remind players, this mod also introduces the new **Courtier Jostles for Position** event. This is a follow-up event that is triggered 15 to 45 days after a *candidate* has joined a court if they have been evaluated as better than other available options for a councillor or court position. In it, the *candidate* requests to be appointed to that position, and their liege can accept or decline this request. If the position in question is already held by an *incumbent*, they are also affected by the outcome.
 
-Before accepting or declining, AI rulers take the into account the following criteria:
+Before accepting or declining, AI rulers take into account the following criteria:
 
 * their opinion of both the *candidate* and the *incumbent*
 * family and other relations (friends, rivals, lovers) to both the *candidate* and the *incumbent*
