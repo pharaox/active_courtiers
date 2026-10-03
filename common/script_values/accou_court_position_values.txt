@@ -164,7 +164,7 @@ accou_antiquarian_candidate_score_value = {
 	value = 50
 	if = {
 		limit = {
-			government_allows = administrative
+			government_has_mechanic = administrative
 		}
 		add = 150
 	}
@@ -573,7 +573,7 @@ accou_master_assassin_candidate_score_value = {
 accou_court_scholar_candidate_score_value = {
 	value = 50
 	if = {
-		limit = { has_trait = scholar }
+		limit = { has_trait = erudite }
 		add = 25
 	}
 	if = {

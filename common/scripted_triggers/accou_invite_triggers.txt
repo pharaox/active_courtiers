@@ -15,7 +15,7 @@ accou_is_valid_invite_recipient_vanilla_trigger = {
 		is_ruler = yes
 		# Added by Unofficial Patch
 		has_trait = order_member
-		location = { is_sea_province = yes }
+		location ?= { is_sea_province = yes }
 	}
 
 	OR = {
@@ -32,6 +32,23 @@ accou_is_valid_invite_recipient_vanilla_trigger = {
 		var:nomad_defector_var = {
 			this = $ACTOR$
 		}
+	}
+	NAND = {
+		OR = {
+			has_trait = devoted
+			has_trait = order_member
+		}
+		liege ?= {
+			government_has_flag = government_is_holy_order
+		}
+		has_variable = recent_vows
+	}
+	NAND = {
+		has_trait = devoted
+		liege ?= {
+			government_has_flag = government_is_holy_order
+		}
+		is_adult = no
 	}
 
 	trigger_if = { # Added by Unofficial Patch

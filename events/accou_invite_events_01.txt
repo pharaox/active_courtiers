@@ -61,7 +61,7 @@ scripted_effect accou_invite_0001_on_approve_effect = {
 	}
 
 	# Stress impact for root
-	stress_impact = {
+	stress_and_fulfillment_impact = {
 		paranoid = minor_stress_gain
 		trusting = minor_stress_loss
 	}

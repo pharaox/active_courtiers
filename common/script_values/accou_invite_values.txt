@@ -701,12 +701,37 @@ accou_quick_invite_ai_accept_modifier_value = {
 		limit = {
 			is_eunuch_trigger = yes
 			liege ?= {
-				government_allows = administrative
+				government_has_mechanic = administrative
 				primary_title.tier = tier_empire
 				culture = { has_cultural_parameter = can_appoint_chief_eunuch }
 			}
 		}
 		add = -1000
+	}
+
+	# Devoted to clerical liege
+	if = {
+		limit = {
+			has_trait = devoted
+			liege ?= {
+				OR = {
+					government_has_flag = government_is_theocracy
+					government_has_flag = government_is_monastic_holy_order
+				}
+				faith = prev.faith
+			}
+		}
+		add = -100
+	}
+
+	# Ritual Hospitality personal tenet
+	if = {
+		limit = {
+			scope:actor = {
+				has_personal_tenet_flag = tenet_ritual_hospitality_invite_to_court_acceptance
+			}
+		}
+		add = 50
 	}
 
 	# Additional reasons

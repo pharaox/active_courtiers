@@ -79,10 +79,10 @@
 	# Chance to gain lifestyle_mystic trait (see coming_of_age.0001)
 	if = {
 		limit = {
-			faith = { has_doctrine_parameter = tenet_esotericism_mystic_education }
+			rite = { rite_has_parameter = tenet_esotericism_mystic_education }
 			scope:child = {
 				accou_has_education_focus_trigger = { FOCUS = education_learning }
-				NOT = { faith = { has_doctrine_parameter = tenet_esotericism_mystic_education } }
+				NOT = { rite = { rite_has_parameter = tenet_esotericism_mystic_education } }
 			}
 		}
 		add = 5

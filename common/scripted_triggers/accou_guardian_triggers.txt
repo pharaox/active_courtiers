@@ -6,6 +6,7 @@ accou_is_valid_guardian_recipient_trigger = {
 
 accou_is_valid_guardian_recipient_vanilla_trigger = {
 	exists = $ACTOR$
+	is_at_home = yes
 	num_of_relation_ward < 2
 	NOR = {
 		has_character_flag = under_offer_as_guardian_flag
@@ -21,6 +22,7 @@ accou_is_valid_child_recipient_trigger = {
 }
 
 accou_is_valid_child_recipient_vanilla_trigger = {
+	is_at_home = yes
 	num_of_relation_guardian = 0
 	trigger_if = {
 		limit = { is_hostage = yes }

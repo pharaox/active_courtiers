@@ -412,7 +412,7 @@ accou_quick_marriage_ai_accept_modifier_actor_value = {
 	else_if = {
 		limit = {
 			scope:actor = {
-				highest_held_title_tier = tier_empire
+				highest_held_title_tier >= tier_empire
 				has_legitimacy_flag = massively_reduced_marriage_acceptance
 			}
 		}
@@ -538,10 +538,10 @@ accou_quick_marriage_ai_accept_modifier_value = {
 	if = {
 		limit = {
 			scope:actor = {
-				government_allows = administrative
+				government_has_mechanic = administrative
 			}
 			scope:recipient = {
-				NOT = { government_allows = administrative }
+				NOT = { government_has_mechanic = administrative }
 			}
 		}
 		add = {
@@ -558,10 +558,10 @@ accou_quick_marriage_ai_accept_modifier_value = {
 	else_if = {
 		limit = {
 			scope:actor = {
-				NOT = { government_allows = administrative }
+				NOT = { government_has_mechanic = administrative }
 			}
 			scope:recipient = {
-				government_allows = administrative
+				government_has_mechanic = administrative
 			}
 		}
 		add = {
@@ -826,6 +826,7 @@ accou_quick_marriage_ai_accept_modifier_value = {
 	# Faith (simplified)
 	if = {
 		limit = {
+			scope:recipient.faith != scope:actor.faith
 			scope:actor = {
 				accou_is_not_nomadic_or_tributary_trigger = { PARTY = scope:recipient }
 			}
@@ -835,9 +836,9 @@ accou_quick_marriage_ai_accept_modifier_value = {
 		}
 		if = {
 			limit = {
-				scope:recipient.faith = {
-					faith_hostility_level = {
-						target = scope:actor.faith
+				scope:recipient.rite = {
+					rite_hostility_level = {
+						target = scope:actor.rite
 						value >= faith_hostility_prevents_marriage_level
 					}
 				}
@@ -846,9 +847,9 @@ accou_quick_marriage_ai_accept_modifier_value = {
 		}
 		else_if = {
 			limit = {
-				scope:recipient.faith = {
-					faith_hostility_level = {
-						target = scope:actor.faith
+				scope:recipient.rite = {
+					rite_hostility_level = {
+						target = scope:actor.rite
 						value >= faith_hostile_level
 					}
 				}
@@ -857,14 +858,81 @@ accou_quick_marriage_ai_accept_modifier_value = {
 		}
 		else_if = {
 			limit = {
-				scope:recipient.faith = {
-					faith_hostility_level = {
-						target = scope:actor.faith
+				scope:recipient.rite = {
+					rite_hostility_level = {
+						target = scope:actor.rite
 						value >= faith_astray_level
 					}
 				}
 			}
 			add = -10
+		}
+	}
+
+	# Rite divergence (same faith, different rites)
+	if = {
+		limit = {
+			scope:recipient.faith = scope:actor.faith
+			scope:actor.rite != scope:recipient.rite
+		}
+		if = {
+			limit = { scope:recipient.rite = { "divergence(scope:actor.rite)" >= monumental_rite_divergence_value } }
+			add = -50
+		}
+		else_if = {
+			limit = { scope:recipient.rite = { "divergence(scope:actor.rite)" >= massive_rite_divergence_value } }
+			add = -30
+		}
+		else_if = {
+			limit = { scope:recipient.rite = { "divergence(scope:actor.rite)" >= major_rite_divergence_value } }
+			add = -20
+		}
+		else_if = {
+			limit = { scope:recipient.rite = { "divergence(scope:actor.rite)" >= medium_rite_divergence_value } }
+			add = -10
+		}
+		else_if = {
+			limit = { scope:recipient.rite = { "divergence(scope:actor.rite)" >= minor_rite_divergence_value } }
+			add = -5
+		}
+	}
+
+	# Pastoral Isolation personal tenet
+	if = {
+		limit = {
+			scope:recipient = {
+				has_personal_tenet_flag = tenet_pastoral_isolation_endogamy
+			}
+			scope:recipient.faith != scope:actor.faith
+		}
+		add = -999
+	}
+
+	# Distrust of clergy (theocratic actor whose rite disallows clerical marriage)
+	if = {
+		limit = {
+			scope:actor.faith = scope:recipient.faith
+			scope:actor.rite = { rite_has_doctrine = doctrine_clerical_marriage_disallowed }
+			scope:actor = { government_has_flag = government_is_theocracy }
+			scope:recipient = {
+				NOT = { government_has_flag = government_is_theocracy }
+			}
+		}
+		if = {
+			limit = {
+				scope:secondary_recipient = { is_close_or_extended_family_of = scope:recipient }
+			}
+			add = -50
+		}
+		else_if = {
+			limit = {
+				exists = scope:recipient.house
+				scope:secondary_recipient.house ?= scope:recipient.house
+			}
+			add = -30
+		}
+		else = {
+			add = -20
 		}
 	}
 
@@ -1106,9 +1174,9 @@ accou_quick_marriage_ai_accept_modifier_value = {
 	# Consaguinity (now possible)
 	if = {
 		limit = {
-			scope:recipient.faith = {
+			scope:recipient.rite = {
 				NOT = {
-					faith_allows_marriage_consanguinity_trigger = { CHARACTER_1 = scope:secondary_recipient CHARACTER_2 = scope:secondary_actor }
+					rite_allows_marriage_consanguinity_trigger = { CHARACTER_1 = scope:secondary_recipient CHARACTER_2 = scope:secondary_actor }
 				}
 			}
 		}
@@ -1169,7 +1237,7 @@ accou_quick_marriage_ai_accept_modifier_value = {
 				this != scope:actor.culture
 			}
 		}
-		add = -50
+		add = -999
 	}
 
 	# Wedding Ceremonies

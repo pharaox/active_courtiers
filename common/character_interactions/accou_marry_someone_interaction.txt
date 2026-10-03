@@ -5,11 +5,11 @@ accou_marry_someone_interaction = {
 	desc = accou_marry_someone_interaction_desc
 	icon = icon_marriage
 
-	is_shown = {
-		scope:actor = {
-			is_ai = no
-		}
+	is_available = {
+		is_ai = no
+	}
 
+	is_shown = {
 		scope:recipient = {
 			is_courtier_of = scope:actor
 
@@ -37,7 +37,7 @@ accou_marry_someone_interaction = {
 
 			# Not a female in a male-dominated faith and vice versa
 			trigger_if = {
-				limit = { is_wrong_gender_in_faith_trigger = { FAITH = faith } }
+				limit = { is_wrong_gender_in_rite_trigger = { RITE = rite } }
 				accou_are_wrong_gender_marriage_requests_allowed_trigger = yes
 			}
 

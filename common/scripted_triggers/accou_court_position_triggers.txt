@@ -65,16 +65,16 @@ accou_can_be_chief_qadi_trigger = {
 	has_trait = education_learning
 	trigger_if = {
 		limit = {
-			$LIEGE$.faith = {
-				has_doctrine = doctrine_gender_male_dominated
+			$LIEGE$.rite = {
+				rite_has_doctrine = doctrine_gender_male_dominated
 			}
 		}
 		is_male = yes
 	}
 	trigger_else_if = { #Unop Use trigger_else_if
 		limit = {
-			$LIEGE$.faith = {
-				has_doctrine = doctrine_gender_female_dominated
+			$LIEGE$.rite = {
+				rite_has_doctrine = doctrine_gender_female_dominated
 			}
 		}
 		is_female = yes
@@ -147,8 +147,8 @@ accou_can_be_food_taster_trigger = {
 	can_be_combatant_based_on_gender_trigger = { ARMY_OWNER = $LIEGE$ }
 	trigger_if = {
 		limit = {
-			$LIEGE$.faith = {
-				NOT = { has_doctrine = doctrine_clerical_function_recruitment }
+			$LIEGE$.rite = {
+				NOT = { rite_has_doctrine = doctrine_clerical_function_recruitment }
 			}
 		}
 		is_clergy = no
@@ -267,6 +267,7 @@ accou_can_be_executioner_trigger = {
 			has_strong_usable_hook = prev
 		}
 	}
+	can_be_combatant_based_on_gender_trigger = { ARMY_OWNER = $LIEGE$ }
 }
 
 accou_can_be_court_artificer_trigger = {
@@ -295,11 +296,11 @@ accou_can_be_master_assassin_trigger = {
 	is_playable_character = no
 	has_no_particular_noble_roots_trigger = yes
 	NOT = { is_spouse_of = $LIEGE$ }
-	faith = {
-		has_doctrine = tenet_fp3_fedayeen
+	rite = {
+		rite_has_parameter = master_assassin_court_position_unlocked
 		NOR = {
-			has_doctrine = tenet_pacifism
-			has_doctrine = tenet_dharmic_pacifism
+			rite_has_tenet = tenet_pacifism
+			rite_has_tenet = tenet_dharmic_pacifism
 		}
 	}
 	can_be_combatant_based_on_gender_trigger = { ARMY_OWNER = $LIEGE$ }

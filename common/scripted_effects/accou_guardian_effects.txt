@@ -5,6 +5,14 @@ accou_educate_child_on_accept_effect = {
 	scope:recipient = { save_scope_as = ward_liege }
 	scope:secondary_actor = { save_scope_as = guardian }
 	scope:secondary_recipient = { save_scope_as = ward }
+	scope:actor = {
+		if = {
+			limit = { is_ai = no }
+			scope:ward = {
+				add_character_flag = player_educated
+			}
+		}
+	}
 
 	if = {
 		limit = { scope:ward.age >= 15 }

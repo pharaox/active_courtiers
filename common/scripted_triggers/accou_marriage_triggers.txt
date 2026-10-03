@@ -60,6 +60,27 @@ accou_is_valid_marriage_target_vanilla_trigger = {
 			}
 		}
 
+		# Block AI from marrying characters under clerical marriage restraint
+		trigger_if = {
+			limit = { is_ai = yes }
+			NOR = {
+				scope:target = { pam_under_clerical_marriage_restraint_trigger = yes }
+				$CHARACTER$ = { pam_under_clerical_marriage_restraint_trigger = yes }
+			}
+		}
+
+		# Pastoral Isolation personal tenet, for AI
+		trigger_if = {
+			limit = {
+				is_ai = yes
+				has_personal_tenet_flag = tenet_pastoral_isolation_endogamy
+			}
+			OR = {
+				faith = $RECIPIENT$.faith
+				faith = scope:target.faith
+			}
+		}
+
 		# Block AI from marrying single mayors in their area unless they are also mayors
 		trigger_if = {
 			limit = {
@@ -104,8 +125,8 @@ accou_could_marry_character_trigger = {
 	}
 
 	# Faith hostility & consanguinity
-	faith = {
-		faith_allows_marriage_consanguinity_trigger = {
+	rite = {
+		rite_allows_marriage_consanguinity_trigger = {
 			CHARACTER_1 = scope:character
 			CHARACTER_2 = $CHARACTER$
 		}
@@ -271,15 +292,11 @@ accou_is_marriage_ai_acceptance_check_original_trigger = {
 accou_is_not_nomadic_or_tributary_trigger = {
 	trigger_if = {
 		limit = {
-			OR = {
-				government_has_flag = government_is_nomadic
-				government_has_flag = government_is_herder
-			}
+			government_has_flag = government_is_in_steppe
 		}
 		$PARTY$ = {
 			NOR = {
-				government_has_flag = government_is_nomadic
-				government_has_flag = government_is_herder
+				government_has_flag = government_is_in_steppe
 				is_tributary_of = prev
 			}
 		}

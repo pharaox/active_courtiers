@@ -13,7 +13,7 @@ scripted_trigger accou_marriage_0001_valid_courtier_trigger = {
 
 	# Not a female in a male-dominated faith and vice versa
 	trigger_if = {
-		limit = { is_wrong_gender_in_faith_trigger = { FAITH = faith } }
+		limit = { is_wrong_gender_in_rite_trigger = { RITE = rite } }
 		accou_are_wrong_gender_marriage_requests_allowed_trigger = yes
 	}
 
@@ -122,6 +122,7 @@ scripted_effect accou_marriage_0001_on_accept_effect = {
 
 	# Save scopes used by marriage_interaction_on_accept_effect
 	root = { save_scope_as = actor }
+	root = { save_scope_as = puppet_or_actor }
 	scope:matchmaker = { save_scope_as = recipient }
 	scope:courtier = { save_scope_as = secondary_actor }
 	scope:candidate = { save_scope_as = secondary_recipient }
@@ -145,13 +146,13 @@ scripted_effect accou_marriage_0001_on_approve_effect = {
 	# Stress impact for root
 	if = {
 		limit = { scope:matchmaker != root }
-		stress_impact = {
+		stress_and_fulfillment_impact = {
 			paranoid = minor_stress_gain
 			trusting = minor_stress_loss
 		}
 	}
 	else = {
-		stress_impact = {
+		stress_and_fulfillment_impact = {
 			ambitious = minor_stress_gain
 			content = minor_stress_loss
 		}
@@ -343,6 +344,7 @@ accou_marriage.0001 = {
 
 		# Save actor and secondary actor scopes
 		root = { save_scope_as = actor }
+		root = { save_scope_as = puppet_or_actor }
 		scope:courtier ?= { save_scope_as = secondary_actor }
 
 		# Save option scopes used by marriage_ai_accept_modifier

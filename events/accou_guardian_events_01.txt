@@ -71,6 +71,7 @@ scripted_effect accou_guardian_0001_on_accept_effect = {
 
 	# Save scopes used by accou_educate_child_on_accept_effect
 	save_scope_as = actor
+	save_scope_as = puppet_or_actor
 	save_scope_as = recipient
 	scope:candidate = { save_scope_as = secondary_actor }
 	scope:child = { save_scope_as = secondary_recipient }
@@ -544,10 +545,10 @@ accou_guardian.0002 = {
 					trigger = {
 						scope:child = {
 							accou_has_education_focus_trigger = { FOCUS = education_learning }
-							NOT = { faith = { has_doctrine_parameter = tenet_esotericism_mystic_education } }
+							NOT = { rite = { rite_has_parameter = tenet_esotericism_mystic_education } }
 						}
 						scope:candidate = {
-							faith = { has_doctrine_parameter = tenet_esotericism_mystic_education }
+							rite = { rite_has_parameter = tenet_esotericism_mystic_education }
 						}
 					}
 					desc = accou_guardian.0002.faith_esotericism_mystic.desc

@@ -5,10 +5,11 @@ accou_invite_someone_interaction = {
 	desc = accou_invite_someone_interaction_desc
 	icon = guest
 
+	is_available = {
+		is_ai = no
+	}
+
 	is_shown = {
-		scope:actor = {
-			is_ai = no
-		}
 		scope:actor = scope:recipient
 	}
 

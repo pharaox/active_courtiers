@@ -36,7 +36,7 @@ AI rulers often keep councillors or position holders with worse skills than avai
 
 ## Compatibility
 
-The current version is compatible with CK3 1.19. If you are still on CK3 1.18.x, use [version 0.11.1](https://github.com/pharaox/active_courtiers/releases/download/0.11.1/active_courtiers-0.11.1.zip) instead.
+The current version is compatible with CK3 1.20. If you are still on CK3 1.19.x, use [version 0.12.0](https://github.com/pharaox/active_courtiers/releases/download/0.12.0/active_courtiers-0.12.0.zip) instead.
 
 This mod does not modify any vanilla files and should be compatible with most other mods. Note that some total conversion mods remove parts of vanilla that may be referred to by this mod, so compatibility with such mods is not guaranteed. Also, this mod cannot properly evaluate candidates for councillor or court positions introduced by conversion mods without a compatch.
 
