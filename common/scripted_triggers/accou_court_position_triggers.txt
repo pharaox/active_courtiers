@@ -63,25 +63,7 @@ accou_can_be_chief_qadi_trigger = {
 	is_capable_adult = yes
 	has_religion = religion:islam_religion
 	has_trait = education_learning
-	trigger_if = {
-		limit = {
-			$LIEGE$.rite = {
-				rite_has_doctrine = doctrine_gender_male_dominated
-			}
-		}
-		is_male = yes
-	}
-	trigger_else_if = { #Unop Use trigger_else_if
-		limit = {
-			$LIEGE$.rite = {
-				rite_has_doctrine = doctrine_gender_female_dominated
-			}
-		}
-		is_female = yes
-	}
-	trigger_else = {
-		always = yes
-	}
+	$LIEGE$.rite = { rite_has_dominant_ruling_gender = prev }
 }
 
 accou_can_be_garuda_trigger = {
