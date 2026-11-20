@@ -508,6 +508,54 @@ accou_can_be_better_khlon_glan_trigger = {
 	}
 }
 
+accou_can_be_better_partner_trigger = {
+	accou_can_be_better_court_position_trigger = {
+		TYPE = partner_court_position
+		NAME = partner
+		LIEGE = $LIEGE$
+	}
+}
+
+accou_can_be_better_fixer_trigger = {
+	accou_can_be_better_court_position_trigger = {
+		TYPE = fixer_court_position
+		NAME = fixer
+		LIEGE = $LIEGE$
+	}
+}
+
+accou_can_be_better_translator_trigger = {
+	accou_can_be_better_court_position_trigger = {
+		TYPE = translator_court_position
+		NAME = translator
+		LIEGE = $LIEGE$
+	}
+}
+
+accou_can_be_better_market_agent_trigger = {
+	accou_can_be_better_court_position_trigger = {
+		TYPE = market_agent_court_position
+		NAME = market_agent
+		LIEGE = $LIEGE$
+	}
+}
+
+accou_can_be_better_bailiff_trigger = {
+	accou_can_be_better_court_position_trigger = {
+		TYPE = bailiff_court_position
+		NAME = bailiff
+		LIEGE = $LIEGE$
+	}
+}
+
+accou_can_be_better_roman_censor_trigger = {
+	accou_can_be_better_court_position_trigger = {
+		TYPE = roman_censor_court_position
+		NAME = roman_censor
+		LIEGE = $LIEGE$
+	}
+}
+
 accou_can_be_better_councillor_trigger = {
 	save_temporary_scope_as = character
 	accou_can_be_$NAME$_trigger = { COURT_OWNER = $LIEGE$ }
@@ -830,6 +878,24 @@ accou_can_apply_for_court_position_option_trigger = {
 		}
 		flag:khlon_glan = {
 			accou_can_apply_for_khlon_glan_trigger = { LIEGE = $LIEGE$ }
+		}
+		flag:partner = {
+			accou_can_apply_for_partner_trigger = { LIEGE = $LIEGE$ }
+		}
+		flag:fixer = {
+			accou_can_apply_for_fixer_trigger = { LIEGE = $LIEGE$ }
+		}
+		flag:translator = {
+			accou_can_apply_for_translator_trigger = { LIEGE = $LIEGE$ }
+		}
+		flag:market_agent = {
+			accou_can_apply_for_market_agent_trigger = { LIEGE = $LIEGE$ }
+		}
+		flag:bailiff = {
+			accou_can_apply_for_bailiff_trigger = { LIEGE = $LIEGE$ }
+		}
+		flag:roman_censor = {
+			accou_can_apply_for_roman_censor_trigger = { LIEGE = $LIEGE$ }
 		}
 	}
 }
@@ -1287,6 +1353,48 @@ accou_can_apply_for_court_brahmin_trigger = {
 accou_can_apply_for_khlon_glan_trigger = {
 	accou_can_apply_for_court_position_trigger = {
 		TYPE = khlon_glan_court_position
+		LIEGE = $LIEGE$
+	}
+}
+
+accou_can_apply_for_partner_trigger = {
+	accou_can_apply_for_court_position_trigger = {
+		TYPE = partner_court_position
+		LIEGE = $LIEGE$
+	}
+}
+
+accou_can_apply_for_fixer_trigger = {
+	accou_can_apply_for_court_position_trigger = {
+		TYPE = fixer_court_position
+		LIEGE = $LIEGE$
+	}
+}
+
+accou_can_apply_for_translator_trigger = {
+	accou_can_apply_for_court_position_trigger = {
+		TYPE = translator_court_position
+		LIEGE = $LIEGE$
+	}
+}
+
+accou_can_apply_for_market_agent_trigger = {
+	accou_can_apply_for_court_position_trigger = {
+		TYPE = market_agent_court_position
+		LIEGE = $LIEGE$
+	}
+}
+
+accou_can_apply_for_bailiff_trigger = {
+	accou_can_apply_for_court_position_trigger = {
+		TYPE = bailiff_court_position
+		LIEGE = $LIEGE$
+	}
+}
+
+accou_can_apply_for_roman_censor_trigger = {
+	accou_can_apply_for_court_position_trigger = {
+		TYPE = roman_censor_court_position
 		LIEGE = $LIEGE$
 	}
 }

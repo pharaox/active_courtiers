@@ -648,6 +648,8 @@ accou_quick_marriage_ai_accept_modifier_value = {
 		}
 	}
 
+	# Ceremonial liege does not accept matrilineal marriages for male ceremonial house members (rare, skipped)
+
 	# Opinions
 	add = {
 		value = scope:opinion_of_secondary_actor
@@ -905,7 +907,7 @@ accou_quick_marriage_ai_accept_modifier_value = {
 			}
 			scope:recipient.faith != scope:actor.faith
 		}
-		add = -999
+		add = isolationist_marriage_penalty_value
 	}
 
 	# Distrust of clergy (theocratic actor whose rite disallows clerical marriage)
@@ -1011,9 +1013,7 @@ accou_quick_marriage_ai_accept_modifier_value = {
 					is_close_or_extended_family_of = scope:recipient
 					is_councillor_of = scope:recipient
 					has_relation_lover = scope:recipient
-					has_relation_soulmate = scope:recipient
 					has_relation_friend = scope:recipient
-					has_relation_best_friend = scope:recipient
 					is_knight_of = scope:recipient
 					exists = inspiration
 				}
@@ -1027,9 +1027,7 @@ accou_quick_marriage_ai_accept_modifier_value = {
 				OR = {
 					is_councillor_of = scope:recipient
 					has_relation_lover = scope:recipient
-					has_relation_soulmate = scope:recipient
 					has_relation_friend = scope:recipient
-					has_relation_best_friend = scope:recipient
 					is_knight_of = scope:recipient
 					inspiration ?= {
 						inspiration_sponsor ?= scope:recipient
@@ -1053,6 +1051,17 @@ accou_quick_marriage_ai_accept_modifier_value = {
 		add = -25
 	}
 
+	# Liege supports a merchant's marriages
+	if = {
+		limit = {
+			scope:actor = {
+				government_has_flag = government_is_merchant
+				subject_contract_has_flag = marriage_supported
+			}
+		}
+		add = merchant_marriage_support_acceptance_value
+	}
+
 	# Liege (simplified)
 	if = {
 		limit = {
@@ -1071,7 +1080,10 @@ accou_quick_marriage_ai_accept_modifier_value = {
 		limit = {
 			scope:secondary_recipient = {
 				is_claimant = yes
-				NOT = { is_close_or_extended_family_of = scope:recipient }
+				NOR = {
+					this = scope:recipient
+					is_close_or_extended_family_of = scope:recipient
+				}
 			}
 		}
 		add = -50
@@ -1237,7 +1249,7 @@ accou_quick_marriage_ai_accept_modifier_value = {
 				this != scope:actor.culture
 			}
 		}
-		add = -999
+		add = isolationist_marriage_penalty_value
 	}
 
 	# Wedding Ceremonies
@@ -1265,132 +1277,6 @@ accou_quick_marriage_ai_accept_modifier_value = {
 			}
 		}
 		add = 25
-	}
-	if = {
-		limit = {
-			OR = {
-				AND = {
-					# The actor is involved and try to marry with someone outside of it
-					scope:actor = {
-						is_ai = yes
-						any_character_struggle = {
-							involvement = involved
-							is_secondary_character_involvement_neither_trigger = { CHAR = scope:recipient }
-						}
-					}
-					scope:recipient = {
-						is_ai = yes
-					}
-				}
-				AND = {
-					# The actor is not involved and try to marry with someone inside of it
-					scope:recipient = {
-						is_ai = yes
-						any_character_struggle = {
-							involvement = involved
-							is_secondary_character_involvement_neither_trigger = { CHAR = scope:actor }
-						}
-					}
-					scope:actor = {
-						is_ai = yes
-					}
-				}
-			}
-		}
-		multiply = {
-			value = 0
-			if = {
-				limit = {
-					OR = {
-						AND = {
-							scope:actor = {
-								any_character_struggle = {
-									involvement = involved
-									phase_has_catalyst = catalyst_forming_alliance_with_major_uninvolved_power
-								}
-							}
-							scope:recipient = {
-								realm_size <= medium_realm_size
-							}
-						}
-						AND = {
-							scope:recipient = {
-								any_character_struggle = {
-									involvement = involved
-									phase_has_catalyst = catalyst_forming_alliance_with_major_uninvolved_power
-								}
-							}
-							scope:actor = {
-								realm_size <= medium_realm_size
-							}
-						}
-					}
-				}
-				add = 0.2
-			}
-			if = {
-				limit = {
-					OR = {
-						AND = {
-							scope:actor = {
-								has_trait = fp3_struggle_detractor
-								any_character_struggle = {
-									involvement = involved
-									phase_has_catalyst = catalyst_forming_alliance_between_detractor_uninvolved_rulers
-								}
-							}
-							scope:recipient = {
-								fp3_character_uninvolved_in_struggle_trigger = yes
-							}
-						}
-						AND = {
-							scope:recipient = {
-								has_trait = fp3_struggle_detractor
-								any_character_struggle = {
-									involvement = involved
-									phase_has_catalyst = catalyst_forming_alliance_between_detractor_uninvolved_rulers
-								}
-							}
-							scope:actor = {
-								fp3_character_uninvolved_in_struggle_trigger = yes
-							}
-						}
-					}
-				}
-				add = 0.2
-			}
-		}
-	}
-	if = {
-		limit = {
-			OR = {
-				AND = {
-					scope:actor = {
-						is_ai = yes
-						any_character_struggle = {
-							involvement = involved
-							is_secondary_character_involvement_interloper_trigger = { CHAR = scope:recipient }
-						}
-					}
-					scope:recipient = {
-						is_ai = yes
-					}
-				}
-				AND = {
-					scope:recipient = {
-						is_ai = yes
-						any_character_struggle = {
-							involvement = involved
-							is_secondary_character_involvement_interloper_trigger = { CHAR = scope:actor }
-						}
-					}
-					scope:actor = {
-						is_ai = yes
-					}
-				}
-			}
-		}
-		multiply = 0.5
 	}
 
 	# Stuggles piety cost (not possible, skipped)
@@ -1513,6 +1399,16 @@ accou_quick_marriage_ai_accept_modifier_value = {
 
 	# Grand Wedding (already calculated)
 
+	# Having already organized a good Grand Wedding
+	if = {
+		limit = {
+			scope:recipient = {
+				has_character_modifier = gwedding_magnificent_host_modifier
+			}
+		}
+		add = 25
+	}
+
 	# Grand Wedding continued (not possible, skipped)
 
 	# Player
@@ -1591,13 +1487,7 @@ accou_quick_marriage_ai_accept_modifier_value = {
 	# Reversed willingness blockers for AI using certain interactions (e.g. arrange_marriage_interaction)
 	if = {
 		limit = {
-			trigger_if = {
-				limit = { exists = scope:actor }
-				scope:actor = { is_ai = yes }
-			}
-			trigger_else = {
-				scope:secondary_actor = { is_ai = yes }
-			}
+			scope:actor = { is_ai = yes }
 			scope:secondary_actor.culture = { has_cultural_parameter = reduced_marriage_acceptance_outside_culture }
 			NOT = { scope:secondary_actor.culture = scope:secondary_recipient.culture }
 		}
@@ -1675,13 +1565,7 @@ accou_quick_marriage_ai_accept_modifier_value = {
 	# Reversed willingness blockers for AI using certain interactions (e.g. arrange_marriage_interaction)
 	if = {
 		limit = {
-			trigger_if = {
-				limit = { exists = scope:actor }
-				scope:actor = { is_ai = yes }
-			}
-			trigger_else = {
-				scope:secondary_actor = { is_ai = yes }
-			}
+			scope:actor = { is_ai = yes }
 			tgp_distant_realm_marriage_trigger = {
 				RECIPIENT_SPOUSE = scope:secondary_actor
 				ACTOR_SPOUSE = scope:secondary_recipient
@@ -1717,14 +1601,14 @@ accou_quick_marriage_ai_accept_modifier_value = {
 				}
 				scope:secondary_actor.house.var:petition_liege_wedding_permission_flag ?= scope:secondary_recipient.house
 			}
-			scope:secondary_recipient.top_liege.primary_title.var:administrative_ui_special_title ?= {
+			scope:secondary_recipient.ceremonial_liege_title ?= {
 				tier > scope:secondary_actor.highest_held_title_tier
 			}
 		}
 		add = {
 			value = -25
 			multiply = {
-				value = scope:secondary_recipient.top_liege.primary_title.var:administrative_ui_special_title.holder.dynasty.dynasty_prestige_level
+				value = scope:secondary_recipient.ceremonial_liege.dynasty.dynasty_prestige_level
 				subtract = scope:secondary_actor.dynasty.dynasty_prestige_level
 			}
 			max = -25 # Base is -25
@@ -1792,6 +1676,123 @@ accou_quick_marriage_ai_accept_modifier_value = {
 	}
 
 	# And slightly less likely to marry player children etc. (not possible, skipped)
+
+	# Republics are less attractive candidates when marrying non-republics
+	if = {
+		limit = {
+			scope:actor = { government_has_flag = government_is_republic }
+			scope:recipient = {
+				NOT = { government_has_flag = government_is_republic }
+			}
+		}
+		add = -40
+	}
+	if = {
+		limit = {
+			scope:actor = {
+				NOT = { government_has_flag = government_is_republic }
+			}
+			scope:recipient = { government_has_flag = government_is_republic }
+		}
+		add = -40
+	}
+
+	# Struggle reluctance (must stay last, since the factor scales the whole total)
+	if = {
+		limit = {
+			OR = {
+				AND = {
+					# The actor is involved and try to marry with someone outside of it
+					scope:actor = {
+						is_ai = yes
+						any_character_struggle = {
+							involvement = involved
+							is_secondary_character_involvement_neither_trigger = { CHAR = scope:recipient }
+						}
+					}
+					scope:recipient = {
+						is_ai = yes
+					}
+				}
+				AND = {
+					# The actor is not involved and try to marry with someone inside of it
+					scope:recipient = {
+						is_ai = yes
+						any_character_struggle = {
+							involvement = involved
+							is_secondary_character_involvement_neither_trigger = { CHAR = scope:actor }
+						}
+					}
+					scope:actor = {
+						is_ai = yes
+					}
+				}
+			}
+		}
+		multiply = {
+			value = 0
+			if = {
+				limit = {
+					OR = {
+						AND = {
+							scope:actor = {
+								any_character_struggle = {
+									involvement = involved
+									phase_has_catalyst = catalyst_forming_alliance_with_major_uninvolved_power
+								}
+							}
+							scope:recipient = {
+								realm_size <= medium_realm_size
+							}
+						}
+						AND = {
+							scope:recipient = {
+								any_character_struggle = {
+									involvement = involved
+									phase_has_catalyst = catalyst_forming_alliance_with_major_uninvolved_power
+								}
+							}
+							scope:actor = {
+								realm_size <= medium_realm_size
+							}
+						}
+					}
+				}
+				add = 0.2
+			}
+			if = {
+				limit = {
+					OR = {
+						AND = {
+							scope:actor = {
+								has_trait = fp3_struggle_detractor
+								any_character_struggle = {
+									involvement = involved
+									phase_has_catalyst = catalyst_forming_alliance_between_detractor_uninvolved_rulers
+								}
+							}
+							scope:recipient = {
+								fp3_character_uninvolved_in_struggle_trigger = yes
+							}
+						}
+						AND = {
+							scope:recipient = {
+								has_trait = fp3_struggle_detractor
+								any_character_struggle = {
+									involvement = involved
+									phase_has_catalyst = catalyst_forming_alliance_between_detractor_uninvolved_rulers
+								}
+							}
+							scope:actor = {
+								fp3_character_uninvolved_in_struggle_trigger = yes
+							}
+						}
+					}
+				}
+				add = 0.2
+			}
+		}
+	}
 }
 
 accou_marriage_candidate_quality_threshold_value = {

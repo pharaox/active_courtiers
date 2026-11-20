@@ -731,3 +731,111 @@ accou_court_brahmin_candidate_score_value = {
 accou_khlon_glan_candidate_score_value = {
 	value = 75
 }
+
+accou_partner_candidate_score_value = {
+	value = 150
+}
+
+accou_fixer_candidate_score_value = {
+	value = 50
+
+	# More likely for very generous characters
+	if = {
+		limit = {
+			ai_greed <= -75
+		}
+		add = 25
+	}
+
+	# Lots of gold to spend!
+	if = {
+		limit = {
+			gold >= 500
+			monthly_character_income > monthly_character_expenses_plus_fourty_percent
+		}
+		add = 50
+	}
+}
+
+accou_translator_candidate_score_value = {
+	value = 50
+
+	# More likely for very generous characters
+	if = {
+		limit = {
+			ai_greed <= -75
+		}
+		add = 25
+	}
+
+	# Lots of gold to spend!
+	if = {
+		limit = {
+			gold >= 500
+			monthly_character_income > monthly_character_expenses_plus_fourty_percent
+		}
+		add = 50
+	}
+}
+
+accou_market_agent_candidate_score_value = {
+	value = 50
+
+	# More likely for very generous characters
+	if = {
+		limit = {
+			ai_greed <= -75
+		}
+		add = 25
+	}
+
+	# Lots of gold to spend!
+	if = {
+		limit = {
+			gold >= 500
+			monthly_character_income > monthly_character_expenses_plus_fourty_percent
+		}
+		add = 50
+	}
+}
+
+accou_bailiff_candidate_score_value = {
+	value = 50
+
+	# More likely for very generous characters
+	if = {
+		limit = {
+			ai_greed <= -75
+		}
+		add = 25
+	}
+
+	# Lots of gold to spend!
+	if = {
+		limit = {
+			gold >= 500
+			monthly_character_income > monthly_character_expenses_plus_fourty_percent
+		}
+		add = 50
+	}
+}
+
+accou_roman_censor_candidate_score_value = {
+	value = 100
+
+	# More likely if you have a lot of gold and can afford it
+	if = {
+		limit = {
+			monthly_character_income > monthly_character_expenses_plus_fourty_percent
+		}
+		add = 50
+	}
+
+	# More likely if you are a builder
+	if = {
+		limit = {
+			ai_has_economical_boom_personality = yes
+		}
+		add = 50
+	}
+}

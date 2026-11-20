@@ -10,7 +10,7 @@
 	trigger_else = {
 		can_be_chancellor_trigger = { COURT_OWNER = $COURT_OWNER$ }
 	}
-	tgp_is_ceremonial_liege_trigger = no
+	is_ceremonial_liege = no
 }
 
 accou_can_be_steward_trigger = {
@@ -25,7 +25,7 @@ accou_can_be_steward_trigger = {
 	trigger_else = {
 		can_be_steward_trigger = { COURT_OWNER = $COURT_OWNER$ }
 	}
-	tgp_is_ceremonial_liege_trigger = no
+	is_ceremonial_liege = no
 }
 
 accou_can_be_marshal_trigger = {
@@ -40,7 +40,7 @@ accou_can_be_marshal_trigger = {
 	trigger_else = {
 		can_be_marshal_trigger = { COURT_OWNER = $COURT_OWNER$ }
 	}
-	tgp_is_ceremonial_liege_trigger = no
+	is_ceremonial_liege = no
 }
 
 accou_can_be_spymaster_trigger = {
@@ -86,7 +86,7 @@ accou_can_be_spymaster_trigger = {
 			is_female = yes
 		}
 	}
-	tgp_is_ceremonial_liege_trigger = no
+	is_ceremonial_liege = no
 }
 
 accou_can_be_court_chaplain_trigger = {
@@ -101,7 +101,7 @@ accou_can_be_court_chaplain_trigger = {
 	trigger_else = {
 		can_be_court_chaplain_trigger = { COURT_OWNER = $COURT_OWNER$ }
 	}
-	tgp_is_ceremonial_liege_trigger = no
+	is_ceremonial_liege = no
 }
 
 accou_can_be_kurultai_trigger = {
@@ -118,38 +118,52 @@ accou_can_be_kurultai_trigger = {
 
 accou_can_appoint_chancellor_trigger = {
 	# valid_position
-	NOR = { 
-		government_has_flag = government_is_landless_adventurer 
+	government_allows = council
+	NOR = {
 		government_has_flag = government_is_nomadic
+		government_has_flag = government_is_landless_adventurer
+		government_has_flag = government_is_merchant
 	}
 }
 
 accou_can_appoint_steward_trigger = {
 	# valid_position
-	NOR = { 
-		government_has_flag = government_is_landless_adventurer 
+	government_allows = council
+	NOR = {
 		government_has_flag = government_is_nomadic
+		government_has_flag = government_is_landless_adventurer
+		government_has_flag = government_is_merchant
 	}
 }
 
 accou_can_appoint_marshal_trigger = {
 	# valid_position
-	NOR = { 
-		government_has_flag = government_is_landless_adventurer 
+	government_allows = council
+	NOR = {
 		government_has_flag = government_is_nomadic
+		government_has_flag = government_is_landless_adventurer
+		government_has_flag = government_is_merchant
+		gdp_use_patrician_council_trigger = yes
 	}
 }
 
 accou_can_appoint_spymaster_trigger = {
 	# valid_position
-	NOT = { government_has_flag = government_is_landless_adventurer }
+	government_allows = council
+	NOR = {
+		government_has_flag = government_is_landless_adventurer
+		government_has_flag = government_is_merchant
+	}
 }
 
 accou_can_appoint_court_chaplain_trigger = {
 	# valid_position
-	NOR = { 
-		government_has_flag = government_is_landless_adventurer 
+	government_allows = council
+	NOR = {
 		government_has_flag = government_is_nomadic
+		government_has_flag = government_is_landless_adventurer
+		government_has_flag = government_is_merchant
+		gdp_use_patrician_council_trigger = yes
 	}
 	# can_fire / can_reassign
 	trigger_if = {

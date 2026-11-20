@@ -5,6 +5,7 @@ accou_is_valid_invite_recipient_trigger = {
 }
 
 accou_is_valid_invite_recipient_vanilla_trigger = {
+	$ACTOR$ = { is_ruler = yes }
 	NOR = {
 		is_courtier_of = $ACTOR$
 		is_foreign_court_guest = yes
@@ -89,16 +90,39 @@ accou_could_accept_invite_trigger = {
 			}
 		}
 
-		# Actor has clan government, same house as actor, and house unity at least friendly
+		# Actor uses house unity or company sentiment, same house as actor, and positive house unity
 		AND = {
-			$ACTOR$ = { government_has_flag = government_is_clan }
-			house ?= {
-				this = $ACTOR$.house
+			$ACTOR$ = {
 				OR = {
-					has_house_unity_stage = harmonious
-					has_house_unity_stage = friendly
+					government_has_flag = government_uses_house_unity
+					government_has_flag = government_uses_company_sentiment
 				}
 			}
+			house ?= {
+				this = $ACTOR$.house
+				house_unity_is_positive_trigger = yes
+			}
+		}
+
+		# Liege is a merchant with rapacious or opportunistic company sentiment
+		liege ?= {
+			government_has_flag = government_is_merchant
+			house ?= {
+				OR = {
+					has_house_unity_stage = rapacious_cs
+					has_house_unity_stage = opportunistic_cs
+				}
+			}
+		}
+
+		# Displaced ruler of the actor's side in Guelphs & Ghibellines
+		AND = {
+			$ACTOR$ = { is_ghibelline_trigger = yes }
+			exists = var:displaced_ghibelline_ruler
+		}
+		AND = {
+			$ACTOR$ = { is_guelph_trigger = yes }
+			exists = var:displaced_guelph_ruler
 		}
 	}
 }

@@ -115,6 +115,12 @@ echo "- minister_bureaucrat: $(grep -a "accou_courtier.0003 event option a, .*, 
 echo "- court_guru: $(grep -a "accou_courtier.0003 event option a, .*, position: court_guru" debug.log | wc -l)"
 echo "- court_brahmin: $(grep -a "accou_courtier.0003 event option a, .*, position: court_brahmin" debug.log | wc -l)"
 echo "- khlon_glan: $(grep -a "accou_courtier.0003 event option a, .*, position: khlon_glan" debug.log | wc -l)"
+echo "- partner: $(grep -a "accou_courtier.0003 event option a, .*, position: partner" debug.log | wc -l)"
+echo "- fixer: $(grep -a "accou_courtier.0003 event option a, .*, position: fixer" debug.log | wc -l)"
+echo "- translator: $(grep -a "accou_courtier.0003 event option a, .*, position: translator" debug.log | wc -l)"
+echo "- market_agent: $(grep -a "accou_courtier.0003 event option a, .*, position: market_agent" debug.log | wc -l)"
+echo "- bailiff: $(grep -a "accou_courtier.0003 event option a, .*, position: bailiff" debug.log | wc -l)"
+echo "- roman_censor: $(grep -a "accou_courtier.0003 event option a, .*, position: roman_censor" debug.log | wc -l)"
 echo "---"
 echo "accou_courtier.0003 event option b: $(grep -a "accou_courtier.0003 event option b" debug.log | wc -l)"
 echo

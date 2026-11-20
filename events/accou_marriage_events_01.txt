@@ -42,6 +42,11 @@ scripted_trigger accou_marriage_0001_valid_marriage_candidate_trigger = {
 		save_temporary_scope_as = matchmaker1
 	}
 
+	scope:matchmaker1 = {
+		# Valid marriage recipient
+		accou_is_valid_marriage_recipient_trigger = { ACTOR = root }
+	}
+
 	trigger_if = {
 		limit = {
 			this != scope:matchmaker1
@@ -49,9 +54,6 @@ scripted_trigger accou_marriage_0001_valid_marriage_candidate_trigger = {
 
 		scope:matchmaker1 = {
 			in_diplomatic_range = root
-
-			# Valid marriage recipient
-			accou_is_valid_marriage_recipient_trigger = { ACTOR = root }
 
 			# Marriage does not yield alliance between matchmaker and root
 			NOT = {

@@ -101,6 +101,10 @@ accou_can_be_travel_leader_trigger = {
 	is_clergy = no
 	NOT = { is_spouse_of = $LIEGE$ }
 	NOT = { has_variable = gone_adventuring }
+	trigger_if = {
+		limit = { exists = assigned_trade_route }
+		NOT = { assigned_trade_route.trade_route_owner = $LIEGE$ }
+	}
 }
 
 accou_can_be_wet_nurse_trigger = {
@@ -444,6 +448,44 @@ accou_can_be_khlon_glan_trigger = {
 	stewardship >= 10
 	martial >= 10
 	NOT = { is_spouse_of = $LIEGE$ }
+}
+
+accou_can_be_partner_trigger = {
+	is_capable_adult = yes
+	OR = {
+		is_landed = no
+		stewardship >= 12
+	}
+	trigger_if = {
+		limit = { exists = assigned_trade_route }
+		NOT = { assigned_trade_route.trade_route_owner = $LIEGE$ }
+	}
+}
+
+accou_can_be_fixer_trigger = {
+	is_capable_adult = yes
+	exists = $LIEGE$
+}
+
+accou_can_be_translator_trigger = {
+	is_capable_adult = yes
+	num_of_known_languages >= 2
+	exists = $LIEGE$
+}
+
+accou_can_be_market_agent_trigger = {
+	is_capable_adult = yes
+	exists = $LIEGE$
+}
+
+accou_can_be_bailiff_trigger = {
+	is_capable_adult = yes
+	exists = $LIEGE$
+}
+
+accou_can_be_roman_censor_trigger = {
+	is_capable_adult = yes
+	exists = $LIEGE$
 }
 
 accou_is_court_position_available_to_vassals_trigger = {

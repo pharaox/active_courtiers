@@ -365,7 +365,7 @@ accou_best_skill_value = {
 # Quick checking of invite AI acceptance
 # See invite_to_court_interaction (ai_accept)
 accou_quick_invite_ai_accept_modifier_value = {
-	value = -50
+	value = -80
 
 	# Opinions
 	add = {
@@ -664,26 +664,45 @@ accou_quick_invite_ai_accept_modifier_value = {
 		}
 	}
 
-	# House unity
+	# House unity or company direction
 	if = {
 		limit = {
 			scope:actor = {
-				government_has_flag = government_is_clan
-			}
-			exists = house
-			exists = scope:actor.house
-			house = scope:actor.house
-			house = {
 				OR = {
-					has_house_unity_stage = harmonious
-					has_house_unity_stage = friendly
+					government_has_flag = government_uses_house_unity
+					government_has_flag = government_uses_company_sentiment
 				}
+				exists = house
+			}
+			house ?= {
+				this = scope:actor.house
+				house_unity_is_positive_trigger = yes
 			}
 		}
 		add = {
 			value = scope:actor.house.house_unity_value
 			multiply = 0.5
 		}
+	}
+
+	# Recipient's liege company sentiment
+	if = {
+		limit = {
+			scope:recipient.liege ?= {
+				government_has_flag = government_is_merchant
+				house ?= { has_house_unity_stage = rapacious_cs }
+			}
+		}
+		add = 50
+	}
+	if = {
+		limit = {
+			scope:recipient.liege ?= {
+				government_has_flag = government_is_merchant
+				house ?= { has_house_unity_stage = opportunistic_cs }
+			}
+		}
+		add = 20
 	}
 
 	# Estate parameters
@@ -742,6 +761,62 @@ accou_quick_invite_ai_accept_modifier_value = {
 			}
 		}
 		add = 15
+	}
+
+	# Guelphs & Ghibellines
+	if = {
+		limit = {
+			scope:recipient = {
+				has_opinion_modifier = {
+					modifier = banished_me
+					target = scope:actor
+				}
+			}
+		}
+		add = -500
+	}
+	if = {
+		limit = {
+			scope:actor = { is_ghibelline_trigger = yes }
+			scope:recipient = { exists = var:displaced_ghibelline_ruler }
+		}
+		add = 100
+	}
+	if = {
+		limit = {
+			scope:actor = { is_guelph_trigger = yes }
+			scope:recipient = { exists = var:displaced_guelph_ruler }
+		}
+		add = 100
+	}
+	if = {
+		limit = {
+			scope:actor = { is_ghibelline_trigger = yes }
+			scope:recipient = { exists = var:displaced_guelph_ruler }
+		}
+		add = -200
+	}
+	if = {
+		limit = {
+			scope:actor = { is_guelph_trigger = yes }
+			scope:recipient = { exists = var:displaced_ghibelline_ruler }
+		}
+		add = -200
+	}
+	if = {
+		limit = {
+			OR = {
+				AND = {
+					scope:actor = { is_guelph_trigger = yes }
+					scope:recipient.var:displaced_ghibelline_ruler ?= scope:actor
+				}
+				AND = {
+					scope:actor = { is_ghibelline_trigger = yes }
+					scope:recipient.var:displaced_guelph_ruler ?= scope:actor
+				}
+			}
+		}
+		add = -1000
 	}
 }
 

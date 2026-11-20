@@ -70,6 +70,7 @@ accou_is_available_ai_allow_travelling_trigger = {
 accou_is_landless_ruler_trigger = {
 	OR = {
 		is_landless_adventurer = yes
+		is_landless_merchant = yes
 		is_landless_administrative = yes
 		is_landless_nomad = yes
 	}

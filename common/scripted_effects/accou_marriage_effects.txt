@@ -14,6 +14,18 @@
 				target = scope:recipient
 			}
 		}
+		if = {
+			limit = {
+				is_target_in_variable_list = {
+					name = patron_marriage
+					target = scope:recipient
+				}
+			}
+			remove_list_variable = {
+				name = patron_marriage
+				target = scope:recipient
+			}
+		}
 	}
 }
 

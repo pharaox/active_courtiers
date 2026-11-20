@@ -291,6 +291,30 @@ accou_court_position_aptitude_value = {
 		limit = { scope:court_position = flag:khlon_glan }
 		value = aptitude:khlon_glan_court_position
 	}
+	else_if = {
+		limit = { scope:court_position = flag:partner }
+		value = aptitude:partner_court_position
+	}
+	else_if = {
+		limit = { scope:court_position = flag:fixer }
+		value = aptitude:fixer_court_position
+	}
+	else_if = {
+		limit = { scope:court_position = flag:translator }
+		value = aptitude:translator_court_position
+	}
+	else_if = {
+		limit = { scope:court_position = flag:market_agent }
+		value = aptitude:market_agent_court_position
+	}
+	else_if = {
+		limit = { scope:court_position = flag:bailiff }
+		value = aptitude:bailiff_court_position
+	}
+	else_if = {
+		limit = { scope:court_position = flag:roman_censor }
+		value = aptitude:roman_censor_court_position
+	}
 }
 
 accou_commander_skill_value = {
@@ -516,6 +540,30 @@ accou_court_position_candidate_score_value = {
 	else_if = {
 		limit = { scope:court_position = flag:khlon_glan }
 		value = accou_khlon_glan_candidate_score_value
+	}
+	else_if = {
+		limit = { scope:court_position = flag:partner }
+		value = accou_partner_candidate_score_value
+	}
+	else_if = {
+		limit = { scope:court_position = flag:fixer }
+		value = accou_fixer_candidate_score_value
+	}
+	else_if = {
+		limit = { scope:court_position = flag:translator }
+		value = accou_translator_candidate_score_value
+	}
+	else_if = {
+		limit = { scope:court_position = flag:market_agent }
+		value = accou_market_agent_candidate_score_value
+	}
+	else_if = {
+		limit = { scope:court_position = flag:bailiff }
+		value = accou_bailiff_candidate_score_value
+	}
+	else_if = {
+		limit = { scope:court_position = flag:roman_censor }
+		value = accou_roman_censor_candidate_score_value
 	}
 
 	add = court_position_candidate_score_base_value

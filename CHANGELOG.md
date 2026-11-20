@@ -1,5 +1,19 @@
 # Changelog
 
+## Version 0.14.0
+
+### Events
+
+* Landless merchants are now included when searching for nearby characters, so merchants can arrange marriages, and merchant courtiers can be marriage and invitation candidates.
+
+### Bug Fixes
+
+* Improved the quick marriage acceptance check to match vanilla more closely.
+
+### Compatibility
+
+* Adapted to CK3 1.21.0.
+
 ## Version 0.13.0
 
 ### Compatibility

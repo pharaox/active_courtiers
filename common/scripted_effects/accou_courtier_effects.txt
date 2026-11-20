@@ -240,6 +240,30 @@ accou_get_better_court_position_options_effect = {
 		limit = { accou_can_be_better_khlon_glan_trigger = { LIEGE = $LIEGE$ } }
 		add_to_variable_list = { name = $OPTIONS$ target = flag:khlon_glan }
 	}
+	if = {
+		limit = { accou_can_be_better_partner_trigger = { LIEGE = $LIEGE$ } }
+		add_to_variable_list = { name = $OPTIONS$ target = flag:partner }
+	}
+	if = {
+		limit = { accou_can_be_better_fixer_trigger = { LIEGE = $LIEGE$ } }
+		add_to_variable_list = { name = $OPTIONS$ target = flag:fixer }
+	}
+	if = {
+		limit = { accou_can_be_better_translator_trigger = { LIEGE = $LIEGE$ } }
+		add_to_variable_list = { name = $OPTIONS$ target = flag:translator }
+	}
+	if = {
+		limit = { accou_can_be_better_market_agent_trigger = { LIEGE = $LIEGE$ } }
+		add_to_variable_list = { name = $OPTIONS$ target = flag:market_agent }
+	}
+	if = {
+		limit = { accou_can_be_better_bailiff_trigger = { LIEGE = $LIEGE$ } }
+		add_to_variable_list = { name = $OPTIONS$ target = flag:bailiff }
+	}
+	if = {
+		limit = { accou_can_be_better_roman_censor_trigger = { LIEGE = $LIEGE$ } }
+		add_to_variable_list = { name = $OPTIONS$ target = flag:roman_censor }
+	}
 }
 
 accou_get_incumbent_councillor_effect = {
@@ -517,6 +541,24 @@ accou_get_incumbent_court_position_holder_effect = {
 		}
 		flag:khlon_glan = {
 			court_position:khlon_glan_court_position ?= { save_scope_as = $INCUMBENT$ }
+		}
+		flag:partner = {
+			court_position:partner_court_position ?= { save_scope_as = $INCUMBENT$ }
+		}
+		flag:fixer = {
+			court_position:fixer_court_position ?= { save_scope_as = $INCUMBENT$ }
+		}
+		flag:translator = {
+			court_position:translator_court_position ?= { save_scope_as = $INCUMBENT$ }
+		}
+		flag:market_agent = {
+			court_position:market_agent_court_position ?= { save_scope_as = $INCUMBENT$ }
+		}
+		flag:bailiff = {
+			court_position:bailiff_court_position ?= { save_scope_as = $INCUMBENT$ }
+		}
+		flag:roman_censor = {
+			court_position:roman_censor_court_position ?= { save_scope_as = $INCUMBENT$ }
 		}
 	}
 }
@@ -842,6 +884,42 @@ accou_appoint_court_position_effect = {
 				recipient = $RECIPIENT$
 			}
 		}
+		flag:partner = {
+			appoint_court_position = {
+				court_position = partner_court_position
+				recipient = $RECIPIENT$
+			}
+		}
+		flag:fixer = {
+			appoint_court_position = {
+				court_position = fixer_court_position
+				recipient = $RECIPIENT$
+			}
+		}
+		flag:translator = {
+			appoint_court_position = {
+				court_position = translator_court_position
+				recipient = $RECIPIENT$
+			}
+		}
+		flag:market_agent = {
+			appoint_court_position = {
+				court_position = market_agent_court_position
+				recipient = $RECIPIENT$
+			}
+		}
+		flag:bailiff = {
+			appoint_court_position = {
+				court_position = bailiff_court_position
+				recipient = $RECIPIENT$
+			}
+		}
+		flag:roman_censor = {
+			appoint_court_position = {
+				court_position = roman_censor_court_position
+				recipient = $RECIPIENT$
+			}
+		}
 	}
 }
 
@@ -1163,6 +1241,42 @@ accou_revoke_court_position_effect = {
 		flag:khlon_glan = {
 			revoke_court_position = {
 				court_position = khlon_glan_court_position
+				recipient = $RECIPIENT$
+			}
+		}
+		flag:partner = {
+			revoke_court_position = {
+				court_position = partner_court_position
+				recipient = $RECIPIENT$
+			}
+		}
+		flag:fixer = {
+			revoke_court_position = {
+				court_position = fixer_court_position
+				recipient = $RECIPIENT$
+			}
+		}
+		flag:translator = {
+			revoke_court_position = {
+				court_position = translator_court_position
+				recipient = $RECIPIENT$
+			}
+		}
+		flag:market_agent = {
+			revoke_court_position = {
+				court_position = market_agent_court_position
+				recipient = $RECIPIENT$
+			}
+		}
+		flag:bailiff = {
+			revoke_court_position = {
+				court_position = bailiff_court_position
+				recipient = $RECIPIENT$
+			}
+		}
+		flag:roman_censor = {
+			revoke_court_position = {
+				court_position = roman_censor_court_position
 				recipient = $RECIPIENT$
 			}
 		}
