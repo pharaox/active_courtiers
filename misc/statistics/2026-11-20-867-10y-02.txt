@@ -1,0 +1,113 @@
+CK3: 1.21.0.3, mod: 0.14.0
+
+accou_marriage.0001 event option a: 10503
+- success: 2864
+- failure: 7639
+- failure fp: 2
+
+accou_marriage.0002 event option a: 1976
+- outsider: 1594
+- insider: 382
+accou_marriage.0002 event option b: 888
+- outsider: 144
+- insider: 744
+average marriage candidate quality: 28,5025
+
+accou_invite.0001 event option a: 4952
+- success: 163
+- failure: 4789
+- failure fp: 0
+
+accou_invite.0002 event option a: 156
+accou_invite.0002 event option b: 7
+average invite candidate quality: 41,7178
+
+accou_guardian.0001 event option a: 719
+- success: 696
+- failure: 23
+- failure fp: 1
+
+accou_guardian.0002 event option a: 660
+- education focus: 30
+accou_guardian.0002 event option b: 36
+average guardian candidate quality: 22,6394
+
+accou_courtier.0001 event option a: 288
+- success: 283
+- failure: 5
+
+accou_courtier.0002 event option a: 679
+- success: 660
+- failure: 19
+
+accou_courtier.0003 event option a: 819
+---
+- chancellor: 33
+- marshal: 20
+- steward: 38
+- spymaster: 112
+- court_chaplain: 44
+- kurultai: 0
+---
+- court_physician: 25
+- charioteer: 0
+- bookmaker: 5
+- akolouthos: 0
+- cultural_emissary: 0
+- keeper_of_swans: 0
+- chief_qadi: 0
+- garuda: 0
+- court_gardener: 0
+- lady_in_waiting: 0
+- antiquarian: 7
+- travel_leader: 253
+- wet_nurse: 15
+- court_tutor: 59
+- food_taster: 0
+- master_of_horse: 20
+- master_of_hunt: 3
+- royal_architect: 0
+- high_almoner: 1
+- seneschal: 90
+- cupbearer: 13
+- chief_eunuch: 0
+- court_jester: 31
+- court_poet: 12
+- court_musician: 5
+- bodyguard: 3
+- champion: 0
+- executioner: 0
+- court_artificer: 0
+- cave_hermit: 0
+- master_assassin: 0
+- court_scholar: 0
+- chronicler: 14
+- court_brewmaster: 1
+- eparch: 0
+- court_astrologer: 1
+- boyan: 1
+- siege_engineer: 0
+- yurtchi: 4
+- cherbi: 2
+- yeke_jarquchi: 0
+- foreign_emissary: 1
+- keeper_of_the_horses: 3
+- grand_preceptor: 0
+- grand_mentor: 0
+- grand_guardian: 0
+- fire_dragon_engineer: 0
+- keeper_of_the_harem: 1
+- favored_minister: 0
+- minister_bureaucrat: 0
+- court_guru: 1
+- court_brahmin: 0
+- khlon_glan: 0
+- partner: 1
+- fixer: 0
+- translator: 0
+- market_agent: 0
+- bailiff: 0
+- roman_censor: 0
+---
+accou_courtier.0003 event option b: 124
+
